@@ -27,8 +27,6 @@ classes
 
 secret.json
 build.bat
-gradle/wrapper/gradle-wrapper.jar
-gradlew
-gradle/wrapper/gradle-wrapper.properties
 gradlew.bat
 setup.bat
+gradlew
