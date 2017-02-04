@@ -36,6 +36,7 @@ minecraft {
     
     mappings = "stable_29"
     makeObfSourceJar = false 
+}
 
 dependencies {
 
@@ -55,5 +56,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
 }
