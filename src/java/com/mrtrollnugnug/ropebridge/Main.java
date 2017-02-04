@@ -34,7 +34,7 @@ public class Main {
     public static boolean customAchievements;
     public static Achievement craftAchievement, buildAchievement;
 
-    @SidedProxy(clientSide="com.czechmate777.ropebridge.ClientProxy", serverSide="com.czechmate777.ropebridge.ServerProxy")
+    @SidedProxy(clientSide="com.mrtrollnugnug.ropebridge.ClientProxy", serverSide="com.mrtrollnugnug.ropebridge.ServerProxy")
     public static CommonProxy proxy;
     
     @Instance

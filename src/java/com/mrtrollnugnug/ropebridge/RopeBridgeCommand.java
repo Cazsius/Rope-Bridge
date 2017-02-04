@@ -18,7 +18,7 @@ import net.minecraft.util.text.TextFormatting;
 
 public class RopeBridgeCommand implements ICommand {
 	
-	private List aliases;
+	private List<String> aliases;
 	private String usage = "ropebridge <variable> <value> OR ropebridge <x1> <y1> <z1> <x2> <y2> <z2> <materialId>";
 	private String commandsString = 
 			"breakThroughBlocks, bridgeDroopFactor, "+
@@ -26,7 +26,7 @@ public class RopeBridgeCommand implements ICommand {
 	"ignoreSlopeWarnings, maxBridgeDistance, zoomOnAim";
 	
 	public RopeBridgeCommand() {
-		this.aliases = new ArrayList();
+		this.aliases = new ArrayList<String>();
 		this.aliases.add("ropebridge");
 		this.aliases.add("rb");
 	}

@@ -27,11 +27,10 @@ public class bridgeMessageHandler implements IMessageHandler<bridgeMessage, IMes
         		WorldServer world = (WorldServer) player.world;
                 switch (message.command) {
                 	case 0: { // Sound
-                		String name = "";
                 		switch  (message.invIndex) {
-                		case 0: { name = "random.bow";	break; }
-                		case 1: { name = "dig.wood";	break; }
-                		case 2: { name = "ropebridge:cock";	break; }
+                		case 0: { break; }
+                		case 1: { break; }
+                		case 2: { break; }
                 		}
                 		/*if (message.posX==0) {	// Sound at player
                 			world.playSoundAtEntity(player, name, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
@@ -68,7 +67,7 @@ public class bridgeMessageHandler implements IMessageHandler<bridgeMessage, IMes
                 	//TODO May Cause Problems | getHeldItemMainhand
                 	case 3: { // damage item
                 		if (player.getHeldItemMainhand().getItemDamage()==player.getHeldItemMainhand().getMaxDamage()) {
-                			player.destroyCurrentEquippedItem();
+                			player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player);;
                 		}
                 		else {
                 			player.getHeldItemMainhand().damageItem(1, player);

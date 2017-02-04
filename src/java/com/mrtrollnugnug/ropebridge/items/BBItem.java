@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.Style;
@@ -69,7 +70,7 @@ public class BBItem extends Item {
 				playerFov = Minecraft.getMinecraft().gameSettings.fovSetting;
 			}
 		}
-    	playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+    	playerIn.setActiveHand(EnumHand.MAIN_HAND);
     	
     	if (worldIn.isRemote) {
     		viewSnap = true;
