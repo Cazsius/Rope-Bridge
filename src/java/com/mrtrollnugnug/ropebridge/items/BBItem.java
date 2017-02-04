@@ -5,7 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.Main;
-import com.mrtrollnugnug.ropebridge.bridgeMessage;
+import com.mrtrollnugnug.ropebridge.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -76,7 +76,7 @@ public class BBItem extends Item {
     		viewSnap = true;
     		fovNormal = false;
     		clickTimer = new Timer();
-    		clickTimer.schedule(new TimerTask() { public void run() { Main.snw.sendToServer(new bridgeMessage(0,0,0,0,2,0)); } }, 500);
+    		clickTimer.schedule(new TimerTask() { public void run() { Main.snw.sendToServer(new BridgeMessage(0,0,0,0,2,0)); } }, 500);
     	}
     	return itemStackIn;
     }
@@ -149,7 +149,7 @@ public class BBItem extends Item {
 					RayTraceResult hit = player.rayTrace(Main.maxBridgeDistance, 1.0F);
 					//world.playSoundEffect(player.posX,player.posY,player.posZ, "random.bow", 1.0F, 1.0F);
 					//			play sound at 					player		random.bow
-					Main.snw.sendToServer(new bridgeMessage(0, 	0, 0, 0, 	0, 0));
+					Main.snw.sendToServer(new BridgeMessage(0, 	0, 0, 0, 	0, 0));
 					if (hit.typeOfHit == RayTraceResult.Type.BLOCK) {
 						BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY)-1, Math.floor(player.posZ));
 						// Vector offsets
@@ -418,7 +418,7 @@ public class BBItem extends Item {
 	 */
 	private void breakBridge(World worldIn, BlockPos posIn, int meta) {
 		// Break block and turn into air
-		Main.snw.sendToServer(new bridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
+		Main.snw.sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
 		int xRange = 0;
 		int zRange = 0;
 		if (meta%2 == 0)

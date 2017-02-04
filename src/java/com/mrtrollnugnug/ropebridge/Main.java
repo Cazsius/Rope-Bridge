@@ -34,7 +34,7 @@ public class Main {
     public static boolean customAchievements;
     public static Achievement craftAchievement, buildAchievement;
 
-    @SidedProxy(clientSide="com.mrtrollnugnug.ropebridge.ClientProxy", serverSide="com.mrtrollnugnug.ropebridge.ServerProxy")
+    @SidedProxy(clientSide="com.mrtrollnugnug.ropebridge.ClientProxy", serverSide="com.mrtrollnugnug.ropebridge.CommonProxy")
     public static CommonProxy proxy;
     
     @Instance
@@ -67,7 +67,7 @@ public class Main {
 
     	// Register Simple Channel
     	snw = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-    	snw.registerMessage(bridgeMessageHandler.class, bridgeMessage.class, 0, Side.SERVER);
+    	snw.registerMessage(BridgeMessageHandler.class, BridgeMessage.class, 0, Side.SERVER);
     }
 
     @EventHandler

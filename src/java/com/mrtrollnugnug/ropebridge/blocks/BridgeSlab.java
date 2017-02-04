@@ -32,7 +32,6 @@ public class BridgeSlab extends BasicBlock {
 		boundingBox = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);	
 	}
 	
-	
 	@Override
 	public boolean isFullBlock(IBlockState state) {
 		return false;
