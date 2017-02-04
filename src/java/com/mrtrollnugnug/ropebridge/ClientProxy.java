@@ -1,7 +1,7 @@
-package com.czechmate777.ropebridge;
+package com.mrtrollnugnug.ropebridge;
 
-import com.czechmate777.ropebridge.client.render.ItemRenderRegister;
-import com.czechmate777.ropebridge.client.render.blocks.BlockRenderRegister;
+import com.mrtrollnugnug.ropebridge.client.render.ItemRenderRegister;
+import com.mrtrollnugnug.ropebridge.client.render.blocks.BlockRenderRegister;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

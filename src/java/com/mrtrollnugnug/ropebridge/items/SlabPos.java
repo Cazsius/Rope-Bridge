@@ -1,6 +1,6 @@
-package com.czechmate777.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.items;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 public class SlabPos {
 	public int x;

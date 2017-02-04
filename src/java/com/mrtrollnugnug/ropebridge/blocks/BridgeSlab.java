@@ -1,30 +1,33 @@
-package com.czechmate777.ropebridge.blocks;
+package com.mrtrollnugnug.ropebridge.blocks;
 
 import java.util.List;
+
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BridgeSlab extends BasicBlock {
 	protected static float slabHeight = 4.0F/16.0F;
-	public static final PropertyEnum TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
+	public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
 	public BridgeSlab(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
-		super(unlocalizedName, Material.wood, 1.0F, 5.0F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
+		this.setSoundType(SoundType.WOOD);
+		//TODO Potential Issue
+		//this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
 	}
 	
@@ -44,12 +47,12 @@ public class BridgeSlab extends BasicBlock {
         List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
         int meta = getMetaFromState(state);
         int slabMeta = (meta-meta%2)/2;
-        ret.add(new ItemStack(Blocks.wooden_slab, 1, slabMeta));
-        ret.add(new ItemStack(Items.string, RANDOM.nextInt(2)));
+        ret.add(new ItemStack(Blocks.WOODEN_SLAB, 1, slabMeta));
+        ret.add(new ItemStack(Items.STRING, RANDOM.nextInt(2)));
         return ret;
     }
 	
-	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
+	public ItemStack getPickBlock(RayTraceResult target, World world, BlockPos pos) {
         return null;
     }
 	
@@ -87,8 +90,8 @@ public class BridgeSlab extends BasicBlock {
     }
     
     @Override
-    protected BlockState createBlockState() {
-        return new BlockState(this, new IProperty[] { TYPE });
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] { TYPE });
     }
     
     @Override

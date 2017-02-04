@@ -1,23 +1,25 @@
-package com.czechmate777.ropebridge;
+package com.mrtrollnugnug.ropebridge;
+
+import com.mrtrollnugnug.ropebridge.blocks.ModBlocks;
+import com.mrtrollnugnug.ropebridge.crafting.ModCrafting;
+import com.mrtrollnugnug.ropebridge.items.ModItems;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public class ServerProxy extends CommonProxy {
+public class CommonProxy {
 
-    @Override
     public void preInit(FMLPreInitializationEvent e) {
-        super.preInit(e);
+    	ModItems.createItems();
+    	ModBlocks.createBlocks();
     }
 
-    @Override
     public void init(FMLInitializationEvent e) {
-        super.init(e);
+    	ModCrafting.initCrafting();
     }
 
-    @Override
     public void postInit(FMLPostInitializationEvent e) {
-        super.postInit(e);
+
     }
 }

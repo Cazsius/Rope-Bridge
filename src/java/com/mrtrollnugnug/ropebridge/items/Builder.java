@@ -1,20 +1,20 @@
-package com.czechmate777.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.items;
 
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.czechmate777.ropebridge.Main;
-import com.czechmate777.ropebridge.bridgeMessage;
+import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.bridgeMessage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class Builder {
@@ -94,7 +94,7 @@ public class Builder {
 							level = 1;
 						}
 					}
-					allClear = !addSlab(player.worldObj,bridge,x,y+1,z,level,rotate) ? false : allClear;
+					allClear = !addSlab(player.world,bridge,x,y+1,z,level,rotate) ? false : allClear;
 				}
 			}
 		}
@@ -111,7 +111,7 @@ public class Builder {
 			}
 			Main.snw.sendToServer(new bridgeMessage(4, 0, 0, 0, 0, 0)); // trigger building achievement
 			
-			buildBridge(player.worldObj, bridge, type);
+			buildBridge(player.world, bridge, type);
 		}
 		else {
 			tell(player, "Oops! Looks like there's something in the way. Look for the Smoke to see where that is and try again.");
@@ -258,6 +258,6 @@ public class Builder {
  	}
 	
 	private static void tell(EntityPlayer playerIn, String message) {
-		playerIn.addChatMessage(new ChatComponentText("[Rope Bridge]: "+message).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.DARK_AQUA)));
+		playerIn.sendMessage(new TextComponentString("[Rope Bridge]: "+message).setStyle(new Style().setColor(TextFormatting.DARK_AQUA)));
 	}
 }

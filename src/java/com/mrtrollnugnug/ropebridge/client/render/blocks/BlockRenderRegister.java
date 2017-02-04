@@ -1,11 +1,11 @@
-package com.czechmate777.ropebridge.client.render.blocks;
+package com.mrtrollnugnug.ropebridge.client.render.blocks;
 
-import com.czechmate777.ropebridge.Main;
-import com.czechmate777.ropebridge.blocks.ModBlocks;
+import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.blocks.ModBlocks;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 

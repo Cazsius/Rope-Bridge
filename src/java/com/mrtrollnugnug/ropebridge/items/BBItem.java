@@ -1,29 +1,26 @@
-package com.czechmate777.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.items;
 
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.czechmate777.ropebridge.Main;
-import com.czechmate777.ropebridge.bridgeMessage;
+import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.bridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,7 +34,7 @@ public class BBItem extends Item {
 	Timer smokeTimer;
 	Timer buildTimer;
 	Timer clickTimer;
-	ChatStyle chatStyle = new ChatStyle().setColor(EnumChatFormatting.DARK_AQUA);
+	Style chatStyle = new Style().setColor(TextFormatting.DARK_AQUA);
 	boolean posSet = false;
 	BlockPos firstPos;
 	private boolean warningSent = false;
@@ -45,7 +42,7 @@ public class BBItem extends Item {
 	public BBItem(String unlocalizedName) {
 		super();
 		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.tabTools);
+		this.setCreativeTab(CreativeTabs.TOOLS);
 		this.setMaxStackSize(1);
 		this.setMaxDamage(64);
 		smokeTimer = new Timer();
@@ -56,7 +53,7 @@ public class BBItem extends Item {
 	}
 	
 	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		playerIn.triggerAchievement(Main.craftAchievement);
+		playerIn.hasAchievement(Main.craftAchievement);
 	}
 	
 	/**
@@ -66,7 +63,7 @@ public class BBItem extends Item {
     	if (worldIn.isRemote) {
 			world = worldIn;
 		}
-		if (playerIn.worldObj.isRemote) {
+		if (playerIn.world.isRemote) {
 			player = playerIn;
 			if (playerFov == 0) {
 				playerFov = Minecraft.getMinecraft().gameSettings.fovSetting;
@@ -148,11 +145,11 @@ public class BBItem extends Item {
 					tellPlayer("You must be standing on something to build a bridge!");
 				}
 				else {
-					MovingObjectPosition hit = player.rayTrace(Main.maxBridgeDistance, 1.0F);
+					RayTraceResult hit = player.rayTrace(Main.maxBridgeDistance, 1.0F);
 					//world.playSoundEffect(player.posX,player.posY,player.posZ, "random.bow", 1.0F, 1.0F);
 					//			play sound at 					player		random.bow
 					Main.snw.sendToServer(new bridgeMessage(0, 	0, 0, 0, 	0, 0));
-					if (hit.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+					if (hit.typeOfHit == RayTraceResult.Type.BLOCK) {
 						BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY)-1, Math.floor(player.posZ));
 						// Vector offsets
 						double xOffset = 0.0D;
@@ -300,7 +297,7 @@ public class BBItem extends Item {
 	*/
 
 	private void tell(EntityPlayer playerIn, String message) {
-		playerIn.addChatMessage(new ChatComponentText("[Rope Bridge]: "+message).setChatStyle(chatStyle));
+		playerIn.sendMessage(new TextComponentString("[Rope Bridge]: "+message).setStyle(chatStyle));
 	}
 	
 	private void tellPlayer(String message) {
@@ -357,8 +354,10 @@ public class BBItem extends Item {
 			if (player == null) {
 				player = (EntityPlayer) entityIn;
 			}
-			if (((EntityPlayer) entityIn).getCurrentEquippedItem()!=null) {
-				if (((EntityPlayer) entityIn).getCurrentEquippedItem().getUnlocalizedName().equals(stack.getUnlocalizedName())) {
+			
+			//TODO May cause problem
+			if (((EntityPlayer) entityIn).getHeldItemMainhand()!=null) {
+				if (((EntityPlayer) entityIn).getHeldItemMainhand().getUnlocalizedName().equals(stack.getUnlocalizedName())) {
 					if (viewSnap) {
 						if (isSelected) {
 							rotatePlayerTowards(getNearestYaw());
@@ -394,10 +393,10 @@ public class BBItem extends Item {
      * @return True to prevent harvesting, false to continue as normal
      */
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer playerIn) {
-        if (playerIn.worldObj.isRemote) {
-        	Block blk = playerIn.worldObj.getBlockState(pos).getBlock();
+        if (playerIn.world.isRemote) {
+        	Block blk = playerIn.world.getBlockState(pos).getBlock();
 	    	if (playerIn.isSneaking() && isBridgeBlock(blk)) {
-	    		breakBridge(playerIn.worldObj, pos, blk.getMetaFromState(playerIn.worldObj.getBlockState(pos)));
+	    		breakBridge(playerIn.world, pos, blk.getMetaFromState(playerIn.world.getBlockState(pos)));
 	        }
         }
     	return false;

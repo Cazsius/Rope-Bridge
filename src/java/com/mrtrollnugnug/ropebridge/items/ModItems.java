@@ -1,4 +1,4 @@
-package com.czechmate777.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.items;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;

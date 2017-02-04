@@ -1,7 +1,7 @@
-package com.czechmate777.ropebridge;
+package com.mrtrollnugnug.ropebridge;
 
-import com.czechmate777.ropebridge.blocks.ModBlocks;
-import com.czechmate777.ropebridge.items.ModItems;
+import com.mrtrollnugnug.ropebridge.blocks.ModBlocks;
+import com.mrtrollnugnug.ropebridge.items.ModItems;
 
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
@@ -48,18 +48,18 @@ public class Main {
     	// Read configuration file
     	config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
-		maxBridgeDistance = config.getInt("maxBridgeDistance", config.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun.");
-		bridgeDroopFactor = config.getInt("bridgeDroopFactor", config.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang.");
-		bridgeYOffset = config.getFloat("bridgeYOffset", config.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet.");
-		zoomOnAim = config.getBoolean("zoomOnAim", config.CATEGORY_GENERAL, true, "Turn this off if issues come up with Optifine.");
-		breakThroughBlocks = config.getBoolean("breakThroughBlocks", config.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode.");
-		ignoreSlopeWarnings = config.getBoolean("ignoreSlopeWarnings", config.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges.");
-		customAchievements = config.getBoolean("customAchievements", config.CATEGORY_GENERAL, true, "Custom crafting and building achievements.");
+		maxBridgeDistance = config.getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun.");
+		bridgeDroopFactor = config.getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang.");
+		bridgeYOffset = config.getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet.");
+		zoomOnAim = config.getBoolean("zoomOnAim", Configuration.CATEGORY_GENERAL, true, "Turn this off if issues come up with Optifine.");
+		breakThroughBlocks = config.getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode.");
+		ignoreSlopeWarnings = config.getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges.");
+		customAchievements = config.getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements.");
 		config.save();
     	
 		// Register Achievements (if enabled in config)
 		if (customAchievements) {
-	    	craftAchievement = new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ModItems.bridgeBuilder, AchievementList.buildBetterPickaxe);
+	    	craftAchievement = new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ModItems.bridgeBuilder, AchievementList.BUILD_BETTER_PICKAXE);
 	    	craftAchievement.registerStat();
 	    	buildAchievement = new Achievement("achievement.buildBridge", "buildBridge", 10, 2, ModBlocks.bridgeBlock2, craftAchievement);
 	    	buildAchievement.registerStat();

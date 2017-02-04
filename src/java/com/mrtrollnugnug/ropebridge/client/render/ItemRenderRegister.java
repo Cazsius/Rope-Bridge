@@ -1,11 +1,11 @@
-package com.czechmate777.ropebridge.client.render;
+package com.mrtrollnugnug.ropebridge.client.render;
 
-import com.czechmate777.ropebridge.Main;
-import com.czechmate777.ropebridge.items.ModItems;
+import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.items.ModItems;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
 public class ItemRenderRegister {
 	public static String modid = Main.MODID;

@@ -1,4 +1,4 @@
-package com.czechmate777.ropebridge;
+package com.mrtrollnugnug.ropebridge;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

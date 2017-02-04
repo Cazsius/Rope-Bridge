@@ -1,4 +1,4 @@
-package com.czechmate777.ropebridge.blocks;
+package com.mrtrollnugnug.ropebridge.blocks;
 
 public class BridgeSlab3 extends BridgeSlab {
 
