@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
@@ -22,14 +23,31 @@ import net.minecraft.world.World;
 
 public class BridgeSlab extends BasicBlock {
 	protected static float slabHeight = 4.0F/16.0F;
+	private final AxisAlignedBB boundingBox;
 	public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
 	public BridgeSlab(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
 		super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
 		this.setSoundType(SoundType.WOOD);
-		//TODO Potential Issue
-		//this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
+		boundingBox = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);	
 	}
+	
+	
+	@Override
+	public boolean isFullBlock(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return boundingBox.offset(pos);
+	}
+		
 	
 	public boolean canDropFromExplosion(Explosion explosionIn) {
         return true;
@@ -121,17 +139,17 @@ public class BridgeSlab extends BasicBlock {
     
     public enum EnumType implements IStringSerializable {
         OAK(0, "oak"),
-        OAK_R(1, "oak-r"),
+        OAK_R(1, "oak_r"),
         SPRUCE(2, "spruce"),
-        SPRUCE_R(3, "spruce-r"),
+        SPRUCE_R(3, "spruce_r"),
         BIRCH(4, "birch"),
-        BIRCH_R(5, "birch-r"),
+        BIRCH_R(5, "birch_r"),
         JUNGLE(6, "jungle"),
-        JUNGLE_R(7, "jungle-r"),
+        JUNGLE_R(7, "jungle_r"),
         ACACIA(8, "acacia"),
-        ACACIA_R(9, "acacia-r"),
-        BIG_OAK(10, "big-oak"),
-        BIG_OAK_R(11, "big-oak-r");
+        ACACIA_R(9, "acacia_r"),
+        BIG_OAK(10, "big_oak"),
+        BIG_OAK_R(11, "big_oak_r");
 
         private int ID;
         private String name;
