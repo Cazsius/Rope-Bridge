@@ -4,17 +4,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class bridgeMessage implements IMessage{
+public class BridgeMessage implements IMessage{
 	int command; 	// 0 = smoke, 1 = setState, 2 = inventory change
 	int posX, posY, posZ; 	// Where smoke or setState
 	int invIndex;	// inventory index to change/upper or lower
 	int stackSize;	// value of stack/rotate or not
 	
-	public bridgeMessage() {
+	public BridgeMessage() {
 		command = -1;
 	}
 	
-	public bridgeMessage(int command, int posX, int posY, int posZ, int invIndex, int stackSize) {
+	public BridgeMessage(int command, int posX, int posY, int posZ, int invIndex, int stackSize) {
 		this.command = command;
 		this.posX = posX;
 		this.posY = posY;

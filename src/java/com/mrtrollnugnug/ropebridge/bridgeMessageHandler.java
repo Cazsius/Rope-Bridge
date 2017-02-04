@@ -12,11 +12,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class bridgeMessageHandler implements IMessageHandler<bridgeMessage, IMessage> {
+public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMessage> {
 
 	@Override
-	public IMessage onMessage(bridgeMessage bridgeMessage, MessageContext context) {
-		final bridgeMessage message = bridgeMessage; // Used for Sounds
+	public IMessage onMessage(BridgeMessage bridgeMessage, MessageContext context) {
+		final BridgeMessage message = bridgeMessage; // Used for Sounds
 		final MessageContext ctx = context;
 		IThreadListener mainThread = (WorldServer) ctx.getServerHandler().playerEntity.world;
 		// or Minecraft.getMinecraft() on the client
@@ -38,8 +38,8 @@ public class bridgeMessageHandler implements IMessageHandler<bridgeMessage, IMes
                 		else {					// Sound at coordinates
                 			world.playSoundEffect(message.posX, message.posY, message.posZ, name, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
                 		}
-                		break;
-                		*/}
+                		break;*/
+                		}
                 	case 1: { // set a block
                 		BlockPos blockPos = new BlockPos(message.posX, message.posY, message.posZ);
                 		world.destroyBlock(blockPos, true);
