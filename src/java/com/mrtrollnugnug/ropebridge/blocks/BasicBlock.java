@@ -2,13 +2,11 @@ package com.mrtrollnugnug.ropebridge.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
 public class BasicBlock extends Block{
 	public BasicBlock(String unlocalizedName, Material material, float hardness, float resistance) {
 		super(material);
 		this.setUnlocalizedName(unlocalizedName);
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		this.setHardness(hardness);
 		this.setResistance(resistance);
 	}
