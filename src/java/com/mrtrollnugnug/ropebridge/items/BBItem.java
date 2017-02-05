@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -100,7 +101,8 @@ public class BBItem extends Item
         return 72000;
     }
 
-    public float getDigSpeed(ItemStack itemstack, net.minecraft.block.state.IBlockState state)
+    @Override
+    public float getStrVsBlock(ItemStack stack, IBlockState state)
     {
         if (player == null) {
             return 1.0F;
@@ -148,7 +150,8 @@ public class BBItem extends Item
         return EnumAction.NONE;
     }
 
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
         if (worldIn.isRemote) {
             viewSnap = false;
