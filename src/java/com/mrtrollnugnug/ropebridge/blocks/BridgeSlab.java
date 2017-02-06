@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 public class BridgeSlab extends BasicBlock
 {
     protected static float slabHeight = 4.0F / 16.0F;
-    private final AxisAlignedBB boundingBox;
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
 
     public BridgeSlab(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
@@ -32,7 +31,7 @@ public class BridgeSlab extends BasicBlock
         super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
-        boundingBox = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+        new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     @Override

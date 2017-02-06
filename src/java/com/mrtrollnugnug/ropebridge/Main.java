@@ -86,4 +86,4 @@ public class Main {
     	// communicate with other mods, adjust based on this
     	Main.proxy.postInit(e);
     }
-}
+}	

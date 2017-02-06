@@ -64,7 +64,6 @@ public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMes
                 		}
                 		break;
                 	}
-                	//TODO May Cause Problems | getHeldItemMainhand
                 	case 3: { // damage item
                 		if (player.getHeldItemMainhand().getItemDamage()==player.getHeldItemMainhand().getMaxDamage()) {
                 			player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player);;

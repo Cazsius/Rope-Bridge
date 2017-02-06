@@ -26,14 +26,12 @@ public class BridgeSlabTest extends BasicBlock
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
     protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static float slabHeight = 4.0F / 16.0F;
-    private final AxisAlignedBB boundingBox;
-
     public BridgeSlabTest(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
     {
         super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(SIDE, Side.BOTTOM).withProperty(WOOD_TYPE, WoodType.OAK));
-        boundingBox = new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+        new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     @Override
