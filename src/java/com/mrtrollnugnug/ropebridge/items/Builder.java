@@ -96,7 +96,7 @@ public class Builder
                             level = 1;
                         }
                     }
-                    allClear = !addSlab(player.world, bridge, x, y + 1, z, level, rotate) ? false : allClear;
+                    	allClear = !addSlab(player.world, bridge, x, y + 1, z, level, rotate) ? false : allClear;
                 }
             }
         }
@@ -172,8 +172,7 @@ public class Builder
             if (name.equals("item.string")) {
                 if (stack.stackSize > stringNeeded) {
                     // stack.stackSize = stack.stackSize - stringNeeded;
-                    // Update on server
-                    Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
+       		Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
                     stringNeeded = 0;
                 }
                 else {
@@ -200,8 +199,8 @@ public class Builder
                 }
             }
         }
-    }
-
+   }
+    //Controls Removing Slabs + Building Physical Bridge
     private static boolean addSlab(World world, LinkedList<SlabPos> list, int x, int y, int z, int level, boolean rotate)
     {
         boolean isClear;
@@ -210,7 +209,7 @@ public class Builder
             pos = new BlockPos(z, y, x);
         }
         else {
-            pos = new BlockPos(x, y, z);
+        	pos = new BlockPos(x, y, z);
         }
         isClear = (Main.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos));
         list.add(new SlabPos(pos, level, rotate));
@@ -219,7 +218,8 @@ public class Builder
         }
         return isClear;
     }
-
+    
+    //Controls if blocks are in the way
     private static void spawnSmoke(World world, BlockPos pos, int times)
     {
         if (times > 0) {
@@ -246,7 +246,7 @@ public class Builder
 
             spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
             // play sound at x y z wood
-            Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
+            //TODO Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
 
             final World finworld = world;
             final LinkedList<SlabPos> finBridge = bridge;
