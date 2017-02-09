@@ -246,7 +246,8 @@ public class Builder
 
             spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
             // play sound at x y z wood
-            //TODO Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
+            //TODO This Line Literally fixed 4 gamebreaking Bugs
+            //Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
 
             final World finworld = world;
             final LinkedList<SlabPos> finBridge = bridge;
