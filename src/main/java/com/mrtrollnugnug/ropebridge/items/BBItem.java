@@ -74,6 +74,7 @@ public class BBItem extends Item
             player = playerIn;
             if (playerFov == 0) {
                 playerFov = Minecraft.getMinecraft().gameSettings.fovSetting;
+                //player.playSound(soundIn, volume, pitch);
             }
         }
         playerIn.setActiveHand(hand);
@@ -162,7 +163,7 @@ public class BBItem extends Item
                 }
                 else {
                     RayTraceResult hit = player.rayTrace(Main.maxBridgeDistance, 1.0F);
-                    // world.playSoundEffect(player.posX,player.posY,player.posZ,
+                    //world.playSoundEffect(player.posX,player.posY,player.posZ,
                     // "random.bow", 1.0F, 1.0F);
                     // play sound at player random.bow
                     // Main.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 0,
