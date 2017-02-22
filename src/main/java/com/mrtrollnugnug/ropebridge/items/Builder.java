@@ -111,7 +111,7 @@ public class Builder
                 Main.snw.sendToServer(new BridgeMessage(3, 0, 0, 0, 0, 0)); // damage
                                                                             // item
             }
-            Main.snw.sendToServer(new BridgeMessage(4, 0, 0, 0, 0, 0)); // trigger
+           // Main.snw.sendToServer(new BridgeMessage(4, 0, 0, 0, 0, 0)); // trigger
                                                                         // building
                                                                         // achievement
 
@@ -171,13 +171,13 @@ public class Builder
             String name = stack.getItem().getUnlocalizedName();
             if (name.equals("item.string")) {
                 if (stack.stackSize > stringNeeded) {
-                    // stack.stackSize = stack.stackSize - stringNeeded;
+                    stack.stackSize = stack.stackSize - stringNeeded; //TODO Potential Issue
        		Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
                     stringNeeded = 0;
                 }
                 else {
                     stringNeeded -= stack.stackSize;
-                    // player.inventory.mainInventory[i] = null;
+                    player.inventory.mainInventory[i] = null;  //TODO Potential Issue
                     // Update on server
                     Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
                     continue;
@@ -185,14 +185,14 @@ public class Builder
             }
             if (name.equals("tile.woodSlab")) {
                 if (stack.stackSize > slabsNeeded) {
-                    // stack.stackSize = stack.stackSize - slabsNeeded;
+                    stack.stackSize = stack.stackSize - slabsNeeded;  //TODO Potential Issue
                     // Update on server
                     Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - slabsNeeded));
                     slabsNeeded = 0;
                 }
                 else {
                     slabsNeeded -= stack.stackSize;
-                    // player.inventory.mainInventory[i] = null;
+                    player.inventory.mainInventory[i] = null;  //TODO Potential Issue
                     // update on server
                     Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
                     continue;
@@ -246,7 +246,6 @@ public class Builder
 
             spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
             // play sound at x y z wood
-            //TODO This Line Literally fixed 4 gamebreaking Bugs
             //Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
 
             final World finworld = world;
