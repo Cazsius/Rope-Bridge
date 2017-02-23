@@ -1,12 +1,12 @@
 package com.mrtrollnugnug.ropebridge;
 
-import com.mrtrollnugnug.ropebridge.blocks.ModBlocks;
+import com.mrtrollnugnug.ropebridge.block.ModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.IThreadListener;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -74,7 +74,7 @@ public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMes
                 		break;
                 	}
                 	case 4: { // trigger the achievement for building a bridge
-                		player.hasAchievement(Main.buildAchievement);
+                		player.hasAchievement(RopeBridge.buildAchievement);
                 		break;
                 	}
                 }

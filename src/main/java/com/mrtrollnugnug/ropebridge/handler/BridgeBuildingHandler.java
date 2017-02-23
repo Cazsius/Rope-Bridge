@@ -1,11 +1,11 @@
-package com.mrtrollnugnug.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.handler;
 
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.BridgeMessage;
-import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.RopeBridge;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,11 +17,12 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class Builder
+public class BridgeBuildingHandler
 {
+	//TODO Wrong Package
     public static void newBridge(EntityPlayer player, float playerFov, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
     {
-        LinkedList<SlabPos> bridge = new LinkedList<SlabPos>();
+        LinkedList<SlabPosHandler> bridge = new LinkedList<SlabPosHandler>();
         boolean allClear = true;
 
         int x1, y1, x2, y2, z, z2;
@@ -56,7 +57,7 @@ public class Builder
         int distInt;
 
         m = (double) (y2 - y1) / (double) (x2 - x1);
-        if (!Main.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
+        if (!RopeBridge.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
             tell(player, "Sorry, your slope is too great. Please try again.");
             return;
         }
@@ -77,7 +78,7 @@ public class Builder
 
         for (int x = Math.min(x1, x2) + 1; x <= Math.max(x1, x2) - 1; x++) {
             for (int y = Math.max(y1, y2); y >= Math.min(y1, y2) - distInt / 8 - 1; y--) {
-                double funcVal = m * (double) x + b - (distance / 1000) * (Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance))) * Main.bridgeDroopFactor + Main.bridgeYOffset;
+                double funcVal = m * (double) x + b - (distance / 1000) * (Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance))) * RopeBridge.bridgeDroopFactor + RopeBridge.bridgeYOffset;
                 if ((double) y + 0.5 > funcVal && (double) y - 0.5 <= funcVal) {
                     int level;
                     if (funcVal >= y) {
@@ -108,7 +109,7 @@ public class Builder
                 if (stack.getItemDamage() == stack.getMaxDamage()) {
                     resetFov(playerFov);
                 }
-                Main.snw.sendToServer(new BridgeMessage(3, 0, 0, 0, 0, 0)); // damage
+                RopeBridge.snw.sendToServer(new BridgeMessage(3, 0, 0, 0, 0, 0)); // damage
                                                                             // item
             }
            // Main.snw.sendToServer(new BridgeMessage(4, 0, 0, 0, 0, 0)); // trigger
@@ -172,14 +173,14 @@ public class Builder
             if (name.equals("item.string")) {
                 if (stack.stackSize > stringNeeded) {
                     stack.stackSize = stack.stackSize - stringNeeded; //TODO Potential Issue
-       		Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
+       		RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
                     stringNeeded = 0;
                 }
                 else {
                     stringNeeded -= stack.stackSize;
                     player.inventory.mainInventory[i] = null;  //TODO Potential Issue
                     // Update on server
-                    Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
+                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
                     continue;
                 }
             }
@@ -187,21 +188,21 @@ public class Builder
                 if (stack.stackSize > slabsNeeded) {
                     stack.stackSize = stack.stackSize - slabsNeeded;  //TODO Potential Issue
                     // Update on server
-                    Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - slabsNeeded));
+                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - slabsNeeded));
                     slabsNeeded = 0;
                 }
                 else {
                     slabsNeeded -= stack.stackSize;
                     player.inventory.mainInventory[i] = null;  //TODO Potential Issue
                     // update on server
-                    Main.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
+                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
                     continue;
                 }
             }
         }
    }
     //Controls Removing Slabs + Building Physical Bridge
-    private static boolean addSlab(World world, LinkedList<SlabPos> list, int x, int y, int z, int level, boolean rotate)
+    private static boolean addSlab(World world, LinkedList<SlabPosHandler> list, int x, int y, int z, int level, boolean rotate)
     {
         boolean isClear;
         BlockPos pos;
@@ -211,8 +212,8 @@ public class Builder
         else {
         	pos = new BlockPos(x, y, z);
         }
-        isClear = (Main.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos));
-        list.add(new SlabPos(pos, level, rotate));
+        isClear = (RopeBridge.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos));
+        list.add(new SlabPosHandler(pos, level, rotate));
         if (!isClear) {
             spawnSmoke(world, pos, 15);
         }
@@ -236,20 +237,20 @@ public class Builder
         }
     }
 
-    private static void buildBridge(World world, LinkedList<SlabPos> bridge, int type)
+    private static void buildBridge(World world, LinkedList<SlabPosHandler> bridge, int type)
     {
-        SlabPos slab;
+        SlabPosHandler slab;
         if (!bridge.isEmpty()) {
             slab = bridge.pop();
             // Server call build x y z
-            Main.snw.sendToServer(new BridgeMessage(1, slab.x, slab.y, slab.z, slab.level, (slab.rotate ? 1 : 0) + 2 * type));
+            RopeBridge.snw.sendToServer(new BridgeMessage(1, slab.x, slab.y, slab.z, slab.level, (slab.rotate ? 1 : 0) + 2 * type));
 
             spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
             // play sound at x y z wood
             //Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y, slab.z, 1, 0));
 
             final World finworld = world;
-            final LinkedList<SlabPos> finBridge = bridge;
+            final LinkedList<SlabPosHandler> finBridge = bridge;
             final int finType = type;
             new Timer().schedule(new TimerTask() {
                 public void run()
@@ -277,7 +278,7 @@ public class Builder
 
     private static void resetFov(float toFov)
     {
-        if (Main.zoomOnAim && toFov != 0) {
+        if (RopeBridge.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }

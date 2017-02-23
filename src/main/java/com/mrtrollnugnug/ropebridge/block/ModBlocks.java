@@ -1,4 +1,4 @@
-package com.mrtrollnugnug.ropebridge.blocks;
+package com.mrtrollnugnug.ropebridge.block;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;

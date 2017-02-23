@@ -3,7 +3,7 @@ package com.mrtrollnugnug.ropebridge;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mrtrollnugnug.ropebridge.items.Builder;
+import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -38,17 +38,17 @@ public class RopeBridgeCommand implements ICommand {
 
 	private void setVariable(String variable, String value) {
 		try {
-			if (Main.instance.getClass().getField(variable).getType().getName().equals("boolean")) {
+			if (RopeBridge.instance.getClass().getField(variable).getType().getName().equals("boolean")) {
 				boolean boolVal = value.equals("true") ? true : false;
-				Main.instance.getClass().getField(variable).set(Main.instance, boolVal);
+				RopeBridge.instance.getClass().getField(variable).set(RopeBridge.instance, boolVal);
 			}
 			else if (variable.equals("bridgeYOffset")) {
 				float floatVal = Float.parseFloat(value);
-				Main.instance.getClass().getField(variable).set(Main.instance, floatVal);
+				RopeBridge.instance.getClass().getField(variable).set(RopeBridge.instance, floatVal);
 			}
 			else {
 				int intVal = Integer.parseInt(value);
-				Main.instance.getClass().getField(variable).set(Main.instance, intVal);
+				RopeBridge.instance.getClass().getField(variable).set(RopeBridge.instance, intVal);
 			}
 		} catch (NumberFormatException exception) {
 			exception.printStackTrace();
@@ -105,7 +105,7 @@ public class RopeBridgeCommand implements ICommand {
 				BlockPos pos1 = new BlockPos(Double.parseDouble(args[0]),Double.parseDouble(args[1]),Double.parseDouble(args[2]));
 				BlockPos pos2 = new BlockPos(Double.parseDouble(args[3]),Double.parseDouble(args[4]),Double.parseDouble(args[5]));
 
-				Builder.newBridge((EntityPlayer) sender, 30, null, type, pos1, pos2);
+				BridgeBuildingHandler.newBridge((EntityPlayer) sender, 30, null, type, pos1, pos2);
 			}
 			catch (NumberFormatException e) {
 				tell(sender, "That doesn't look right. Make sure you use the format <x1> <y1> <z1> <x2> <y2> <z2> <woodType>. If no wood type is given '0' or oak is used.");

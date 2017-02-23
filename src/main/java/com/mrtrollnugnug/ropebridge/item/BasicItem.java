@@ -1,12 +1,11 @@
-package com.mrtrollnugnug.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class BasicItem extends Item{
-	public BasicItem(String unlocalizedName) {
+	public BasicItem() {
 		super();
-		this.setUnlocalizedName(unlocalizedName);
 	    this.setCreativeTab(CreativeTabs.TOOLS);
 	}
 }

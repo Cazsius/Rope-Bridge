@@ -1,11 +1,12 @@
-package com.mrtrollnugnug.ropebridge.items;
+package com.mrtrollnugnug.ropebridge.item;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.BridgeMessage;
-import com.mrtrollnugnug.ropebridge.Main;
+import com.mrtrollnugnug.ropebridge.RopeBridge;
+import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BBItem extends Item
+public class ItemBridgeBuilder extends Item
 {
     World world;
     EntityPlayer player;
@@ -44,13 +45,11 @@ public class BBItem extends Item
     BlockPos firstPos;
     private boolean warningSent = false;
 
-    public BBItem(String unlocalizedName)
-    {
+    public ItemBridgeBuilder() {
         super();
-        this.setUnlocalizedName(unlocalizedName);
-        this.setCreativeTab(CreativeTabs.TOOLS);
-        this.setMaxStackSize(1);
-        this.setMaxDamage(64);
+        setCreativeTab(CreativeTabs.TOOLS);
+        setMaxStackSize(1);
+        setMaxDamage(64);
         smokeTimer = new Timer();
         buildTimer = new Timer();
         clickTimer = new Timer();
@@ -61,7 +60,7 @@ public class BBItem extends Item
     @Override
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
-        playerIn.hasAchievement(Main.craftAchievement);
+        playerIn.hasAchievement(RopeBridge.craftAchievement);
     }
 
     @Override
@@ -86,7 +85,7 @@ public class BBItem extends Item
             clickTimer.schedule(new TimerTask() {
                 public void run()
                 {
-                    Main.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 2, 0));
+                    RopeBridge.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 2, 0));
                 }
             }, 500);
         }
@@ -162,7 +161,7 @@ public class BBItem extends Item
                     tellPlayer("You must be standing on something to build a bridge!");
                 }
                 else {
-                    RayTraceResult hit = player.rayTrace(Main.maxBridgeDistance, 1.0F);
+                    RayTraceResult hit = player.rayTrace(RopeBridge.maxBridgeDistance, 1.0F);
                     //world.playSoundEffect(player.posX,player.posY,player.posZ,
                     // "random.bow", 1.0F, 1.0F);
                     // play sound at player random.bow
@@ -186,7 +185,7 @@ public class BBItem extends Item
                             }
                         }
 
-                        Builder.newBridge(player, playerFov, stack, -1, floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset));
+                        BridgeBuildingHandler.newBridge(player, playerFov, stack, -1, floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset));
                     }
                 }
             }
@@ -386,7 +385,7 @@ public class BBItem extends Item
     private void breakBridge(World worldIn, BlockPos posIn, int meta)
     {
         // Break block and turn into air
-        Main.snw.sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
+        RopeBridge.snw.sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
         int xRange = 0;
         int zRange = 0;
         if (meta % 2 == 0)
@@ -494,7 +493,7 @@ public class BBItem extends Item
 
     private void zoomTowards(float toFov)
     {
-        if (Main.zoomOnAim && toFov != 0 && !fovNormal) {
+        if (RopeBridge.zoomOnAim && toFov != 0 && !fovNormal) {
             float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (Math.round(currentFov) != toFov) {
                 zoomTo(currentFov + (toFov - currentFov) / 4);
@@ -509,7 +508,7 @@ public class BBItem extends Item
 
     private void zoomTo(float toFov)
     {
-        if (Main.zoomOnAim && toFov != 0) {
+        if (RopeBridge.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
