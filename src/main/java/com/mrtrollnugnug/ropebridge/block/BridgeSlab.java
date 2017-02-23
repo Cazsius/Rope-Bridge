@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.block;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,14 +22,14 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BridgeSlab extends BasicBlock
+public class BridgeSlab extends Block
 {
     protected static float slabHeight = 4.0F / 16.0F;
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
 
-    public BridgeSlab(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
+    public BridgeSlab(float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
     {
-        super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
+        super(Material.WOOD);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
         new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
@@ -49,7 +50,7 @@ public class BridgeSlab extends BasicBlock
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return BridgeSlabTest.AABB_BOTTOM_HALF;
+        return BridgeSlabTest.AABB_BLOCK_2;
     }
 
     public boolean canDropFromExplosion(Explosion explosionIn)

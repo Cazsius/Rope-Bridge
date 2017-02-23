@@ -6,9 +6,9 @@ item.ropebridge.bridge.builder.handle.name=Bridge Building Gun Stock
 
 #Blocks
 tile.ropebridge.bridge.block.1.name=Bridge Board 1
-tile.ropebridge.bridge_block.2.name=Bridge Board 2
-tile.ropebridge.bridge_block.3.name=Bridge Board 3
-tile.ropebridge.bridge_block.4.name=Bridge Board 4
+tile.ropebridge.bridge.block.2.name=Bridge Board 2
+tile.ropebridge.bridge.block.3.name=Bridge Board 3
+tile.ropebridge.bridge.block.4.name=Bridge Board 4
 
 #Achievements
 achievement.grapplingGun=Bridge Building Gun

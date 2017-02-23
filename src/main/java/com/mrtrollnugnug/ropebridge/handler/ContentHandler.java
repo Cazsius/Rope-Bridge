@@ -1,9 +1,14 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab1;
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab2;
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab3;
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab4;
 import com.mrtrollnugnug.ropebridge.item.BasicItem;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -15,6 +20,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ContentHandler {
 
 	//Blocks
+	public static Block blockBridgeSlab1;
+	public static Block blockBridgeSlab2;
+	public static Block blockBridgeSlab3;
+	public static Block blockBridgeSlab4;
 	
 	
 	//Items
@@ -24,7 +33,15 @@ public class ContentHandler {
 	public static Item itemBridgeBuilderHandle;
 	
 	public static void initBlocks () {
+		blockBridgeSlab1 = new BridgeSlab1();
+		blockBridgeSlab2 = new BridgeSlab2();
+		blockBridgeSlab3 = new BridgeSlab3();
+		blockBridgeSlab4 = new BridgeSlab4();
 		
+		ModUtils.registerBlock(blockBridgeSlab1, "bridge_block_1");
+		ModUtils.registerBlock(blockBridgeSlab2, "bridge_block_2");
+		ModUtils.registerBlock(blockBridgeSlab3, "bridge_block_3");
+		ModUtils.registerBlock(blockBridgeSlab4, "bridge_block_4");
 	 }
 	
 	public static void initItems () {

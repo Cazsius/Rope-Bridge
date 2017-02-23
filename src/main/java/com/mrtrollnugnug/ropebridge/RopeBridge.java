@@ -1,6 +1,5 @@
 package com.mrtrollnugnug.ropebridge;
 
-import com.mrtrollnugnug.ropebridge.block.ModBlocks;
 import com.mrtrollnugnug.ropebridge.common.CommonProxy;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
@@ -58,7 +57,7 @@ public class RopeBridge {
 		if (customAchievements) {
 	    	craftAchievement = new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ContentHandler.itemBridgeBuilder, AchievementList.BUILD_BETTER_PICKAXE);
 	    	craftAchievement.registerStat();
-	    	buildAchievement = new Achievement("achievement.buildBridge", "buildBridge", 10, 2, ModBlocks.bridgeBlock2, craftAchievement);
+	    	buildAchievement = new Achievement("achievement.buildBridge", "buildBridge", 10, 2, ContentHandler.blockBridgeSlab2, craftAchievement);
 	    	buildAchievement.registerStat();
 		}
 

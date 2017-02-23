@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.block;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,35 +22,40 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BridgeSlabTest extends BasicBlock
+public class BridgeSlabTest extends Block
 {
-    protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-    protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+    protected static final AxisAlignedBB AABB_BLOCK_2 = new AxisAlignedBB(0.0D, 0.25D, 0.0D, 1.0D, 0.5D, 1.0D);
+    protected static final AxisAlignedBB AABB_BLOCK_3 = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 0.75D, 1.0D);
+    protected static final AxisAlignedBB AABB_BLOCK_4 = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static float slabHeight = 4.0F / 16.0F;
     public BridgeSlabTest(String unlocalizedName, float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
     {
-        super(unlocalizedName, Material.WOOD, 1.0F, 5.0F);
+        super(Material.WOOD);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(SIDE, Side.BOTTOM).withProperty(WOOD_TYPE, WoodType.OAK));
         new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
     }
-
+    
     @Override
-    public boolean isFullBlock(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
+    	return false;
+    }
+    
+    @Override
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return state.getValue(SIDE) == Side.BOTTOM ? AABB_BOTTOM_HALF : AABB_TOP_HALF;
+        return state.getValue(SIDE) == Side.BOTTOM ? AABB_BLOCK_2 : AABB_BLOCK_4;
     }
 
     public boolean canDropFromExplosion(Explosion explosionIn)

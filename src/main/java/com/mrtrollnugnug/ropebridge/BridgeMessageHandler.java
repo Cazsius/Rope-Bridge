@@ -1,6 +1,6 @@
 package com.mrtrollnugnug.ropebridge;
 
-import com.mrtrollnugnug.ropebridge.block.ModBlocks;
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -46,10 +46,10 @@ public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMes
                 		Block blk;
                 		switch (message.invIndex) {
                 		case 0: { blk = Blocks.AIR;				break; }
-                		case 1: { blk = ModBlocks.bridgeBlock1; break; }
-                		case 2: { blk = ModBlocks.bridgeBlock2; break; }
-                		case 3: { blk = ModBlocks.bridgeBlock3; break; }
-                		case 4: { blk = ModBlocks.bridgeBlock4; break; }
+                		case 1: { blk = ContentHandler.blockBridgeSlab1; break; }
+                		case 2: { blk = ContentHandler.blockBridgeSlab2; break; }
+                		case 3: { blk = ContentHandler.blockBridgeSlab3; break; }
+                		case 4: { blk = ContentHandler.blockBridgeSlab4; break; }
                 		default: { blk = Blocks.AIR; break; }
                 		}
                 		world.setBlockState(blockPos, blk.getStateFromMeta(message.stackSize));
