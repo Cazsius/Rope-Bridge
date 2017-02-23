@@ -1,11 +1,17 @@
 package com.mrtrollnugnug.ropebridge.client.render;
 
+import com.mrtrollnugnug.ropebridge.block.ModBlocks;
+import com.mrtrollnugnug.ropebridge.lib.Constants;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 
 
 
 public final class BlockRenderRegister {
+	public static String modid = Constants.MOD_ID;
 
 	public static void registerBlockRenderer() {
 		reg(ModBlocks.bridgeBlock1);
