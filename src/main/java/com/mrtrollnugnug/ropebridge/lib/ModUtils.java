@@ -13,11 +13,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModUtils {
-	
-	/**
-	 * @author Darkhax
-	 *
-	 */
+
+    /**
+     * @author Darkhax
+     *
+     */
 
     /**
      * A list of all items from RopeBridge.
