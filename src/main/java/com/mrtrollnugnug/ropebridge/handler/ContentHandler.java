@@ -4,7 +4,7 @@ import com.mrtrollnugnug.ropebridge.block.BridgeSlab1;
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab2;
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab3;
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab4;
-import com.mrtrollnugnug.ropebridge.item.BasicItem;
+import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
@@ -31,11 +31,7 @@ public class ContentHandler {
     // Items
     public static Item itemBridgeBuilder;
 
-    public static Item itemBridgeBuilderHook;
-
-    public static Item itemBridgeBuilderBarrel;
-
-    public static Item itemBridgeBuilderHandle;
+    public static Item itemBridgeMaterial;
 
     public static void initBlocks () {
 
@@ -53,23 +49,19 @@ public class ContentHandler {
     public static void initItems () {
 
         itemBridgeBuilder = new ItemBridgeBuilder();
-        itemBridgeBuilderHook = new BasicItem();
-        itemBridgeBuilderBarrel = new BasicItem();
-        itemBridgeBuilderHandle = new BasicItem();
+        itemBridgeMaterial = new ItemBridgeMaterial();
 
         ModUtils.registerItem(itemBridgeBuilder, "bridge_builder");
-        ModUtils.registerItem(itemBridgeBuilderHook, "bridge_builder_hook");
-        ModUtils.registerItem(itemBridgeBuilderBarrel, "bridge_builder_barrel");
-        ModUtils.registerItem(itemBridgeBuilderHandle, "bridge_builder_handle");
+        ModUtils.registerItem(itemBridgeMaterial, "bridge_builder_material");
 
     }
 
     public static void initRecipes () {
 
-        GameRegistry.addRecipe(new ItemStack(itemBridgeBuilderHook), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
-        GameRegistry.addRecipe(new ItemStack(itemBridgeBuilderBarrel), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
-        GameRegistry.addRecipe(new ItemStack(itemBridgeBuilderHandle), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
-        GameRegistry.addRecipe(new ItemStack(itemBridgeBuilder), new Object[] { "tbh", 't', itemBridgeBuilderHook, 'b', itemBridgeBuilderBarrel, 'h', itemBridgeBuilderHandle });
+        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 0), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
+        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 1), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
+        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 2), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
+        GameRegistry.addRecipe(new ItemStack(itemBridgeBuilder), new Object[] { "tbh", 't', new ItemStack(itemBridgeMaterial, 1, 0), 'b', new ItemStack(itemBridgeMaterial, 1, 1), 'h', new ItemStack(itemBridgeMaterial, 1, 2) });
         GameRegistry.addRecipe(new ItemStack(Items.STRING, 4), new Object[] { "w", 'w', Blocks.WOOL });
     }
 
@@ -77,8 +69,6 @@ public class ContentHandler {
     public static void onClientPreInit () {
         
         ModUtils.registerItemInvModel(itemBridgeBuilder);
-        ModUtils.registerItemInvModel(itemBridgeBuilderHook);
-        ModUtils.registerItemInvModel(itemBridgeBuilderBarrel);
-        ModUtils.registerItemInvModel(itemBridgeBuilderHandle);
+        ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.varients);
     }
 }
