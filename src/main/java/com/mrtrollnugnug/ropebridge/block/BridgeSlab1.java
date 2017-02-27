@@ -7,14 +7,14 @@ import net.minecraft.world.IBlockAccess;
 
 public class BridgeSlab1 extends BridgeSlab {
 
-	public BridgeSlab1() {
-		super(0.1F, 0.0F, 0.1F, 0.9F, slabHeight, 0.9F);
-	}
+    public BridgeSlab1 () {
+        super(0.1F, 0.0F, 0.1F, 0.9F, slabHeight, 0.9F);
+    }
 
-	@Override
-	    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	    {
-	        return BridgeSlabTest.AABB_BLOCK_1;
-	    }
-	
+    @Override
+    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos) {
+
+        return BridgeSlabTest.AABB_BLOCK_1;
+    }
+
 }

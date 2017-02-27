@@ -21,4 +21,3 @@ public class Constants {
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 }
-	
