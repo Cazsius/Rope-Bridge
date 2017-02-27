@@ -76,5 +76,9 @@ public class ContentHandler {
     @SideOnly(Side.CLIENT)
     public static void onClientPreInit () {
         
+        ModUtils.registerItemInvModel(itemBridgeBuilder);
+        ModUtils.registerItemInvModel(itemBridgeBuilderHook);
+        ModUtils.registerItemInvModel(itemBridgeBuilderBarrel);
+        ModUtils.registerItemInvModel(itemBridgeBuilderHandle);
     }
 }
