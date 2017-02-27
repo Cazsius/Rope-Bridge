@@ -32,25 +32,16 @@ public class ContentHandler {
 
     public static void initBlocks () {
 
-        blockBridgeSlab1 = new BridgeSlab(BridgeSlab.AABB_BLOCK_1);
-        blockBridgeSlab2 = new BridgeSlab(BridgeSlab.AABB_BLOCK_2);
-        blockBridgeSlab3 = new BridgeSlab(BridgeSlab.AABB_BLOCK_3);
-        blockBridgeSlab4 = new BridgeSlab(BridgeSlab.AABB_BLOCK_4);
-
-        ModUtils.registerBlock(blockBridgeSlab1, "bridge_block_1");
-        ModUtils.registerBlock(blockBridgeSlab2, "bridge_block_2");
-        ModUtils.registerBlock(blockBridgeSlab3, "bridge_block_3");
-        ModUtils.registerBlock(blockBridgeSlab4, "bridge_block_4");
+        blockBridgeSlab1 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1");
+        blockBridgeSlab2 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2");
+        blockBridgeSlab3 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3");
+        blockBridgeSlab4 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4");
     }
 
     public static void initItems () {
 
-        itemBridgeBuilder = new ItemBridgeBuilder();
-        itemBridgeMaterial = new ItemBridgeMaterial();
-
-        ModUtils.registerItem(itemBridgeBuilder, "bridge_builder");
-        ModUtils.registerItem(itemBridgeMaterial, "bridge_builder_material");
-
+        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
+        itemBridgeMaterial = ModUtils.registerItem(new ItemBridgeMaterial(), "bridge_builder_material");
     }
 
     public static void initRecipes () {
