@@ -17,22 +17,31 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BridgeSlab extends Block {
 
-    protected static float slabHeight = 4.0F / 16.0F;
+    public static float slabHeight = 4.0F / 16.0F;
+
+    public static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
+
+    public static final AxisAlignedBB AABB_BLOCK_2 = new AxisAlignedBB(0.0D, 0.25D, 0.0D, 1.0D, 0.5D, 1.0D);
+
+    public static final AxisAlignedBB AABB_BLOCK_3 = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 0.75D, 1.0D);
+
+    public static final AxisAlignedBB AABB_BLOCK_4 = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
 
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
 
-    public BridgeSlab (float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
+    private final AxisAlignedBB bounds;
+
+    public BridgeSlab (AxisAlignedBB bounds) {
+
         super(Material.WOOD);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
-        new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+        this.bounds = bounds;
     }
 
     @Override
@@ -50,19 +59,7 @@ public class BridgeSlab extends Block {
     @Override
     public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos) {
 
-        return BridgeSlabTest.AABB_BLOCK_2;
-    }
-
-    @Override
-    public boolean canDropFromExplosion (Explosion explosionIn) {
-
-        return true;
-    }
-
-    @Override
-    public boolean canHarvestBlock (IBlockAccess world, BlockPos pos, EntityPlayer player) {
-
-        return true;
+        return this.bounds;
     }
 
     @Override
@@ -82,21 +79,6 @@ public class BridgeSlab extends Block {
         return ret;
     }
 
-    public ItemStack getPickBlock (RayTraceResult target, World world, BlockPos pos) {
-
-        return null;
-    }
-
-    public boolean isOpaqueCube () {
-
-        return false;
-    }
-
-    public boolean isFullCube () {
-
-        return false;
-    }
-
     @Override
     public int getFlammability (IBlockAccess world, BlockPos pos, EnumFacing face) {
 
@@ -113,23 +95,6 @@ public class BridgeSlab extends Block {
     public int getFireSpreadSpeed (IBlockAccess world, BlockPos pos, EnumFacing face) {
 
         return 5;
-    }
-
-    @Override
-    public boolean isFireSource (World world, BlockPos pos, EnumFacing side) {
-
-        return false;
-    }
-
-    @Override
-    public boolean isPassable (IBlockAccess worldIn, BlockPos pos) {
-
-        return false;
-    }
-
-    public int getMobilityFlag () {
-
-        return 1;
     }
 
     @Override
