@@ -11,14 +11,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBridgeMaterial extends Item {
 
     public static String[] varients = new String[] { "hook", "barrel", "handle" };
-    
+
     public ItemBridgeMaterial () {
-        
+
         super();
         this.setHasSubtypes(true);
         this.setCreativeTab(CreativeTabs.TOOLS);
     }
-    
+
     @Override
     public String getUnlocalizedName (ItemStack stack) {
 
