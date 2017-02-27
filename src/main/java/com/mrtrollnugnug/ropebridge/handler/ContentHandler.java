@@ -1,11 +1,8 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
-import com.mrtrollnugnug.ropebridge.block.BridgeSlab1;
-import com.mrtrollnugnug.ropebridge.block.BridgeSlab2;
-import com.mrtrollnugnug.ropebridge.block.BridgeSlab3;
-import com.mrtrollnugnug.ropebridge.block.BridgeSlab4;
-import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
 import net.minecraft.block.Block;
@@ -35,10 +32,10 @@ public class ContentHandler {
 
     public static void initBlocks () {
 
-        blockBridgeSlab1 = new BridgeSlab1();
-        blockBridgeSlab2 = new BridgeSlab2();
-        blockBridgeSlab3 = new BridgeSlab3();
-        blockBridgeSlab4 = new BridgeSlab4();
+        blockBridgeSlab1 = new BridgeSlab(BridgeSlab.AABB_BLOCK_1);
+        blockBridgeSlab2 = new BridgeSlab(BridgeSlab.AABB_BLOCK_2);
+        blockBridgeSlab3 = new BridgeSlab(BridgeSlab.AABB_BLOCK_3);
+        blockBridgeSlab4 = new BridgeSlab(BridgeSlab.AABB_BLOCK_4);
 
         ModUtils.registerBlock(blockBridgeSlab1, "bridge_block_1");
         ModUtils.registerBlock(blockBridgeSlab2, "bridge_block_2");
@@ -67,7 +64,7 @@ public class ContentHandler {
 
     @SideOnly(Side.CLIENT)
     public static void onClientPreInit () {
-        
+
         ModUtils.registerItemInvModel(itemBridgeBuilder);
         ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.varients);
     }
