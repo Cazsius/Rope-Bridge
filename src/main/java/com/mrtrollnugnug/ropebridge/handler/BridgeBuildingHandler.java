@@ -69,7 +69,7 @@ public class BridgeBuildingHandler {
         if (distInt < 2)
             // bridge too short
             return;
-    
+
         // Check for materials in inventory
         if (!player.capabilities.isCreativeMode && !hasMaterials(player, distInt - 1))
             return;
