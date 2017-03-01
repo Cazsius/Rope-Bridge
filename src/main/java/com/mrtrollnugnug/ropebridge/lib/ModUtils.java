@@ -5,19 +5,16 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.command.ICommandSender;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModUtils {
-
-    /**
-     * @author Darkhax
-     *
-     */
 
     /**
      * A list of all items from RopeBridge.
@@ -28,6 +25,18 @@ public class ModUtils {
      * A list of all blocks from RopeBridge.
      */
     public static final List<Block> BLOCKS = new ArrayList<>();
+
+    /**
+     * Sends a message to a command sender. Can be used for easier message sending.
+     *
+     * @param sender The thing to send the message to. This should probably be a player.
+     * @param message The message to send. This can be a normal message, however translation
+     *        keys are HIGHLY encouraged!
+     */
+    public static void tellPlayer (ICommandSender sender, String message) {
+
+        sender.sendMessage(new TextComponentTranslation(message));
+    }
 
     /**
      * Provides the same functionality as older forge tile registration.

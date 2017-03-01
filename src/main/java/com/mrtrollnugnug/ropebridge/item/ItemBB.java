@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import com.mrtrollnugnug.ropebridge.network.BuildMessage;
 
 import net.minecraft.block.Block;
@@ -23,9 +25,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -80,7 +79,7 @@ public class ItemBB extends Item {
             final EntityPlayer player = (EntityPlayer) entityLiving;
             if (this.getMaxItemUseDuration(stack) - timeLeft > 10) {
                 if (!player.onGround) {
-                    tellPlayer(player, "You must be standing on something to build a bridge!");
+                    ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 }
                 else {
                     final RayTraceResult hit = raytrace(player);
@@ -146,7 +145,7 @@ public class ItemBB extends Item {
 
         if (FMLCommonHandler.instance().getSide().isClient()) {
             if (RopeBridge.proxy.getPlayer().isSneaking() && isBridgeBlock(state.getBlock())) {
-                tellPlayer(RopeBridge.proxy.getPlayer(), "WARNING! Breaking whole bridge!");
+                ModUtils.tellPlayer(RopeBridge.proxy.getPlayer(), Messages.WARNING_BREAKING);
                 return 0.3F;
             }
         }
@@ -165,11 +164,6 @@ public class ItemBB extends Item {
     public int getMaxItemUseDuration (ItemStack stack) {
 
         return 72000;
-    }
-
-    private static void tellPlayer (EntityPlayer player, String message) {
-
-        player.sendMessage(new TextComponentString("[Rope Bridge]: " + message).setStyle(new Style().setColor(TextFormatting.DARK_AQUA)));
     }
 
     private static boolean isBridgeBlock (Block blockIn) {

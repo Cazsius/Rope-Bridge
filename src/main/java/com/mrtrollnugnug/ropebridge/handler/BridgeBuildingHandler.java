@@ -4,20 +4,18 @@ import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.RopeBridge;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class BridgeBuildingHandler {
@@ -51,7 +49,7 @@ public class BridgeBuildingHandler {
             z2 = pos2.getX();
         }
         if (Math.abs(z2 - z) > 3) {
-            tell(player, "Sorry, bridge must be built in a cardinal direction. Please try again.");
+            ModUtils.tellPlayer(player, Messages.NOT_CARDINAL);
             return;
         }
         double m;
@@ -61,7 +59,7 @@ public class BridgeBuildingHandler {
 
         m = (double) (y2 - y1) / (double) (x2 - x1);
         if (!ConfigurationHandler.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
-            tell(player, "Sorry, your slope is too great. Please try again.");
+            ModUtils.tellPlayer(player, Messages.SLOPE_GREAT);
             return;
         }
         b = y1 - m * x1;
@@ -110,20 +108,13 @@ public class BridgeBuildingHandler {
                 if (stack.getItemDamage() == stack.getMaxDamage()) {
                     // resetFov(playerFov);
                 }
-                // RopeBridge.snw.sendToServer(new BridgeMessage(3, 0, 0, 0, 0,
-                // 0)); // damage
-                // item
                 stack.damageItem(1, player);
             }
-            // Main.snw.sendToServer(new BridgeMessage(4, 0, 0, 0, 0, 0)); //
-            // trigger
-            // building
-            // achievement
 
             buildBridge(player.world, bridge, type);
         }
         else {
-            tell(player, "Oops! Looks like there's something in the way. Look for the Smoke to see where that is and try again.");
+            ModUtils.tellPlayer(player, Messages.OBSTRUCTED);
             return;
         }
     }
@@ -153,7 +144,7 @@ public class BridgeBuildingHandler {
         if (slabsHad >= slabsNeeded && stringHad >= stringNeeded)
             return true;
         else {
-            tell(player, "You need at least " + slabsNeeded + " slabs and " + stringNeeded + " strings to build this bridge.");
+            ModUtils.tellPlayer(player, Messages.UNDERFUNDED);
             return false;
         }
     }
@@ -252,11 +243,6 @@ public class BridgeBuildingHandler {
         SlabPosHandler slab;
         if (!bridge.isEmpty()) {
             slab = bridge.pop();
-            // Server call build x y z
-            // slab.level, (slab.rotate ? 1 : 0) + 2 * type));
-            // replaced with new message type
-            // RopeBridge.snw.sendToServer(new BridgeMessage(1, slab.x, slab.y,
-            // slab.z, slab.level, (slab.rotate ? 1 : 0) + 2 * type));
             Block block = Blocks.AIR;
             switch (slab.level) {
                 case 1:
@@ -276,9 +262,6 @@ public class BridgeBuildingHandler {
             world.setBlockState(slab.getBlockPos(), state, 3);
 
             spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
-            // play sound at x y z wood
-            // Main.snw.sendToServer(new BridgeMessage(0, slab.x, slab.y,
-            // slab.z, 1, 0));
 
             new Timer().schedule(new TimerTask() {
 
@@ -302,17 +285,5 @@ public class BridgeBuildingHandler {
                 return stack.getItemDamage();
         }
         return 0;
-    }
-
-    private static void resetFov (float toFov) {
-
-        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
-            Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
-        }
-    }
-
-    private static void tell (EntityPlayer playerIn, String message) {
-
-        playerIn.sendMessage(new TextComponentString("[Rope Bridge]: " + message).setStyle(new Style().setColor(TextFormatting.DARK_AQUA)));
     }
 }

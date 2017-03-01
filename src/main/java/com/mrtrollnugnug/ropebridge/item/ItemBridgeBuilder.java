@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
@@ -25,7 +27,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -123,7 +124,7 @@ public class ItemBridgeBuilder extends Item {
         else {
             if (this.player.isSneaking() && this.isBridgeBlock(state.getBlock())) {
                 if (!this.warningSent) {
-                    this.tellPlayer("WARNING! Breaking whole bridge!");
+                    ModUtils.tellPlayer(this.player, Messages.WARNING_BREAKING);
                     this.warningSent = true;
                 }
                 return 0.3F;
@@ -165,15 +166,10 @@ public class ItemBridgeBuilder extends Item {
             this.viewSnap = false;
             if (72000 - timeLeft > 10) {
                 if (!player.onGround) {
-                    this.tellPlayer("You must be standing on something to build a bridge!");
+                    ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 }
                 else {
                     final RayTraceResult hit = player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0F);
-                    // world.playSoundEffect(player.posX,player.posY,player.posZ,
-                    // "random.bow", 1.0F, 1.0F);
-                    // play sound at player random.bow
-                    // Main.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 0,
-                    // 0));
                     if (hit.typeOfHit == RayTraceResult.Type.BLOCK) {
                         final BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY) - 1, Math.floor(player.posZ));
                         // Vector offsets
@@ -203,82 +199,6 @@ public class ItemBridgeBuilder extends Item {
         }
     }
 
-    /*
-     * private void newBridge(ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2) {
-     * LinkedList<SlabPos> bridge = new LinkedList<SlabPos>(); boolean allClear = true; int
-     * x1,y1,x2,y2,z,z2; int Xdiff = Math.abs(pos1.getX()-pos2.getX()); int Zdiff =
-     * Math.abs(pos1.getZ()-pos2.getZ()); boolean rotate; if (Xdiff > Zdiff) { rotate = false;
-     * x1 = pos1.getX(); y1 = pos1.getY(); x2 = pos2.getX(); y2 = pos2.getY(); z = pos1.getZ();
-     * z2 = pos2.getZ(); } else { rotate = true; x1 = pos1.getZ(); y1 = pos1.getY(); x2 =
-     * pos2.getZ(); y2 = pos2.getY(); z = pos1.getX(); z2 = pos2.getX(); } if
-     * (Math.abs(z2-z)>3) {
-     * tellPlayer("Sorry, bridge must be built in a cardinal dirrection. Please try again." );
-     * return; } double m; double b; double distance; int distInt; m =
-     * (double)(y2-y1)/(double)(x2-x1); if (!Main.ignoreSlopeWarnings && Math.abs(m)>0.2) {
-     * tellPlayer("Sorry, your slope is too great. Please try again."); return; } b =
-     * (double)y1-(m*(double)x1); distance = Math.abs(x2-x1); distInt = Math.abs(x2-x1); //
-     * Check if bridge longer than 0 if (distInt < 2) { // bridge too short return; } // Check
-     * for materials in inventory if (!hasMaterials(distInt-1) &&
-     * !player.capabilities.isCreativeMode) { return; } for (int x = Math.min(x1, x2)+1; x<=
-     * Math.max(x1, x2)-1; x++) { for (int y = Math.max(y1, y2); y>= Math.min(y1,
-     * y2)-distInt/8-1; y--) { double funcVal =
-     * m*(double)x+b-(distance/1000)*(Math.sin((x-Math.min(x1,
-     * x2))*(Math.PI/distance)))*Main.bridgeDroopFactor + Main.bridgeYOffset; if
-     * ((double)y+0.5>funcVal && (double)y-0.5<=funcVal) { int level; if (funcVal>=y) { if
-     * (funcVal>=(double)y+0.25) { level = 4; } else { level = 3; } } else { if
-     * (funcVal>=(double)y-0.25) { level = 2; } else { level = 1; } } allClear =
-     * !addSlab(bridge,x,y+1,z,level,rotate) ? false : allClear; } } } if (allClear) { int type
-     * = inputType==-1 ? getWoodType() : inputType; if (!player.capabilities.isCreativeMode) {
-     * takeMaterials(distInt-1); if (stack.getItemDamage()==stack.getMaxDamage()) {
-     * zoomTo(playerFov); } Main.snw.sendToServer(new bridgeMessage(3, 0, 0, 0, 0, 0)); //
-     * damage item } Main.snw.sendToServer(new bridgeMessage(4, 0, 0, 0, 0, 0)); // trigger
-     * building achievement tellPlayer("Building Bridge!"); buildBridge(bridge, type); } else {
-     * tellPlayer("Oops! Looks like there's something in the way. Look for the Smoke to see where that is and try again."
-     * ); } }
-     */
-
-    /*
-     * private int getWoodType() { for (int i = 0; i < player.inventory.mainInventory.length;
-     * i++) { ItemStack stack = player.inventory.mainInventory[i]; if (stack == null) {
-     * continue; } String name = stack.getItem().getUnlocalizedName(); if
-     * (name.equals("tile.woodSlab")) { return stack.getItemDamage(); } } return 0; }
-     */
-
-    private void tell (EntityPlayer playerIn, String message) {
-
-        playerIn.sendMessage(new TextComponentString("[Rope Bridge]: " + message).setStyle(this.chatStyle));
-    }
-
-    private void tellPlayer (String message) {
-
-        this.tell(this.player, message);
-    }
-
-    /*
-     * private boolean addSlab(LinkedList<SlabPos> list, int x, int y, int z, int level,
-     * boolean rotate) { boolean isClear; BlockPos pos; if (rotate) { pos = new BlockPos(z, y,
-     * x); } else { pos = new BlockPos(x, y, z); } isClear = (Main.breakThroughBlocks ||
-     * world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos));
-     * list.add(new SlabPos(pos, level, rotate)); if (!isClear) { spawnSmoke(pos, 15); } return
-     * isClear; }
-     */
-
-    /*
-     * private void spawnSmoke(BlockPos pos, int times) { if (times > 0) {
-     * world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX()+0.5, pos.getY()+0.5,
-     * pos.getZ()+0.5, 0.0D, 0.0D, 0.0D, new int[0]); final BlockPos finPos = pos; final int
-     * finTimes = times-1; smokeTimer.schedule(new TimerTask() { public void run() {
-     * spawnSmoke(finPos, finTimes); } }, 1000); } } private void
-     * buildBridge(LinkedList<SlabPos> bridge, int type) { SlabPos slab; if(!bridge.isEmpty())
-     * { slab = bridge.pop(); // Server call build x y z Main.snw.sendToServer(new
-     * bridgeMessage(1, slab.x, slab.y, slab.z, slab.level, (slab.rotate?1:0)+2*type));
-     * spawnSmoke(new BlockPos(slab.x, slab.y, slab.z), 1); // play sound at x y z wood
-     * Main.snw.sendToServer(new bridgeMessage(0, slab.x, slab.y, slab.z, 1, 0)); final
-     * LinkedList<SlabPos> finBridge = bridge; final int finType = type;
-     * buildTimer.schedule(new TimerTask() { public void run() { buildBridge(finBridge,
-     * finType); } }, 100); } }
-     */
-
     /**
      * rotates a player towards the closest cardinal direction when holding this item
      */
@@ -287,15 +207,6 @@ public class ItemBridgeBuilder extends Item {
 
         if (worldIn.isRemote && entityIn instanceof EntityPlayer) {
             final EntityPlayer player = (EntityPlayer) entityIn;
-            // if (player == null) {
-            // player = (EntityPlayer) entityIn;
-            // }
-
-            // TODO May cause problem
-            // if (((EntityPlayer) entityIn).getHeldItemMainhand() != null) {
-            // if (((EntityPlayer)
-            // entityIn).getHeldItemMainhand().getUnlocalizedName().equals(stack.getUnlocalizedName()))
-            // {
             if (isSelected) {
                 if (this.viewSnap) {
                     if (isSelected) {
@@ -312,12 +223,6 @@ public class ItemBridgeBuilder extends Item {
                 this.viewSnap = false;
                 this.clickTimer.cancel();
             }
-            // }
-            // else {
-            // zoomTowards(playerFov);
-            // viewSnap = false;
-            // clickTimer.cancel();
-            // }
         }
     }
 
@@ -397,35 +302,6 @@ public class ItemBridgeBuilder extends Item {
             }
         }
     }
-
-    /*
-     * private boolean hasMaterials(int dist) { if (player.capabilities.isCreativeMode) {
-     * return true; } int slabsNeeded = dist; int stringNeeded = 1+Math.round(dist/2); int
-     * slabsHad = 0; int stringHad = 0; for (int i = 0; i < 36; i++) { ItemStack stack =
-     * player.inventory.mainInventory[i]; if (stack == null) { continue; } String name =
-     * stack.getItem().getUnlocalizedName(); if (name.equals("item.string")) { stringHad +=
-     * stack.stackSize; } if (name.equals("tile.woodSlab")) { slabsHad += stack.stackSize; } }
-     * if (slabsHad>=slabsNeeded && stringHad>=stringNeeded) { return true; } else {
-     * tellPlayer("You need at least "+slabsNeeded+" slabs and "
-     * +stringNeeded+" strings to build this bridge."); return false; } }
-     */
-
-    /*
-     * private void takeMaterials(int dist) { if (player.capabilities.isCreativeMode) { return;
-     * } int slabsNeeded = dist; int stringNeeded = 1+Math.round(dist/2); for (int i = 0; i <
-     * 36; i++) { ItemStack stack = player.inventory.mainInventory[i]; if (stack == null) {
-     * continue; } String name = stack.getItem().getUnlocalizedName(); if
-     * (name.equals("item.string")) { if (stack.stackSize > stringNeeded) { //stack.stackSize =
-     * stack.stackSize - stringNeeded; // Update on server Main.snw.sendToServer(new
-     * bridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded)); stringNeeded = 0; } else
-     * { stringNeeded -= stack.stackSize; //player.inventory.mainInventory[i] = null; // Update
-     * on server Main.snw.sendToServer(new bridgeMessage(2, 0, 0, 0, i, 0)); continue; } } if
-     * (name.equals("tile.woodSlab")) { if (stack.stackSize > slabsNeeded) { //stack.stackSize
-     * = stack.stackSize - slabsNeeded; // Update on server Main.snw.sendToServer(new
-     * bridgeMessage(2, 0, 0, 0, i, stack.stackSize - slabsNeeded)); slabsNeeded = 0; } else {
-     * slabsNeeded -= stack.stackSize; //player.inventory.mainInventory[i] = null; // update on
-     * server Main.snw.sendToServer(new bridgeMessage(2, 0, 0, 0, i, 0)); continue; } } } }
-     */
 
     private float getNearestYaw (EntityPlayer player) {
 
