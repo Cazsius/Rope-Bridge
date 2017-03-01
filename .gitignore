@@ -1,32 +1,17 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
-
-# idea
-out
+*.class
+*.iml
 *.ipr
 *.iws
-*.iml
-.idea
+*.classpath
+*.project
+*.prefs
+*.launch
+/output
 
-# gradle
-build
-.gradle
-
-# other
-eclipse
-run
-classes
-
-/README.txt
-/forge-*-changelog.txt
-
-secret.json
-build.bat
-gradlew.bat
-setup.bat
-gradlew
+#ForgeGradle
+/build
+/.gradle
+/eclipse/assets
+/libs
+/bin/
+/run/
