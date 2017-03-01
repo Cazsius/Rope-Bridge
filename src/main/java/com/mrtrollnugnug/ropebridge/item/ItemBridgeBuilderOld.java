@@ -32,7 +32,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBridgeBuilderOld extends Item {
+/**
+ * Use ItemBridgeBuilder instead
+ */
+@Deprecated
+public class ItemBridgeBuilderOld extends Item
+{
 
     World world;
 
@@ -58,7 +63,8 @@ public class ItemBridgeBuilderOld extends Item {
 
     private boolean warningSent = false;
 
-    public ItemBridgeBuilderOld () {
+    public ItemBridgeBuilderOld()
+    {
         super();
         this.setCreativeTab(CreativeTabs.TOOLS);
         this.setMaxStackSize(1);
@@ -71,13 +77,15 @@ public class ItemBridgeBuilderOld extends Item {
     }
 
     @Override
-    public void onCreated (ItemStack stack, World worldIn, EntityPlayer playerIn) {
+    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    {
 
         playerIn.hasAchievement(RopeBridge.craftAchievement);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick (ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+    {
 
         if (worldIn.isRemote) {
             this.world = worldIn;
@@ -98,7 +106,8 @@ public class ItemBridgeBuilderOld extends Item {
             this.clickTimer.schedule(new TimerTask() {
 
                 @Override
-                public void run () {
+                public void run()
+                {
 
                     RopeBridge.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 2, 0));
                 }
@@ -111,13 +120,15 @@ public class ItemBridgeBuilderOld extends Item {
      * How long it takes to use or consume an item
      */
     @Override
-    public int getMaxItemUseDuration (ItemStack stack) {
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
 
         return 72000;
     }
 
     @Override
-    public float getStrVsBlock (ItemStack stack, IBlockState state) {
+    public float getStrVsBlock(ItemStack stack, IBlockState state)
+    {
 
         if (this.player == null)
             return 1.0F;
@@ -135,31 +146,39 @@ public class ItemBridgeBuilderOld extends Item {
     }
 
     /**
-     * allows items to add custom lines of information to the mouseover description
+     * allows items to add custom lines of information to the mouseover
+     * description
      *
-     * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
-     * @param advanced Whether the setting "Advanced tooltips" is enabled
+     * @param tooltip
+     *            All lines to display in the Item's tooltip. This is a List of
+     *            Strings.
+     * @param advanced
+     *            Whether the setting "Advanced tooltips" is enabled
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation (ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced)
+    {
 
         tooltip.add("- Hold right-click to build");
         tooltip.add("- Sneak to break whole bridge");
     }
 
     /**
-     * returns the action that specifies what animation to play when the items is being used
+     * returns the action that specifies what animation to play when the items
+     * is being used
      */
     @Override
-    public EnumAction getItemUseAction (ItemStack stack) {
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
 
         return EnumAction.NONE;
     }
 
     @Override
-    public void onPlayerStoppedUsing (ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+    {
 
         if (!worldIn.isRemote && entityLiving instanceof EntityPlayer) {
             final EntityPlayer player = (EntityPlayer) entityLiving;
@@ -200,10 +219,12 @@ public class ItemBridgeBuilderOld extends Item {
     }
 
     /**
-     * rotates a player towards the closest cardinal direction when holding this item
+     * rotates a player towards the closest cardinal direction when holding this
+     * item
      */
     @Override
-    public void onUpdate (ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
 
         if (worldIn.isRemote && entityIn instanceof EntityPlayer) {
             final EntityPlayer player = (EntityPlayer) entityIn;
@@ -227,17 +248,22 @@ public class ItemBridgeBuilderOld extends Item {
     }
 
     /**
-     * Called before a block is broken. Return true to prevent default block harvesting.
+     * Called before a block is broken. Return true to prevent default block
+     * harvesting.
      *
      * Note: In SMP, this is called on both client and server sides!
      *
-     * @param itemstack The current ItemStack
-     * @param pos Block's position in world
-     * @param player The Player that is wielding the item
+     * @param itemstack
+     *            The current ItemStack
+     * @param pos
+     *            Block's position in world
+     * @param player
+     *            The Player that is wielding the item
      * @return True to prevent harvesting, false to continue as normal
      */
     @Override
-    public boolean onBlockStartBreak (ItemStack itemstack, BlockPos pos, EntityPlayer playerIn) {
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer playerIn)
+    {
 
         if (playerIn.world.isRemote) {
             final Block blk = playerIn.world.getBlockState(pos).getBlock();
@@ -248,7 +274,8 @@ public class ItemBridgeBuilderOld extends Item {
         return false;
     }
 
-    private boolean isBridgeBlock (Block blockIn) {
+    private boolean isBridgeBlock(Block blockIn)
+    {
 
         if (blockIn.getUnlocalizedName().contains("bridge_block"))
             return true;
@@ -257,11 +284,14 @@ public class ItemBridgeBuilderOld extends Item {
     }
 
     /**
-     * Breaks block at position posIn and recursively spreads to in-line neighbors
+     * Breaks block at position posIn and recursively spreads to in-line
+     * neighbors
      *
-     * @param posIn the position of the block to start breaking bridge from
+     * @param posIn
+     *            the position of the block to start breaking bridge from
      */
-    private void breakBridge (World worldIn, BlockPos posIn, int meta) {
+    private void breakBridge(World worldIn, BlockPos posIn, int meta)
+    {
 
         // Break block and turn into air
         RopeBridge.snw.sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
@@ -290,7 +320,8 @@ public class ItemBridgeBuilderOld extends Item {
                                 this.buildTimer.schedule(new TimerTask() {
 
                                     @Override
-                                    public void run () {
+                                    public void run()
+                                    {
 
                                         ItemBridgeBuilderOld.this.breakBridge(worldInFinal, currentPosFinal, metaFinal);
                                     }
@@ -303,7 +334,8 @@ public class ItemBridgeBuilderOld extends Item {
         }
     }
 
-    private float getNearestYaw (EntityPlayer player) {
+    private float getNearestYaw(EntityPlayer player)
+    {
 
         float yaw = player.rotationYaw % 360;
         if (yaw < 0) {
@@ -321,7 +353,8 @@ public class ItemBridgeBuilderOld extends Item {
             return 360F;
     }
 
-    private void rotatePlayerTowards (EntityPlayer player, float target) {
+    private void rotatePlayerTowards(EntityPlayer player, float target)
+    {
 
         float yaw = player.rotationYaw % 360;
         if (yaw < 0) {
@@ -330,14 +363,16 @@ public class ItemBridgeBuilderOld extends Item {
         this.rotatePlayerTo(player, yaw + (target - yaw) / 4);
     }
 
-    private void rotatePlayerTo (EntityPlayer player, float yaw) {
+    private void rotatePlayerTo(EntityPlayer player, float yaw)
+    {
 
         final float original = player.rotationYaw;
         player.rotationYaw = yaw;
         player.prevRotationYaw += player.rotationYaw - original;
     }
 
-    private void zoomTowards (float toFov) {
+    private void zoomTowards(float toFov)
+    {
 
         if (ConfigurationHandler.zoomOnAim && toFov != 0 && !this.fovNormal) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
@@ -352,7 +387,8 @@ public class ItemBridgeBuilderOld extends Item {
         }
     }
 
-    private void zoomTo (float toFov) {
+    private void zoomTo(float toFov)
+    {
 
         if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
