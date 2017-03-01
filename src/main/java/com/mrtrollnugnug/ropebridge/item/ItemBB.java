@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.RopeBridge;
+import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.network.BuildMessage;
 
@@ -113,7 +114,7 @@ public class ItemBB extends Item {
 
     private static RayTraceResult raytrace (EntityPlayer player) {
 
-        return player.rayTrace(RopeBridge.maxBridgeDistance, 1.0f);
+        return player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0f);
     }
 
     private static float fov = 0;
@@ -212,7 +213,7 @@ public class ItemBB extends Item {
 
     private static void zoomTowards (float toFov) {
 
-        if (RopeBridge.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (Math.round(currentFov) != toFov) {
                 zoomTo(currentFov + (toFov - currentFov) / 4);
@@ -222,7 +223,7 @@ public class ItemBB extends Item {
 
     private static void zoomTo (float toFov) {
 
-        if (RopeBridge.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }

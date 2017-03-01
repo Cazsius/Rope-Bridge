@@ -60,7 +60,7 @@ public class BridgeBuildingHandler {
         int distInt;
 
         m = (double) (y2 - y1) / (double) (x2 - x1);
-        if (!RopeBridge.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
+        if (!ConfigurationHandler.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
             tell(player, "Sorry, your slope is too great. Please try again.");
             return;
         }
@@ -79,7 +79,7 @@ public class BridgeBuildingHandler {
 
         for (int x = Math.min(x1, x2) + 1; x <= Math.max(x1, x2) - 1; x++) {
             for (int y = Math.max(y1, y2); y >= Math.min(y1, y2) - distInt / 8 - 1; y--) {
-                final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * RopeBridge.bridgeDroopFactor + RopeBridge.bridgeYOffset;
+                final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigurationHandler.bridgeDroopFactor + ConfigurationHandler.bridgeYOffset;
                 if (y + 0.5 > funcVal && y - 0.5 <= funcVal) {
                     int level;
                     if (funcVal >= y) {
@@ -220,7 +220,7 @@ public class BridgeBuildingHandler {
         else {
             pos = new BlockPos(x, y, z);
         }
-        isClear = RopeBridge.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos);
+        isClear = ConfigurationHandler.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos);
         list.add(new SlabPosHandler(pos, level, rotate));
         if (!isClear) {
             spawnSmoke(world, pos, 15);
@@ -306,7 +306,7 @@ public class BridgeBuildingHandler {
 
     private static void resetFov (float toFov) {
 
-        if (RopeBridge.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }

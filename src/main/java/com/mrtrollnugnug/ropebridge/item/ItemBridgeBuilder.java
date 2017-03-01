@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
+import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
@@ -167,7 +168,7 @@ public class ItemBridgeBuilder extends Item {
                     this.tellPlayer("You must be standing on something to build a bridge!");
                 }
                 else {
-                    final RayTraceResult hit = player.rayTrace(RopeBridge.maxBridgeDistance, 1.0F);
+                    final RayTraceResult hit = player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0F);
                     // world.playSoundEffect(player.posX,player.posY,player.posZ,
                     // "random.bow", 1.0F, 1.0F);
                     // play sound at player random.bow
@@ -462,7 +463,7 @@ public class ItemBridgeBuilder extends Item {
 
     private void zoomTowards (float toFov) {
 
-        if (RopeBridge.zoomOnAim && toFov != 0 && !this.fovNormal) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0 && !this.fovNormal) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (Math.round(currentFov) != toFov) {
                 this.zoomTo(currentFov + (toFov - currentFov) / 4);
@@ -477,7 +478,7 @@ public class ItemBridgeBuilder extends Item {
 
     private void zoomTo (float toFov) {
 
-        if (RopeBridge.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
