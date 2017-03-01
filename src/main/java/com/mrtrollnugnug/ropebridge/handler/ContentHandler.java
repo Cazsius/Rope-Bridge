@@ -1,7 +1,7 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
-import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemBB;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
@@ -14,7 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContentHandler {
+public class ContentHandler
+{
 
     // Blocks
     public static Block blockBridgeSlab1;
@@ -30,7 +31,8 @@ public class ContentHandler {
 
     public static Item itemBridgeMaterial;
 
-    public static void initBlocks () {
+    public static void initBlocks()
+    {
 
         blockBridgeSlab1 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1");
         blockBridgeSlab2 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2");
@@ -38,13 +40,15 @@ public class ContentHandler {
         blockBridgeSlab4 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4");
     }
 
-    public static void initItems () {
+    public static void initItems()
+    {
 
-        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
+        itemBridgeBuilder = ModUtils.registerItem(new ItemBB(), "bridge_builder");
         itemBridgeMaterial = ModUtils.registerItem(new ItemBridgeMaterial(), "bridge_builder_material");
     }
 
-    public static void initRecipes () {
+    public static void initRecipes()
+    {
 
         GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 0), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
         GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 1), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
@@ -54,7 +58,8 @@ public class ContentHandler {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void onClientPreInit () {
+    public static void onClientPreInit()
+    {
 
         ModUtils.registerItemInvModel(itemBridgeBuilder);
         ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.varients);

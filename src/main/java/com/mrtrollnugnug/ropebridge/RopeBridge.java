@@ -3,6 +3,9 @@ package com.mrtrollnugnug.ropebridge;
 import com.mrtrollnugnug.ropebridge.common.CommonProxy;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
+import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
+import com.mrtrollnugnug.ropebridge.network.BridgeMessageHandler;
+import com.mrtrollnugnug.ropebridge.network.BuildMessage;
 
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
@@ -17,7 +20,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER)
-public class RopeBridge {
+public class RopeBridge
+{
 
     public static SimpleNetworkWrapper snw;
 
@@ -44,7 +48,8 @@ public class RopeBridge {
     public static CommonProxy proxy;
 
     @EventHandler
-    public void preInit (FMLPreInitializationEvent e) {
+    public void preInit(FMLPreInitializationEvent e)
+    {
 
         ContentHandler.initBlocks();
         ContentHandler.initItems();
@@ -70,12 +75,15 @@ public class RopeBridge {
         }
 
         snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
-        snw.registerMessage(BridgeMessageHandler.class, BridgeMessage.class, 0, Side.SERVER);
+        snw.registerMessage(BridgeMessageHandler.class, BridgeMessage.class, discriminator++, Side.SERVER);
+        snw.registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, discriminator++, Side.SERVER);
     }
 
-    @EventHandler
-    public void serverLoad (FMLServerStartingEvent e) {
+    private int discriminator = 0;
 
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent e)
+    {
         e.registerServerCommand(new RopeBridgeCommand());
     }
 

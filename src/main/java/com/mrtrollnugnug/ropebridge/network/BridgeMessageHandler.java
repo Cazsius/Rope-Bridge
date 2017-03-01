@@ -1,5 +1,6 @@
-package com.mrtrollnugnug.ropebridge;
+package com.mrtrollnugnug.ropebridge.network;
 
+import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 
 import net.minecraft.block.Block;

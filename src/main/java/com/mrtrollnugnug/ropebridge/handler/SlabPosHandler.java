@@ -1,9 +1,11 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 
 //TODO Wrong Package
-public class SlabPosHandler {
+public class SlabPosHandler
+{
 
     public int x;
 
@@ -15,7 +17,8 @@ public class SlabPosHandler {
 
     public boolean rotate;
 
-    public SlabPosHandler (int xCoordinate, int yCoordinate, int zCoordinate, int slabLevel, boolean isRotated) {
+    public SlabPosHandler(int xCoordinate, int yCoordinate, int zCoordinate, int slabLevel, boolean isRotated)
+    {
         this.x = xCoordinate;
         this.y = yCoordinate;
         this.z = zCoordinate;
@@ -23,11 +26,17 @@ public class SlabPosHandler {
         this.rotate = isRotated;
     }
 
-    public SlabPosHandler (BlockPos position, int slabLevel, boolean isRotated) {
+    public SlabPosHandler(BlockPos position, int slabLevel, boolean isRotated)
+    {
         this.x = position.getX();
         this.y = position.getY();
         this.z = position.getZ();
         this.level = slabLevel;
         this.rotate = isRotated;
+    }
+
+    public BlockPos getBlockPos()
+    {
+        return new BlockPos(x, y, z);
     }
 }
