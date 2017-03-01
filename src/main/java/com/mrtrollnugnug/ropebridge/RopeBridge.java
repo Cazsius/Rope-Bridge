@@ -20,8 +20,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER)
-public class RopeBridge
-{
+public class RopeBridge {
 
     public static SimpleNetworkWrapper snw;
 
@@ -48,8 +47,7 @@ public class RopeBridge
     public static CommonProxy proxy;
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent e)
-    {
+    public void preInit (FMLPreInitializationEvent e) {
 
         ContentHandler.initBlocks();
         ContentHandler.initItems();
@@ -75,15 +73,15 @@ public class RopeBridge
         }
 
         snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
-        snw.registerMessage(BridgeMessageHandler.class, BridgeMessage.class, discriminator++, Side.SERVER);
-        snw.registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, discriminator++, Side.SERVER);
+        snw.registerMessage(BridgeMessageHandler.class, BridgeMessage.class, this.discriminator++, Side.SERVER);
+        snw.registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, this.discriminator++, Side.SERVER);
     }
 
     private int discriminator = 0;
 
     @EventHandler
-    public void serverLoad(FMLServerStartingEvent e)
-    {
+    public void serverLoad (FMLServerStartingEvent e) {
+
         e.registerServerCommand(new RopeBridgeCommand());
     }
 
