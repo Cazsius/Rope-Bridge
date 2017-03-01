@@ -1,7 +1,7 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
-import com.mrtrollnugnug.ropebridge.item.ItemBB;
+import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
@@ -40,7 +40,7 @@ public class ContentHandler {
 
     public static void initItems () {
 
-        itemBridgeBuilder = ModUtils.registerItem(new ItemBB(), "bridge_builder");
+        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
         itemBridgeMaterial = ModUtils.registerItem(new ItemBridgeMaterial(), "bridge_builder_material");
     }
 
