@@ -3,6 +3,7 @@ package com.mrtrollnugnug.ropebridge.handler;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class ConfigurationHandler
 {
@@ -50,7 +51,7 @@ public class ConfigurationHandler
         maxBridgeDistance = config.getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun.");
         bridgeDroopFactor = config.getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang.");
         bridgeYOffset = config.getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet.");
-        zoomOnAim = config.getBoolean("zoomOnAim", Configuration.CATEGORY_CLIENT, false, "WARNING - might cause problems with optifine. Due to restrictions in Minecrafts code, you won't be able to change your fov once enabled either.");
+        zoomOnAim = config.getBoolean("zoomOnAim", Configuration.CATEGORY_CLIENT, true && !FMLClientHandler.instance().hasOptifine(), "WARNING - might cause problems with optifine. Due to restrictions in Minecrafts code, you won't be able to change your fov once enabled either.");
         breakThroughBlocks = config.getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode.");
         ignoreSlopeWarnings = config.getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges.");
         customAchievements = config.getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements.");
