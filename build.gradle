@@ -33,7 +33,6 @@ archivesBaseName = "ropebridge"
 minecraft {
     version = "1.10.2-12.18.2.2099"
     runDir = "run"
-    baseVersion = "1.10.2"
     
     mappings = "stable_29"
     makeObfSourceJar = false
