@@ -1,11 +1,14 @@
 package com.mrtrollnugnug.ropebridge.item;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.RopeBridge;
+import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
@@ -135,7 +138,7 @@ public class ItemBridgeBuilder extends Item
         final IBlockState state = player.world.getBlockState(pos);
         final Block block = state.getBlock();
         if (!player.world.isRemote && player.isSneaking() && isBridgeBlock(player.world.getBlockState(pos).getBlock())) {
-            breakBridge(player.world, pos, block.getMetaFromState(state));
+            breakBridge(player, player.world, pos, block.getMetaFromState(state));
         }
         return false;
     }
@@ -235,41 +238,81 @@ public class ItemBridgeBuilder extends Item
      * @param posIn
      *            the position of the block to start breaking bridge from
      */
-    private static void breakBridge(final World worldIn, final BlockPos posIn, final int meta)
+    private static void breakBridge(final EntityPlayer player, final World worldIn, final BlockPos posIn, final int meta)
     {
+        FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
+            int xRange = 0;
+            int zRange = 0;
+            if (meta % 2 == 0) {
+                xRange = 1;
+            }
+            else {
+                zRange = 1;
+            }
 
-        worldIn.destroyBlock(posIn, true);
-        int xRange = 0;
-        int zRange = 0;
-        if (meta % 2 == 0) {
-            xRange = 1;
-        }
-        else {
-            zRange = 1;
-        }
-        for (int x = posIn.getX() - xRange; x <= posIn.getX() + xRange; x++) {
-            for (int y = posIn.getY() - 1; y <= posIn.getY() + 1; y++) {
-                for (int z = posIn.getZ() - zRange; z <= posIn.getZ() + zRange; z++) {
-                    if (x - posIn.getX() == 0 && z - posIn.getZ() == 0) {
-                        // No bridge
-                    }
-                    else {
-                        final BlockPos currentPos = new BlockPos(x, y, z);
-                        final IBlockState currentBlockState = worldIn.getBlockState(currentPos);
-                        if (isBridgeBlock(currentBlockState.getBlock()) && currentBlockState.getBlock().getMetaFromState(currentBlockState) == meta) {
-                            new Timer().schedule(new TimerTask() {
+            Queue<BlockPos> newQueue = new LinkedList<>();
+            newQueue.add(posIn);
+            Queue<BlockPos> queue = new LinkedList<>();
+            queue.add(posIn);
 
-                                @Override
-                                public void run()
-                                {
+            while (!newQueue.isEmpty()) {
+                BlockPos pos = newQueue.remove();
 
-                                    breakBridge(worldIn, currentPos, meta);
+                for (int x = pos.getX() - xRange; x <= pos.getX() + xRange; x++) {
+                    for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++) {
+                        for (int z = pos.getZ() - zRange; z <= pos.getZ() + zRange; z++) {
+                            // System.out.println("lag " + x + " " + y + " " +
+                            // z);
+                            final BlockPos currentPos = new BlockPos(x, y, z);
+                            if ((x - pos.getX() == 0 && z - pos.getZ() == 0) || queue.contains(currentPos)) {
+                                // No bridge
+                            }
+                            else {
+                                final IBlockState currentBlockState = worldIn.getBlockState(currentPos);
+                                if (isBridgeBlock(currentBlockState.getBlock()) && currentBlockState.getBlock().getMetaFromState(currentBlockState) == meta) {
+                                    newQueue.add(currentPos);
                                 }
-                            }, 100);
+                            }
                         }
                     }
                 }
+
+                queue.add(pos);
             }
+
+            Timer timer = new Timer();
+            TimerTask task = new BreakTask(queue, worldIn, timer, !player.capabilities.isCreativeMode);
+            timer.schedule(task, 100, 100);
+        });
+    }
+
+    // might be necessary for proper multithreading
+    // private static Semaphore sem = new Semaphore(1);
+
+    private static class BreakTask extends TimerTask
+    {
+        private final Queue<BlockPos> queue;
+        private final World world;
+        private final Timer timer;
+        private final boolean drop;
+
+        public BreakTask(Queue<BlockPos> queue, World world, Timer timer, boolean drop)
+        {
+            super();
+            this.queue = queue;
+            this.world = world;
+            this.timer = timer;
+            this.drop = drop;
+        }
+
+        @Override
+        public void run()
+        {
+            BlockPos pos = queue.remove();
+            if (world.getBlockState(pos).getBlock() instanceof BridgeSlab)
+                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> world.destroyBlock(pos, drop));
+            if (queue.isEmpty())
+                timer.cancel();
         }
     }
 }
