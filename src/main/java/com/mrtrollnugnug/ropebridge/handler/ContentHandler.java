@@ -32,10 +32,10 @@ public class ContentHandler {
 
     public static void initBlocks () {
 
-        blockBridgeSlab1 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1");
-        blockBridgeSlab2 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2");
-        blockBridgeSlab3 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3");
-        blockBridgeSlab4 = ModUtils.registerBlock(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4");
+        blockBridgeSlab1 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1");
+        blockBridgeSlab2 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2");
+        blockBridgeSlab3 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3");
+        blockBridgeSlab4 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4");
     }
 
     public static void initItems () {

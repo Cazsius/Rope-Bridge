@@ -61,6 +61,16 @@ public class ModUtils
         BLOCKS.add(block);
         return block;
     }
+    
+    public static Block registerBlockNoItem(Block block, String ID)
+    {
+
+        block.setRegistryName(ID);
+        block.setUnlocalizedName(Constants.MOD_ID + "." + ID.toLowerCase().replace("_", "."));
+        GameRegistry.register(block);
+        BLOCKS.add(block);
+        return block;
+    }
 
     /**
      * Provides the same functionality as older forge item registration.

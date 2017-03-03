@@ -26,7 +26,7 @@ apply plugin: 'java'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 
-version = "1.10.2-1.4.4"
+version = "1.10.2-1.4.5"
 group= "com.mrtrollnugnug.ropebridge"
 archivesBaseName = "ropebridge"
 
@@ -35,7 +35,7 @@ minecraft {
     runDir = "run"
     
     mappings = "stable_29"
-    makeObfSourceJar = false
+    makeObfSourceJar = true
 }
 
 dependencies {
