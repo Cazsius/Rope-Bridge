@@ -30,51 +30,36 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBridgeBuilder extends Item {
-
-    public ItemBridgeBuilder () {
+public class ItemBridgeBuilder extends Item
+{
+    public ItemBridgeBuilder()
+    {
         super();
         this.setCreativeTab(CreativeTabs.TOOLS);
         this.setMaxStackSize(1);
         this.setMaxDamage(64);
+        if (ConfigurationHandler.zoomOnAim)
+            fov = RopeBridge.proxy.getFov();
     }
 
     @Override
-    public void onCreated (ItemStack stack, World worldIn, EntityPlayer playerIn) {
-
+    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
+    {
         playerIn.addStat(RopeBridge.craftAchievement);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick (ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-
+    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
+    {
         if (hand == EnumHand.MAIN_HAND) {
             playerIn.setActiveHand(hand);
-            if (worldIn.isRemote) {
-                fov = Minecraft.getMinecraft().gameSettings.fovSetting;
-            }
         }
         return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
     }
 
     @Override
-    public void onUsingTick (ItemStack stack, EntityLivingBase player, int count) {
-
-        if (!player.world.isRemote && count % 10 == 0) {
-            // TODO play clicking sound here
-            // player.world.playSound(x, y, z, soundIn, category, volume, pitch,
-            // distanceDelay);
-        }
-        else if (player.world.isRemote && player instanceof EntityPlayer) {
-            final EntityPlayer p = (EntityPlayer) player;
-            rotatePlayerTowards(p, getNearestYaw(p));
-            zoomTowards(30);
-        }
-    }
-
-    @Override
-    public void onPlayerStoppedUsing (ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft) {
-
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft)
+    {
         if (entityLiving instanceof EntityPlayer && world.isRemote) {
             final EntityPlayer player = (EntityPlayer) entityLiving;
             if (this.getMaxItemUseDuration(stack) - timeLeft > 10) {
@@ -111,16 +96,31 @@ public class ItemBridgeBuilder extends Item {
         }
     }
 
-    private static RayTraceResult raytrace (EntityPlayer player) {
-
+    private static RayTraceResult raytrace(EntityPlayer player)
+    {
         return player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0f);
     }
 
-    private static float fov = 0;
+    public static float fov = 0;
 
     @Override
-    public void onUpdate (ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+        if (!player.world.isRemote && count % 10 == 0) {
+            // TODO play clicking sound here
+            // player.world.playSound(x, y, z, soundIn, category, volume, pitch,
+            // distanceDelay);
+        }
+        else if (player.world.isRemote && player instanceof EntityPlayer) {
+            final EntityPlayer p = (EntityPlayer) player;
+            rotatePlayerTowards(p, getNearestYaw(p));
+            zoomTowards(30);
+        }
+    }
 
+    @Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+    {
         if (entityIn instanceof EntityPlayer && worldIn.isRemote) {
             final EntityPlayer p = (EntityPlayer) entityIn;
             if (!isSelected || p.getActiveItemStack() != stack) {
@@ -130,8 +130,8 @@ public class ItemBridgeBuilder extends Item {
     }
 
     @Override
-    public boolean onBlockStartBreak (ItemStack itemstack, BlockPos pos, EntityPlayer player) {
-
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, EntityPlayer player)
+    {
         final IBlockState state = player.world.getBlockState(pos);
         final Block block = state.getBlock();
         if (!player.world.isRemote && player.isSneaking() && isBridgeBlock(player.world.getBlockState(pos).getBlock())) {
@@ -141,8 +141,8 @@ public class ItemBridgeBuilder extends Item {
     }
 
     @Override
-    public float getStrVsBlock (ItemStack stack, IBlockState state) {
-
+    public float getStrVsBlock(ItemStack stack, IBlockState state)
+    {
         if (FMLCommonHandler.instance().getSide().isClient()) {
             if (RopeBridge.proxy.getPlayer().isSneaking() && isBridgeBlock(state.getBlock())) {
                 ModUtils.tellPlayer(RopeBridge.proxy.getPlayer(), Messages.WARNING_BREAKING);
@@ -154,24 +154,26 @@ public class ItemBridgeBuilder extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation (ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+    {
         tooltip.add("- Hold right-click to build");
         tooltip.add("- Sneak to break whole bridge");
     }
 
     @Override
-    public int getMaxItemUseDuration (ItemStack stack) {
-
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
         return 72000;
     }
 
-    private static boolean isBridgeBlock (Block blockIn) {
+    private static boolean isBridgeBlock(Block blockIn)
+    {
 
         return blockIn == ContentHandler.blockBridgeSlab1 || blockIn == ContentHandler.blockBridgeSlab2 || blockIn == ContentHandler.blockBridgeSlab3 || blockIn == ContentHandler.blockBridgeSlab4;
     }
 
-    private static float getNearestYaw (EntityPlayer player) {
+    private static float getNearestYaw(EntityPlayer player)
+    {
 
         float yaw = player.rotationYaw % 360;
         if (yaw < 0) {
@@ -189,8 +191,8 @@ public class ItemBridgeBuilder extends Item {
             return 360F;
     }
 
-    private static void rotatePlayerTowards (EntityPlayer player, float target) {
-
+    private static void rotatePlayerTowards(EntityPlayer player, float target)
+    {
         float yaw = player.rotationYaw % 360;
         if (yaw < 0) {
             yaw += 360;
@@ -198,36 +200,43 @@ public class ItemBridgeBuilder extends Item {
         rotatePlayerTo(player, yaw + (target - yaw) / 4);
     }
 
-    private static void rotatePlayerTo (EntityPlayer player, float yaw) {
-
+    private static void rotatePlayerTo(EntityPlayer player, float yaw)
+    {
         final float original = player.rotationYaw;
         player.rotationYaw = yaw;
         player.prevRotationYaw += player.rotationYaw - original;
     }
 
-    private static void zoomTowards (float toFov) {
-
+    private static void zoomTowards(float toFov)
+    {
         if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
-            if (Math.round(currentFov) != toFov) {
-                zoomTo(currentFov + (toFov - currentFov) / 4);
+            if (currentFov != toFov) {
+                float change = (toFov - currentFov) / 4;
+                if (change < 0.1 && change > -0.1)
+                    zoomTo(toFov);
+                else
+                    zoomTo(currentFov + change);
             }
         }
     }
 
-    private static void zoomTo (float toFov) {
-
+    private static void zoomTo(float toFov)
+    {
         if (ConfigurationHandler.zoomOnAim && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
 
     /**
-     * Breaks block at position posIn and recursively spreads to in-line neighbors
+     * Breaks block at position posIn and recursively spreads to in-line
+     * neighbors
      *
-     * @param posIn the position of the block to start breaking bridge from
+     * @param posIn
+     *            the position of the block to start breaking bridge from
      */
-    private static void breakBridge (final World worldIn, final BlockPos posIn, final int meta) {
+    private static void breakBridge(final World worldIn, final BlockPos posIn, final int meta)
+    {
 
         worldIn.destroyBlock(posIn, true);
         int xRange = 0;
@@ -251,7 +260,8 @@ public class ItemBridgeBuilder extends Item {
                             new Timer().schedule(new TimerTask() {
 
                                 @Override
-                                public void run () {
+                                public void run()
+                                {
 
                                     breakBridge(worldIn, currentPos, meta);
                                 }

@@ -15,3 +15,11 @@ achievement.grapplingGun=Bridge Building Gun
 achievement.grapplingGun.desc=Craft a bridge building grappling gun with a hook, barrel, and handle
 achievement.buildBridge=Rope Bridge
 achievement.buildBridge.desc=Build a rope bridge with your new grappling gun
+
+#Messages
+chat.ropebridge.warning.breaking=WARNING! Breaking whole bridge!
+chat.ropebridge.info.notonground=You must be standing on something to build a bridge!
+chat.ropebridge.info.notcardinal=Sorry, bridge must be built in a cardinal direction. Please try again.
+chat.ropebridge.info.greatslope=Sorry, your slope is too great. Please try again.
+chat.ropebridge.info.obstruction=Oops! Looks like there's something in the way. Look for the Smoke to see where that is and try again.
+chat.ropebridge.info.underfunded=You need at least %f slabs and %f strings to build this bridge.

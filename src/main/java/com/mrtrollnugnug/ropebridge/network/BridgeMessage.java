@@ -3,7 +3,7 @@ package com.mrtrollnugnug.ropebridge.network;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-
+@Deprecated
 public class BridgeMessage implements IMessage {
 
     int command; // 0 = smoke, 1 = setState, 2 = inventory change

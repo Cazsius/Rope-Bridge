@@ -26,13 +26,14 @@ apply plugin: 'java'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 
-version = "1.10.2-1.4.0"
+version = "1.10.2-1.4.1"
 group= "com.mrtrollnugnug.ropebridge"
 archivesBaseName = "ropebridge"
 
 minecraft {
     version = "1.10.2-12.18.2.2099"
     runDir = "run"
+    baseVersion = "1.10.2"
     
     mappings = "stable_29"
     makeObfSourceJar = false
@@ -50,7 +51,7 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.baseVersion
     }
         
     from(sourceSets.main.resources.srcDirs) {

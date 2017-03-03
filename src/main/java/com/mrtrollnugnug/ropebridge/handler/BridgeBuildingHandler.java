@@ -18,11 +18,12 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BridgeBuildingHandler {
+public class BridgeBuildingHandler
+{
 
     // TODO Wrong Package
-    public static void newBridge (EntityPlayer player, float playerFov, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2) {
-
+    public static void newBridge(EntityPlayer player, float playerFov, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
+    {
         final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
         boolean allClear = true;
 
@@ -119,7 +120,8 @@ public class BridgeBuildingHandler {
         }
     }
 
-    private static boolean hasMaterials (EntityPlayer player, int dist) {
+    private static boolean hasMaterials(EntityPlayer player, int dist)
+    {
 
         if (player.capabilities.isCreativeMode)
             return true;
@@ -144,12 +146,13 @@ public class BridgeBuildingHandler {
         if (slabsHad >= slabsNeeded && stringHad >= stringNeeded)
             return true;
         else {
-            ModUtils.tellPlayer(player, Messages.UNDERFUNDED);
+            ModUtils.tellPlayer(player, Messages.UNDERFUNDED, slabsNeeded, stringNeeded);
             return false;
         }
     }
 
-    private static void takeMaterials (EntityPlayer player, int dist) {
+    private static void takeMaterials(EntityPlayer player, int dist)
+    {
 
         if (player.capabilities.isCreativeMode)
             return;
@@ -201,7 +204,8 @@ public class BridgeBuildingHandler {
     }
 
     // Controls Removing Slabs + Building Physical Bridge
-    private static boolean addSlab (World world, LinkedList<SlabPosHandler> list, int x, int y, int z, int level, boolean rotate) {
+    private static boolean addSlab(World world, LinkedList<SlabPosHandler> list, int x, int y, int z, int level, boolean rotate)
+    {
 
         boolean isClear;
         BlockPos pos;
@@ -220,7 +224,8 @@ public class BridgeBuildingHandler {
     }
 
     // Controls if blocks are in the way
-    private static void spawnSmoke (World world, BlockPos pos, int times) {
+    private static void spawnSmoke(World world, BlockPos pos, int times)
+    {
 
         if (times > 0) {
             world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D, new int[0]);
@@ -230,7 +235,8 @@ public class BridgeBuildingHandler {
             new Timer().schedule(new TimerTask() {
 
                 @Override
-                public void run () {
+                public void run()
+                {
 
                     spawnSmoke(finworld, finPos, finTimes);
                 }
@@ -238,25 +244,26 @@ public class BridgeBuildingHandler {
         }
     }
 
-    private static void buildBridge (final World world, final LinkedList<SlabPosHandler> bridge, final int type) {
+    private static void buildBridge(final World world, final LinkedList<SlabPosHandler> bridge, final int type)
+    {
 
         SlabPosHandler slab;
         if (!bridge.isEmpty()) {
             slab = bridge.pop();
             Block block = Blocks.AIR;
             switch (slab.level) {
-                case 1:
-                    block = ContentHandler.blockBridgeSlab1;
-                    break;
-                case 2:
-                    block = ContentHandler.blockBridgeSlab2;
-                    break;
-                case 3:
-                    block = ContentHandler.blockBridgeSlab3;
-                    break;
-                case 4:
-                    block = ContentHandler.blockBridgeSlab4;
-                    break;
+            case 1:
+                block = ContentHandler.blockBridgeSlab1;
+                break;
+            case 2:
+                block = ContentHandler.blockBridgeSlab2;
+                break;
+            case 3:
+                block = ContentHandler.blockBridgeSlab3;
+                break;
+            case 4:
+                block = ContentHandler.blockBridgeSlab4;
+                break;
             }
             final IBlockState state = block.getStateFromMeta((slab.rotate ? 1 : 0) + 2 * type);
             world.setBlockState(slab.getBlockPos(), state, 3);
@@ -266,7 +273,8 @@ public class BridgeBuildingHandler {
             new Timer().schedule(new TimerTask() {
 
                 @Override
-                public void run () {
+                public void run()
+                {
 
                     buildBridge(world, bridge, type);
                 }
@@ -274,7 +282,8 @@ public class BridgeBuildingHandler {
         }
     }
 
-    private static int getWoodType (EntityPlayer player) {
+    private static int getWoodType(EntityPlayer player)
+    {
 
         for (final ItemStack stack : player.inventory.mainInventory) {
             if (stack == null) {
