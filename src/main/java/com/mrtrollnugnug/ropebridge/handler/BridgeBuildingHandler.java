@@ -5,9 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mrtrollnugnug.ropebridge.Messages;
-import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -170,33 +168,22 @@ public class BridgeBuildingHandler
                     stack.stackSize = stack.stackSize - stringNeeded; // TODO
                                                                       // Potential
                                                                       // Issue
-                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - stringNeeded));
                     stringNeeded = 0;
                 }
                 else {
                     stringNeeded -= stack.stackSize;
-                    player.inventory.mainInventory[i] = null; // TODO Potential
-                                                              // Issue
-                    // Update on server
-                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
+                    player.inventory.mainInventory[i] = null;
                     continue;
                 }
             }
             if (name.equals("tile.woodSlab")) {
                 if (stack.stackSize > slabsNeeded) {
-                    stack.stackSize = stack.stackSize - slabsNeeded; // TODO
-                                                                     // Potential
-                                                                     // Issue
-                    // Update on server
-                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, stack.stackSize - slabsNeeded));
+                    stack.stackSize = stack.stackSize - slabsNeeded;
                     slabsNeeded = 0;
                 }
                 else {
                     slabsNeeded -= stack.stackSize;
-                    player.inventory.mainInventory[i] = null; // TODO Potential
-                                                              // Issue
-                    // update on server
-                    RopeBridge.snw.sendToServer(new BridgeMessage(2, 0, 0, 0, i, 0));
+                    player.inventory.mainInventory[i] = null;
                     continue;
                 }
             }
@@ -206,7 +193,6 @@ public class BridgeBuildingHandler
     // Controls Removing Slabs + Building Physical Bridge
     private static boolean addSlab(World world, LinkedList<SlabPosHandler> list, int x, int y, int z, int level, boolean rotate)
     {
-
         boolean isClear;
         BlockPos pos;
         if (rotate) {
