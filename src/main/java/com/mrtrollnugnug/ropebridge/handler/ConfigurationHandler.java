@@ -5,7 +5,7 @@ import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-public class ConfigurationHandler
+public final class ConfigurationHandler
 {
 
     /**

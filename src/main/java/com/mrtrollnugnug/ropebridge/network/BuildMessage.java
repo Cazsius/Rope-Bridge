@@ -18,6 +18,7 @@ public class BuildMessage implements IMessage {
     private BlockPos to;
 
     public BuildMessage () {
+    	//Why do we need this? Kicks when missing.
     }
 
     public BuildMessage (BlockPos from, BlockPos to) {
@@ -47,9 +48,8 @@ public class BuildMessage implements IMessage {
 
             if (ctx.side == Side.SERVER) {
                 final EntityPlayer player = ctx.getServerHandler().playerEntity;
-                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask( () -> {
-                    BridgeBuildingHandler.newBridge(player, 0, player.getHeldItemMainhand(), -1, message.from, message.to);
-                });
+                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask( () ->
+                    BridgeBuildingHandler.newBridge(player, player.getHeldItemMainhand(), -1, message.from, message.to));
             }
             return null;
         }

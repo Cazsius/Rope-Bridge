@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContentHandler {
+public final class ContentHandler {
 
     // Blocks
     public static Block blockBridgeSlab1;
@@ -57,6 +57,8 @@ public class ContentHandler {
     public static void onClientPreInit () {
 
         ModUtils.registerItemInvModel(itemBridgeBuilder);
-        ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.varients);
+        ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.getVarients());
+        
+        
     }
 }

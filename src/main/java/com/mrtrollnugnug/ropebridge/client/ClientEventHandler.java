@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 @EventBusSubscriber(value = { Side.CLIENT })
-public class ClientEventHandler
+public final class ClientEventHandler
 {
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent event)

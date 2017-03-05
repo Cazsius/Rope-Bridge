@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 public class BridgeSlab extends Block
 {
 
-    public static float slabHeight = 4.0F / 16.0F;
+    public static final float slabHeight = 4.0F / 16.0F;
 
     public static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
@@ -47,13 +47,13 @@ public class BridgeSlab extends Block
         this.bounds = bounds;
     }
 
+    @Deprecated
     @Override
-    public boolean isFullBlock(IBlockState state)
-    {
-
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+    @Deprecated
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
@@ -61,6 +61,7 @@ public class BridgeSlab extends Block
         return false;
     }
 
+    @Deprecated
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
@@ -115,10 +116,10 @@ public class BridgeSlab extends Block
         return new BlockStateContainer(this, new IProperty[] { TYPE });
     }
 
+    @Deprecated
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-
         switch (meta) {
         case 0: {
             return this.getDefaultState().withProperty(TYPE, EnumType.OAK);

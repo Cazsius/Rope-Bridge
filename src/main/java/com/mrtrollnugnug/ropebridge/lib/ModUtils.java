@@ -14,18 +14,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModUtils
+public final class ModUtils
 {
-
     /**
      * A list of all items from RopeBridge.
      */
-    public static final List<Item> ITEMS = new ArrayList<>();
+    protected static final List<Item> ITEMS = new ArrayList<>();
 
     /**
      * A list of all blocks from RopeBridge.
      */
-    public static final List<Block> BLOCKS = new ArrayList<>();
+    protected static final List<Block> BLOCKS = new ArrayList<>();
 
     /**
      * Sends a message to a command sender. Can be used for easier message

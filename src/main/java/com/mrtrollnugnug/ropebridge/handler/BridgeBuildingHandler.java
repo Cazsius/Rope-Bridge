@@ -17,23 +17,30 @@ import net.minecraft.world.World;
 
 public class BridgeBuildingHandler
 {
-
-    public static void newBridge(EntityPlayer player, float playerFov, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
+	public static String string = "item.string";
+	public static String woodSlab = "tile.woodSlab";
+	
+    public static void newBridge(EntityPlayer player, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
     {
         final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
         boolean allClear = true;
 
-        int x1, y1, x2, y2, z, z2;
-        final int Xdiff = Math.abs(pos1.getX() - pos2.getX());
-        final int Zdiff = Math.abs(pos1.getZ() - pos2.getZ());
+        int x1;
+        int x2;
+        int y1;
+        int y2;
+        int z1;
+        int z2;
+        final int xdiff = Math.abs(pos1.getX() - pos2.getX());
+        final int zdiff = Math.abs(pos1.getZ() - pos2.getZ());
         boolean rotate;
-        if (Xdiff > Zdiff) {
+        if (xdiff > zdiff) {
             rotate = false;
             x1 = pos1.getX();
             y1 = pos1.getY();
             x2 = pos2.getX();
             y2 = pos2.getY();
-            z = pos1.getZ();
+            z1 = pos1.getZ();
             z2 = pos2.getZ();
         }
         else {
@@ -42,10 +49,10 @@ public class BridgeBuildingHandler
             y1 = pos1.getY();
             x2 = pos2.getZ();
             y2 = pos2.getY();
-            z = pos1.getX();
+            z1 = pos1.getX();
             z2 = pos2.getX();
         }
-        if (Math.abs(z2 - z) > 3) {
+        if (Math.abs(z2 - z1) > 3) {
             ModUtils.tellPlayer(player, Messages.NOT_CARDINAL);
             return;
         }
@@ -62,13 +69,9 @@ public class BridgeBuildingHandler
         b = y1 - m * x1;
         distance = Math.abs(x2 - x1);
         distInt = Math.abs(x2 - x1);
-
-        // Check if bridge longer than 0
         if (distInt < 2)
-            // bridge too short
             return;
-
-        // Check for materials in inventory
+        
         if (!player.capabilities.isCreativeMode && !hasMaterials(player, distInt - 1))
             return;
 
@@ -93,7 +96,7 @@ public class BridgeBuildingHandler
                             level = 1;
                         }
                     }
-                    allClear = !addSlab(player.world, bridge, x, y + 1, z, level, rotate) ? false : allClear;
+                    allClear = !addSlab(player.world, bridge, x, y + 1, z1, level, rotate) ? false : allClear;
                 }
             }
         }
@@ -102,9 +105,6 @@ public class BridgeBuildingHandler
             final int type = inputType == -1 ? getWoodType(player) : inputType;
             if (inputType == -1 && !player.capabilities.isCreativeMode) {
                 takeMaterials(player, distInt - 1);
-                if (stack.getItemDamage() == stack.getMaxDamage()) {
-                    // resetFov(playerFov);
-                }
                 stack.damageItem(1, player);
             }
 
@@ -132,10 +132,10 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            if (name.equals("item.string")) {
+            if (name.equals(BridgeBuildingHandler.string)) {
                 stringHad += stack.stackSize;
             }
-            if (name.equals("tile.woodSlab")) {
+            if (name.equals(BridgeBuildingHandler.woodSlab)) {
                 slabsHad += stack.stackSize;
             }
         }
@@ -161,7 +161,7 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            if (name.equals("item.string")) {
+            if (name.equals(BridgeBuildingHandler.string)) {
                 if (stack.stackSize > stringNeeded) {
                     stack.stackSize = stack.stackSize - stringNeeded;
                     stringNeeded = 0;
@@ -172,7 +172,7 @@ public class BridgeBuildingHandler
                     continue;
                 }
             }
-            if (name.equals("tile.woodSlab")) {
+            if (name.equals(BridgeBuildingHandler.woodSlab)) {
                 if (stack.stackSize > slabsNeeded) {
                     stack.stackSize = stack.stackSize - slabsNeeded;
                     slabsNeeded = 0;
@@ -186,7 +186,6 @@ public class BridgeBuildingHandler
         }
     }
 
-    // Controls Removing Slabs + Building Physical Bridge
     private static boolean addSlab(World world, LinkedList<SlabPosHandler> list, int x, int y, int z, int level, boolean rotate)
     {
         boolean isClear;
@@ -234,6 +233,9 @@ public class BridgeBuildingHandler
             slab = bridge.pop();
             Block block = Blocks.AIR;
             switch (slab.getLevel()) {
+            default:
+            	block = ContentHandler.blockBridgeSlab1;
+            	break;
             case 1:
                 block = ContentHandler.blockBridgeSlab1;
                 break;
@@ -272,7 +274,7 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            if (name.equals("tile.woodSlab"))
+            if (name.equals(BridgeBuildingHandler.woodSlab))
                 return stack.getItemDamage();
         }
         return 0;

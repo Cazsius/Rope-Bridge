@@ -22,7 +22,10 @@ public class RopeBridge
 
     public static SimpleNetworkWrapper snw;
 
-    public static Achievement craftAchievement, buildAchievement;
+    public static Achievement craftAchievement;
+    public static  Achievement buildAchievement;
+    
+    private int discriminator = 0;
 
     @Mod.Instance(Constants.MOD_ID)
     public static RopeBridge instance;
@@ -50,6 +53,4 @@ public class RopeBridge
         snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
         snw.registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, this.discriminator++, Side.SERVER);
     }
-
-    private int discriminator = 0;
 }

@@ -1,6 +1,6 @@
 package com.mrtrollnugnug.ropebridge;
 
-public class Messages {
+public final class Messages {
 
     // WARNING! Breaking whole bridge!
     public static final String WARNING_BREAKING = "chat.ropebridge.warning.breaking";

@@ -207,7 +207,7 @@ public class ItemBridgeBuilderOld extends Item
                             }
                         }
 
-                        BridgeBuildingHandler.newBridge(player, this.playerFov, stack, -1, floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset));
+                        BridgeBuildingHandler.newBridge(player, stack, -1, floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset));
                     }
                 }
             }
