@@ -8,7 +8,6 @@ import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -19,7 +18,6 @@ import net.minecraft.world.World;
 public class BridgeBuildingHandler
 {
 
-    // TODO Wrong Package
     public static void newBridge(EntityPlayer player, float playerFov, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
     {
         final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
@@ -165,9 +163,7 @@ public class BridgeBuildingHandler
             final String name = stack.getItem().getUnlocalizedName();
             if (name.equals("item.string")) {
                 if (stack.stackSize > stringNeeded) {
-                    stack.stackSize = stack.stackSize - stringNeeded; // TODO
-                                                                      // Potential
-                                                                      // Issue
+                    stack.stackSize = stack.stackSize - stringNeeded;
                     stringNeeded = 0;
                 }
                 else {
@@ -237,7 +233,7 @@ public class BridgeBuildingHandler
         if (!bridge.isEmpty()) {
             slab = bridge.pop();
             Block block = Blocks.AIR;
-            switch (slab.level) {
+            switch (slab.getLevel()) {
             case 1:
                 block = ContentHandler.blockBridgeSlab1;
                 break;
@@ -251,10 +247,10 @@ public class BridgeBuildingHandler
                 block = ContentHandler.blockBridgeSlab4;
                 break;
             }
-            final IBlockState state = block.getStateFromMeta((slab.rotate ? 1 : 0) + 2 * type);
-            world.setBlockState(slab.getBlockPos(), state, 3);
+            
+            world.setBlockState(slab.getBlockPos(), block.getStateFromMeta((slab.isRotate() ? 1 : 0) + 2 * type), 3);
 
-            spawnSmoke(world, new BlockPos(slab.x, slab.y, slab.z), 1);
+            spawnSmoke(world, new BlockPos(slab.getBlockPos().getX(), slab.getBlockPos().getY(), slab.getBlockPos().getZ()), 1);
 
             new Timer().schedule(new TimerTask() {
 

@@ -2,18 +2,17 @@ package com.mrtrollnugnug.ropebridge.handler;
 
 import net.minecraft.util.math.BlockPos;
 
-//TODO Wrong Package
 public class SlabPosHandler {
 
-    public int x;
+    private final int x;
 
-    public int y;
+    private final  int y;
 
-    public int z;
+    private final  int z;
 
-    public int level;
+     private final int level;
 
-    public boolean rotate;
+    private final boolean rotate;
 
     public SlabPosHandler (int xCoordinate, int yCoordinate, int zCoordinate, int slabLevel, boolean isRotated) {
         this.x = xCoordinate;
@@ -35,4 +34,12 @@ public class SlabPosHandler {
 
         return new BlockPos(this.x, this.y, this.z);
     }
+
+	public boolean isRotate() {
+		return rotate;
+	}
+
+	public int getLevel() {
+		return level;
+	}
 }

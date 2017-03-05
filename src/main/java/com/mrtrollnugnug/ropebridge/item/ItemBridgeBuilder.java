@@ -35,6 +35,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBridgeBuilder extends Item
 {
+	public static float fov = 0;
+	   
     public ItemBridgeBuilder()
     {
         super();
@@ -70,7 +72,7 @@ public class ItemBridgeBuilder extends Item
                     ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 }
                 else {
-                    final RayTraceResult hit = raytrace(player);
+                    final RayTraceResult hit = trace(player);
                     if (hit.typeOfHit == Type.BLOCK) {
                         final BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY) - 1, Math.floor(player.posZ));
                         // Vector offsets
@@ -99,20 +101,15 @@ public class ItemBridgeBuilder extends Item
         }
     }
 
-    private static RayTraceResult raytrace(EntityPlayer player)
+    private static RayTraceResult trace(EntityPlayer player)
     {
         return player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0f);
     }
-
-    public static float fov = 0;
 
     @Override
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
     {
         if (!player.world.isRemote && count % 10 == 0) {
-            // TODO play clicking sound here
-            // player.world.playSound(x, y, z, soundIn, category, volume, pitch,
-            // distanceDelay);
         }
         else if (player.world.isRemote && player instanceof EntityPlayer) {
             final EntityPlayer p = (EntityPlayer) player;
@@ -212,7 +209,7 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTowards(float toFov)
     {
-        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0.0) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (currentFov != toFov) {
                 float change = (toFov - currentFov) / 4;
@@ -226,7 +223,7 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTo(float toFov)
     {
-        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.zoomOnAim && toFov != 0.0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
@@ -260,12 +257,9 @@ public class ItemBridgeBuilder extends Item
 
                 for (int x = pos.getX() - xRange; x <= pos.getX() + xRange; x++) {
                     for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++) {
-                        for (int z = pos.getZ() - zRange; z <= pos.getZ() + zRange; z++) {
-                            // System.out.println("lag " + x + " " + y + " " +
-                            // z);
+                        for (int z = pos.getZ() - zRange; z <= pos.getZ() + zRange; z++) {                
                             final BlockPos currentPos = new BlockPos(x, y, z);
                             if ((x - pos.getX() == 0 && z - pos.getZ() == 0) || queue.contains(currentPos)) {
-                                // No bridge
                             }
                             else {
                                 final IBlockState currentBlockState = worldIn.getBlockState(currentPos);
@@ -285,10 +279,6 @@ public class ItemBridgeBuilder extends Item
             timer.schedule(task, 100, 100);
         });
     }
-
-    // might be necessary for proper multithreading
-    // private static Semaphore sem = new Semaphore(1);
-
     private static class BreakTask extends TimerTask
     {
         private final Queue<BlockPos> queue;
@@ -310,7 +300,7 @@ public class ItemBridgeBuilder extends Item
         {
             BlockPos pos = queue.remove();
             if (world.getBlockState(pos).getBlock() instanceof BridgeSlab)
-                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> world.destroyBlock(pos, drop));
+            	FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> world.destroyBlock(pos, drop));
             if (queue.isEmpty())
                 timer.cancel();
         }
