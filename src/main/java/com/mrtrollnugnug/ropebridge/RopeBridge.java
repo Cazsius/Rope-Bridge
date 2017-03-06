@@ -31,7 +31,7 @@ public class RopeBridge
     private static RopeBridge instance;
 
     @SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
-    public static CommonProxy proxy;
+    private static  CommonProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent e)
@@ -41,7 +41,7 @@ public class RopeBridge
         ContentHandler.initBlocks();
         ContentHandler.initItems();
         ContentHandler.initRecipes();
-        proxy.preInit(e);
+        getProxy().preInit(e);
 
         if  (ConfigurationHandler.isCustomAchievements()) {
             setCraftAchievement(new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ContentHandler.getItemBridgeBuilder(), AchievementList.BUILD_BETTER_PICKAXE));
@@ -75,5 +75,13 @@ public class RopeBridge
 
 	public static void setBuildAchievement(Achievement buildAchievement) {
 		RopeBridge.buildAchievement = buildAchievement;
+	}
+
+	public static CommonProxy getProxy() {
+		return proxy;
+	}
+
+	public static void setProxy(CommonProxy proxy) {
+		RopeBridge.proxy = proxy;
 	}
 }

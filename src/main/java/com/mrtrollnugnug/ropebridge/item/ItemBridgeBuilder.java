@@ -44,7 +44,7 @@ public class ItemBridgeBuilder extends Item
         this.setMaxStackSize(1);
         this.setMaxDamage(64);
         if (ConfigurationHandler.isZoomOnAim())
-            setFov(RopeBridge.proxy.getFov());
+            setFov(RopeBridge.getProxy().getFov());
     }
 
     @Override
@@ -144,8 +144,8 @@ public class ItemBridgeBuilder extends Item
     public float getStrVsBlock(ItemStack stack, IBlockState state)
     {
         if (FMLCommonHandler.instance().getSide().isClient()) {
-            if (RopeBridge.proxy.getPlayer().isSneaking() && isBridgeBlock(state.getBlock())) {
-                ModUtils.tellPlayer(RopeBridge.proxy.getPlayer(), Messages.WARNING_BREAKING);
+            if (RopeBridge.getProxy().getPlayer().isSneaking() && isBridgeBlock(state.getBlock())) {
+                ModUtils.tellPlayer(RopeBridge.getProxy().getPlayer(), Messages.WARNING_BREAKING);
                 return 0.3F;
             }
         }

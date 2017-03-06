@@ -1,5 +1,6 @@
 package com.mrtrollnugnug.ropebridge.client.gui;
 
+import java.util.Collections;
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;
@@ -26,6 +27,6 @@ public class GuiFactoryRopeBridge implements IModGuiFactory {
 
     @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories () {
-        return null;
+        return Collections.emptySet();
     }
 }

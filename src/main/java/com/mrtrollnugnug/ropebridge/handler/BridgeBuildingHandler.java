@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 
 public class BridgeBuildingHandler
 {
-	public static String string = "item.string";
-	public static String woodSlab = "tile.woodSlab";
+	private static String string = "item.string";
+	private static String woodSlab = "tile.woodSlab";
 	
     public static void newBridge(EntityPlayer player, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
     {
@@ -29,7 +29,7 @@ public class BridgeBuildingHandler
         int x2;
         int y1;
         int y2;
-        int z1;
+        int z1;	
         int z2;
         final int xdiff = Math.abs(pos1.getX() - pos2.getX());
         final int zdiff = Math.abs(pos1.getZ() - pos2.getZ());

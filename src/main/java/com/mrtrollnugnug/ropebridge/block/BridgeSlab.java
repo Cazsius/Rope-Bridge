@@ -176,13 +176,13 @@ public class BridgeSlab extends Block
         OAK(0, "oak"), OAK_R(1, "oak_r"), SPRUCE(2, "spruce"), SPRUCE_R(3, "spruce_r"), BIRCH(4, "birch"), BIRCH_R(5, "birch_r"), JUNGLE(6, "jungle"),
         JUNGLE_R(7, "jungle_r"), ACACIA(8, "acacia"), ACACIA_R(9, "acacia_r"), BIG_OAK(10, "big_oak"), BIG_OAK_R(11, "big_oak_r");
 
-        private int ID;
+        private int id;
 
         private String name;
 
-        private EnumType(int ID, String name)
+        private EnumType(int id, String name)
         {
-            this.ID = ID;
+            this.id = id;
             this.name = name;
         }
 
@@ -196,7 +196,7 @@ public class BridgeSlab extends Block
         public int getID()
         {
 
-            return this.ID;
+            return this.id;
         }
 
         @Override
