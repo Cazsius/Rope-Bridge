@@ -11,6 +11,11 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
+
+plugins {
+	id "org.sonarqube" version "2.2"
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 /*
@@ -19,6 +24,8 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
+
+
 
 
 apply plugin: 'java'
