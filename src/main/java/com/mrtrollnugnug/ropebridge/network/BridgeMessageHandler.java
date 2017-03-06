@@ -61,19 +61,19 @@ public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMes
                     break;
                 }
                 case 1: {
-                    blk = ContentHandler.blockBridgeSlab1;
+                    blk = ContentHandler.getBlockBridgeSlab1();
                     break;
                 }
                 case 2: {
-                    blk = ContentHandler.blockBridgeSlab2;
+                    blk = ContentHandler.getBlockBridgeSlab2();
                     break;
                 }
                 case 3: {
-                    blk = ContentHandler.blockBridgeSlab3;
+                    blk = ContentHandler.getBlockBridgeSlab3();
                     break;
                 }
                 case 4: {
-                    blk = ContentHandler.blockBridgeSlab4;
+                    blk = ContentHandler.getBlockBridgeSlab4();
                     break;
                 }
                 default: {
@@ -104,7 +104,7 @@ public class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMes
                 break;
             }
             case 4: { // trigger the achievement for building a bridge
-                player.hasAchievement(RopeBridge.buildAchievement);
+                player.hasAchievement(RopeBridge.getBuildAchievement());
                 break;
             }
             }

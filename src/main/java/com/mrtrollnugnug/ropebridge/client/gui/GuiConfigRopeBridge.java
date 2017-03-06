@@ -14,7 +14,7 @@ import net.minecraftforge.fml.client.config.IConfigElement;
 
 public class GuiConfigRopeBridge extends GuiConfig {
 
-    static final Configuration cfg = ConfigurationHandler.config;
+    static final Configuration cfg = ConfigurationHandler.getConfig();
 
     public GuiConfigRopeBridge (GuiScreen parent) {
 

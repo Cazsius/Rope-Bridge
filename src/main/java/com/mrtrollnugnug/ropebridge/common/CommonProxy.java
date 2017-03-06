@@ -20,6 +20,6 @@ public class CommonProxy
 
     public float getFov()
     {
-        return ItemBridgeBuilder.fov;
+        return ItemBridgeBuilder.getFov();
     }
 }

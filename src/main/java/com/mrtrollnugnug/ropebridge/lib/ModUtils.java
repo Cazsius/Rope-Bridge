@@ -47,25 +47,25 @@ public final class ModUtils
      *
      * @param block
      *            The block to register.
-     * @param ID
+     * @param id
      *            The ID to register the block with.
      */
-    public static Block registerBlock(Block block, String ID)
+    public static Block registerBlock(Block block, String id)
     {
 
-        block.setRegistryName(ID);
-        block.setUnlocalizedName(Constants.MOD_ID + "." + ID.toLowerCase().replace("_", "."));
+        block.setRegistryName(id);
+        block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(block);
         GameRegistry.register(new ItemBlock(block), block.getRegistryName());
         BLOCKS.add(block);
         return block;
     }
     
-    public static Block registerBlockNoItem(Block block, String ID)
+    public static Block registerBlockNoItem(Block block, String id)
     {
 
-        block.setRegistryName(ID);
-        block.setUnlocalizedName(Constants.MOD_ID + "." + ID.toLowerCase().replace("_", "."));
+        block.setRegistryName(id);
+        block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(block);
         BLOCKS.add(block);
         return block;
@@ -76,17 +76,17 @@ public final class ModUtils
      *
      * @param item
      *            The item to register.
-     * @param ID
+     * @param id
      *            The ID to register the item with.
      */
-    public static Item registerItem(Item item, String ID)
+    public static Item registerItem(Item item, String id)
     {
 
         if (item.getRegistryName() == null) {
-            item.setRegistryName(ID);
+            item.setRegistryName(id);
         }
 
-        item.setUnlocalizedName(Constants.MOD_ID + "." + ID.toLowerCase().replace("_", "."));
+        item.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(item);
         ITEMS.add(item);
         return item;

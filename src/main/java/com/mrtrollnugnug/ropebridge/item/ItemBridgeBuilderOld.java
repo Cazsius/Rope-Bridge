@@ -80,7 +80,7 @@ public class ItemBridgeBuilderOld extends Item
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
 
-        playerIn.hasAchievement(RopeBridge.craftAchievement);
+        playerIn.hasAchievement(RopeBridge.getCraftAchievement());
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ItemBridgeBuilderOld extends Item
                 public void run()
                 {
 
-                    RopeBridge.snw.sendToServer(new BridgeMessage(0, 0, 0, 0, 2, 0));
+                    RopeBridge.getSnw().sendToServer(new BridgeMessage(0, 0, 0, 0, 2, 0));
                 }
             }, 500);
         }
@@ -188,7 +188,7 @@ public class ItemBridgeBuilderOld extends Item
                     ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 }
                 else {
-                    final RayTraceResult hit = player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0F);
+                    final RayTraceResult hit = player.rayTrace(ConfigurationHandler.getMaxBridgeDistance(), 1.0F);
                     if (hit.typeOfHit == RayTraceResult.Type.BLOCK) {
                         final BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY) - 1, Math.floor(player.posZ));
                         // Vector offsets
@@ -294,7 +294,7 @@ public class ItemBridgeBuilderOld extends Item
     {
 
         // Break block and turn into air
-        RopeBridge.snw.sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
+        RopeBridge.getSnw().sendToServer(new BridgeMessage(1, posIn.getX(), posIn.getY(), posIn.getZ(), 0, 0));
         int xRange = 0;
         int zRange = 0;
         if (meta % 2 == 0) {
@@ -374,7 +374,7 @@ public class ItemBridgeBuilderOld extends Item
     private void zoomTowards(float toFov)
     {
 
-        if (ConfigurationHandler.zoomOnAim && toFov != 0 && !this.fovNormal) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov != 0 && !this.fovNormal) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (Math.round(currentFov) != toFov) {
                 this.zoomTo(currentFov + (toFov - currentFov) / 4);
@@ -390,7 +390,7 @@ public class ItemBridgeBuilderOld extends Item
     private void zoomTo(float toFov)
     {
 
-        if (ConfigurationHandler.zoomOnAim && toFov != 0) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov != 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }

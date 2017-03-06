@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 public class BridgeSlab extends Block
 {
 
-    public static final float slabHeight = 4.0F / 16.0F;
+    public static final float SLAB_HEIGHT = 4.0F / 16.0F;
 
     public static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
@@ -83,8 +83,8 @@ public class BridgeSlab extends Block
         final List<ItemStack> ret = new java.util.ArrayList<>();
         final int meta = this.getMetaFromState(state);
         final int slabMeta = (meta - meta % 2) / 2;
-        ret.add(new ItemStack(Blocks.WOODEN_SLAB, (int) Math.floor(ConfigurationHandler.slabsPerBlock / 2), slabMeta));
-        ret.add(new ItemStack(Items.STRING, (int) Math.ceil(ConfigurationHandler.stringPerBlock / 2)));
+        ret.add(new ItemStack(Blocks.WOODEN_SLAB, (int) Math.floor(ConfigurationHandler.getSlabsPerBlock() / 2), slabMeta));
+        ret.add(new ItemStack(Items.STRING, (int) Math.ceil(ConfigurationHandler.getStringPerBlock() / 2)));
         return ret;
     }
 

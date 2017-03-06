@@ -62,7 +62,7 @@ public class BridgeBuildingHandler
         int distInt;
 
         m = (double) (y2 - y1) / (double) (x2 - x1);
-        if (!ConfigurationHandler.ignoreSlopeWarnings && Math.abs(m) > 0.2) {
+        if (!ConfigurationHandler.isIgnoreSlopeWarnings() && Math.abs(m) > 0.2) {
             ModUtils.tellPlayer(player, Messages.SLOPE_GREAT);
             return;
         }
@@ -77,7 +77,7 @@ public class BridgeBuildingHandler
 
         for (int x = Math.min(x1, x2) + 1; x <= Math.max(x1, x2) - 1; x++) {
             for (int y = Math.max(y1, y2); y >= Math.min(y1, y2) - distInt / 8 - 1; y--) {
-                final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigurationHandler.bridgeDroopFactor + ConfigurationHandler.bridgeYOffset;
+                final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigurationHandler.getBridgeDroopFactor() + ConfigurationHandler.getBridgeYOffset();
                 if (y + 0.5 > funcVal && y - 0.5 <= funcVal) {
                     int level;
                     if (funcVal >= y) {
@@ -122,7 +122,7 @@ public class BridgeBuildingHandler
         if (player.capabilities.isCreativeMode)
             return true;
         final int slabsNeeded = dist;
-        final int stringNeeded = 1 + Math.round(dist / 2);
+        final int stringNeeded = 1 + dist / 2;
         int slabsHad = 0;
         int stringHad = 0;
 
@@ -153,9 +153,10 @@ public class BridgeBuildingHandler
         if (player.capabilities.isCreativeMode)
             return;
         int slabsNeeded = dist;
-        int stringNeeded = 1 + Math.round(dist / 2);
-
-        for (int i = 0; i < 36; i++) {
+        int stringNeeded = 1 + dist / 2;
+        int i = 0;
+        
+        for (;i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) {
                 continue;
@@ -196,7 +197,7 @@ public class BridgeBuildingHandler
         else {
             pos = new BlockPos(x, y, z);
         }
-        isClear = ConfigurationHandler.breakThroughBlocks || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos);
+        isClear = ConfigurationHandler.isBreakThroughBlocks() || world.isAirBlock(pos) || world.getBlockState(pos).getBlock().isReplaceable(world, pos);
         list.add(new SlabPosHandler(pos, level, rotate));
         if (!isClear) {
             spawnSmoke(world, pos, 15);
@@ -234,19 +235,19 @@ public class BridgeBuildingHandler
             Block block = Blocks.AIR;
             switch (slab.getLevel()) {
             default:
-            	block = ContentHandler.blockBridgeSlab1;
+            	block = ContentHandler.getBlockBridgeSlab1();
             	break;
             case 1:
-                block = ContentHandler.blockBridgeSlab1;
+                block = ContentHandler.getBlockBridgeSlab1();
                 break;
             case 2:
-                block = ContentHandler.blockBridgeSlab2;
+                block = ContentHandler.getBlockBridgeSlab2();
                 break;
             case 3:
-                block = ContentHandler.blockBridgeSlab3;
+                block = ContentHandler.getBlockBridgeSlab3();
                 break;
             case 4:
-                block = ContentHandler.blockBridgeSlab4;
+                block = ContentHandler.getBlockBridgeSlab4();
                 break;
             }
             

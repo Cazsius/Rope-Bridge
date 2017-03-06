@@ -35,7 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBridgeBuilder extends Item
 {
-	public static float fov = 0;
+	private static float fov = 0;
 	   
     public ItemBridgeBuilder()
     {
@@ -43,14 +43,14 @@ public class ItemBridgeBuilder extends Item
         this.setCreativeTab(CreativeTabs.TOOLS);
         this.setMaxStackSize(1);
         this.setMaxDamage(64);
-        if (ConfigurationHandler.zoomOnAim)
-            fov = RopeBridge.proxy.getFov();
+        if (ConfigurationHandler.isZoomOnAim())
+            setFov(RopeBridge.proxy.getFov());
     }
 
     @Override
     public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
-        playerIn.addStat(RopeBridge.craftAchievement);
+        playerIn.addStat(RopeBridge.getCraftAchievement());
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ItemBridgeBuilder extends Item
                                 yOffset = -0.8D;
                             }
                         }
-                        RopeBridge.snw.sendToServer(new BuildMessage(floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset)));
+                        RopeBridge.getSnw().sendToServer(new BuildMessage(floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset)));
                         // BridgeBuildingHandler.newBridge(player, fov, stack,
                         // -1, floored, new BlockPos(hit.hitVec.xCoord +
                         // xOffset, hit.hitVec.yCoord + yOffset,
@@ -103,7 +103,7 @@ public class ItemBridgeBuilder extends Item
 
     private static RayTraceResult trace(EntityPlayer player)
     {
-        return player.rayTrace(ConfigurationHandler.maxBridgeDistance, 1.0f);
+        return player.rayTrace(ConfigurationHandler.getMaxBridgeDistance(), 1.0f);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ItemBridgeBuilder extends Item
         if (entityIn instanceof EntityPlayer && worldIn.isRemote) {
             final EntityPlayer p = (EntityPlayer) entityIn;
             if (!isSelected || p.getActiveItemStack() != stack) {
-                zoomTowards(fov);
+                zoomTowards(getFov());
             }
         }
     }
@@ -169,7 +169,7 @@ public class ItemBridgeBuilder extends Item
     private static boolean isBridgeBlock(Block blockIn)
     {
 
-        return blockIn == ContentHandler.blockBridgeSlab1 || blockIn == ContentHandler.blockBridgeSlab2 || blockIn == ContentHandler.blockBridgeSlab3 || blockIn == ContentHandler.blockBridgeSlab4;
+        return blockIn == ContentHandler.getBlockBridgeSlab1() || blockIn == ContentHandler.getBlockBridgeSlab2() || blockIn == ContentHandler.getBlockBridgeSlab3() || blockIn == ContentHandler.getBlockBridgeSlab4();
     }
 
     private static float getNearestYaw(EntityPlayer player)
@@ -209,7 +209,7 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTowards(float toFov)
     {
-        if (ConfigurationHandler.zoomOnAim && toFov != 0.0) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov != 0.0) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
             if (currentFov != toFov) {
                 float change = (toFov - currentFov) / 4;
@@ -223,7 +223,7 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTo(float toFov)
     {
-        if (ConfigurationHandler.zoomOnAim && toFov != 0.0) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov != 0.0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
@@ -279,7 +279,14 @@ public class ItemBridgeBuilder extends Item
             timer.schedule(task, 100, 100);
         });
     }
-    private static class BreakTask extends TimerTask
+    public static float getFov() {
+		return fov;
+	}
+
+	public static void setFov(float fov) {
+		ItemBridgeBuilder.fov = fov;
+	}
+	private static class BreakTask extends TimerTask
     {
         private final Queue<BlockPos> queue;
         private final World world;

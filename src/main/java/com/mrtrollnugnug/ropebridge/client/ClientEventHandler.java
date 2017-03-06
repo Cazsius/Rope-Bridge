@@ -18,9 +18,8 @@ public final class ClientEventHandler
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent event)
     {
-        ConfigurationHandler.syncConfig();
-        if (event.getModID().equals(Constants.MOD_ID))
-            if (ConfigurationHandler.zoomOnAim)
-                ItemBridgeBuilder.fov = Minecraft.getMinecraft().gameSettings.fovSetting;
+    	 if (event.getModID().equals(Constants.MOD_ID))
+             if (ConfigurationHandler.isZoomOnAim())
+                 ItemBridgeBuilder.setFov(Minecraft.getMinecraft().gameSettings.fovSetting);
     }
 }

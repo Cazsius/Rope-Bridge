@@ -20,15 +20,15 @@ import net.minecraftforge.fml.relauncher.Side;
 public class RopeBridge
 {
 
-    public static SimpleNetworkWrapper snw;
+    private static SimpleNetworkWrapper snw;
 
-    public static Achievement craftAchievement;
-    public static  Achievement buildAchievement;
+    private static Achievement craftAchievement;
+    private static  Achievement buildAchievement;
     
     private int discriminator = 0;
 
     @Mod.Instance(Constants.MOD_ID)
-    public static RopeBridge instance;
+    private static RopeBridge instance;
 
     @SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -43,14 +43,37 @@ public class RopeBridge
         ContentHandler.initRecipes();
         proxy.preInit(e);
 
-        if (ConfigurationHandler.customAchievements) {
-            craftAchievement = new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ContentHandler.itemBridgeBuilder, AchievementList.BUILD_BETTER_PICKAXE);
-            craftAchievement.registerStat();
-            buildAchievement = new Achievement("achievement.buildBridge", "buildBridge", 10, 2, ContentHandler.blockBridgeSlab2, craftAchievement);
-            buildAchievement.registerStat();
+        if  (ConfigurationHandler.isCustomAchievements()) {
+            setCraftAchievement(new Achievement("achievement.grapplingGun", "grapplingGun", 8, 2, ContentHandler.getItemBridgeBuilder(), AchievementList.BUILD_BETTER_PICKAXE));
+            getCraftAchievement().registerStat();
+            setBuildAchievement(new Achievement("achievement.buildBridge", "buildBridge", 10, 2, ContentHandler.getBlockBridgeSlab2(), getCraftAchievement()));
+            getBuildAchievement().registerStat();
         }
 
-        snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
-        snw.registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, this.discriminator++, Side.SERVER);
+        setSnw(NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID));
+        getSnw().registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, this.discriminator++, Side.SERVER);
     }
+    
+	public static SimpleNetworkWrapper getSnw() {
+		return snw;
+	}
+	public static void setSnw(SimpleNetworkWrapper snw) {
+		RopeBridge.snw = snw;
+	}
+
+	public static Achievement getCraftAchievement() {
+		return craftAchievement;
+	}
+
+	public static void setCraftAchievement(Achievement craftAchievement) {
+		RopeBridge.craftAchievement = craftAchievement;
+	}
+
+	public static Achievement getBuildAchievement() {
+		return buildAchievement;
+	}
+
+	public static void setBuildAchievement(Achievement buildAchievement) {
+		RopeBridge.buildAchievement = buildAchievement;
+	}
 }
