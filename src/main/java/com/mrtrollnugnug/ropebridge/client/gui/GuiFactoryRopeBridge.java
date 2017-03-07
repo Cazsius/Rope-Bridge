@@ -6,27 +6,35 @@ import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GuiFactoryRopeBridge implements IModGuiFactory {
+@SideOnly(Side.CLIENT)
+public class GuiFactoryRopeBridge implements IModGuiFactory
+{
 
     // This was scheduled for removal in 1.11
     @Override
-    public RuntimeOptionGuiHandler getHandlerFor (RuntimeOptionCategoryElement element) {
+    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
+    {
         return null;
     }
 
     @Override
-    public void initialize (Minecraft minecraftInstance) {
-    	//Initializes the GUI when Config Button is pressed
+    public void initialize(Minecraft minecraftInstance)
+    {
+        // Initializes the GUI when Config Button is pressed
     }
 
     @Override
-    public Class<? extends GuiScreen> mainConfigGuiClass () {
+    public Class<? extends GuiScreen> mainConfigGuiClass()
+    {
         return GuiConfigRopeBridge.class;
     }
 
     @Override
-    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories () {
+    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
+    {
         return Collections.emptySet();
     }
 }
