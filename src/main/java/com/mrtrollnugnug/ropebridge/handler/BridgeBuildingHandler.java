@@ -162,8 +162,6 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            switch (name) {
-            }
             if (name.equals(BridgeBuildingHandler.string)) {
                 if (stack.stackSize > stringNeeded) {
                     stack.stackSize = stack.stackSize - stringNeeded;
