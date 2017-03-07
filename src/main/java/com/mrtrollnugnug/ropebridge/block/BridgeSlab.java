@@ -49,7 +49,8 @@ public class BridgeSlab extends Block
 
     @Deprecated
     @Override
-    public boolean isFullBlock(IBlockState state) {
+    public boolean isFullBlock(IBlockState state)
+    {
         return false;
     }
 
@@ -121,45 +122,31 @@ public class BridgeSlab extends Block
     public IBlockState getStateFromMeta(int meta)
     {
         switch (meta) {
-        case 0: {
-            return this.getDefaultState().withProperty(TYPE, EnumType.OAK);
-        }
-        case 1: {
+        case 0:
+        case 1:
             return this.getDefaultState().withProperty(TYPE, EnumType.OAK_R);
-        }
-        case 2: {
+        case 2:
             return this.getDefaultState().withProperty(TYPE, EnumType.SPRUCE);
-        }
-        case 3: {
+        case 3:
             return this.getDefaultState().withProperty(TYPE, EnumType.SPRUCE_R);
-        }
-        case 4: {
+        case 4:
             return this.getDefaultState().withProperty(TYPE, EnumType.BIRCH);
-        }
-        case 5: {
+        case 5:
             return this.getDefaultState().withProperty(TYPE, EnumType.BIRCH_R);
-        }
-        case 6: {
+        case 6:
             return this.getDefaultState().withProperty(TYPE, EnumType.JUNGLE);
-        }
-        case 7: {
+        case 7:
             return this.getDefaultState().withProperty(TYPE, EnumType.JUNGLE_R);
-        }
-        case 8: {
+        case 8:
             return this.getDefaultState().withProperty(TYPE, EnumType.ACACIA);
-        }
-        case 9: {
+        case 9:
             return this.getDefaultState().withProperty(TYPE, EnumType.ACACIA_R);
-        }
-        case 10: {
+        case 10:
             return this.getDefaultState().withProperty(TYPE, EnumType.BIG_OAK);
-        }
-        case 11: {
+        case 11:
             return this.getDefaultState().withProperty(TYPE, EnumType.BIG_OAK_R);
-        }
-        default: {
+        default:
             return this.getDefaultState().withProperty(TYPE, EnumType.OAK);
-        }
         }
     }
 

@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 public class BridgeBuildingHandler
 {
-	private static String string = "item.string";
-	private static String woodSlab = "tile.woodSlab";
-	
+    private static String string = "item.string";
+    private static String woodSlab = "tile.woodSlab";
+
     public static void newBridge(EntityPlayer player, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
     {
         final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
@@ -29,7 +29,7 @@ public class BridgeBuildingHandler
         int x2;
         int y1;
         int y2;
-        int z1;	
+        int z1;
         int z2;
         final int xdiff = Math.abs(pos1.getX() - pos2.getX());
         final int zdiff = Math.abs(pos1.getZ() - pos2.getZ());
@@ -71,7 +71,7 @@ public class BridgeBuildingHandler
         distInt = Math.abs(x2 - x1);
         if (distInt < 2)
             return;
-        
+
         if (!player.capabilities.isCreativeMode && !hasMaterials(player, distInt - 1))
             return;
 
@@ -149,19 +149,20 @@ public class BridgeBuildingHandler
 
     private static void takeMaterials(EntityPlayer player, int dist)
     {
-
         if (player.capabilities.isCreativeMode)
             return;
         int slabsNeeded = dist;
         int stringNeeded = 1 + dist / 2;
         int i = 0;
-        
-        for (;i < 36; i++) {
+
+        for (; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) {
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
+            switch (name) {
+            }
             if (name.equals(BridgeBuildingHandler.string)) {
                 if (stack.stackSize > stringNeeded) {
                     stack.stackSize = stack.stackSize - stringNeeded;
@@ -173,7 +174,7 @@ public class BridgeBuildingHandler
                     continue;
                 }
             }
-            if (name.equals(BridgeBuildingHandler.woodSlab)) {
+            else if (name.equals(BridgeBuildingHandler.woodSlab)) {
                 if (stack.stackSize > slabsNeeded) {
                     stack.stackSize = stack.stackSize - slabsNeeded;
                     slabsNeeded = 0;
@@ -232,11 +233,8 @@ public class BridgeBuildingHandler
         SlabPosHandler slab;
         if (!bridge.isEmpty()) {
             slab = bridge.pop();
-            Block block = Blocks.AIR;
+            Block block;
             switch (slab.getLevel()) {
-            default:
-            	block = ContentHandler.getBlockBridgeSlab1();
-            	break;
             case 1:
                 block = ContentHandler.getBlockBridgeSlab1();
                 break;
@@ -249,8 +247,11 @@ public class BridgeBuildingHandler
             case 4:
                 block = ContentHandler.getBlockBridgeSlab4();
                 break;
+            default:
+                block = Blocks.AIR;
+                break;
             }
-            
+
             world.setBlockState(slab.getBlockPos(), block.getStateFromMeta((slab.isRotate() ? 1 : 0) + 2 * type), 3);
 
             spawnSmoke(world, new BlockPos(slab.getBlockPos().getX(), slab.getBlockPos().getY(), slab.getBlockPos().getZ()), 1);

@@ -1,5 +1,6 @@
 package com.mrtrollnugnug.ropebridge.item;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -35,8 +36,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBridgeBuilder extends Item
 {
-	private static float fov = 0;
-	   
+    private static float fov = 0;
+
     public ItemBridgeBuilder()
     {
         super();
@@ -79,26 +80,27 @@ public class ItemBridgeBuilder extends Item
                         double xOffset = 0.0D;
                         double yOffset = 0.0D;
                         double zOffset = 0.0D;
-                        if (hit.hitVec.xCoord % 1 == 0 && hit.hitVec.xCoord < floored.getX()) {
+                        if (equalsZero(hit.hitVec.xCoord % 1) && hit.hitVec.xCoord < floored.getX()) {
                             xOffset = -0.8D;
                         }
-                        if (hit.hitVec.zCoord % 1 == 0 && hit.hitVec.zCoord < floored.getZ()) {
+                        if (equalsZero(hit.hitVec.zCoord % 1) && hit.hitVec.zCoord < floored.getZ()) {
                             zOffset = -0.8D;
                         }
-                        if (hit.hitVec.yCoord % 1 == 0) {
+                        if (equalsZero(hit.hitVec.yCoord % 1)) {
                             if (player.rotationPitch > 0) { // Looking from top
                                 yOffset = -0.8D;
                             }
                         }
                         RopeBridge.getSnw().sendToServer(new BuildMessage(floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset)));
-                        // BridgeBuildingHandler.newBridge(player, fov, stack,
-                        // -1, floored, new BlockPos(hit.hitVec.xCoord +
-                        // xOffset, hit.hitVec.yCoord + yOffset,
-                        // hit.hitVec.zCoord + zOffset));
                     }
                 }
             }
         }
+    }
+
+    private static boolean equalsZero(double d)
+    {
+        return BigDecimal.valueOf(d).equals(BigDecimal.ZERO);
     }
 
     private static RayTraceResult trace(EntityPlayer player)
@@ -209,9 +211,9 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTowards(float toFov)
     {
-        if (ConfigurationHandler.isZoomOnAim() && toFov != 0.0) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov > 0) {
             final float currentFov = Minecraft.getMinecraft().gameSettings.fovSetting;
-            if (currentFov != toFov) {
+            if (Math.abs(currentFov - toFov) > 0.00001) {
                 float change = (toFov - currentFov) / 4;
                 if (change < 0.1 && change > -0.1)
                     zoomTo(toFov);
@@ -223,7 +225,7 @@ public class ItemBridgeBuilder extends Item
 
     private static void zoomTo(float toFov)
     {
-        if (ConfigurationHandler.isZoomOnAim() && toFov != 0.0) {
+        if (ConfigurationHandler.isZoomOnAim() && toFov > 0) {
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
@@ -257,7 +259,7 @@ public class ItemBridgeBuilder extends Item
 
                 for (int x = pos.getX() - xRange; x <= pos.getX() + xRange; x++) {
                     for (int y = pos.getY() - 1; y <= pos.getY() + 1; y++) {
-                        for (int z = pos.getZ() - zRange; z <= pos.getZ() + zRange; z++) {                
+                        for (int z = pos.getZ() - zRange; z <= pos.getZ() + zRange; z++) {
                             final BlockPos currentPos = new BlockPos(x, y, z);
                             if ((x - pos.getX() == 0 && z - pos.getZ() == 0) || queue.contains(currentPos)) {
                             }
@@ -279,14 +281,18 @@ public class ItemBridgeBuilder extends Item
             timer.schedule(task, 100, 100);
         });
     }
-    public static float getFov() {
-		return fov;
-	}
 
-	public static void setFov(float fov) {
-		ItemBridgeBuilder.fov = fov;
-	}
-	private static class BreakTask extends TimerTask
+    public static float getFov()
+    {
+        return fov;
+    }
+
+    public static void setFov(float fov)
+    {
+        ItemBridgeBuilder.fov = fov;
+    }
+
+    private static class BreakTask extends TimerTask
     {
         private final Queue<BlockPos> queue;
         private final World world;
@@ -307,7 +313,7 @@ public class ItemBridgeBuilder extends Item
         {
             BlockPos pos = queue.remove();
             if (world.getBlockState(pos).getBlock() instanceof BridgeSlab)
-            	FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> world.destroyBlock(pos, drop));
+                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> world.destroyBlock(pos, drop));
             if (queue.isEmpty())
                 timer.cancel();
         }
