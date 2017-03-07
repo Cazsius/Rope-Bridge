@@ -31,25 +31,21 @@ public class BridgeBuildingHandler
         int y2;
         int z1;
         int z2;
-        final int xdiff = Math.abs(pos1.getX() - pos2.getX());
-        final int zdiff = Math.abs(pos1.getZ() - pos2.getZ());
-        boolean rotate;
-        if (xdiff > zdiff) {
-            rotate = false;
+        boolean rotate = getRotate(pos1, pos2);
+        if (!rotate) {
             x1 = pos1.getX();
             y1 = pos1.getY();
+            z1 = pos1.getZ();
             x2 = pos2.getX();
             y2 = pos2.getY();
-            z1 = pos1.getZ();
             z2 = pos2.getZ();
         }
         else {
-            rotate = true;
             x1 = pos1.getZ();
             y1 = pos1.getY();
+            z1 = pos1.getX();
             x2 = pos2.getZ();
             y2 = pos2.getY();
-            z1 = pos1.getX();
             z2 = pos2.getX();
         }
         if (Math.abs(z2 - z1) > 3) {
@@ -114,6 +110,11 @@ public class BridgeBuildingHandler
             ModUtils.tellPlayer(player, Messages.OBSTRUCTED);
             return;
         }
+    }
+
+    private static boolean getRotate(BlockPos p1, BlockPos p2)
+    {
+        return Math.abs(p1.getX() - p2.getX()) <= Math.abs(p1.getZ() - p2.getZ());
     }
 
     private static boolean hasMaterials(EntityPlayer player, int dist)
