@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public final class ConfigurationHandler
 {
@@ -50,89 +51,110 @@ public final class ConfigurationHandler
         setCustomAchievements(getConfig().getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements."));
         setSlabsPerBlock(getConfig().getInt("slabsPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Slabs consumed for every bridge block built."));
         setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for every bridge block built."));
-        setZoomOnAim(!FMLClientHandler.instance().hasOptifine());
+        if (FMLCommonHandler.instance().getSide().isClient())
+            setZoomOnAim(!FMLClientHandler.instance().hasOptifine());
 
         if (getConfig().hasChanged())
             getConfig().save();
     }
 
-	public static float getSlabsPerBlock() {
-		return slabsPerBlock;
-	}
+    public static float getSlabsPerBlock()
+    {
+        return slabsPerBlock;
+    }
 
-	public static void setSlabsPerBlock(float slabsPerBlock) {
-		ConfigurationHandler.slabsPerBlock = slabsPerBlock;
-	}
+    public static void setSlabsPerBlock(float slabsPerBlock)
+    {
+        ConfigurationHandler.slabsPerBlock = slabsPerBlock;
+    }
 
-	public static float getStringPerBlock() {
-		return stringPerBlock;
-	}
+    public static float getStringPerBlock()
+    {
+        return stringPerBlock;
+    }
 
-	public static void setStringPerBlock(float stringPerBlock) {
-		ConfigurationHandler.stringPerBlock = stringPerBlock;
-	}
+    public static void setStringPerBlock(float stringPerBlock)
+    {
+        ConfigurationHandler.stringPerBlock = stringPerBlock;
+    }
 
-	public static Configuration getConfig() {
-		return config;
-	}
+    public static Configuration getConfig()
+    {
+        return config;
+    }
 
-	public static void setConfig(Configuration config) {
-		ConfigurationHandler.config = config;
-	}
+    public static void setConfig(Configuration config)
+    {
+        ConfigurationHandler.config = config;
+    }
 
-	public static boolean isZoomOnAim() {
-		return zoomOnAim;
-	}
+    public static boolean isZoomOnAim()
+    {
+        return zoomOnAim;
+    }
 
-	public static void setZoomOnAim(boolean zoomOnAim) {
-		ConfigurationHandler.zoomOnAim = zoomOnAim;
-	}
+    public static void setZoomOnAim(boolean zoomOnAim)
+    {
+        ConfigurationHandler.zoomOnAim = zoomOnAim;
+    }
 
-	public static boolean isIgnoreSlopeWarnings() {
-		return ignoreSlopeWarnings;
-	}
+    public static boolean isIgnoreSlopeWarnings()
+    {
+        return ignoreSlopeWarnings;
+    }
 
-	public static void setIgnoreSlopeWarnings(boolean ignoreSlopeWarnings) {
-		ConfigurationHandler.ignoreSlopeWarnings = ignoreSlopeWarnings;
-	}
+    public static void setIgnoreSlopeWarnings(boolean ignoreSlopeWarnings)
+    {
+        ConfigurationHandler.ignoreSlopeWarnings = ignoreSlopeWarnings;
+    }
 
-	public static int getBridgeDroopFactor() {
-		return bridgeDroopFactor;
-	}
+    public static int getBridgeDroopFactor()
+    {
+        return bridgeDroopFactor;
+    }
 
-	public static void setBridgeDroopFactor(int bridgeDroopFactor) {
-		ConfigurationHandler.bridgeDroopFactor = bridgeDroopFactor;
-	}
+    public static void setBridgeDroopFactor(int bridgeDroopFactor)
+    {
+        ConfigurationHandler.bridgeDroopFactor = bridgeDroopFactor;
+    }
 
-	public static float getBridgeYOffset() {
-		return bridgeYOffset;
-	}
+    public static float getBridgeYOffset()
+    {
+        return bridgeYOffset;
+    }
 
-	public static void setBridgeYOffset(float bridgeYOffset) {
-		ConfigurationHandler.bridgeYOffset = bridgeYOffset;
-	}
+    public static void setBridgeYOffset(float bridgeYOffset)
+    {
+        ConfigurationHandler.bridgeYOffset = bridgeYOffset;
+    }
 
-	public static boolean isBreakThroughBlocks() {
-		return breakThroughBlocks;
-	}
+    public static boolean isBreakThroughBlocks()
+    {
+        return breakThroughBlocks;
+    }
 
-	public static void setBreakThroughBlocks(boolean breakThroughBlocks) {
-		ConfigurationHandler.breakThroughBlocks = breakThroughBlocks;
-	}
+    public static void setBreakThroughBlocks(boolean breakThroughBlocks)
+    {
+        ConfigurationHandler.breakThroughBlocks = breakThroughBlocks;
+    }
 
-	public static int getMaxBridgeDistance() {
-		return maxBridgeDistance;
-	}
+    public static int getMaxBridgeDistance()
+    {
+        return maxBridgeDistance;
+    }
 
-	public static void setMaxBridgeDistance(int maxBridgeDistance) {
-		ConfigurationHandler.maxBridgeDistance = maxBridgeDistance;
-	}
+    public static void setMaxBridgeDistance(int maxBridgeDistance)
+    {
+        ConfigurationHandler.maxBridgeDistance = maxBridgeDistance;
+    }
 
-	public static boolean isCustomAchievements() {
-		return customAchievements;
-	}
+    public static boolean isCustomAchievements()
+    {
+        return customAchievements;
+    }
 
-	public static void setCustomAchievements(boolean customAchievements) {
-		ConfigurationHandler.customAchievements = customAchievements;
-	}
+    public static void setCustomAchievements(boolean customAchievements)
+    {
+        ConfigurationHandler.customAchievements = customAchievements;
+    }
 }
