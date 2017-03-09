@@ -10,6 +10,8 @@ tile.ropebridge.bridge.block.2.name=Bridge Board 2
 tile.ropebridge.bridge.block.3.name=Bridge Board 3
 tile.ropebridge.bridge.block.4.name=Bridge Board 4
 
+tile.ropebridge.rope.ladder.name=Rope Ladder
+
 #Achievements
 achievement.grapplingGun=Bridge Building Gun
 achievement.grapplingGun.desc=Craft a bridge building grappling gun with a hook, barrel, and handle

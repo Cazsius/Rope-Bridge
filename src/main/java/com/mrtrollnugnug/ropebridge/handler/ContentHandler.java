@@ -1,6 +1,7 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
+import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
@@ -24,6 +25,8 @@ public final class ContentHandler {
     private static Block blockBridgeSlab3;
 
     private static Block blockBridgeSlab4;
+    
+    private static Block blockRopeLadder;
 
     // Items
     private static Item itemBridgeBuilder;
@@ -36,6 +39,11 @@ public final class ContentHandler {
         setBlockBridgeSlab2(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2"));
         setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3"));
         setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4"));
+        
+        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder"));
+        
+        blockRopeLadder = new RopeLadder();
+        
     }
 
     public static void initItems () {
@@ -58,9 +66,11 @@ public final class ContentHandler {
 
         ModUtils.registerItemInvModel(getItemBridgeBuilder());
         ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.getVarients());
-        
-        
+              
     }
+    
+    
+    
 
 	public static Block getBlockBridgeSlab1() {
 		return blockBridgeSlab1;
@@ -92,6 +102,10 @@ public final class ContentHandler {
 
 	public static void setBlockBridgeSlab4(Block blockBridgeSlab4) {
 		ContentHandler.blockBridgeSlab4 = blockBridgeSlab4;
+	}
+	
+	public static void setBlockRopeLadder(Block blockRopeLadder) {
+		ContentHandler.blockRopeLadder = blockRopeLadder;
 	}
 
 	public static Item getItemBridgeBuilder() {
