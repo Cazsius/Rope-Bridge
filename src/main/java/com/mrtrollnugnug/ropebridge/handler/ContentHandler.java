@@ -4,6 +4,7 @@ import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
+import com.mrtrollnugnug.ropebridge.item.ItemRope;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
 import net.minecraft.block.Block;
@@ -26,12 +27,12 @@ public final class ContentHandler {
 
     private static Block blockBridgeSlab4;
     
-    private static Block blockRopeLadder;
-
     // Items
     private static Item itemBridgeBuilder;
 
     private static Item itemBridgeMaterial;
+    
+    private static Item itemRope;
 
     public static void initBlocks () {
 
@@ -40,9 +41,10 @@ public final class ContentHandler {
         setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3"));
         setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4"));
         
-        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder"));
+        setItemRope(ModUtils.registerItem(new ItemRope(), "rope"));
         
-        blockRopeLadder = new RopeLadder();
+        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder")); 
+        new RopeLadder();
         
     }
 
@@ -66,6 +68,8 @@ public final class ContentHandler {
 
         ModUtils.registerItemInvModel(getItemBridgeBuilder());
         ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.getVarients());
+        
+        ModUtils.registerItemInvModel(itemRope);
               
     }
     
@@ -105,7 +109,6 @@ public final class ContentHandler {
 	}
 	
 	public static void setBlockRopeLadder(Block blockRopeLadder) {
-		ContentHandler.blockRopeLadder = blockRopeLadder;
 	}
 
 	public static Item getItemBridgeBuilder() {
@@ -115,6 +118,11 @@ public final class ContentHandler {
 	public static void setItemBridgeBuilder(Item itemBridgeBuilder) {
 		ContentHandler.itemBridgeBuilder = itemBridgeBuilder;
 	}
+	
+	public static void setItemRope(Item itemRope) {
+		ContentHandler.itemRope = itemRope;
+	}
+	
 	
 	
 }
