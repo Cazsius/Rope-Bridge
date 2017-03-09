@@ -114,7 +114,7 @@ public class BridgeSlab extends Block
     protected BlockStateContainer createBlockState()
     {
 
-        return new BlockStateContainer(this, new IProperty[] { TYPE });
+        return new BlockStateContainer(this, TYPE);
     }
 
     @Deprecated

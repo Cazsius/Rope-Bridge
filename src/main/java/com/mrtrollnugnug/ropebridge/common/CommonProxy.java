@@ -1,5 +1,6 @@
 package com.mrtrollnugnug.ropebridge.common;
 
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,7 +10,9 @@ public class CommonProxy
 {
 
     public void preInit(FMLPreInitializationEvent e) {
-    	//Controls preInit stage in loading game
+        ContentHandler.initBlocks();
+        ContentHandler.initItems();
+        ContentHandler.initRecipes();
     }
 
     public EntityPlayer getPlayer()

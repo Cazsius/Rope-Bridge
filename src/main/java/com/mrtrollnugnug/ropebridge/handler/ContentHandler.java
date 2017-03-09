@@ -3,11 +3,11 @@ package com.mrtrollnugnug.ropebridge.handler;
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
-import com.mrtrollnugnug.ropebridge.item.ItemBridgeMaterial;
-import com.mrtrollnugnug.ropebridge.item.ItemRope;
+import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -16,7 +16,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public final class ContentHandler {
+public final class ContentHandler
+{
 
     // Blocks
     private static Block blockBridgeSlab1;
@@ -26,103 +27,109 @@ public final class ContentHandler {
     private static Block blockBridgeSlab3;
 
     private static Block blockBridgeSlab4;
-    
+
     // Items
     private static Item itemBridgeBuilder;
 
-    private static Item itemBridgeMaterial;
-    
-    private static Item itemRope;
+    private static Item itemRope, itemHook, itemBarrel, itemHandle;
 
-    public static void initBlocks () {
-
+    public static void initBlocks()
+    {
         setBlockBridgeSlab1(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1"));
         setBlockBridgeSlab2(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2"));
         setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3"));
         setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4"));
-        
-        setItemRope(ModUtils.registerItem(new ItemRope(), "rope"));
-        
-        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder")); 
-        new RopeLadder();
-        
+
+        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder"));
     }
 
-    public static void initItems () {
-
+    public static void initItems()
+    {
         setItemBridgeBuilder(ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder"));
-        itemBridgeMaterial = ModUtils.registerItem(new ItemBridgeMaterial(), "bridge_builder_material");
+        itemHook = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.hook");
+        itemBarrel = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.barrel");
+        itemHandle = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.handle");
+        setItemRope(ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.MATERIALS), "rope"));
     }
 
-    public static void initRecipes () {
-
-        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 0), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
-        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 1), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
-        GameRegistry.addRecipe(new ItemStack(itemBridgeMaterial, 1, 2), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
-        GameRegistry.addRecipe(new ItemStack(getItemBridgeBuilder()), new Object[] { "tbh", 't', new ItemStack(itemBridgeMaterial, 1, 0), 'b', new ItemStack(itemBridgeMaterial, 1, 1), 'h', new ItemStack(itemBridgeMaterial, 1, 2) });
+    public static void initRecipes()
+    {
+        GameRegistry.addRecipe(new ItemStack(itemHook), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
+        GameRegistry.addRecipe(new ItemStack(itemBarrel), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
+        GameRegistry.addRecipe(new ItemStack(itemHandle), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
+        GameRegistry.addRecipe(new ItemStack(getItemBridgeBuilder()), new Object[] { "tbh", 't', new ItemStack(itemHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
         GameRegistry.addRecipe(new ItemStack(Items.STRING, 4), new Object[] { "w", 'w', Blocks.WOOL });
     }
 
     @SideOnly(Side.CLIENT)
-    public static void onClientPreInit () {
+    public static void onClientPreInit()
+    {
 
         ModUtils.registerItemInvModel(getItemBridgeBuilder());
-        ModUtils.registerItemInvModel(itemBridgeMaterial, "bridge_builder", ItemBridgeMaterial.getVarients());
-        
+        ModUtils.registerItemInvModel(itemHook, 0, Constants.MOD_ID + ":bridge_builder_hook");
+        ModUtils.registerItemInvModel(itemBarrel, 0, Constants.MOD_ID + ":bridge_builder_barrel");
+        ModUtils.registerItemInvModel(itemHandle, 0, Constants.MOD_ID + ":bridge_builder_handle");
+
         ModUtils.registerItemInvModel(itemRope);
-              
+
     }
-    
-    
-    
 
-	public static Block getBlockBridgeSlab1() {
-		return blockBridgeSlab1;
-	}
+    public static Block getBlockBridgeSlab1()
+    {
+        return blockBridgeSlab1;
+    }
 
-	public static void setBlockBridgeSlab1(Block blockBridgeSlab1) {
-		ContentHandler.blockBridgeSlab1 = blockBridgeSlab1;
-	}
+    public static void setBlockBridgeSlab1(Block blockBridgeSlab1)
+    {
+        ContentHandler.blockBridgeSlab1 = blockBridgeSlab1;
+    }
 
-	public static Block getBlockBridgeSlab2() {
-		return blockBridgeSlab2;
-	}
+    public static Block getBlockBridgeSlab2()
+    {
+        return blockBridgeSlab2;
+    }
 
-	public static void setBlockBridgeSlab2(Block blockBridgeSlab2) {
-		ContentHandler.blockBridgeSlab2 = blockBridgeSlab2;
-	}
+    public static void setBlockBridgeSlab2(Block blockBridgeSlab2)
+    {
+        ContentHandler.blockBridgeSlab2 = blockBridgeSlab2;
+    }
 
-	public static Block getBlockBridgeSlab3() {
-		return blockBridgeSlab3;
-	}
+    public static Block getBlockBridgeSlab3()
+    {
+        return blockBridgeSlab3;
+    }
 
-	public static void setBlockBridgeSlab3(Block blockBridgeSlab3) {
-		ContentHandler.blockBridgeSlab3 = blockBridgeSlab3;
-	}
+    public static void setBlockBridgeSlab3(Block blockBridgeSlab3)
+    {
+        ContentHandler.blockBridgeSlab3 = blockBridgeSlab3;
+    }
 
-	public static Block getBlockBridgeSlab4() {
-		return blockBridgeSlab4;
-	}
+    public static Block getBlockBridgeSlab4()
+    {
+        return blockBridgeSlab4;
+    }
 
-	public static void setBlockBridgeSlab4(Block blockBridgeSlab4) {
-		ContentHandler.blockBridgeSlab4 = blockBridgeSlab4;
-	}
-	
-	public static void setBlockRopeLadder(Block blockRopeLadder) {
-	}
+    public static void setBlockBridgeSlab4(Block blockBridgeSlab4)
+    {
+        ContentHandler.blockBridgeSlab4 = blockBridgeSlab4;
+    }
 
-	public static Item getItemBridgeBuilder() {
-		return itemBridgeBuilder;
-	}
+    public static void setBlockRopeLadder(Block blockRopeLadder)
+    {
+    }
 
-	public static void setItemBridgeBuilder(Item itemBridgeBuilder) {
-		ContentHandler.itemBridgeBuilder = itemBridgeBuilder;
-	}
-	
-	public static void setItemRope(Item itemRope) {
-		ContentHandler.itemRope = itemRope;
-	}
-	
-	
-	
+    public static Item getItemBridgeBuilder()
+    {
+        return itemBridgeBuilder;
+    }
+
+    public static void setItemBridgeBuilder(Item itemBridgeBuilder)
+    {
+        ContentHandler.itemBridgeBuilder = itemBridgeBuilder;
+    }
+
+    public static void setItemRope(Item itemRope)
+    {
+        ContentHandler.itemRope = itemRope;
+    }
 }
