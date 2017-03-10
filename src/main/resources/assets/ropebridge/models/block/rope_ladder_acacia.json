@@ -1,6 +1,6 @@
 {
 	"parent": "ropebridge:block/rope_ladder",
 	"textures": {
-		"plank": "blocks/log_oak_top"
+		"plank": "blocks/log_acacia_top"
 	}
 }

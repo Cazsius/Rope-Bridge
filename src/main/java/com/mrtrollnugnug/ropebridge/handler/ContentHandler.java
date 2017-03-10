@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder;
+import com.mrtrollnugnug.ropebridge.block.TileEntityRopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
@@ -28,6 +29,8 @@ public final class ContentHandler
 
     private static Block blockBridgeSlab4;
 
+    private static Block blockRopeLadder;
+
     // Items
     private static Item itemBridgeBuilder;
 
@@ -40,7 +43,8 @@ public final class ContentHandler
         setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3"));
         setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4"));
 
-        setBlockRopeLadder(ModUtils.registerBlock(new RopeLadder(), "rope_ladder"));
+        setBlockRopeLadder(ModUtils.registerBlockNoItem(new RopeLadder(), "rope_ladder"));
+        GameRegistry.registerTileEntity(TileEntityRopeLadder.class, Constants.MOD_ID + ":rope_ladder_te");
     }
 
     public static void initItems()
@@ -116,6 +120,12 @@ public final class ContentHandler
 
     public static void setBlockRopeLadder(Block blockRopeLadder)
     {
+        ContentHandler.blockRopeLadder = blockRopeLadder;
+    }
+    
+    public static Block getBlockRopeLadder()
+    {
+        return blockRopeLadder;
     }
 
     public static Item getItemBridgeBuilder()

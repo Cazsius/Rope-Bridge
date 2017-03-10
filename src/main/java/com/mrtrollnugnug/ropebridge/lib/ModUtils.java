@@ -56,11 +56,12 @@ public final class ModUtils
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(block);
+        System.out.println(block.getRegistryName());
         GameRegistry.register(new ItemBlock(block), block.getRegistryName());
         BLOCKS.add(block);
         return block;
     }
-    
+
     public static Block registerBlockNoItem(Block block, String id)
     {
 

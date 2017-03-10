@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.block;
 
 import com.mrtrollnugnug.ropebridge.block.RopeLadder.EnumType;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityRopeLadder extends TileEntity
@@ -26,5 +27,25 @@ public class TileEntityRopeLadder extends TileEntity
     public void setType(EnumType type)
     {
         this.type = type;
+    }
+
+    private static final String typeKey = "type";
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        super.writeToNBT(compound);
+
+        compound.setInteger(typeKey, type.meta);
+
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        super.readFromNBT(compound);
+
+        type = EnumType.fromMeta(compound.getInteger(typeKey));
     }
 }

@@ -1,5 +1,7 @@
 package com.mrtrollnugnug.ropebridge.block;
 
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -7,6 +9,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
@@ -20,16 +23,16 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
 
     protected static final AxisAlignedBB ROPE_LADDER_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.2D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB ROPE_LADDER_WEST_AABB = new AxisAlignedBB(0.1D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+    protected static final AxisAlignedBB ROPE_LADDER_WEST_AABB = new AxisAlignedBB(0.8D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB ROPE_LADDER_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.2D);
-    protected static final AxisAlignedBB ROPE_LADDER_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.1D, 1.0D, 1.0D, 1.0D);
+    protected static final AxisAlignedBB ROPE_LADDER_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8D, 1.0D, 1.0D, 1.0D);
 
     public RopeLadder()
     {
         super();
         setSoundType(SoundType.WOOD);
         setCreativeTab(CreativeTabs.COMBAT);
-        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, EnumType.OAK));
+        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.OAK));
     }
 
     @Override
@@ -49,6 +52,32 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
     }
 
     @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        if (facing.getAxis().isHorizontal())
+            return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+        else {
+            if (worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.getBlockRopeLadder())
+                return getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.up()).getValue(FACING));
+            else
+                return getDefaultState();
+        }
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    {
+        return super.canPlaceBlockAt(worldIn, pos) || worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.getBlockRopeLadder();
+    }
+
+    @Override
+    protected boolean canBlockStay(World worldIn, BlockPos pos, EnumFacing facing)
+    {
+        IBlockState up = worldIn.getBlockState(pos.up());
+        return super.canBlockStay(worldIn, pos, facing) || (up.getBlock() == ContentHandler.getBlockRopeLadder() && up.getValue(FACING) == facing);
+    }
+
+    @Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, FACING, TYPE);
@@ -64,6 +93,7 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
     public enum EnumType implements IStringSerializable
     {
         OAK(0), BIRCH(1), SPRUCE(2), JUNGLE(3), DARK_OAK(4), ACACIA(6);
+
         final int meta;
 
         EnumType(int meta)
