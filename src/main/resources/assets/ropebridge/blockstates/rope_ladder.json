@@ -1,7 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "ropebridge:rope_ladder_oak" },
-        "inventory": { "model": "ropebridge:rope_ladder_oak" },
         "facing=north,type=oak": { "model": "ropebridge:rope_ladder_oak", "y": 180 },
         "facing=east,type=oak":  { "model": "ropebridge:rope_ladder_oak", "y": 270 },
         "facing=south,type=oak": { "model": "ropebridge:rope_ladder_oak", "y": 360 },
@@ -18,10 +16,10 @@
         "facing=east,type=jungle":  { "model": "ropebridge:rope_ladder_jungle", "y": 270 },
         "facing=south,type=jungle": { "model": "ropebridge:rope_ladder_jungle", "y": 360 },
         "facing=west,type=jungle":  { "model": "ropebridge:rope_ladder_jungle", "y": 90 },
-        "facing=north,type=dark_acacia": { "model": "ropebridge:rope_ladder_dark_acacia", "y": 180 },
-        "facing=east,type=dark_acacia":  { "model": "ropebridge:rope_ladder_dark_acacia", "y": 270 },
-        "facing=south,type=dark_acacia": { "model": "ropebridge:rope_ladder_dark_acacia", "y": 360 },
-        "facing=west,type=dark_acacia":  { "model": "ropebridge:rope_ladder_dark_acacia", "y": 90 },
+        "facing=north,type=dark_oak": { "model": "ropebridge:rope_ladder_dark_oak", "y": 180 },
+        "facing=east,type=dark_oak":  { "model": "ropebridge:rope_ladder_dark_oak", "y": 270 },
+        "facing=south,type=dark_oak": { "model": "ropebridge:rope_ladder_dark_oak", "y": 360 },
+        "facing=west,type=dark_oak":  { "model": "ropebridge:rope_ladder_dark_oak", "y": 90 },
         "facing=north,type=acacia": { "model": "ropebridge:rope_ladder_acacia", "y": 180 },
         "facing=east,type=acacia":  { "model": "ropebridge:rope_ladder_acacia", "y": 270 },
         "facing=south,type=acacia": { "model": "ropebridge:rope_ladder_acacia", "y": 360 },

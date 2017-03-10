@@ -2,8 +2,13 @@ package com.mrtrollnugnug.ropebridge.block;
 
 import com.mrtrollnugnug.ropebridge.block.RopeLadder.EnumType;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileEntityRopeLadder extends TileEntity
 {
@@ -11,7 +16,7 @@ public class TileEntityRopeLadder extends TileEntity
 
     public TileEntityRopeLadder(EnumType type)
     {
-        this.type = type;
+        setType(type);
     }
 
     public TileEntityRopeLadder()
@@ -29,15 +34,21 @@ public class TileEntityRopeLadder extends TileEntity
         this.type = type;
     }
 
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
+    {
+        return newSate.getBlock() != oldState.getBlock();
+    }
+
     private static final String typeKey = "type";
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
-
-        compound.setInteger(typeKey, type.meta);
-
+        if (type != null) {
+            compound.setInteger(typeKey, type.meta);
+        }
         return compound;
     }
 
@@ -45,7 +56,25 @@ public class TileEntityRopeLadder extends TileEntity
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
+        if (compound.hasKey(typeKey))
+            setType(EnumType.fromMeta(compound.getInteger(typeKey)));
+    }
 
-        type = EnumType.fromMeta(compound.getInteger(typeKey));
+    @Override
+    public NBTTagCompound getUpdateTag()
+    {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket()
+    {
+        return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
+    {
+        readFromNBT(pkt.getNbtCompound());
     }
 }

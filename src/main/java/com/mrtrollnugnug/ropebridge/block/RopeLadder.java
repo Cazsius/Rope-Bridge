@@ -32,7 +32,7 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
         super();
         setSoundType(SoundType.WOOD);
         setCreativeTab(CreativeTabs.COMBAT);
-        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.OAK));
+        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.DARK_OAK));
     }
 
     @Override
@@ -84,15 +84,22 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
     }
 
     @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+        return getExtendedState(state, worldIn, pos);
+    }
+
+    @Override
     public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
     {
         TileEntityRopeLadder te = (TileEntityRopeLadder) world.getTileEntity(pos);
-        return state.withProperty(TYPE, te.getType());
+        IBlockState out = state.withProperty(TYPE, te.getType());
+        return out;
     }
 
     public enum EnumType implements IStringSerializable
     {
-        OAK(0), BIRCH(1), SPRUCE(2), JUNGLE(3), DARK_OAK(4), ACACIA(6);
+        OAK(0), BIRCH(1), SPRUCE(2), JUNGLE(3), DARK_OAK(4), ACACIA(5);
 
         final int meta;
 
