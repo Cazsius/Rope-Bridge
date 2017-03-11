@@ -143,7 +143,7 @@ public class BridgeBuildingHandler
         if (slabsHad >= slabsNeeded && stringHad >= stringNeeded)
             return true;
         else {
-            ModUtils.tellPlayer(player, Messages.UNDERFUNDED, slabsNeeded, stringNeeded);
+            ModUtils.tellPlayer(player, Messages.UNDERFUNDED_BRIDGE, slabsNeeded, stringNeeded);
             return false;
         }
     }

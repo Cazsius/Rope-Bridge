@@ -13,7 +13,7 @@ import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-import com.mrtrollnugnug.ropebridge.network.BuildMessage;
+import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -91,7 +91,7 @@ public class ItemBridgeBuilder extends Item
                                 yOffset = -0.8D;
                             }
                         }
-                        RopeBridge.getSnw().sendToServer(new BuildMessage(floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset)));
+                        RopeBridge.getSnw().sendToServer(new BridgeMessage(floored, new BlockPos(hit.hitVec.xCoord + xOffset, hit.hitVec.yCoord + yOffset, hit.hitVec.zCoord + zOffset)));
                     }
                 }
             }

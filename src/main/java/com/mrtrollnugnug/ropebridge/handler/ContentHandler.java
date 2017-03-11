@@ -4,6 +4,7 @@ import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.block.TileEntityRopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemLadderBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
@@ -32,7 +33,7 @@ public final class ContentHandler
     private static Block blockRopeLadder;
 
     // Items
-    private static Item itemBridgeBuilder;
+    private static Item itemBridgeBuilder, itemLadderBuilder;
 
     private static Item itemRope, itemHook, itemBarrel, itemHandle;
 
@@ -50,6 +51,7 @@ public final class ContentHandler
     public static void initItems()
     {
         setItemBridgeBuilder(ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder"));
+        itemLadderBuilder = ModUtils.registerItem(new ItemLadderBuilder(), "ladder_builder");
         itemHook = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.hook");
         itemBarrel = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.barrel");
         itemHandle = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.handle");
@@ -122,7 +124,7 @@ public final class ContentHandler
     {
         ContentHandler.blockRopeLadder = blockRopeLadder;
     }
-    
+
     public static Block getBlockRopeLadder()
     {
         return blockRopeLadder;
@@ -131,6 +133,11 @@ public final class ContentHandler
     public static Item getItemBridgeBuilder()
     {
         return itemBridgeBuilder;
+    }
+
+    public static Item getItemRope()
+    {
+        return itemRope;
     }
 
     public static void setItemBridgeBuilder(Item itemBridgeBuilder)

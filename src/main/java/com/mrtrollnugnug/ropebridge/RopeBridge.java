@@ -4,7 +4,8 @@ import com.mrtrollnugnug.ropebridge.common.CommonProxy;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
-import com.mrtrollnugnug.ropebridge.network.BuildMessage;
+import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
+import com.mrtrollnugnug.ropebridge.network.LadderMessage;
 
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.AchievementList;
@@ -48,7 +49,8 @@ public class RopeBridge
         }
 
         setSnw(NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID));
-        getSnw().registerMessage(BuildMessage.BuildMessageHandler.class, BuildMessage.class, this.discriminator++, Side.SERVER);
+        getSnw().registerMessage(BridgeMessage.BridgeMessageHandler.class, BridgeMessage.class, discriminator++, Side.SERVER);
+        getSnw().registerMessage(LadderMessage.LadderMessageHandler.class, LadderMessage.class, discriminator++, Side.SERVER);
     }
 
     public static SimpleNetworkWrapper getSnw()

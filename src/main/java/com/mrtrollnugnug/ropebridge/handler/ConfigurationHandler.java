@@ -20,8 +20,10 @@ public final class ConfigurationHandler
     private static boolean breakThroughBlocks;
     private static boolean ignoreSlopeWarnings;
     private static boolean customAchievements;
-    private static float slabsPerBlock;
-    private static float stringPerBlock;
+    private static int slabsPerBlock;
+    private static int stringPerBlock;
+    private static int woodPerBlock;
+    private static int ropePerBlock;
 
     /**
      * Initializes the configuration file.
@@ -49,33 +51,15 @@ public final class ConfigurationHandler
         setBreakThroughBlocks(getConfig().getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode."));
         setIgnoreSlopeWarnings(getConfig().getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges."));
         setCustomAchievements(getConfig().getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements."));
-        setSlabsPerBlock(getConfig().getInt("slabsPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Slabs consumed for every bridge block built."));
-        setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for every bridge block built."));
+        setSlabsPerBlock(getConfig().getInt("slabsPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Slabs consumed for each bridge block built."));
+        setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
+        setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
+        setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
         if (FMLCommonHandler.instance().getSide().isClient())
             setZoomOnAim(!FMLClientHandler.instance().hasOptifine());
 
         if (getConfig().hasChanged())
             getConfig().save();
-    }
-
-    public static float getSlabsPerBlock()
-    {
-        return slabsPerBlock;
-    }
-
-    public static void setSlabsPerBlock(float slabsPerBlock)
-    {
-        ConfigurationHandler.slabsPerBlock = slabsPerBlock;
-    }
-
-    public static float getStringPerBlock()
-    {
-        return stringPerBlock;
-    }
-
-    public static void setStringPerBlock(float stringPerBlock)
-    {
-        ConfigurationHandler.stringPerBlock = stringPerBlock;
     }
 
     public static Configuration getConfig()
@@ -156,5 +140,45 @@ public final class ConfigurationHandler
     public static void setCustomAchievements(boolean customAchievements)
     {
         ConfigurationHandler.customAchievements = customAchievements;
+    }
+
+    public static void setRopePerBlock(int ropePerBlock)
+    {
+        ConfigurationHandler.ropePerBlock = ropePerBlock;
+    }
+
+    public static void setSlabsPerBlock(int slabsPerBlock)
+    {
+        ConfigurationHandler.slabsPerBlock = slabsPerBlock;
+    }
+
+    public static void setStringPerBlock(int stringPerBlock)
+    {
+        ConfigurationHandler.stringPerBlock = stringPerBlock;
+    }
+
+    public static void setWoodPerBlock(int woodPerBlock)
+    {
+        ConfigurationHandler.woodPerBlock = woodPerBlock;
+    }
+
+    public static int getRopePerBlock()
+    {
+        return ropePerBlock;
+    }
+
+    public static int getSlabsPerBlock()
+    {
+        return slabsPerBlock;
+    }
+
+    public static int getStringPerBlock()
+    {
+        return stringPerBlock;
+    }
+
+    public static int getWoodPerBlock()
+    {
+        return woodPerBlock;
     }
 }

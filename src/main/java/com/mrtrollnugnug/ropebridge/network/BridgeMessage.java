@@ -11,45 +11,53 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class BuildMessage implements IMessage {
+public class BridgeMessage implements IMessage
+{
 
     private BlockPos from;
 
     private BlockPos to;
 
-    public BuildMessage () {
-    	//Why do we need this? Kicks when missing.
+    public BridgeMessage()
+    {
+        // Why do we need this? Kicks when missing.
+        // We need this because when the message is received on the target, it
+        // tries to use the default constructor (this one) to initialize a new
+        // IMessage instance, have that message read out data with fromBytes and
+        // finally pass that message to the IMessageHandler
     }
 
-    public BuildMessage (BlockPos from, BlockPos to) {
+    public BridgeMessage(BlockPos from, BlockPos to)
+    {
         super();
         this.from = from;
         this.to = to;
     }
 
     @Override
-    public void fromBytes (ByteBuf buf) {
-
+    public void fromBytes(ByteBuf buf)
+    {
         this.from = BlockPos.fromLong(buf.readLong());
         this.to = BlockPos.fromLong(buf.readLong());
     }
 
     @Override
-    public void toBytes (ByteBuf buf) {
-
+    public void toBytes(ByteBuf buf)
+    {
         buf.writeLong(this.from.toLong());
         buf.writeLong(this.to.toLong());
     }
 
-    public static class BuildMessageHandler implements IMessageHandler<BuildMessage, IMessage> {
+    public static class BridgeMessageHandler implements IMessageHandler<BridgeMessage, IMessage>
+    {
 
         @Override
-        public IMessage onMessage (BuildMessage message, MessageContext ctx) {
+        public IMessage onMessage(BridgeMessage message, MessageContext ctx)
+        {
 
             if (ctx.side == Side.SERVER) {
                 final EntityPlayer player = ctx.getServerHandler().playerEntity;
-                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask( () ->
-                    BridgeBuildingHandler.newBridge(player, player.getHeldItemMainhand(), -1, message.from, message.to));
+                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> BridgeBuildingHandler.newBridge(player, player.getHeldItemMainhand(), -1, message.from, message.to));
             }
             return null;
         }
