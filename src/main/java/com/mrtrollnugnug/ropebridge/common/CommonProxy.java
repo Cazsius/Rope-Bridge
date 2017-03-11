@@ -1,7 +1,7 @@
 package com.mrtrollnugnug.ropebridge.common;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
-import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemBuilder;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -9,7 +9,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy
 {
 
-    public void preInit(FMLPreInitializationEvent e) {
+    public void preInit(FMLPreInitializationEvent e)
+    {
         ContentHandler.initBlocks();
         ContentHandler.initItems();
         ContentHandler.initRecipes();
@@ -23,6 +24,6 @@ public class CommonProxy
 
     public float getFov()
     {
-        return ItemBridgeBuilder.getFov();
+        return ItemBuilder.getFov();
     }
 }

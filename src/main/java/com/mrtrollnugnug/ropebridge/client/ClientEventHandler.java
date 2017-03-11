@@ -1,7 +1,7 @@
 package com.mrtrollnugnug.ropebridge.client;
 
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
-import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,7 @@ public final class ClientEventHandler
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent event)
     {
-    	 if (event.getModID().equals(Constants.MOD_ID) && (ConfigurationHandler.isZoomOnAim()))
-                 ItemBridgeBuilder.setFov(Minecraft.getMinecraft().gameSettings.fovSetting);
+        if (event.getModID().equals(Constants.MOD_ID) && (ConfigurationHandler.isZoomOnAim()))
+            ItemBuilder.setFov(Minecraft.getMinecraft().gameSettings.fovSetting);
     }
 }
