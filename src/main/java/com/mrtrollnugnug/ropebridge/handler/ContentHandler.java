@@ -35,7 +35,7 @@ public final class ContentHandler
     // Items
     private static Item itemBridgeBuilder, itemLadderBuilder;
 
-    private static Item itemRope, itemHook, itemBarrel, itemHandle, itemLadderHook;
+    private static Item itemRope, itemBridgeHook, itemBarrel, itemHandle, itemLadderHook;
 
     public static void initBlocks()
     {
@@ -52,7 +52,7 @@ public final class ContentHandler
     {
         setItemBridgeBuilder(ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder"));
         itemLadderBuilder = ModUtils.registerItem(new ItemLadderBuilder().setCreativeTab(CreativeTabs.TOOLS), "ladder_builder");
-        itemHook = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.hook");
+        itemBridgeHook = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.hook");
         itemBarrel = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.barrel");
         itemHandle = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "bridge_builder_material.handle");
         itemLadderHook = ModUtils.registerItem(new Item().setCreativeTab(CreativeTabs.TOOLS), "ladder_hook");
@@ -61,12 +61,13 @@ public final class ContentHandler
 
     public static void initRecipes()
     {
-        GameRegistry.addRecipe(new ItemStack(itemHook), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
+        GameRegistry.addRecipe(new ItemStack(itemBridgeHook), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
         GameRegistry.addRecipe(new ItemStack(itemBarrel), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
         GameRegistry.addRecipe(new ItemStack(itemHandle), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
-        GameRegistry.addRecipe(new ItemStack(getItemBridgeBuilder()), new Object[] { "tbh", 't', new ItemStack(itemHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
+        GameRegistry.addRecipe(new ItemStack(getItemBridgeBuilder()), new Object[] { "tbh", 't', new ItemStack(itemBridgeHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
         GameRegistry.addRecipe(new ItemStack(Items.STRING, 4), new Object[] { "w", 'w', Blocks.WOOL });
         GameRegistry.addRecipe(new ItemStack(itemLadderBuilder), new Object[] { "tbh", 't', new ItemStack(itemLadderHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
+        GameRegistry.addRecipe(new ItemStack(itemRope), new Object[] { "sv ", "vs ", "sv ", 's', Items.STRING, 'v', Blocks.VINE} );
         //TODO add rope recipe
     }
 
@@ -74,7 +75,7 @@ public final class ContentHandler
     public static void onClientPreInit()
     {
         ModUtils.registerItemInvModel(getItemBridgeBuilder());
-        ModUtils.registerItemInvModel(itemHook, 0, Constants.MOD_ID + ":bridge_builder_hook");
+        ModUtils.registerItemInvModel(itemBridgeHook, 0, Constants.MOD_ID + ":bridge_builder_hook");
         ModUtils.registerItemInvModel(itemBarrel, 0, Constants.MOD_ID + ":bridge_builder_barrel");
         ModUtils.registerItemInvModel(itemHandle, 0, Constants.MOD_ID + ":bridge_builder_handle");
         ModUtils.registerItemInvModel(itemLadderBuilder);

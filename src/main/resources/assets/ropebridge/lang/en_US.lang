@@ -1,9 +1,12 @@
 _#Items
 item.ropebridge.bridge.builder.name=Bridge Building Gun
 item.ropebridge.bridge.builder.material.hook.name=Bridge Building Gun Hook
-item.ropebridge.bridge.builder.material.barrel.name=Bridge Building Gun Barrel
-item.ropebridge.bridge.builder.material.handle.name=Bridge Building Gun Stock
+item.ropebridge.bridge.builder.material.barrel.name=Gun Barrel
+item.ropebridge.bridge.builder.material.handle.name=Gun Stock
 item.ropebridge.rope.name=Rope
+item.ropebridge.ladder.hook.name=Ladder Gun Hook
+item.ropebridge.ladder.builder.name=Ladder Gun
+
 
 #Blocks
 tile.ropebridge.bridge.block.1.name=Bridge Board 1
