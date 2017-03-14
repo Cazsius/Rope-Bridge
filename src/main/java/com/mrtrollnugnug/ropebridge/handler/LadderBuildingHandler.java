@@ -25,6 +25,8 @@ public class LadderBuildingHandler
 {
     public static void newLadder(BlockPos start, EntityPlayer player, World world, EnumFacing hitSide, ItemStack builder)
     {
+
+    	
         if (!hitSide.getAxis().isHorizontal()) {
             ModUtils.tellPlayer(player, Messages.BAD_SIDE, hitSide == EnumFacing.UP ? I18n.format(Messages.TOP) : I18n.format(Messages.BOTTOM));
             return;
@@ -86,6 +88,8 @@ public class LadderBuildingHandler
 
     private static void consume(EntityPlayer player, int woodNeeded, int ropeNeeded, net.minecraft.block.BlockPlanks.EnumType woodType)
     {
+    	if (player.capabilities.isCreativeMode)
+            return;
         player.inventory.clearMatchingItems(ContentHandler.getItemRope(), -1, ropeNeeded, null);
         player.inventory.clearMatchingItems(Item.getItemFromBlock(Blocks.WOODEN_SLAB), woodType.getMetadata(), woodNeeded, null);
     }
@@ -123,6 +127,8 @@ public class LadderBuildingHandler
 
     private static boolean hasMaterials(EntityPlayer player, int woodNeeded, int ropeNeeded, BlockPlanks.EnumType toFind)
     {
+    	  if (player.capabilities.isCreativeMode)
+              return true;
         for (ItemStack i : player.inventory.mainInventory) {
             if (i == null)
                 continue;

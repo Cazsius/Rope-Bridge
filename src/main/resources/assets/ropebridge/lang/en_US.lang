@@ -29,7 +29,7 @@ chat.ropebridge.info.notcardinal=Sorry, bridge must be built in a cardinal direc
 chat.ropebridge.info.greatslope=Sorry, your slope is too great. Please try again.
 chat.ropebridge.info.obstruction=Oops! Looks like there's something in the way.
 # TODO Fix smoke! Look for the Smoke to see where that is and try again.
-chat.ropebridge.info.underfunded_bridge=You need at least %f slabs and %f strings to build this bridge.
+chat.ropebridge.info.underfunded_bridge=You need at least %f slabs and %f rope to build this bridge.
 chat.ropebridge.info.underfunded_ladder=You need at least %f slabs and %f rope to build this ladder.
 chat.ropebridge.info.bad_side=You can't build a ladder on the %f of a block. Try the sides!
 chat.ropebridge.info.not_solid=That block can't support a ropeladder on that side.

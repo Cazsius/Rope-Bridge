@@ -1,6 +1,6 @@
 {
     "textures": {
-        "rope": "blocks/wool_colored_white",
+        "rope": "ropebridge:blocks/rope_ladder",
         "particle": "#log"
     },
     "elements": [

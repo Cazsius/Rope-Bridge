@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class BridgeBuildingHandler
 {
-    private static String string = "item.string";
+    private static String rope = "item.string";
     private static String woodSlab = "tile.woodSlab";
 
     public static void newBridge(EntityPlayer player, ItemStack stack, int inputType, BlockPos pos1, BlockPos pos2)
@@ -133,7 +133,7 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            if (name.equals(BridgeBuildingHandler.string)) {
+            if (name.equals(BridgeBuildingHandler.rope)) {
                 stringHad += stack.stackSize;
             }
             if (name.equals(BridgeBuildingHandler.woodSlab)) {
@@ -162,7 +162,7 @@ public class BridgeBuildingHandler
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
-            if (name.equals(BridgeBuildingHandler.string)) {
+            if (name.equals(BridgeBuildingHandler.rope)) {
                 if (stack.stackSize > stringNeeded) {
                     stack.stackSize = stack.stackSize - stringNeeded;
                     stringNeeded = 0;
