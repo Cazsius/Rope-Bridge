@@ -39,10 +39,10 @@ public final class ContentHandler
 
     public static void initBlocks()
     {
-        setBlockBridgeSlab1(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_1), "bridge_block_1"));
-        setBlockBridgeSlab2(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2), "bridge_block_2"));
-        setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3), "bridge_block_3"));
-        setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4), "bridge_block_4"));
+        setBlockBridgeSlab1(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_1, 1), "bridge_block_1"));
+        setBlockBridgeSlab2(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2, 2), "bridge_block_2"));
+        setBlockBridgeSlab3(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3, 3), "bridge_block_3"));
+        setBlockBridgeSlab4(ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4, 4), "bridge_block_4"));
 
         setBlockRopeLadder(ModUtils.registerBlockNoItem(new RopeLadder(), "rope_ladder"));
         GameRegistry.registerTileEntity(TileEntityRopeLadder.class, Constants.MOD_ID + ":rope_ladder_te");

@@ -54,7 +54,7 @@ public class LadderBuildingHandler
         BlockPlanks.EnumType woodType = findType(player);
         EnumType type = convertType(woodType);
 
-        if (type == null || !hasMaterials(player, woodNeeded, ropeNeeded, woodType)) {
+        if (type == null || (!player.capabilities.isCreativeMode && !hasMaterials(player, woodNeeded, ropeNeeded, woodType))) {
             ModUtils.tellPlayer(player, Messages.UNDERFUNDED_LADDER, woodNeeded, ropeNeeded);
             return;
         }
@@ -122,7 +122,7 @@ public class LadderBuildingHandler
             if (i != null && i.getItem() == Item.getItemFromBlock(Blocks.WOODEN_SLAB))
                 return (BlockPlanks.EnumType) Blocks.WOODEN_SLAB.getTypeForItem(i);
         }
-        return null;
+        return player.capabilities.isCreativeMode ? BlockPlanks.EnumType.OAK : null;
     }
 
     private static boolean hasMaterials(EntityPlayer player, int woodNeeded, int ropeNeeded, BlockPlanks.EnumType toFind)
