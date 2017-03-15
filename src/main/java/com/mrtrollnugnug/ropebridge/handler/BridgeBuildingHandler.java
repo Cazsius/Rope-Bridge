@@ -201,10 +201,8 @@ public class BridgeBuildingHandler {
 	private static void spawnSmoke(World world, BlockPos pos, int times) {
 
 		if (times > 0) {
-			FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
-				world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + 0.5, pos.getY() + 0.5,
-						pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D, new int[0]);
-			});
+			world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, pos.getX() + 0.5, pos.getY() + 0.5,
+					pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D, new int[0]);
 			final World finworld = world;
 			final BlockPos finPos = pos;
 			final int finTimes = times - 1;
