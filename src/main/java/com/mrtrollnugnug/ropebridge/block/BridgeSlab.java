@@ -1,14 +1,17 @@
 package com.mrtrollnugnug.ropebridge.block;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,15 +20,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BridgeSlab extends Block
-{
+public class BridgeSlab extends Block {
 
-    public static final float SLAB_HEIGHT = 4.0F / 16.0F;
 
     public static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
 
@@ -36,160 +38,136 @@ public class BridgeSlab extends Block
     public static final AxisAlignedBB AABB_BLOCK_4 = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
 
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
+    public static final PropertyBool ROTATED = PropertyBool.create("rotated");
+    public static final PropertyInteger FRONT = PropertyInteger.create("front", 0, 3);
+    public static final PropertyInteger BACK = PropertyInteger.create("back", 0, 3);
 
     private final AxisAlignedBB bounds;
+    private final int boundIndex;
 
-    public BridgeSlab(AxisAlignedBB bounds)
-    {
+    public BridgeSlab(AxisAlignedBB bounds, int boundIndex) {
         super(Material.WOOD);
+        this.boundIndex = boundIndex;
         this.setSoundType(SoundType.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(TYPE, EnumType.OAK).withProperty(ROTATED, false));
         this.bounds = bounds;
     }
 
     @Deprecated
     @Override
-    public boolean isFullBlock(IBlockState state)
-    {
+    public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
     @Deprecated
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Deprecated
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return this.bounds;
     }
 
     @Override
-    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
-    {
-
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return false;
     }
 
     @Override
-    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
-
-        final List<ItemStack> ret = new java.util.ArrayList<>();
-        final int meta = this.getMetaFromState(state);
-        final int slabMeta = (meta - meta % 2) / 2;
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        List<ItemStack> ret = new ArrayList<>();
+        int slabMeta = state.getValue(TYPE).ordinal();
         ret.add(new ItemStack(Blocks.WOODEN_SLAB, (int) Math.floor(ConfigurationHandler.getSlabsPerBlock() / 2), slabMeta));
         ret.add(new ItemStack(Items.STRING, (int) Math.ceil(ConfigurationHandler.getStringPerBlock() / 2)));
         return ret;
     }
 
     @Override
-    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return 20;
     }
 
     @Override
-    public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-
+    public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return true;
     }
 
     @Override
-    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return 5;
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
-
-        return new BlockStateContainer(this, TYPE);
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, TYPE, ROTATED, FRONT, BACK);
     }
 
     @Deprecated
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        switch (meta) {
-        case 0:
-        case 1:
-            return this.getDefaultState().withProperty(TYPE, EnumType.OAK_R);
-        case 2:
-            return this.getDefaultState().withProperty(TYPE, EnumType.SPRUCE);
-        case 3:
-            return this.getDefaultState().withProperty(TYPE, EnumType.SPRUCE_R);
-        case 4:
-            return this.getDefaultState().withProperty(TYPE, EnumType.BIRCH);
-        case 5:
-            return this.getDefaultState().withProperty(TYPE, EnumType.BIRCH_R);
-        case 6:
-            return this.getDefaultState().withProperty(TYPE, EnumType.JUNGLE);
-        case 7:
-            return this.getDefaultState().withProperty(TYPE, EnumType.JUNGLE_R);
-        case 8:
-            return this.getDefaultState().withProperty(TYPE, EnumType.ACACIA);
-        case 9:
-            return this.getDefaultState().withProperty(TYPE, EnumType.ACACIA_R);
-        case 10:
-            return this.getDefaultState().withProperty(TYPE, EnumType.BIG_OAK);
-        case 11:
-            return this.getDefaultState().withProperty(TYPE, EnumType.BIG_OAK_R);
-        default:
-            return this.getDefaultState().withProperty(TYPE, EnumType.OAK);
-        }
+    public IBlockState getStateFromMeta(int meta) {
+        boolean rotated = (meta & 1) == 1;
+        int typeValue = meta >> 1;
+        EnumType type = EnumType.values()[typeValue % EnumType.values().length];
+        return getDefaultState().withProperty(TYPE, type).withProperty(ROTATED, rotated);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
-
-        final EnumType type = state.getValue(TYPE);
-        return type.getID();
+    public IBlockState withRotation(IBlockState state, Rotation rot) {
+        if (rot == Rotation.CLOCKWISE_90 || rot == Rotation.COUNTERCLOCKWISE_90)
+            return state.cycleProperty(ROTATED);
+        return state;
     }
 
-    public enum EnumType implements IStringSerializable
-    {
-        OAK(0, "oak"), OAK_R(1, "oak_r"), SPRUCE(2, "spruce"), SPRUCE_R(3, "spruce_r"), BIRCH(4, "birch"), BIRCH_R(5, "birch_r"), JUNGLE(6, "jungle"),
-        JUNGLE_R(7, "jungle_r"), ACACIA(8, "acacia"), ACACIA_R(9, "acacia_r"), BIG_OAK(10, "big_oak"), BIG_OAK_R(11, "big_oak_r");
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        int frontAmount = 0, backAmount = 0;
 
-        private int id;
+        boolean rotated = state.getValue(ROTATED);
+        EnumFacing front = rotated ? EnumFacing.NORTH : EnumFacing.WEST;
+        EnumFacing back = rotated ? EnumFacing.SOUTH : EnumFacing.EAST;
 
-        private String name;
+        IBlockState frontState = worldIn.getBlockState(pos.offset(front));
+        if (frontState.getBlock() instanceof BridgeSlab)
+            frontAmount = ((BridgeSlab) frontState.getBlock()).boundIndex - boundIndex;
+        else {
+            frontState = worldIn.getBlockState(pos.offset(front).offset(EnumFacing.UP));
+            if (frontState.getBlock() instanceof BridgeSlab)
+                frontAmount = ((BridgeSlab) frontState.getBlock()).boundIndex + 4 - boundIndex;
+        }
 
-        private EnumType(int id, String name)
-        {
-            this.id = id;
-            this.name = name;
+        IBlockState backState = worldIn.getBlockState(pos.offset(back));
+        if (backState.getBlock() instanceof BridgeSlab)
+            backAmount = ((BridgeSlab) backState.getBlock()).boundIndex - boundIndex;
+        else {
+            backState = worldIn.getBlockState(pos.offset(back).offset(EnumFacing.UP));
+            if (backState.getBlock() instanceof BridgeSlab)
+                backAmount = ((BridgeSlab) backState.getBlock()).boundIndex + 4 - boundIndex;
+        }
+
+        if (frontAmount < 0 || frontAmount > 3) frontAmount = 0;
+        if (backAmount < 0 || backAmount > 3) backAmount = 0;
+
+        return super.getActualState(state, worldIn, pos).withProperty(FRONT, frontAmount).withProperty(BACK, backAmount);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return (state.getValue(TYPE).ordinal() << 1) | (state.getValue(ROTATED) ? 1 : 0);
+    }
+
+    public enum EnumType implements IStringSerializable {
+        OAK, SPRUCE, BIRCH, JUNGLE, ACACIA, BIG_OAK;
+
+        @Override
+        public String getName() {
+            return this.name().toLowerCase(Locale.ROOT);
         }
 
         @Override
-        public String getName()
-        {
-
-            return this.name;
-        }
-
-        public int getID()
-        {
-
-            return this.id;
-        }
-
-        @Override
-        public String toString()
-        {
-
+        public String toString() {
             return this.getName();
         }
     }

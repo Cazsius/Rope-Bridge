@@ -1,17 +1,60 @@
 {
-    "variants": {
-        "normal": { "model": "ropebridge:bridge_block_3_oak" },
-        "type=oak": { "model": "ropebridge:bridge_block_3_oak" },
-        "type=oak_r": { "model": "ropebridge:bridge_block_3_oak", "y": 90 },
-        "type=spruce": { "model": "ropebridge:bridge_block_3_spruce" },
-        "type=spruce_r": { "model": "ropebridge:bridge_block_3_spruce", "y": 90 },
-        "type=birch": { "model": "ropebridge:bridge_block_3_birch" },
-        "type=birch_r": { "model": "ropebridge:bridge_block_3_birch", "y": 90 },
-        "type=jungle": { "model": "ropebridge:bridge_block_3_jungle" },
-        "type=jungle_r": { "model": "ropebridge:bridge_block_3_jungle", "y": 90 },
-        "type=acacia": { "model": "ropebridge:bridge_block_3_acacia" },
-        "type=acacia_r": { "model": "ropebridge:bridge_block_3_acacia", "y": 90 },
-        "type=big_oak": { "model": "ropebridge:bridge_block_3_big_oak" },
-        "type=big_oak_r": { "model": "ropebridge:bridge_block_3_big_oak", "y": 90 }
-    }
+    "multipart": [
+        {"when": { "type": "oak", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_oak" }},
+        {"when": { "type": "oak", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_oak", "y": 90 }},
+        {"when": { "type": "spruce", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_spruce" }},
+        {"when": { "type": "spruce", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_spruce", "y": 90 }},
+        {"when": { "type": "birch", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_birch" }},
+        {"when": { "type": "birch", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_birch", "y": 90 }},
+        {"when": { "type": "jungle", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_jungle" }},
+        {"when": { "type": "jungle", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_jungle", "y": 90 }},
+        {"when": { "type": "acacia", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_acacia" }},
+        {"when": { "type": "acacia", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_acacia", "y": 90 }},
+        {"when": { "type": "big_oak", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_block_3_big_oak" }},
+        {"when": { "type": "big_oak", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_block_3_big_oak", "y": 90 }},
+
+        {"when": { "OR" : [
+            { "front": "1", "rotated": "false" },
+            { "front": "2", "rotated": "false" },
+            { "front": "3", "rotated": "false" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_3" }},
+        {"when": { "OR" : [
+            { "front": "2", "rotated": "false" },
+            { "front": "3", "rotated": "false" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_4" }},
+        {"when": { "front": "3", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_attach_5" }},
+
+        {"when": { "OR" : [
+            { "front": "1", "rotated": "true" },
+            { "front": "2", "rotated": "true" },
+            { "front": "3", "rotated": "true" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_3", "y": 90 }},
+        {"when": { "OR" : [
+            { "front": "2", "rotated": "true" },
+            { "front": "3", "rotated": "true" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_4", "y": 90 }},
+        {"when": { "front": "3", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_attach_5", "y": 90 }},
+
+        {"when": { "OR" : [
+            { "back": "1", "rotated": "false" },
+            { "back": "2", "rotated": "false" },
+            { "back": "3", "rotated": "false" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_3", "y": 180 }},
+        {"when": { "OR" : [
+            { "back": "2", "rotated": "false" },
+            { "back": "3", "rotated": "false" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_4", "y": 180 }},
+        {"when": { "back": "3", "rotated": "false" }, "apply": { "model": "ropebridge:bridge_attach_5", "y": 180 }},
+
+        {"when": { "OR" : [
+            { "back": "1", "rotated": "true" },
+            { "back": "2", "rotated": "true" },
+            { "back": "3", "rotated": "true" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_3", "y": 270 }},
+        {"when": { "OR" : [
+            { "back": "2", "rotated": "true" },
+            { "back": "3", "rotated": "true" }
+        ] }, "apply": { "model": "ropebridge:bridge_attach_4", "y": 270 }},
+        {"when": { "back": "3", "rotated": "true" }, "apply": { "model": "ropebridge:bridge_attach_5", "y": 270 }}
+    ]
 }

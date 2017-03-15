@@ -15,4 +15,5 @@
 /libs
 /bin/
 /run/
+/out/
 gradle.properties

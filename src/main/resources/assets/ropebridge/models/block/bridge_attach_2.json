@@ -1,0 +1,32 @@
+{
+	"__comment": "Designed by Wire Segal with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"rope": "ropebridge:blocks/rope_ladder"
+	},
+	"elements": [
+		{
+			"from": [ 0, 4, 4 ],
+			"to": [ 1, 8, 5 ],
+			"faces": {
+				"down": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"up": { "uv": [ 16, 4, 4, 1 ], "texture": "#rope", "rotation": 270 },
+				"north": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 270 },
+				"south": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"west": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"east": { "uv": [ 16, 4, 4, 1 ], "texture": "#rope", "rotation": 270 }
+			}
+		},
+		{
+			"from": [ 0, 4, 11 ],
+			"to": [ 1, 8, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"up": { "uv": [ 16, 4, 4, 1 ], "texture": "#rope", "rotation": 270 },
+				"north": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 270 },
+				"south": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"west": { "uv": [ 4, 1, 16, 4 ], "texture": "#rope", "rotation": 90 },
+				"east": { "uv": [ 16, 4, 4, 1 ], "texture": "#rope", "rotation": 270 }
+			}
+		}
+	]
+}
