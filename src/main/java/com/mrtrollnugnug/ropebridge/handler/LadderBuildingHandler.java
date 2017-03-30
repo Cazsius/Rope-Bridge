@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class LadderBuildingHandler {
-	public static void newLadder(BlockPos start, EntityPlayer player, World world, EnumFacing hitSide,
+	public static void newLadder(EntityPlayer player, BlockPos start, World world, EnumFacing hitSide,
 			ItemStack builder) {
 
 		if (!hitSide.getAxis().isHorizontal()) {

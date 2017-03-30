@@ -29,6 +29,41 @@ public abstract class ItemBuilder extends Item
             setFov(RopeBridge.getProxy().getFov());
     }
 
+    protected static void rotatePlayerTowards(EntityPlayer player, float target)
+    {
+        float yaw = player.rotationYaw % 360;
+        if (yaw < 0) {
+            yaw += 360;
+        }
+        rotatePlayerTo(player, yaw + (target - yaw) / 4);
+    }
+ 
+ private static void rotatePlayerTo(EntityPlayer player, float yaw)
+    {
+        final float original = player.rotationYaw;
+        player.rotationYaw = yaw;
+        player.prevRotationYaw += player.rotationYaw - original;
+    }
+
+ 
+    protected static float getNearestYaw(EntityPlayer player)
+    {
+        float yaw = player.rotationYaw % 360;
+        if (yaw < 0) {
+            yaw += 360;
+        }
+        if (yaw < 45)
+            return 0F;
+        if (yaw > 45 && yaw <= 135)
+            return 90F;
+        else if (yaw > 135 && yaw <= 225)
+            return 180F;
+        else if (yaw > 225 && yaw <= 315)
+            return 270F;
+        else
+            return 360F;
+    }
+    
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
@@ -89,7 +124,7 @@ public abstract class ItemBuilder extends Item
             }
         }
     }
-
+    
     private static void zoomTo(float toFov)
     {
         if (ConfigurationHandler.isZoomOnAim() && toFov > 0) {
