@@ -5,7 +5,6 @@ import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +27,7 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider
     protected static final AxisAlignedBB ROPE_LADDER_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.2D);
     protected static final AxisAlignedBB ROPE_LADDER_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8D, 1.0D, 1.0D, 1.0D);
 
-    public RopeLadder(Material materialIn)
+    public RopeLadder()
     {
         super();
         setSoundType(SoundType.WOOD);

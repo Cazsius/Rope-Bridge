@@ -72,6 +72,11 @@ public class BridgeSlab extends Block {
     }
 
     @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        return false;
+    }
+
+    @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         List<ItemStack> ret = new ArrayList<>();
         int slabMeta = state.getValue(TYPE).ordinal();

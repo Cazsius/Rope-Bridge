@@ -15,6 +15,7 @@ import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,6 +32,7 @@ public class ItemBridgeBuilder extends ItemBuilder
     public ItemBridgeBuilder()
     {
         super();
+        this.setCreativeTab(CreativeTabs.TOOLS);
     }
 
     @Override
@@ -45,10 +47,43 @@ public class ItemBridgeBuilder extends ItemBuilder
         super.onUsingTick(stack, player, count);
         if (player.world.isRemote && player instanceof EntityPlayer) {
             final EntityPlayer p = (EntityPlayer) player;
-            ItemBuilder.rotatePlayerTowards(p, ItemBuilder.getNearestYaw(p));
+            rotatePlayerTowards(p, getNearestYaw(p));
         }
     }
 
+    private static void rotatePlayerTowards(EntityPlayer player, float target)
+    {
+        float yaw = player.rotationYaw % 360;
+        if (yaw < 0) {
+            yaw += 360;
+        }
+        rotatePlayerTo(player, yaw + (target - yaw) / 4);
+    }
+
+    private static void rotatePlayerTo(EntityPlayer player, float yaw)
+    {
+        final float original = player.rotationYaw;
+        player.rotationYaw = yaw;
+        player.prevRotationYaw += player.rotationYaw - original;
+    }
+
+    private static float getNearestYaw(EntityPlayer player)
+    {
+        float yaw = player.rotationYaw % 360;
+        if (yaw < 0) {
+            yaw += 360;
+        }
+        if (yaw < 45)
+            return 0F;
+        if (yaw > 45 && yaw <= 135)
+            return 90F;
+        else if (yaw > 135 && yaw <= 225)
+            return 180F;
+        else if (yaw > 225 && yaw <= 315)
+            return 270F;
+        else
+            return 360F;
+    }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft)
