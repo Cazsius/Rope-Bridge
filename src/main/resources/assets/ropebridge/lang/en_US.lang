@@ -1,8 +1,13 @@
-_#Items
+#ItemGroups
+itemGroup.RopeBridgeTab=Rope Bridge
+
+#Items
+item.ropebridge.zipline.builder.name=Zipline Building Gun
 item.ropebridge.bridge.builder.name=Bridge Building Gun
 item.ropebridge.bridge.builder.material.hook.name=Bridge Building Gun Hook
 item.ropebridge.bridge.builder.material.barrel.name=Gun Barrel
 item.ropebridge.bridge.builder.material.handle.name=Gun Stock
+item.ropebridge.zipline.hook.name=Zipline Hook
 item.ropebridge.rope.name=Rope
 item.ropebridge.ladder.hook.name=Ladder Gun Hook
 item.ropebridge.ladder.builder.name=Ladder Gun
@@ -23,6 +28,7 @@ achievement.buildBridge=Rope Bridge
 achievement.buildBridge.desc=Build a rope bridge with your new grappling gun
 
 #Messages
+chat.ropebridge.info.underfunded_zipline=You need at least %f rope to build this zipline.
 chat.ropebridge.warning.breaking_bridge=WARNING! Breaking whole bridge!
 chat.ropebridge.info.notonground=You must be standing on something to build a bridge!
 chat.ropebridge.info.notcardinal=Sorry, bridge must be built in a cardinal direction. Please try again.
