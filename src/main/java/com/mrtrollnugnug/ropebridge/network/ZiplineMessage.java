@@ -46,6 +46,7 @@ public class ZiplineMessage implements IMessage{
 
             if (ctx.side == Side.SERVER) {
                 final EntityPlayer player = ctx.getServerHandler().playerEntity;
+                //ZiplingBuildingHandler.newZipline causing the problem where it creates bridge?
                 FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> ZiplineBuildingHandler.newZipline(player, player.getHeldItemMainhand(), -1, message.from, message.to));
             }
             return null;
