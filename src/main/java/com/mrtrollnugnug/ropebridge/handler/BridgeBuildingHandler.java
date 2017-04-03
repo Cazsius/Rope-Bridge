@@ -151,8 +151,8 @@ public class BridgeBuildingHandler
     {
         if (player.capabilities.isCreativeMode)
             return;
-        int slabsNeeded = dist * ConfigurationHandler.getSlabsPerBlock();
-        int stringNeeded = dist * ConfigurationHandler.getRopePerBlock();
+        int slabsNeeded = dist;
+        int stringNeeded = 1 + dist / 2;
         int i = 0;
 
         for (; i < 36; i++) {

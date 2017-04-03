@@ -50,7 +50,7 @@ public class LadderMessage implements IMessage
 
             if (ctx.side == Side.SERVER) {
                 final EntityPlayer player = ctx.getServerHandler().playerEntity;
-                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> LadderBuildingHandler.newLadder(player, message.from, player.getEntityWorld(), message.side, player.getHeldItemMainhand()));
+                FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> LadderBuildingHandler.newLadder(message.from, player, player.getEntityWorld(), message.side, player.getHeldItemMainhand()));
             }
             return null;
         }

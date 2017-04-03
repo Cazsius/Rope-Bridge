@@ -3,8 +3,6 @@ package com.mrtrollnugnug.ropebridge;
 public final class Messages
 {
 
-	public static final String UNDERFUNDED_ZIPLINE = "chat.ropebridge.info.underfunded_zipline";
-	
     // WARNING! Breaking whole bridge!
     public static final String WARNING_BREAKING = "chat.ropebridge.warning.breaking";
 
