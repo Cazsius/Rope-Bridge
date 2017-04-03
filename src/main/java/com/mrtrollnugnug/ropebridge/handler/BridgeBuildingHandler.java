@@ -31,7 +31,6 @@ public class BridgeBuildingHandler
         int y2;
         int z1;
         int z2;
-        //Controls rotation of slabs
         boolean rotate = getRotate(pos1, pos2);
         if (!rotate) {
             x1 = pos1.getX();
@@ -49,7 +48,6 @@ public class BridgeBuildingHandler
             y2 = pos2.getY();
             z2 = pos2.getX();
         }
-        //Controls if bridge is not in cardinal direction
         if (Math.abs(z2 - z1) > 3) {
             ModUtils.tellPlayer(player, Messages.NOT_CARDINAL);
             return;
@@ -59,24 +57,20 @@ public class BridgeBuildingHandler
         double distance;
         int distInt;
 
-        //Controls if bridge is too steep
         m = (double) (y2 - y1) / (double) (x2 - x1);
         if (!ConfigurationHandler.isIgnoreSlopeWarnings() && Math.abs(m) > 0.2) {
             ModUtils.tellPlayer(player, Messages.SLOPE_GREAT);
             return;
         }
         b = y1 - m * x1;
-        //Controls how far the bridge is away
         distance = Math.abs(x2 - x1);
         distInt = Math.abs(x2 - x1);
         if (distInt < 2)
             return;
 
-        //Controls not using materials if the player is in create
         if (!player.capabilities.isCreativeMode && !hasMaterials(player, distInt - 1))
             return;
 
-        //POSSIBLY? Controls building of bridge
         for (int x = Math.min(x1, x2) + 1; x <= Math.max(x1, x2) - 1; x++) {
             for (int y = Math.max(y1, y2); y >= Math.min(y1, y2) - distInt / 8 - 1; y--) {
                 final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigurationHandler.getBridgeDroopFactor() + ConfigurationHandler.getBridgeYOffset();
@@ -103,7 +97,6 @@ public class BridgeBuildingHandler
             }
         }
 
-        //Controls surival and if so take materials
         if (allClear) {
             final int type = inputType == -1 ? getWoodType(player) : inputType;
             if (inputType == -1 && !player.capabilities.isCreativeMode) {
@@ -133,12 +126,7 @@ public class BridgeBuildingHandler
         int slabsHad = 0;
         int stringHad = 0;
 
-        
-		//TODO Potentially broken.
-		//Where did 36 come from?
-		//Appears to work smoother?
-		//for (int i = 0; i < 36; i++) {
-        for (int i = 0; i < ConfigurationHandler.getBridgeDroopFactor(); i++) {
+        for (int i = 0; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) {
                 continue;
@@ -167,7 +155,7 @@ public class BridgeBuildingHandler
         int stringNeeded = dist * ConfigurationHandler.getRopePerBlock();
         int i = 0;
 
-		for (; i < 36; i++) {
+        for (; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory[i];
             if (stack == null) {
                 continue;
@@ -218,8 +206,6 @@ public class BridgeBuildingHandler
     }
 
     // Controls if blocks are in the way
-    //Displays smoke if so
-    //TODO Currently Broken I believe
     private static void spawnSmoke(World world, BlockPos pos, int times)
     {
 
@@ -281,7 +267,6 @@ public class BridgeBuildingHandler
         }
     }
 
-    //Controls the type of wood for bridge
     private static int getWoodType(EntityPlayer player)
     {
 
@@ -291,7 +276,6 @@ public class BridgeBuildingHandler
             }
             final String name = stack.getItem().getUnlocalizedName();
             if (name.equals(BridgeBuildingHandler.woodSlab))
-            	//Checks meta to see wood type
                 return stack.getItemDamage();
         }
         return 0;

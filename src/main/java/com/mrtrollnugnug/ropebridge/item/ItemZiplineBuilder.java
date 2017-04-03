@@ -39,15 +39,12 @@ public class ItemZiplineBuilder extends ItemBuilder {
                 } 
 	            
 	            else {
-	            	//Potentially? hit - Controls where the player is relative to where it is going to.
                     final RayTraceResult hit = trace(player);
                     if (hit.typeOfHit == Type.BLOCK) {
-                    	//floored- Controls making it level spawn at the players feet and not above head
                        final BlockPos floored = new BlockPos(Math.floor(player.posX), Math.floor(player.posY), Math.floor(player.posZ)).down();
-                       //target - Controls where the rope bridge is going to.
-                       BlockPos target = hit.getBlockPos();
+                        BlockPos target = hit.getBlockPos();
                         //TODO How does this make it send rope bridge stuff?
-                        RopeBridge.getSnw().sendToServer(new ZiplineMessage(floored, target));
+                        //RopeBridge.getSnw().sendToServer(new ZiplineMessage(floored, target));
                     }
 	            }
 	            }
