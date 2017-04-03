@@ -11,7 +11,7 @@ public final class Constants {
 
     public static final String MOD_NAME = "Ropbe Bridge Mod";
 
-    public static final String VERSION_NUMBER = "1.4.8";
+    public static final String VERSION_NUMBER = "2.0.5";
 
     public static final String CLIENT_PROXY_CLASS = "com.mrtrollnugnug.ropebridge.client.ClientProxy";
 

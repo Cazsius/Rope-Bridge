@@ -3,6 +3,8 @@ package com.mrtrollnugnug.ropebridge.lib;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.command.ICommandSender;
@@ -55,6 +57,7 @@ public final class ModUtils
 
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
+        block.setCreativeTab(ContentHandler.RopeBridgeTab);
         GameRegistry.register(block);
         System.out.println(block.getRegistryName());
         GameRegistry.register(new ItemBlock(block), block.getRegistryName());
@@ -87,6 +90,7 @@ public final class ModUtils
             item.setRegistryName(id);
         }
 
+        item.setCreativeTab(ContentHandler.RopeBridgeTab);
         item.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(item);
         ITEMS.add(item);
