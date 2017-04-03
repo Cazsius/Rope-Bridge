@@ -1,6 +1,7 @@
 package com.mrtrollnugnug.ropebridge.common;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.item.ItemBuilder;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,10 +21,9 @@ public class CommonProxy
 
         return null;
     }
-/*
+
     public float getFov()
     {
         return ItemBuilder.getFov();
-   	}
-*/
+    }
 }

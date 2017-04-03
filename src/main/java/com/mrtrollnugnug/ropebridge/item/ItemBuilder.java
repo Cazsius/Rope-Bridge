@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.item;
 
 import java.math.BigDecimal;
 
+import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 
 import net.minecraft.client.Minecraft;
@@ -17,15 +18,15 @@ import net.minecraft.world.World;
 
 public abstract class ItemBuilder extends Item
 {
+    private static float fov = 0;
+
     public ItemBuilder()
     {
         super();
         this.setMaxStackSize(1);
         this.setMaxDamage(64);
-        /* TODO
         if (ConfigurationHandler.isZoomOnAim())
             setFov(RopeBridge.getProxy().getFov());
-            */
     }
 
     protected static void rotatePlayerTowards(EntityPlayer player, float target)
@@ -76,12 +77,20 @@ public abstract class ItemBuilder extends Item
     public abstract void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft);
 
     @Override
+    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
+    {
+        if (player.world.isRemote && player instanceof EntityPlayer) {
+            zoomTowards(30);
+        }
+    }
+
+    @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
         if (entityIn instanceof EntityPlayer && worldIn.isRemote) {
             final EntityPlayer p = (EntityPlayer) entityIn;
             if (!isSelected || p.getActiveItemStack() != stack) {
-               // zoomTowards(getFov());
+                zoomTowards(getFov());
             }
         }
     }
@@ -101,15 +110,7 @@ public abstract class ItemBuilder extends Item
     {
         return player.rayTrace(ConfigurationHandler.getMaxBridgeDistance(), 1.0f);
     }
-/* TODO
- 
-    @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
-    {
-        if (player.world.isRemote && player instanceof EntityPlayer) {
-            zoomTowards(30);
-        }
-    }
+
     private static void zoomTowards(float toFov)
     {
         if (ConfigurationHandler.isZoomOnAim() && toFov > 0) {
@@ -130,7 +131,7 @@ public abstract class ItemBuilder extends Item
             Minecraft.getMinecraft().gameSettings.fovSetting = toFov;
         }
     }
-    
+
     public static float getFov()
     {
         return fov;
@@ -140,5 +141,4 @@ public abstract class ItemBuilder extends Item
     {
         fov = newFov;
     }
-*/
 }

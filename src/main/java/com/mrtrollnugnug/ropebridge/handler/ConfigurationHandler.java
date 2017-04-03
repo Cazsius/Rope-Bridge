@@ -3,6 +3,8 @@ package com.mrtrollnugnug.ropebridge.handler;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public final class ConfigurationHandler
 {
@@ -14,7 +16,7 @@ public final class ConfigurationHandler
     private static int maxBridgeDistance;
     private static int bridgeDroopFactor;
     private static float bridgeYOffset;
-    // private static boolean zoomOnAim;
+    private static boolean zoomOnAim;
     private static boolean breakThroughBlocks;
     private static boolean ignoreSlopeWarnings;
     private static boolean customAchievements;
@@ -37,7 +39,7 @@ public final class ConfigurationHandler
     }
 
     /**
-     * Sync all configuration properties.
+     * Syncs all configuration properties.
      */
     public static void syncConfig()
     {
@@ -45,6 +47,7 @@ public final class ConfigurationHandler
         setMaxBridgeDistance(getConfig().getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun."));
         setBridgeDroopFactor(getConfig().getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang."));
         setBridgeYOffset(getConfig().getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet."));
+        setZoomOnAim(getConfig().getBoolean("zoomOnAim", Configuration.CATEGORY_CLIENT, true, "WARNING - might cause problems with optifine. Due to restrictions in Minecrafts code, you won't be able to change your fov once enabled either."));
         setBreakThroughBlocks(getConfig().getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode."));
         setIgnoreSlopeWarnings(getConfig().getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges."));
         setCustomAchievements(getConfig().getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements."));
@@ -52,11 +55,8 @@ public final class ConfigurationHandler
         setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
         setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
         setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
-        /* TODO
-        setZoomOnAim(getConfig().getBoolean("zoomOnAim", Configuration.CATEGORY_CLIENT, true, "WARNING - might cause problems with optifine. Due to restrictions in Minecrafts code, you won't be able to change your fov once enabled either."));
-       if (FMLCommonHandler.instance().getSide().isClient())
+        if (FMLCommonHandler.instance().getSide().isClient())
             setZoomOnAim(!FMLClientHandler.instance().hasOptifine());
-            */
 
         if (getConfig().hasChanged())
             getConfig().save();
@@ -72,7 +72,6 @@ public final class ConfigurationHandler
         ConfigurationHandler.config = config;
     }
 
-    /*
     public static boolean isZoomOnAim()
     {
         return zoomOnAim;
@@ -82,7 +81,6 @@ public final class ConfigurationHandler
     {
         ConfigurationHandler.zoomOnAim = zoomOnAim;
     }
-    */
 
     public static boolean isIgnoreSlopeWarnings()
     {

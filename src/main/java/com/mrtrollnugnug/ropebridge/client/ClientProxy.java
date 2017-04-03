@@ -26,11 +26,10 @@ public class ClientProxy extends CommonProxy
 
         return Minecraft.getMinecraft().player;
     }
-    /*
+
     @Override
     public float getFov()
     {
         return Minecraft.getMinecraft().gameSettings.fovSetting;
     }
-    */
 }
