@@ -17,3 +17,5 @@
 /run/
 /out/
 gradle.properties
+
+\.idea/
