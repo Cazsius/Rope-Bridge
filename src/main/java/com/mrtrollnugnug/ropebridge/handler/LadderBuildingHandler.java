@@ -37,9 +37,11 @@ public class LadderBuildingHandler {
 
 		int count = 0;
 		BlockPos lower = start;
-		while (world.isAirBlock(lower)) {
+		IBlockState state = world.getBlockState(lower);
+		while (state.getBlock().isReplaceable(world, lower)) {
 			count++;
 			lower = lower.down();
+			state = world.getBlockState(lower);
 		}
 
 		if (count <= 0) {
