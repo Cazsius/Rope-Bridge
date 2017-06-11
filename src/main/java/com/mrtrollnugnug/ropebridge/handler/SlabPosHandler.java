@@ -5,13 +5,9 @@ import net.minecraft.util.math.BlockPos;
 public class SlabPosHandler {
 
     private final int x;
-
     private final  int y;
-
     private final  int z;
-
-     private final int level;
-
+    private final int level;
     private final boolean rotate;
 
     public SlabPosHandler (int xCoordinate, int yCoordinate, int zCoordinate, int slabLevel, boolean isRotated) {
@@ -31,11 +27,10 @@ public class SlabPosHandler {
     }
 
     public BlockPos getBlockPos () {
-
         return new BlockPos(this.x, this.y, this.z);
     }
 
-	public boolean isRotate() {
+	public boolean getRotate() {
 		return rotate;
 	}
 

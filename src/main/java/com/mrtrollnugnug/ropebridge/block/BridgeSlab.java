@@ -28,20 +28,14 @@ import net.minecraft.world.World;
 
 public class BridgeSlab extends Block {
 
-
     public static final AxisAlignedBB AABB_BLOCK_1 = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
-
     public static final AxisAlignedBB AABB_BLOCK_2 = new AxisAlignedBB(0.0D, 0.25D, 0.0D, 1.0D, 0.5D, 1.0D);
-
     public static final AxisAlignedBB AABB_BLOCK_3 = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 0.75D, 1.0D);
-
     public static final AxisAlignedBB AABB_BLOCK_4 = new AxisAlignedBB(0.0D, 0.75D, 0.0D, 1.0D, 1.0D, 1.0D);
-
     public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", BridgeSlab.EnumType.class);
     public static final PropertyBool ROTATED = PropertyBool.create("rotated");
     public static final PropertyInteger FRONT = PropertyInteger.create("front", 0, 3);
     public static final PropertyInteger BACK = PropertyInteger.create("back", 0, 3);
-
     private final AxisAlignedBB bounds;
     private final int boundIndex;
 
@@ -124,32 +118,36 @@ public class BridgeSlab extends Block {
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         int frontAmount = 0, backAmount = 0;
-
         boolean rotated = state.getValue(ROTATED);
         EnumFacing front = rotated ? EnumFacing.NORTH : EnumFacing.WEST;
         EnumFacing back = rotated ? EnumFacing.SOUTH : EnumFacing.EAST;
 
         IBlockState frontState = worldIn.getBlockState(pos.offset(front));
-        if (frontState.getBlock() instanceof BridgeSlab)
+        if (frontState.getBlock() instanceof BridgeSlab) {
             frontAmount = ((BridgeSlab) frontState.getBlock()).boundIndex - boundIndex;
-        else {
+        } else {
             frontState = worldIn.getBlockState(pos.offset(front).offset(EnumFacing.UP));
-            if (frontState.getBlock() instanceof BridgeSlab)
+            if (frontState.getBlock() instanceof BridgeSlab) {
                 frontAmount = ((BridgeSlab) frontState.getBlock()).boundIndex + 4 - boundIndex;
+            }
         }
 
         IBlockState backState = worldIn.getBlockState(pos.offset(back));
-        if (backState.getBlock() instanceof BridgeSlab)
+        if (backState.getBlock() instanceof BridgeSlab) {
             backAmount = ((BridgeSlab) backState.getBlock()).boundIndex - boundIndex;
-        else {
+    	} else {
             backState = worldIn.getBlockState(pos.offset(back).offset(EnumFacing.UP));
-            if (backState.getBlock() instanceof BridgeSlab)
+            if (backState.getBlock() instanceof BridgeSlab) {
                 backAmount = ((BridgeSlab) backState.getBlock()).boundIndex + 4 - boundIndex;
+            }
         }
 
-        if (frontAmount < 0 || frontAmount > 3) frontAmount = 0;
-        if (backAmount < 0 || backAmount > 3) backAmount = 0;
-
+        if (frontAmount < 0 || frontAmount > 3) {
+        	frontAmount = 0;
+        }
+        if (backAmount < 0 || backAmount > 3) { 
+        	backAmount = 0;
+        }
         return super.getActualState(state, worldIn, pos).withProperty(FRONT, frontAmount).withProperty(BACK, backAmount);
     }
 

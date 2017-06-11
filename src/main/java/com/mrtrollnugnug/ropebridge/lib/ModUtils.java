@@ -16,8 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public final class ModUtils
-{
+public final class ModUtils {
     /**
      * A list of all items from RopeBridge.
      */
@@ -39,8 +38,7 @@ public final class ModUtils
      *            The message to send. This can be a normal message, however
      *            translation keys are HIGHLY encouraged!
      */
-    public static void tellPlayer(ICommandSender sender, String message, Object... params)
-    {
+    public static void tellPlayer(ICommandSender sender, String message, Object... params) {
         sender.sendMessage(new TextComponentTranslation(message, params));
     }
 
@@ -52,9 +50,7 @@ public final class ModUtils
      * @param id
      *            The ID to register the block with.
      */
-    public static Block registerBlock(Block block, String id)
-    {
-
+    public static Block registerBlock(Block block, String id) {
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         block.setCreativeTab(ContentHandler.RopeBridgeTab);
@@ -65,9 +61,7 @@ public final class ModUtils
         return block;
     }
 
-    public static Block registerBlockNoItem(Block block, String id)
-    {
-
+    public static Block registerBlockNoItem(Block block, String id) {
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(block);
@@ -83,13 +77,10 @@ public final class ModUtils
      * @param id
      *            The ID to register the item with.
      */
-    public static Item registerItem(Item item, String id)
-    {
-
+    public static Item registerItem(Item item, String id) {
         if (item.getRegistryName() == null) {
             item.setRegistryName(id);
         }
-
         item.setCreativeTab(ContentHandler.RopeBridgeTab);
         item.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         GameRegistry.register(item);
@@ -106,9 +97,7 @@ public final class ModUtils
      *            The names of the models to use in order of meta data.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, String[] variants)
-    {
-
+    public static void registerBlockInvModel(Block block, String[] variants) {
         registerItemInvModel(Item.getItemFromBlock(block), variants);
     }
 
@@ -123,9 +112,7 @@ public final class ModUtils
      *            The names of the models to use in order of meta data.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, String prefix, String[] variants)
-    {
-
+    public static void registerBlockInvModel(Block block, String prefix, String[] variants) {
         registerItemInvModel(Item.getItemFromBlock(block), prefix, variants);
     }
 
@@ -136,9 +123,7 @@ public final class ModUtils
      *            The block to register models for.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block)
-    {
-
+    public static void registerBlockInvModel(Block block) {
         registerItemInvModel(Item.getItemFromBlock(block), 0);
     }
 
@@ -151,9 +136,7 @@ public final class ModUtils
      *            The meta data to register the model for.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, int meta)
-    {
-
+    public static void registerBlockInvModel(Block block, int meta) {
         registerItemInvModel(Item.getItemFromBlock(block), meta);
     }
 
@@ -168,9 +151,7 @@ public final class ModUtils
      *            The name of the model to register.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, int meta, String model)
-    {
-
+    public static void registerItemInvModel(Item item, int meta, String model) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(model, "inventory"));
     }
 
@@ -185,9 +166,7 @@ public final class ModUtils
      *            The names of the models to use, in order of meta data.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, String prefix, String[] variants)
-    {
-
+    public static void registerItemInvModel(Item item, String prefix, String[] variants) {
         for (int meta = 0; meta < variants.length; meta++) {
             ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().getResourceDomain() + ":" + prefix + "_" + variants[meta], "inventory"));
         }
@@ -202,9 +181,7 @@ public final class ModUtils
      *            The names of the models to use, in order of meta data.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, String[] variants)
-    {
-
+    public static void registerItemInvModel(Item item, String[] variants) {
         for (int meta = 0; meta < variants.length; meta++) {
             ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().getResourceDomain() + ":" + variants[meta], "inventory"));
         }
@@ -217,9 +194,7 @@ public final class ModUtils
      *            The item to registers a model for.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item)
-    {
-
+    public static void registerItemInvModel(Item item) {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
     }
 
@@ -232,9 +207,7 @@ public final class ModUtils
      *            The meta data to register the model for.
      */
     @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, int meta)
-    {
-
+    public static void registerItemInvModel(Item item, int meta) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
     }
 }

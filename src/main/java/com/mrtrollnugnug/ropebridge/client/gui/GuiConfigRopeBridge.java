@@ -15,14 +15,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiConfigRopeBridge extends GuiConfig
-{
-
+public class GuiConfigRopeBridge extends GuiConfig {
     static final Configuration cfg = ConfigurationHandler.getConfig();
 
-    public GuiConfigRopeBridge(GuiScreen parent)
-    {
-
+    public GuiConfigRopeBridge(GuiScreen parent) {
         super(parent, generateConfigList(), Constants.MOD_ID, false, false, GuiConfig.getAbridgedConfigPath(cfg.toString()));
     }
 
@@ -33,15 +29,12 @@ public class GuiConfigRopeBridge extends GuiConfig
      * @return List<IConfigElement>: A list of IConfigElement which are used to
      *         populate forge's configuration GUI.
      */
-    public static List<IConfigElement> generateConfigList()
-    {
-
+    public static List<IConfigElement> generateConfigList() {
         final ArrayList<IConfigElement> elements = new ArrayList<>();
 
         for (final String name : cfg.getCategoryNames()) {
             elements.add(new ConfigElement(cfg.getCategory(name)));
         }
-
         return elements;
     }
 }

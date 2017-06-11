@@ -13,41 +13,35 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public abstract class ItemBuilder extends Item
-{
+public abstract class ItemBuilder extends Item {
 
-    public ItemBuilder()
-    {
+	public ItemBuilder() {
         super();
         this.setMaxStackSize(1);
         this.setMaxDamage(64);
     }
-
+    
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand)
-    {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
             playerIn.setActiveHand(hand);
         }
-        return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+        return super.onItemRightClick(worldIn, playerIn, hand);
     }
 
     @Override
     public abstract void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft);
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 72000;
     }
 
-    public static boolean equalsZero(double d)
-    {
+    public static boolean equalsZero(double d) {
         return BigDecimal.valueOf(d).equals(BigDecimal.ZERO);
     }
 
-    public static RayTraceResult trace(EntityPlayer player)
-    {
+    public static RayTraceResult trace(EntityPlayer player) {
         return player.rayTrace(ConfigurationHandler.getMaxBridgeDistance(), 1.0f);
     }
 }

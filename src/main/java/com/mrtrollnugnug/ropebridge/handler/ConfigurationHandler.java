@@ -4,19 +4,13 @@ import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
 
-public final class ConfigurationHandler
-{
-
-    /**
-     * An instance of the Configuration object being used.
-     */
+public final class ConfigurationHandler {
     private static Configuration config = null;
     private static int maxBridgeDistance;
     private static int bridgeDroopFactor;
     private static float bridgeYOffset;
     private static boolean breakThroughBlocks;
     private static boolean ignoreSlopeWarnings;
-    private static boolean customAchievements;
     private static int slabsPerBlock;
     private static int stringPerBlock;
     private static int woodPerBlock;
@@ -28,9 +22,7 @@ public final class ConfigurationHandler
      * @param file
      *            The file to read/write config stuff to.
      */
-    public static void initConfig(File file)
-    {
-
+    public static void initConfig(File file) {
         setConfig(new Configuration(file));
         syncConfig();
     }
@@ -38,131 +30,99 @@ public final class ConfigurationHandler
     /**
      * Syncs all configuration properties.
      */
-    public static void syncConfig()
-    {
-
+    public static void syncConfig() {
         setMaxBridgeDistance(getConfig().getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun."));
         setBridgeDroopFactor(getConfig().getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang."));
         setBridgeYOffset(getConfig().getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet."));
         setBreakThroughBlocks(getConfig().getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode."));
         setIgnoreSlopeWarnings(getConfig().getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges."));
-        setCustomAchievements(getConfig().getBoolean("customAchievements", Configuration.CATEGORY_GENERAL, true, "Custom crafting and building achievements."));
         setSlabsPerBlock(getConfig().getInt("slabsPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Slabs consumed for each bridge block built."));
         setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
         setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
         setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
 
-        if (getConfig().hasChanged())
+        if (getConfig().hasChanged()) {
             getConfig().save();
+        }
     }
 
-    public static Configuration getConfig()
-    {
+    public static Configuration getConfig() {
         return config;
     }
 
-    public static void setConfig(Configuration config)
-    {
+    public static void setConfig(Configuration config) {
         ConfigurationHandler.config = config;
     }
 
-    public static boolean isIgnoreSlopeWarnings()
-    {
+    public static boolean isIgnoreSlopeWarnings() {
         return ignoreSlopeWarnings;
     }
 
-    public static void setIgnoreSlopeWarnings(boolean ignoreSlopeWarnings)
-    {
+    public static void setIgnoreSlopeWarnings(boolean ignoreSlopeWarnings) {
         ConfigurationHandler.ignoreSlopeWarnings = ignoreSlopeWarnings;
     }
 
-    public static int getBridgeDroopFactor()
-    {
+    public static int getBridgeDroopFactor() {
         return bridgeDroopFactor;
     }
 
-    public static void setBridgeDroopFactor(int bridgeDroopFactor)
-    {
+    public static void setBridgeDroopFactor(int bridgeDroopFactor) {
         ConfigurationHandler.bridgeDroopFactor = bridgeDroopFactor;
     }
 
-    public static float getBridgeYOffset()
-    {
+    public static float getBridgeYOffset() {
         return bridgeYOffset;
     }
 
-    public static void setBridgeYOffset(float bridgeYOffset)
-    {
+    public static void setBridgeYOffset(float bridgeYOffset) {
         ConfigurationHandler.bridgeYOffset = bridgeYOffset;
     }
 
-    public static boolean isBreakThroughBlocks()
-    {
+    public static boolean isBreakThroughBlocks() {
         return breakThroughBlocks;
     }
 
-    public static void setBreakThroughBlocks(boolean breakThroughBlocks)
-    {
+    public static void setBreakThroughBlocks(boolean breakThroughBlocks) {
         ConfigurationHandler.breakThroughBlocks = breakThroughBlocks;
     }
 
-    public static int getMaxBridgeDistance()
-    {
+    public static int getMaxBridgeDistance() {
         return maxBridgeDistance;
     }
 
-    public static void setMaxBridgeDistance(int maxBridgeDistance)
-    {
+    public static void setMaxBridgeDistance(int maxBridgeDistance) {
         ConfigurationHandler.maxBridgeDistance = maxBridgeDistance;
     }
 
-    public static boolean isCustomAchievements()
-    {
-        return customAchievements;
-    }
-
-    public static void setCustomAchievements(boolean customAchievements)
-    {
-        ConfigurationHandler.customAchievements = customAchievements;
-    }
-
-    public static void setRopePerBlock(int ropePerBlock)
-    {
+    public static void setRopePerBlock(int ropePerBlock) {
         ConfigurationHandler.ropePerBlock = ropePerBlock;
     }
 
-    public static void setSlabsPerBlock(int slabsPerBlock)
-    {
+    public static void setSlabsPerBlock(int slabsPerBlock) {
         ConfigurationHandler.slabsPerBlock = slabsPerBlock;
     }
 
-    public static void setStringPerBlock(int stringPerBlock)
-    {
+    public static void setStringPerBlock(int stringPerBlock) {
         ConfigurationHandler.stringPerBlock = stringPerBlock;
     }
 
-    public static void setWoodPerBlock(int woodPerBlock)
-    {
+    public static void setWoodPerBlock(int woodPerBlock) {
         ConfigurationHandler.woodPerBlock = woodPerBlock;
     }
 
-    public static int getRopePerBlock()
-    {
+    public static int getRopePerBlock() {
         return ropePerBlock;
     }
 
-    public static int getSlabsPerBlock()
-    {
+    public static int getSlabsPerBlock() {
         return slabsPerBlock;
     }
 
-    public static int getStringPerBlock()
-    {
+    public static int getStringPerBlock() {
         return stringPerBlock;
     }
 
-    public static int getWoodPerBlock()
-    {
+    public static int getWoodPerBlock() {
         return woodPerBlock;
     }
 }

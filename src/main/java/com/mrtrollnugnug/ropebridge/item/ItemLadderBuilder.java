@@ -11,22 +11,20 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 
-public class ItemLadderBuilder extends ItemBuilder
-{
-    public ItemLadderBuilder()
-    {
+public class ItemLadderBuilder extends ItemBuilder {
+	
+    public ItemLadderBuilder() {
         super();
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft)
-    {
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft) {
         if (entityLiving instanceof EntityPlayer && world.isRemote) {
             final EntityPlayer player = (EntityPlayer) entityLiving;
             if (this.getMaxItemUseDuration(stack) - timeLeft > 10) {
                 final RayTraceResult hit = trace(player);
                 if (hit.typeOfHit == Type.BLOCK) {
-                    final BlockPos start = hit.getBlockPos();//new BlockPos(Math.floor(hit.hitVec.xCoord), Math.floor(hit.hitVec.yCoord), Math.floor(hit.hitVec.zCoord));
+                    final BlockPos start = hit.getBlockPos();
                     RopeBridge.getSnw().sendToServer(new LadderMessage(start.offset(hit.sideHit), hit.sideHit));
                 }
             }

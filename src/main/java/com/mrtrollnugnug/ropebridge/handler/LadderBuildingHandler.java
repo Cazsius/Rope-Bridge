@@ -3,10 +3,10 @@ package com.mrtrollnugnug.ropebridge.handler;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.mrtrollnugnug.ropebridge.Messages;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.block.RopeLadder.EnumType;
 import com.mrtrollnugnug.ropebridge.block.TileEntityRopeLadder;
+import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
 import net.minecraft.block.BlockPlanks;
@@ -43,7 +43,6 @@ public class LadderBuildingHandler {
 			lower = lower.down();
 			state = world.getBlockState(lower);
 		}
-
 		if (count <= 0) {
 			ModUtils.tellPlayer(player, Messages.OBSTRUCTED);
 			return;
@@ -51,7 +50,6 @@ public class LadderBuildingHandler {
 
 		int woodNeeded = count * ConfigurationHandler.getWoodPerBlock();
 		int ropeNeeded = count * ConfigurationHandler.getRopePerBlock();
-
 		BlockPlanks.EnumType woodType = findType(player);
 		EnumType type = convertType(woodType);
 
@@ -74,7 +72,7 @@ public class LadderBuildingHandler {
 	private static void build(final World world, final BlockPos start, final int count, final int it,
 			final EnumFacing facing, final EnumType type) {
 		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
-			IBlockState state = ContentHandler.getBlockRopeLadder().getDefaultState()
+			IBlockState state = ContentHandler.blockRopeLadder.getDefaultState()
 					.withProperty(RopeLadder.FACING, facing).withProperty(RopeLadder.TYPE, type);
 			world.setBlockState(start.down(it), state);
 			world.setTileEntity(start.down(it), new TileEntityRopeLadder(type));
@@ -93,7 +91,7 @@ public class LadderBuildingHandler {
 			net.minecraft.block.BlockPlanks.EnumType woodType) {
 		if (player.capabilities.isCreativeMode)
 			return;
-		player.inventory.clearMatchingItems(ContentHandler.getItemRope(), -1, ropeNeeded, null);
+		player.inventory.clearMatchingItems(ContentHandler.itemRope, -1, ropeNeeded, null);
 		player.inventory.clearMatchingItems(Item.getItemFromBlock(Blocks.WOODEN_SLAB), woodType.getMetadata(),
 				woodNeeded, null);
 	}
@@ -135,11 +133,11 @@ public class LadderBuildingHandler {
 			if (i == null)
 				continue;
 			Item it = i.getItem();
-			if (it == ContentHandler.getItemRope()) {
-				ropeNeeded -= i.stackSize;
+			if (it == ContentHandler.itemRope) {
+				ropeNeeded -= i.getCount();
 			} else if (it == Item.getItemFromBlock(Blocks.WOODEN_SLAB)
 					&& toFind == Blocks.WOODEN_SLAB.getTypeForItem(i)) {
-				woodNeeded -= i.stackSize;
+				woodNeeded -= i.getCount();
 			}
 		}
 		return woodNeeded <= 0 && ropeNeeded <= 0;
