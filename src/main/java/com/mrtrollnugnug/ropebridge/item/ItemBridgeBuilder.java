@@ -15,6 +15,7 @@ import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -116,7 +117,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         tooltip.add("- Hold right-click to build");
         tooltip.add("- Sneak to break whole bridge");
     }

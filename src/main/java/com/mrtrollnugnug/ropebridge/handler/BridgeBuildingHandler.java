@@ -199,7 +199,8 @@ public class BridgeBuildingHandler {
         }
     }
 
-    private static void buildBridge(final World world, final LinkedList<SlabPosHandler> bridge, final int type) {
+    @SuppressWarnings("deprecation")
+	private static void buildBridge(final World world, final LinkedList<SlabPosHandler> bridge, final int type) {
 
         SlabPosHandler slab;
         if (!bridge.isEmpty()) {

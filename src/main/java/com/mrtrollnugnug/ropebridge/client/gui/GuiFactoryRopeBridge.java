@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiFactoryRopeBridge implements IModGuiFactory {
-    // This was scheduled for removal in 1.11
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
         return null;
     }

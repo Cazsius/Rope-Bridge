@@ -115,7 +115,8 @@ public class BridgeSlab extends Block {
         return state;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         int frontAmount = 0, backAmount = 0;
         boolean rotated = state.getValue(ROTATED);

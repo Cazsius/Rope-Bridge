@@ -64,13 +64,15 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider {
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     	return super.canPlaceBlockAt(worldIn, pos) || worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder;
     }
-
+    
+    /*
     @Override
-    protected boolean canBlockStay(World worldIn, BlockPos pos, EnumFacing facing) {
+    private boolean canBlockStay(World worldIn, BlockPos pos, EnumFacing facing) {
         IBlockState up = worldIn.getBlockState(pos.up());
-        return super.canBlockStay(worldIn, pos, facing) || (up.getBlock() == ContentHandler.blockRopeLadder && up.getValue(FACING) == facing);
+        return canBlockStay(worldIn, pos, facing) || (up.getBlock() == ContentHandler.blockRopeLadder && up.getValue(FACING) == facing);
     }
-
+    */
+    
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, TYPE);
