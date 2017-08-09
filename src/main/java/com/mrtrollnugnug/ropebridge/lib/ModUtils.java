@@ -15,6 +15,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.GameData;
 
 public final class ModUtils {
     /**
@@ -54,9 +55,9 @@ public final class ModUtils {
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         block.setCreativeTab(ContentHandler.RopeBridgeTab);
-        GameRegistry.register(block);
+        GameData.register_impl(block);
         System.out.println(block.getRegistryName());
-        GameRegistry.register(new ItemBlock(block), block.getRegistryName());
+        //GameRegistry.register(new ItemBlock(block), block.getRegistryName());
         BLOCKS.add(block);
         return block;
     }
@@ -64,7 +65,7 @@ public final class ModUtils {
     public static Block registerBlockNoItem(Block block, String id) {
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
-        GameRegistry.register(block);
+        GameData.register_impl(block);
         BLOCKS.add(block);
         return block;
     }
@@ -83,7 +84,7 @@ public final class ModUtils {
         }
         item.setCreativeTab(ContentHandler.RopeBridgeTab);
         item.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
-        GameRegistry.register(item);
+        GameData.register_impl(item);
         ITEMS.add(item);
         return item;
     }
