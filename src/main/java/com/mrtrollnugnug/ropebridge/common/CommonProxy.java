@@ -10,7 +10,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         ContentHandler.initBlocks();
         ContentHandler.initItems();
-        ContentHandler.initRecipes();
+        //ContentHandler.initRecipes();
     }
 
     public EntityPlayer getPlayer() {

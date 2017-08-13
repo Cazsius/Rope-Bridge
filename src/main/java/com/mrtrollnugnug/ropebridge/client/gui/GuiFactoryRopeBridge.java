@@ -8,7 +8,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
+/*
 @SideOnly(Side.CLIENT)
 public class GuiFactoryRopeBridge implements IModGuiFactory {
     @SuppressWarnings("deprecation")
@@ -42,3 +42,4 @@ public class GuiFactoryRopeBridge implements IModGuiFactory {
 		return null;
 	}
 }
+*/
