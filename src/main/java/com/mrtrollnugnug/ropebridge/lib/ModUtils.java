@@ -9,10 +9,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.GameData;
@@ -50,17 +48,18 @@ public final class ModUtils {
      *            The block to register.
      * @param id
      *            The ID to register the block with.
-     */
     public static Block registerBlock(Block block, String id) {
         block.setRegistryName(id);
         block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
         block.setCreativeTab(ContentHandler.RopeBridgeTab);
         GameData.register_impl(block);
         System.out.println(block.getRegistryName());
-        //GameRegistry.register(new ItemBlock(block), block.getRegistryName());
+        GameRegistry.register(new ItemBlock(block), block.getRegistryName());
+        //TODO ^
         BLOCKS.add(block);
         return block;
     }
+    */
 
     public static Block registerBlockNoItem(Block block, String id) {
         block.setRegistryName(id);

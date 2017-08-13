@@ -9,7 +9,7 @@
     "I": { "item": "minecraft:iron_ingot" }
   },
   "result": {
-    "item": "ropebridge:bridge_builder_hook",
+    "item": "bridge_builder_hook",
     "count": 1
   }
 }
