@@ -10,7 +10,7 @@
   	"R": { "item": "ropebridge:rope" }
   },
   "result": {
-    "item": "ropebridge:bridge_builder_barrel",
+    "item": "ropebridge:bridge_builder_material.barrel",
     "count": 1
   }
 }

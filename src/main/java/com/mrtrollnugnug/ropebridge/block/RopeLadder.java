@@ -8,8 +8,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
@@ -29,7 +29,6 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider {
     public RopeLadder() {
         super();
         setSoundType(SoundType.WOOD);
-        setCreativeTab(CreativeTabs.COMBAT);
         setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.DARK_OAK));
     }
 
@@ -65,13 +64,15 @@ public class RopeLadder extends BlockLadder implements ITileEntityProvider {
     	return super.canPlaceBlockAt(worldIn, pos) || worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder;
     }
     
-    /*
-    @Override
-    private boolean canBlockStay(World worldIn, BlockPos pos, EnumFacing facing) {
-        IBlockState up = worldIn.getBlockState(pos.up());
-        return canBlockStay(worldIn, pos, facing) || (up.getBlock() == ContentHandler.blockRopeLadder && up.getValue(FACING) == facing);
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState facing)
+    {
+        if (facing.getBlock() == this) {
+        	IBlockState up = worldIn.getBlockState(pos.up());
+            IBlockState down = worldIn.getBlockState(pos.down());
+            return canBlockStay(worldIn, pos, facing) || (!(down.getBlock() == Blocks.WATER) && up.getBlock() == ContentHandler.blockRopeLadder);
+        }
+        return true;
     }
-    */
     
     @Override
     protected BlockStateContainer createBlockState() {

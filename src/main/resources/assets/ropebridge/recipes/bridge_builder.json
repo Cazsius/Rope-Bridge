@@ -6,9 +6,9 @@
     "   "
   ],
   "key": {
-	"T": { "item": "ropebridge:bridge_builder_hook" },
-  	"B": { "item": "ropebridge:bridge_builder_barrel" },
-  	"H": { "item": "ropebridge:bridge_builder_handle" }
+	"T": { "item": "ropebridge:bridge_builder_material.hook" },
+  	"B": { "item": "ropebridge:bridge_builder_material.barrel" },
+  	"H": { "item": "ropebridge:bridge_builder_material.handle" }
   },
   "result": {
     "item": "ropebridge:bridge_builder",

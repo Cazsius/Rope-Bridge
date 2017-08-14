@@ -13,7 +13,7 @@
   	"W": { "item": "minecraft:planks", "data": 0 }
   },
   "result": {
-    "item": "ropebridge:bridge_builder_handle",
+    "item": "ropebridge:bridge_builder_material.handle",
     "count": 1
   }
 }

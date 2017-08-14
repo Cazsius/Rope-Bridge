@@ -42,12 +42,12 @@ public final class ContentHandler {
     }
 
     public static void initItems() {
-        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
         itemLadderBuilder = ModUtils.registerItem(new ItemLadderBuilder(), "ladder_builder");
         itemBridgeHook = ModUtils.registerItem(new Item(), "bridge_builder_material.hook");
         itemBarrel = ModUtils.registerItem(new Item(), "bridge_builder_material.barrel");
         itemHandle = ModUtils.registerItem(new Item(), "bridge_builder_material.handle");
         itemLadderHook = ModUtils.registerItem(new Item(), "ladder_hook");
+        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
         itemRope = ModUtils.registerItem(new Item(), "rope");
     }
 
@@ -68,10 +68,10 @@ public final class ContentHandler {
     @SideOnly(Side.CLIENT)
     public static void onClientPreInit()
     {
-        ModUtils.registerItemInvModel(itemBridgeBuilder);
         ModUtils.registerItemInvModel(itemBridgeHook, 0, Constants.MOD_ID + ":bridge_builder_hook");
         ModUtils.registerItemInvModel(itemBarrel, 0, Constants.MOD_ID + ":bridge_builder_barrel");
         ModUtils.registerItemInvModel(itemHandle, 0, Constants.MOD_ID + ":bridge_builder_handle");
+        ModUtils.registerItemInvModel(itemBridgeBuilder);
         ModUtils.registerItemInvModel(itemLadderBuilder);
         ModUtils.registerItemInvModel(itemLadderHook);
         ModUtils.registerItemInvModel(itemRope);
