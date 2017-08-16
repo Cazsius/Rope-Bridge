@@ -11,7 +11,6 @@ public final class Constants {
     public static final String VERSION_NUMBER = "2.0.5";
     public static final String CLIENT_PROXY_CLASS = "com.mrtrollnugnug.ropebridge.client.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "com.mrtrollnugnug.ropebridge.common.CommonProxy";
-    public static final String GUI_FACTORY = "com.mrtrollnugnug.ropebridge.client.gui.GuiFactoryRopeBridge";
     public static final Random RANDOM = new Random();
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     
