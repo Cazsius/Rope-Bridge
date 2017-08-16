@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "RRR",
+    "III"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+  	"R": { "item": "ropebridge:rope" }
+  },
+  "result": {
+    "item": "ropebridge:bridge_builder_material.barrel",
+    "count": 1
+  }
+}

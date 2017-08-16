@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SV ",
+    "VS ",
+    "SV "
+  ],
+  "key": {
+    "S": { "item": "minecraft:string" },
+  	"V": { "item": "minecraft:vine" }
+  },
+  "result": {
+    "item": "ropebridge:rope",
+    "count": 8
+  }
+}	

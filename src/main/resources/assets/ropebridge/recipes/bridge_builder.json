@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "TBH",
+    "   "
+  ],
+  "key": {
+	"T": { "item": "ropebridge:bridge_builder_material.hook" },
+  	"B": { "item": "ropebridge:bridge_builder_material.barrel" },
+  	"H": { "item": "ropebridge:bridge_builder_material.handle" }
+  },
+  "result": {
+    "item": "ropebridge:bridge_builder",
+    "count": 1
+  }
+}

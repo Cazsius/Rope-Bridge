@@ -54,20 +54,6 @@ public final class ContentHandler {
         itemRope = ModUtils.registerItem(new Item(), "rope");
     }
 
-    @SuppressWarnings("deprecation")
-	public static void initRecipes()
-    {
-        GameRegistry.addShapedRecipe(new ResourceLocation("bridge_hook"), new ItemStack(itemBridgeHook), new Object[] { "i  ", "iii", "i  ", 'i', Items.IRON_INGOT });
-        GameRegistry.addShapedRecipe(new ResourceLocation("ladder_hook"), new ItemStack(itemLadderHook), new Object[] { "r  ", "iii", "i  ", 'r', Items.IRON_INGOT, 'r', new ItemStack(itemRope) });
-        GameRegistry.addShapedRecipe(new ResourceLocation("barrel"), new ItemStack(itemBarrel), new Object[] { "iii", "sss", "iii", 'i', Items.IRON_INGOT, 's', Items.STRING });
-        GameRegistry.addShapedRecipe(new ResourceLocation("handle"), new ItemStack(itemHandle), new Object[] { "i f", "sg ", "iww", 'i', Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL, 's', Items.STRING, 'g', Items.GUNPOWDER, 'w', Blocks.PLANKS });
-        GameRegistry.addShapedRecipe(new ResourceLocation("bridge_builder"), new ItemStack(itemBridgeBuilder), new Object[] { "tbh", 't', new ItemStack(itemBridgeHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
-        GameRegistry.addShapedRecipe(new ResourceLocation("string"), new ItemStack(Items.STRING, 4), new Object[] { "w", 'w', Blocks.WOOL });
-        GameRegistry.addShapedRecipe(new ResourceLocation("ladder_builder"), new ItemStack(itemLadderBuilder), new Object[] { "tbh", 't', new ItemStack(itemLadderHook), 'b', new ItemStack(itemBarrel), 'h', new ItemStack(itemHandle) });
-        GameRegistry.addShapedRecipe(new ResourceLocation("rope"), new ItemStack(itemRope), new Object[] { "sv ", "vs ", "sv ", 's', Items.STRING, 'v', Blocks.VINE} );
-        //TODO add rope recipe
-    }
-
     @SideOnly(Side.CLIENT)
     public static void onClientPreInit()
     {
