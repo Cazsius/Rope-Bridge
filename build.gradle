@@ -21,7 +21,7 @@ apply plugin: 'java'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 
-version = "1.12-2.0.6"
+version = "1.12-2.0.7"
 group= "com.mrtrollnugnug.ropebridge"
 archivesBaseName = "ropebridge"
 
