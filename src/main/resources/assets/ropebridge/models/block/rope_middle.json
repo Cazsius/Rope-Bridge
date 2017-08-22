@@ -1,6 +1,6 @@
 {
 	"textures": {
-		"0": "ropebridge:block/lead_knot",
+		"0": "minecraft:entity/lead_knot",
 	},
 	"elements": [
 		{
