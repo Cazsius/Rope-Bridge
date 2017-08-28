@@ -6,6 +6,7 @@ item.ropebridge.bridge.builder.material.handle.name=Gun Stock
 item.ropebridge.rope.name=Rope
 item.ropebridge.ladder.hook.name=Ladder Gun Hook
 item.ropebridge.ladder.builder.name=Ladder Gun
+item.ropebridge.zipliner.name=Zipliner
 
 #Item Groups
 itemGroup.RopeBridgeTab=Rope Bridge

@@ -1,12 +1,12 @@
 {
 	"textures": {
-		"mid_gray": "items/mid",
-		"dark_gray": "items/dar",
-		"light_gray": "items/lig",
-		"tan": "items/tan",
-		"dark_tan": "items/darktan",
-		"grapple": "items/grap",
-		"rope": "blocks/rope_ladder"
+		"mid_gray": "ropebridge:items/mid",
+		"dark_gray": "ropebridge:items/dar",
+		"light_gray": "ropebridge:items/lig",
+		"tan": "ropebridge:items/tan",
+		"dark_tan": "ropebridge:items/darktan",
+		"grapple": "ropebridge:items/grap",
+		"rope": "ropebridge:blocks/rope_ladder"
 	},
 	"elements": [
 		{

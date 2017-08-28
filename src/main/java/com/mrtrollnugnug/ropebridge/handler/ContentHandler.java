@@ -6,6 +6,7 @@ import com.mrtrollnugnug.ropebridge.block.RopeLadder;
 import com.mrtrollnugnug.ropebridge.block.TileEntityRopeLadder;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemLadderBuilder;
+import com.mrtrollnugnug.ropebridge.item.ItemZipliner;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 
@@ -27,7 +28,7 @@ public final class ContentHandler
 	public static Block blockZipline;
 
 	// Items
-	public static Item itemBridgeBuilder, itemLadderBuilder;
+	public static Item itemBridgeBuilder, itemLadderBuilder, itemZipliner;
 	public static Item itemRope, itemBridgeHook, itemBarrel, itemHandle,
 			itemLadderHook;
 
@@ -53,7 +54,7 @@ public final class ContentHandler
 		blockRopeLadder =
 				ModUtils.registerBlockNoItem(new RopeLadder(), "rope_ladder");
 		blockZipline = ModUtils.registerBlockNoItem(new BlockZipline(),
-				"block_zipline");
+				"zipline_middle");
 		GameRegistry.registerTileEntity(TileEntityRopeLadder.class,
 				Constants.MOD_ID + ":rope_ladder_te");
 	}
@@ -72,6 +73,7 @@ public final class ContentHandler
 				"bridge_builder_material.handle");
 		itemLadderHook = ModUtils.registerItem(new Item(), "ladder_hook");
 		itemRope = ModUtils.registerItem(new Item(), "rope");
+		itemZipliner = ModUtils.registerItem(new ItemZipliner(), "zipliner");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -87,5 +89,6 @@ public final class ContentHandler
 		ModUtils.registerItemInvModel(itemLadderBuilder);
 		ModUtils.registerItemInvModel(itemLadderHook);
 		ModUtils.registerItemInvModel(itemRope);
+		ModUtils.registerItemInvModel(itemZipliner);
 	}
 }
