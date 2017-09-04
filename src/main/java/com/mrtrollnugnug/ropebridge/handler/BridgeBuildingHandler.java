@@ -117,7 +117,7 @@ public class BridgeBuildingHandler {
 
         for (int i = 0; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory.get(i);
-            if (stack == null) {
+            if (stack.isEmpty()) {
                 continue;
             }
             final Item item = stack.getItem();
@@ -146,7 +146,7 @@ public class BridgeBuildingHandler {
 
         for (; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory.get(i);
-            if (stack == null) {
+            if (stack.isEmpty()) {
                 continue;
             }
             final Item item = stack.getItem();
@@ -238,7 +238,7 @@ public class BridgeBuildingHandler {
     private static int getWoodType(EntityPlayer player) {
 
         for (final ItemStack stack : player.inventory.mainInventory) {
-            if (stack == null) {
+            if (stack.isEmpty()) {
                 continue;
             }
             final String name = stack.getItem().getUnlocalizedName();
