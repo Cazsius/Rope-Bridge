@@ -72,8 +72,8 @@ public class LadderBuildingHandler {
 	private static void build(final World world, final BlockPos start, final int count, final int it,
 			final EnumFacing facing, final EnumType type) {
 		FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> {
-			IBlockState state = ContentHandler.blockRopeLadder.getDefaultState()
-					.withProperty(RopeLadder.FACING, facing).withProperty(RopeLadder.TYPE, type);
+			IBlockState state = ContentHandler.blockRopeLadder.getDefaultState().withProperty(RopeLadder.FACING, facing)
+					.withProperty(RopeLadder.TYPE, type);
 			world.setBlockState(start.down(it), state);
 			world.setTileEntity(start.down(it), new TileEntityRopeLadder(type));
 		});

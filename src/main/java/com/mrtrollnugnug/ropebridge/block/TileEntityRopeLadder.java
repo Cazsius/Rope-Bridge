@@ -11,59 +11,59 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityRopeLadder extends TileEntity {
-    private EnumType type;
-    private static final String typeKey = "type";
-    
-    public TileEntityRopeLadder(EnumType type) {
-        setType(type);
-    }
+	private EnumType type;
+	private static final String typeKey = "type";
 
-    public TileEntityRopeLadder() {
-        this(EnumType.OAK);
-    }
+	public TileEntityRopeLadder(EnumType type) {
+		setType(type);
+	}
 
-    public EnumType getType() {
-        return type;
-    }
+	public TileEntityRopeLadder() {
+		this(EnumType.OAK);
+	}
 
-    public void setType(EnumType type) {
-        this.type = type;
-    }
+	public EnumType getType() {
+		return type;
+	}
 
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return newSate.getBlock() != oldState.getBlock();
-    }
+	public void setType(EnumType type) {
+		this.type = type;
+	}
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        if (type != null) {
-            compound.setInteger(typeKey, type.meta);
-        }
-        return compound;
-    }
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		return newSate.getBlock() != oldState.getBlock();
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        if (compound.hasKey(typeKey)) {
-            setType(EnumType.fromMeta(compound.getInteger(typeKey)));
-        }
-    }
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		if (type != null) {
+			compound.setInteger(typeKey, type.meta);
+		}
+		return compound;
+	}
 
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		if (compound.hasKey(typeKey)) {
+			setType(EnumType.fromMeta(compound.getInteger(typeKey)));
+		}
+	}
 
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
-    }
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return writeToNBT(new NBTTagCompound());
+	}
 
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        readFromNBT(pkt.getNbtCompound());
-    }
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(getPos(), 0, writeToNBT(new NBTTagCompound()));
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.getNbtCompound());
+	}
 }

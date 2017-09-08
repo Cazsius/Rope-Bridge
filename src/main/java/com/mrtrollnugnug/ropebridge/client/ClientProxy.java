@@ -13,13 +13,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-    public void preInit(FMLPreInitializationEvent e) {
-        super.preInit(e);
-        ContentHandler.onClientPreInit();
-    }
+	public void preInit(FMLPreInitializationEvent e) {
+		super.preInit(e);
+		ContentHandler.onClientPreInit();
+	}
 
-    @Override
-    public EntityPlayer getPlayer() {
-        return Minecraft.getMinecraft().player;
-    }
+	@Override
+	public EntityPlayer getPlayer() {
+		return Minecraft.getMinecraft().player;
+	}
 }

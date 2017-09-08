@@ -16,30 +16,32 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_NUMBER, guiFactory = Constants.GUI_FACTORY)
 public class RopeBridge {
-    private static SimpleNetworkWrapper snw;
+	private static SimpleNetworkWrapper snw;
 
-    private int discriminator = 0;
+	private int discriminator = 0;
 
-    @Mod.Instance(Constants.MOD_ID)
-    private static RopeBridge instance;
+	@Mod.Instance(Constants.MOD_ID)
+	private static RopeBridge instance;
 
-    @SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
-    private static CommonProxy proxy;
+	@SidedProxy(clientSide = Constants.CLIENT_PROXY_CLASS, serverSide = Constants.SERVER_PROXY_CLASS)
+	private static CommonProxy proxy;
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
-        ConfigurationHandler.initConfig(e.getSuggestedConfigurationFile());
-        proxy.preInit(e);
-        snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
-        snw.registerMessage(BridgeMessage.BridgeMessageHandler.class, BridgeMessage.class, discriminator++, Side.SERVER);
-        snw.registerMessage(LadderMessage.LadderMessageHandler.class, LadderMessage.class, discriminator++, Side.SERVER);
-    }
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent e) {
+		ConfigurationHandler.initConfig(e.getSuggestedConfigurationFile());
+		proxy.preInit(e);
+		snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
+		snw.registerMessage(BridgeMessage.BridgeMessageHandler.class, BridgeMessage.class, discriminator++,
+				Side.SERVER);
+		snw.registerMessage(LadderMessage.LadderMessageHandler.class, LadderMessage.class, discriminator++,
+				Side.SERVER);
+	}
 
-    public static SimpleNetworkWrapper getSnw() {
-        return snw;
-    }
+	public static SimpleNetworkWrapper getSnw() {
+		return snw;
+	}
 
-    public static CommonProxy getProxy() {
-        return proxy;
-    }
+	public static CommonProxy getProxy() {
+		return proxy;
+	}
 }

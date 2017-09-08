@@ -11,28 +11,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiFactoryRopeBridge implements IModGuiFactory {
-	
+
 	/*
+	 * @Override public RuntimeOptionGuiHandler
+	 * getHandlerFor(RuntimeOptionCategoryElement element) { return null; }
+	 * 
+	 * @Override public Class<? extends GuiScreen> mainConfigGuiClass() { return
+	 * GuiConfigRopeBridge.class; }
+	 */
+
 	@Override
-    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
-        return null;
-    }
+	public void initialize(Minecraft minecraftInstance) {
+		// Initializes the GUI when Config Button is pressed
+	}
 
-    @Override
-    public Class<? extends GuiScreen> mainConfigGuiClass() {
-        return GuiConfigRopeBridge.class;
-    }
-    */
-
-    @Override
-    public void initialize(Minecraft minecraftInstance) {
-        // Initializes the GUI when Config Button is pressed
-    }
-
-    @Override
-    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
-        return Collections.emptySet();
-    }
+	@Override
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
+		return Collections.emptySet();
+	}
 
 	@Override
 	public boolean hasConfigGui() {
@@ -43,6 +39,5 @@ public class GuiFactoryRopeBridge implements IModGuiFactory {
 	public GuiScreen createConfigGui(GuiScreen parentScreen) {
 		return null;
 	}
-	
-	
+
 }

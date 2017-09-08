@@ -19,101 +19,102 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class RopeLadder extends BlockLadder implements ITileEntityProvider {
-    public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
+	public static final PropertyEnum<EnumType> TYPE = PropertyEnum.create("type", EnumType.class);
 
-    protected static final AxisAlignedBB ROPE_LADDER_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.2D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB ROPE_LADDER_WEST_AABB = new AxisAlignedBB(0.8D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB ROPE_LADDER_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.2D);
-    protected static final AxisAlignedBB ROPE_LADDER_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB ROPE_LADDER_EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.2D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB ROPE_LADDER_WEST_AABB = new AxisAlignedBB(0.8D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB ROPE_LADDER_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.2D);
+	protected static final AxisAlignedBB ROPE_LADDER_NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8D, 1.0D, 1.0D, 1.0D);
 
-    public RopeLadder() {
-        super();
-        setSoundType(SoundType.WOOD);
-        setCreativeTab(CreativeTabs.COMBAT);
-        setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.DARK_OAK));
-    }
+	public RopeLadder() {
+		super();
+		setSoundType(SoundType.WOOD);
+		setCreativeTab(CreativeTabs.COMBAT);
+		setDefaultState(getDefaultState().withProperty(FACING, EnumFacing.EAST).withProperty(TYPE, EnumType.DARK_OAK));
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        switch ((EnumFacing) state.getValue(FACING)) {
-        case NORTH:
-            return ROPE_LADDER_NORTH_AABB;
-        case SOUTH:
-            return ROPE_LADDER_SOUTH_AABB;
-        case WEST:
-            return ROPE_LADDER_WEST_AABB;
-        case EAST:
-        default:
-            return ROPE_LADDER_EAST_AABB;
-        }
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		switch ((EnumFacing) state.getValue(FACING)) {
+		case NORTH:
+			return ROPE_LADDER_NORTH_AABB;
+		case SOUTH:
+			return ROPE_LADDER_SOUTH_AABB;
+		case WEST:
+			return ROPE_LADDER_WEST_AABB;
+		case EAST:
+		default:
+			return ROPE_LADDER_EAST_AABB;
+		}
+	}
 
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        if (facing.getAxis().isHorizontal()) {
-            return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
-        } else {
-            if (worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder) {
-                return getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.up()).getValue(FACING));
-            } else
-                return getDefaultState();
-        }
-    }
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer) {
+		if (facing.getAxis().isHorizontal()) {
+			return super.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer);
+		} else {
+			if (worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder) {
+				return getDefaultState().withProperty(FACING, worldIn.getBlockState(pos.up()).getValue(FACING));
+			} else
+				return getDefaultState();
+		}
+	}
 
-    @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-    	return super.canPlaceBlockAt(worldIn, pos) || worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder;
-    }
-    
-    /*
-    @Override
-    private boolean canBlockStay(World worldIn, BlockPos pos, EnumFacing facing) {
-        IBlockState up = worldIn.getBlockState(pos.up());
-        return canBlockStay(worldIn, pos, facing) || (up.getBlock() == ContentHandler.blockRopeLadder && up.getValue(FACING) == facing);
-    }
-    */
-    
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING, TYPE);
-    }
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return super.canPlaceBlockAt(worldIn, pos)
+				|| worldIn.getBlockState(pos.up()).getBlock() == ContentHandler.blockRopeLadder;
+	}
 
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return getExtendedState(state, worldIn, pos);
-    }
+	/*
+	 * @Override private boolean canBlockStay(World worldIn, BlockPos pos,
+	 * EnumFacing facing) { IBlockState up = worldIn.getBlockState(pos.up()); return
+	 * canBlockStay(worldIn, pos, facing) || (up.getBlock() ==
+	 * ContentHandler.blockRopeLadder && up.getValue(FACING) == facing); }
+	 */
 
-    @Override
-    public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        TileEntityRopeLadder te = (TileEntityRopeLadder) world.getTileEntity(pos);
-        IBlockState out = state.withProperty(TYPE, te.getType());
-        return out;
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING, TYPE);
+	}
 
-    public enum EnumType implements IStringSerializable {
-        OAK(0), BIRCH(1), SPRUCE(2), JUNGLE(3), DARK_OAK(4), ACACIA(5);
-        final int meta;
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return getExtendedState(state, worldIn, pos);
+	}
 
-        EnumType(int meta) {
-            this.meta = meta;
-        }
+	@Override
+	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		TileEntityRopeLadder te = (TileEntityRopeLadder) world.getTileEntity(pos);
+		IBlockState out = state.withProperty(TYPE, te.getType());
+		return out;
+	}
 
-        static EnumType fromMeta(int meta) {
-            for (EnumType t : values())
-                if (meta == t.meta) {
-                    return t;
-                }
-            return null;
-        }
+	public enum EnumType implements IStringSerializable {
+		OAK(0), BIRCH(1), SPRUCE(2), JUNGLE(3), DARK_OAK(4), ACACIA(5);
+		final int meta;
 
-        @Override
-        public String getName() {
-            return name().toLowerCase();
-        }
-    }
+		EnumType(int meta) {
+			this.meta = meta;
+		}
 
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityRopeLadder();
-    }
+		static EnumType fromMeta(int meta) {
+			for (EnumType t : values())
+				if (meta == t.meta) {
+					return t;
+				}
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			return name().toLowerCase();
+		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityRopeLadder();
+	}
 }

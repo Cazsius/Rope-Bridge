@@ -12,22 +12,22 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 
 public class ItemLadderBuilder extends ItemBuilder {
-	
-    public ItemLadderBuilder() {
-        super();
-    }
 
-    @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft) {
-        if (entityLiving instanceof EntityPlayer && world.isRemote) {
-            final EntityPlayer player = (EntityPlayer) entityLiving;
-            if (this.getMaxItemUseDuration(stack) - timeLeft > 10) {
-                final RayTraceResult hit = trace(player);
-                if (hit.typeOfHit == Type.BLOCK) {
-                    final BlockPos start = hit.getBlockPos();
-                    RopeBridge.getSnw().sendToServer(new LadderMessage(start.offset(hit.sideHit), hit.sideHit));
-                }
-            }
-        }
-    }
+	public ItemLadderBuilder() {
+		super();
+	}
+
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft) {
+		if (entityLiving instanceof EntityPlayer && world.isRemote) {
+			final EntityPlayer player = (EntityPlayer) entityLiving;
+			if (this.getMaxItemUseDuration(stack) - timeLeft > 10) {
+				final RayTraceResult hit = trace(player);
+				if (hit.typeOfHit == Type.BLOCK) {
+					final BlockPos start = hit.getBlockPos();
+					RopeBridge.getSnw().sendToServer(new LadderMessage(start.offset(hit.sideHit), hit.sideHit));
+				}
+			}
+		}
+	}
 }
