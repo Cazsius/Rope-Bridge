@@ -50,7 +50,7 @@ public final class ModUtils {
 	 */
 	public static Block registerBlock(Block block, String id) {
 		block.setRegistryName(id);
-		block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
+		block.setTranslationKey(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
 		block.setCreativeTab(ContentHandler.RopeBridgeTab);
 		GameData.register_impl(block);
 		System.out.println(block.getRegistryName());
@@ -61,7 +61,7 @@ public final class ModUtils {
 
 	public static Block registerBlockNoItem(Block block, String id) {
 		block.setRegistryName(id);
-		block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
+		block.setTranslationKey(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
 		GameData.register_impl(block);
 		BLOCKS.add(block);
 		return block;
@@ -80,7 +80,7 @@ public final class ModUtils {
 			item.setRegistryName(id);
 		}
 		item.setCreativeTab(ContentHandler.RopeBridgeTab);
-		item.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
+		item.setTranslationKey(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
 		GameData.register_impl(item);
 		ITEMS.add(item);
 		return item;
@@ -167,7 +167,7 @@ public final class ModUtils {
 	public static void registerItemInvModel(Item item, String prefix, String[] variants) {
 		for (int meta = 0; meta < variants.length; meta++) {
 			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(
-					item.getRegistryName().getResourceDomain() + ":" + prefix + "_" + variants[meta], "inventory"));
+					item.getRegistryName().getNamespace() + ":" + prefix + "_" + variants[meta], "inventory"));
 		}
 	}
 
@@ -183,7 +183,7 @@ public final class ModUtils {
 	public static void registerItemInvModel(Item item, String[] variants) {
 		for (int meta = 0; meta < variants.length; meta++) {
 			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(
-					item.getRegistryName().getResourceDomain() + ":" + variants[meta], "inventory"));
+					item.getRegistryName().getNamespace() + ":" + variants[meta], "inventory"));
 		}
 	}
 

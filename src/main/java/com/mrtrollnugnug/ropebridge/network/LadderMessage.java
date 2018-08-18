@@ -27,7 +27,7 @@ public class LadderMessage implements IMessage {
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		this.from = BlockPos.fromLong(buf.readLong());
-		this.side = EnumFacing.getFront(buf.readByte());
+		this.side = EnumFacing.byIndex(buf.readByte());
 	}
 
 	@Override

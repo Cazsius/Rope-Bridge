@@ -110,13 +110,13 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state) {
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 		if (FMLCommonHandler.instance().getSide().isClient()) {
 			if (RopeBridge.getProxy().getPlayer().isSneaking() && isBridgeBlock(state.getBlock())) {
 				return 0.3F;
 			}
 		}
-		return super.getStrVsBlock(stack, state);
+		return super.getDestroySpeed(stack, state);
 	}
 
 	@Override
