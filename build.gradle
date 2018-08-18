@@ -12,20 +12,10 @@ buildscript {
 }
 
 plugins {
-	id "org.sonarqube" version "2.2"
+	id "org.sonarqube" version "2.6.2"
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-
-/*
-// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
-}
-*/
-
-
-
 
 apply plugin: 'java'
 
@@ -37,7 +27,7 @@ group= "com.mrtrollnugnug.ropebridge"
 archivesBaseName = "ropebridge"
 
 minecraft {
-    version = "1.10.2-12.18.2.2099"
+    version = "1.10.2-12.18.3.2185"
     runDir = "run"
     
     mappings = "stable_29"
