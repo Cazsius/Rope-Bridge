@@ -27,7 +27,7 @@ public final class ContentHandler {
     public static Item itemRope, itemBridgeHook, itemBarrel, itemHandle, itemLadderHook;
     
     public static final CreativeTabs RopeBridgeTab = new CreativeTabs("RopeBridgeTab") {
-	   		public ItemStack getTabIconItem() {
+	   		public ItemStack createIcon() {
 	   			return new ItemStack(ContentHandler.itemBridgeBuilder);
 	   		}
 	 };

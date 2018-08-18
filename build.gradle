@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-	id "org.sonarqube" version "2.2"
+	id "org.sonarqube" version "2.6.2"
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -29,7 +29,7 @@ minecraft {
     version = "1.12-14.21.1.2387"
     runDir = "run"
     
-    mappings = "snapshot_20170809"
+    mappings = "stable_39"
     makeObfSourceJar = true
 }
 

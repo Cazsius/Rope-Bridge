@@ -124,7 +124,7 @@ public class BridgeBuildingHandler {
             if (item == ContentHandler.itemRope) {
                 stringHad += stack.getCount();
             }
-            if (item.getUnlocalizedName().equals(woodSlab)) {
+            if (item.getTranslationKey().equals(woodSlab)) {
                 slabsHad += stack.getCount();
             }
         }
@@ -150,7 +150,7 @@ public class BridgeBuildingHandler {
                 continue;
             }
             final Item item = stack.getItem();
-            final String name = item.getUnlocalizedName();
+            final String name = item.getTranslationKey();
             if (item == ContentHandler.itemRope) {
                 if (stack.getCount() > stringNeeded) {
                 	stack.shrink(stringNeeded);
@@ -241,7 +241,7 @@ public class BridgeBuildingHandler {
             if (stack.isEmpty()) {
                 continue;
             }
-            final String name = stack.getItem().getUnlocalizedName();
+            final String name = stack.getItem().getTranslationKey();
             if (name.equals(BridgeBuildingHandler.woodSlab))
                 return stack.getItemDamage();
         }
