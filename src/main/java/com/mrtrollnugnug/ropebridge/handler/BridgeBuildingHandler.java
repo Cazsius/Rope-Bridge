@@ -138,7 +138,8 @@ public class BridgeBuildingHandler {
     }
 
     private static void takeMaterials(EntityPlayer player, int dist) {
-        if (player.capabilities.isCreativeMode) {
+        boolean noCost = ConfigurationHandler.getSlabsPerBlock() == 0 && ConfigurationHandler.getStringPerBlock() == 0;
+        if (player.capabilities.isCreativeMode || noCost) {
             return;
         }
         int slabsNeeded = dist;
@@ -237,7 +238,6 @@ public class BridgeBuildingHandler {
     }
 
     private static int getWoodType(EntityPlayer player) {
-
         for (final ItemStack stack : player.inventory.mainInventory) {
             if (stack.isEmpty()) {
                 continue;
