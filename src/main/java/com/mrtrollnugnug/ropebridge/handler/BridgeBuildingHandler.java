@@ -108,7 +108,8 @@ public class BridgeBuildingHandler {
     }
 
     private static boolean hasMaterials(EntityPlayer player, int dist) {
-        if (player.capabilities.isCreativeMode)
+        boolean noCost = ConfigurationHandler.getSlabsPerBlock() == 0 && ConfigurationHandler.getStringPerBlock() == 0;
+        if (player.capabilities.isCreativeMode || noCost)
             return true;
         final int slabsNeeded = dist;
         final int stringNeeded = 1 + dist / 2;
