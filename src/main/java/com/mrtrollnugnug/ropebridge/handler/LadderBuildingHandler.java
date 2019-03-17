@@ -118,16 +118,20 @@ public class LadderBuildingHandler {
 	}
 
 	private static BlockPlanks.EnumType findType(EntityPlayer player) {
+		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+		if (noCost || player.capabilities.isCreativeMode)
+			return BlockPlanks.EnumType.OAK;
 		for (ItemStack i : player.inventory.mainInventory) {
 			if (i != null && i.getItem() == Item.getItemFromBlock(Blocks.WOODEN_SLAB))
 				return (BlockPlanks.EnumType) Blocks.WOODEN_SLAB.getTypeForItem(i);
 		}
-		return player.capabilities.isCreativeMode ? BlockPlanks.EnumType.OAK : null;
+		return null;
 	}
 
 	private static boolean hasMaterials(EntityPlayer player, int woodNeeded, int ropeNeeded,
 			BlockPlanks.EnumType toFind) {
-		if (player.capabilities.isCreativeMode)
+		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+		if (noCost || player.capabilities.isCreativeMode)
 			return true;
 		for (ItemStack i : player.inventory.mainInventory) {
 			if (i == null)
