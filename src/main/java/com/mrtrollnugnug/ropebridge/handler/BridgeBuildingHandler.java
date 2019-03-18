@@ -94,7 +94,7 @@ public class BridgeBuildingHandler {
             final int type = inputType == -1 ? getWoodType(player) : inputType;
             if (inputType == -1 && !player.capabilities.isCreativeMode) {
                 takeMaterials(player, distInt - 1);
-                stack.damageItem(1, player);
+                stack.damageItem(ConfigurationHandler.getBridgeDamage(), player);
             }
             buildBridge(player.world, bridge, type);
         } else {

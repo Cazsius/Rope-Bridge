@@ -64,7 +64,7 @@ public class LadderBuildingHandler {
 			type = EnumType.OAK;
 
 		if (!player.capabilities.isCreativeMode)
-			builder.damageItem(1, player);
+			builder.damageItem(ConfigurationHandler.getLadderDamage(), player);
 
 		consume(player, woodNeeded, ropeNeeded, woodType);
 		build(world, start, count, hitSide, type);
