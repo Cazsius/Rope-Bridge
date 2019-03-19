@@ -42,8 +42,8 @@ public final class ConfigurationHandler {
         setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
         setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
         setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
-        setDamagePerLadder(getConfig().getInt("damageForLadder", Configuration.CATEGORY_GENERAL, 1, 1, 64, "How much the Ladder Gun is damaged after creating each ladder."));
-        setDamagePerBridge(getConfig().getInt("damageForBridge", Configuration.CATEGORY_GENERAL, 1, 1, 64, "How much the Bridge Gun is damaged after creating each ladder."));
+        setDamagePerLadder(getConfig().getInt("damageForLadder", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Ladder Gun is damaged after creating each ladder."));
+        setDamagePerBridge(getConfig().getInt("damageForBridge", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Bridge Gun is damaged after creating each ladder."));
 
         if (getConfig().hasChanged()) {
             getConfig().save();
