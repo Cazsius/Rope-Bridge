@@ -15,6 +15,8 @@ public final class ConfigurationHandler {
     private static int stringPerBlock;
     private static int woodPerBlock;
     private static int ropePerBlock;
+    private static int bridgeDamage;
+    private static int ladderDamage;
 
     /**
      * Initializes the configuration file.
@@ -40,6 +42,8 @@ public final class ConfigurationHandler {
         setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
         setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
         setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
+        setDamagePerLadder(getConfig().getInt("damageForLadder", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Ladder Gun is damaged after creating each ladder."));
+        setDamagePerBridge(getConfig().getInt("damageForBridge", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Bridge Gun is damaged after creating each ladder."));
 
         if (getConfig().hasChanged()) {
             getConfig().save();
@@ -110,6 +114,14 @@ public final class ConfigurationHandler {
         ConfigurationHandler.woodPerBlock = woodPerBlock;
     }
 
+    public static void setDamagePerBridge (int bridgeDamage) {
+        ConfigurationHandler.bridgeDamage = bridgeDamage;
+    }
+
+    public static void setDamagePerLadder (int ladderDamage) {
+        ConfigurationHandler.ladderDamage = ladderDamage;
+    }
+
     public static int getRopePerBlock() {
         return ropePerBlock;
     }
@@ -124,5 +136,13 @@ public final class ConfigurationHandler {
 
     public static int getWoodPerBlock() {
         return woodPerBlock;
+    }
+
+    public static int getLadderDamage () {
+        return ladderDamage;
+    }
+
+    public static int getBridgeDamage () {
+        return bridgeDamage;
     }
 }

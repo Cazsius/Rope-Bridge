@@ -94,7 +94,7 @@ public class BridgeBuildingHandler {
             final int type = inputType == -1 ? getWoodType(player) : inputType;
             if (inputType == -1 && !player.capabilities.isCreativeMode) {
                 takeMaterials(player, distInt - 1);
-                stack.damageItem(1, player);
+                stack.damageItem(ConfigurationHandler.getBridgeDamage(), player);
             }
             buildBridge(player.world, bridge, type);
         } else {
@@ -138,7 +138,8 @@ public class BridgeBuildingHandler {
     }
 
     private static void takeMaterials(EntityPlayer player, int dist) {
-        if (player.capabilities.isCreativeMode) {
+        boolean noCost = ConfigurationHandler.getSlabsPerBlock() == 0 && ConfigurationHandler.getStringPerBlock() == 0;
+        if (player.capabilities.isCreativeMode || noCost) {
             return;
         }
         int slabsNeeded = dist;
@@ -237,7 +238,6 @@ public class BridgeBuildingHandler {
     }
 
     private static int getWoodType(EntityPlayer player) {
-
         for (final ItemStack stack : player.inventory.mainInventory) {
             if (stack.isEmpty()) {
                 continue;

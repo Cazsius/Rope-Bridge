@@ -58,8 +58,13 @@ public class LadderBuildingHandler {
 				ModUtils.tellPlayer(player, Messages.UNDERFUNDED_LADDER, woodNeeded, ropeNeeded);
 				return;
 			}
-		} else if (type == null)
+		}
+
+		if (type == null)
 			type = EnumType.OAK;
+
+		if (!player.capabilities.isCreativeMode)
+			builder.damageItem(ConfigurationHandler.getLadderDamage(), player);
 
 		consume(player, woodNeeded, ropeNeeded, woodType);
 		build(world, start, count, hitSide, type);
@@ -89,7 +94,8 @@ public class LadderBuildingHandler {
 
 	private static void consume(EntityPlayer player, int woodNeeded, int ropeNeeded,
 			net.minecraft.block.BlockPlanks.EnumType woodType) {
-		if (player.capabilities.isCreativeMode)
+		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+		if (player.capabilities.isCreativeMode || noCost)
 			return;
 		player.inventory.clearMatchingItems(ContentHandler.itemRope, -1, ropeNeeded, null);
 		player.inventory.clearMatchingItems(Item.getItemFromBlock(Blocks.WOODEN_SLAB), woodType.getMetadata(),
