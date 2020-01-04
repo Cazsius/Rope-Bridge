@@ -1,148 +1,89 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
-import java.io.File;
-
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.ForgeConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
 public final class ConfigurationHandler {
-    private static Configuration config = null;
-    private static int maxBridgeDistance;
-    private static int bridgeDroopFactor;
-    private static float bridgeYOffset;
-    private static boolean breakThroughBlocks;
-    private static boolean ignoreSlopeWarnings;
-    private static int slabsPerBlock;
-    private static int stringPerBlock;
-    private static int woodPerBlock;
-    private static int ropePerBlock;
-    private static int bridgeDamage;
-    private static int ladderDamage;
+    private static ForgeConfigSpec.IntValue maxBridgeDistance;
+    private static ForgeConfigSpec.IntValue bridgeDroopFactor;
+    private static ForgeConfigSpec.DoubleValue bridgeYOffset;
+    private static ForgeConfigSpec.BooleanValue breakThroughBlocks;
+    private static ForgeConfigSpec.BooleanValue ignoreSlopeWarnings;
+    private static ForgeConfigSpec.IntValue slabsPerBlock;
+    private static ForgeConfigSpec.IntValue stringPerBlock;
+    private static ForgeConfigSpec.IntValue woodPerBlock;
+    private static ForgeConfigSpec.IntValue ropePerBlock;
+    private static ForgeConfigSpec.IntValue bridgeDamage;
+    private static ForgeConfigSpec.IntValue ladderDamage;
 
-    /**
-     * Initializes the configuration file.
-     *
-     * @param file
-     *            The file to read/write config stuff to.
-     */
-    public static void initConfig(File file) {
-        setConfig(new Configuration(file));
-        syncConfig();
+    public static final ConfigurationHandler SERVER;
+    public static final ForgeConfigSpec SERVER_SPEC;
+
+    static {
+        final Pair<ConfigurationHandler, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ConfigurationHandler::new);
+        SERVER_SPEC = specPair.getRight();
+        SERVER = specPair.getLeft();
     }
 
-    /**
-     * Syncs all configuration properties.
-     */
-    public static void syncConfig() {
-        setMaxBridgeDistance(getConfig().getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun."));
-        setBridgeDroopFactor(getConfig().getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang."));
-        setBridgeYOffset(getConfig().getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet."));
-        setBreakThroughBlocks(getConfig().getBoolean("breakThroughBlocks", Configuration.CATEGORY_GENERAL, false, "If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode."));
-        setIgnoreSlopeWarnings(getConfig().getBoolean("ignoreSlopeWarnings", Configuration.CATEGORY_GENERAL, false, "Set true to ignore all slope warnings and allow building of very steep bridges."));
-        setSlabsPerBlock(getConfig().getInt("slabsPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Slabs consumed for each bridge block built."));
-        setStringPerBlock(getConfig().getInt("stringPerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "String consumed for each bridge block built."));
-        setWoodPerBlock(getConfig().getInt("woodPerBlock", Configuration.CATEGORY_GENERAL, 1, 0, 10, "Wood consumed for each ladder block built."));
-        setRopePerBlock(getConfig().getInt("ropePerBlock", Configuration.CATEGORY_GENERAL, 2, 0, 20, "Rope consumed for each ladder block built."));
-        setDamagePerLadder(getConfig().getInt("damageForLadder", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Ladder Gun is damaged after creating each ladder."));
-        setDamagePerBridge(getConfig().getInt("damageForBridge", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Bridge Gun is damaged after creating each ladder."));
-
-        if (getConfig().hasChanged()) {
-            getConfig().save();
-        }
-    }
-
-    public static Configuration getConfig() {
-        return config;
-    }
-
-    public static void setConfig(Configuration config) {
-        ConfigurationHandler.config = config;
+    public ConfigurationHandler(ForgeConfigSpec.Builder builder) {
+        builder.push("general");
+        maxBridgeDistance = builder.comment("Max length of bridges made be Grappling Gun.").defineInRange("maxBridgeDistance", 400, 1, 1000);
+        bridgeDroopFactor = builder.comment("Percent of slack the bridge will have, causing it to hang.").defineInRange("bridgeDroopFactor", 100, 0, 100);
+        bridgeYOffset = builder.comment("Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet.").defineInRange("bridgeYOffset", -0.3, -1, 1);
+        breakThroughBlocks = builder.comment("If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode.").define("breakThroughBlocks",  false);
+        ignoreSlopeWarnings = builder.comment("Set true to ignore all slope warnings and allow building of very steep bridges.").define("ignoreSlopeWarnings", false);
+        slabsPerBlock = builder.comment("Slabs consumed for each bridge block built.").defineInRange("slabsPerBlock",  1, 0, 10);
+        stringPerBlock = builder.comment("String consumed for each bridge block built.").defineInRange("stringPerBlock", 2, 0, 20);
+        woodPerBlock = builder.comment("Wood consumed for each ladder block built.").defineInRange("woodPerBlock",  1, 0, 10);
+        ropePerBlock = builder.comment("Rope consumed for each ladder block built.").defineInRange("ropePerBlock",  2, 0, 20);
+        bridgeDamage = builder.comment("How much the Ladder Gun is damaged after creating each ladder.").defineInRange("damageForLadder", 1, 0, 64);
+        ladderDamage = builder.comment("How much the Bridge Gun is damaged after creating each ladder.").defineInRange("damageForBridge",  1, 0, 64);
+        builder.pop();
     }
 
     public static boolean isIgnoreSlopeWarnings() {
-        return ignoreSlopeWarnings;
-    }
-
-    public static void setIgnoreSlopeWarnings(boolean ignoreSlopeWarnings) {
-        ConfigurationHandler.ignoreSlopeWarnings = ignoreSlopeWarnings;
+        return ignoreSlopeWarnings.get();
     }
 
     public static int getBridgeDroopFactor() {
-        return bridgeDroopFactor;
+        return bridgeDroopFactor.get();
     }
 
-    public static void setBridgeDroopFactor(int bridgeDroopFactor) {
-        ConfigurationHandler.bridgeDroopFactor = bridgeDroopFactor;
+
+    public static double getBridgeYOffset() {
+        return bridgeYOffset.get();
     }
 
-    public static float getBridgeYOffset() {
-        return bridgeYOffset;
-    }
-
-    public static void setBridgeYOffset(float bridgeYOffset) {
-        ConfigurationHandler.bridgeYOffset = bridgeYOffset;
-    }
 
     public static boolean isBreakThroughBlocks() {
-        return breakThroughBlocks;
-    }
-
-    public static void setBreakThroughBlocks(boolean breakThroughBlocks) {
-        ConfigurationHandler.breakThroughBlocks = breakThroughBlocks;
+        return breakThroughBlocks.get();
     }
 
     public static int getMaxBridgeDistance() {
-        return maxBridgeDistance;
-    }
-
-    public static void setMaxBridgeDistance(int maxBridgeDistance) {
-        ConfigurationHandler.maxBridgeDistance = maxBridgeDistance;
-    }
-
-    public static void setRopePerBlock(int ropePerBlock) {
-        ConfigurationHandler.ropePerBlock = ropePerBlock;
-    }
-
-    public static void setSlabsPerBlock(int slabsPerBlock) {
-        ConfigurationHandler.slabsPerBlock = slabsPerBlock;
-    }
-
-    public static void setStringPerBlock(int stringPerBlock) {
-        ConfigurationHandler.stringPerBlock = stringPerBlock;
-    }
-
-    public static void setWoodPerBlock(int woodPerBlock) {
-        ConfigurationHandler.woodPerBlock = woodPerBlock;
-    }
-
-    public static void setDamagePerBridge (int bridgeDamage) {
-        ConfigurationHandler.bridgeDamage = bridgeDamage;
-    }
-
-    public static void setDamagePerLadder (int ladderDamage) {
-        ConfigurationHandler.ladderDamage = ladderDamage;
+        return maxBridgeDistance.get();
     }
 
     public static int getRopePerBlock() {
-        return ropePerBlock;
+        return ropePerBlock.get();
     }
 
     public static int getSlabsPerBlock() {
-        return slabsPerBlock;
+        return slabsPerBlock.get();
     }
 
     public static int getStringPerBlock() {
-        return stringPerBlock;
+        return stringPerBlock.get();
     }
 
     public static int getWoodPerBlock() {
-        return woodPerBlock;
+        return woodPerBlock.get();
     }
 
     public static int getLadderDamage () {
-        return ladderDamage;
+        return ladderDamage.get();
     }
 
     public static int getBridgeDamage () {
-        return bridgeDamage;
+        return bridgeDamage.get();
     }
 }

@@ -1,65 +1,78 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
-import com.mrtrollnugnug.ropebridge.block.BridgeSlab;
-import com.mrtrollnugnug.ropebridge.block.RopeLadder;
-import com.mrtrollnugnug.ropebridge.block.TileEntityRopeLadder;
+import com.mrtrollnugnug.ropebridge.RopeBridge;
+import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
+import com.mrtrollnugnug.ropebridge.block.RopeLadderBlock;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemLadderBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ObjectHolder;
 
+@ObjectHolder(Constants.MOD_ID)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ContentHandler {
 
-    // Blocks
-    public static Block blockBridgeSlab1, blockBridgeSlab2, blockBridgeSlab3, blockBridgeSlab4;
-    public static Block blockRopeLadder;
+  // Blocks
 
-    // Items
-    public static Item itemBridgeBuilder, itemLadderBuilder;
-    public static Item itemRope, itemBridgeHook, itemBarrel, itemHandle, itemLadderHook;
-    
-    public static final CreativeTabs RopeBridgeTab = new CreativeTabs("RopeBridgeTab") {
-	   		public ItemStack createIcon() {
-	   			return new ItemStack(ContentHandler.itemBridgeBuilder);
-	   		}
-	 };
+  public static final Block oak_rope_ladder = null;
+  public static final Block birch_rope_ladder = null;
+  public static final Block jungle_rope_ladder = null;
+  public static final Block spruce_rope_ladder = null;
+  public static final Block acacia_rope_ladder = null;
+  public static final Block dark_oak_rope_ladder = null;
 
-    public static void initBlocks() {
-    	blockBridgeSlab1 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_1, 1), "bridge_block_1");
-    	blockBridgeSlab2 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_2, 2), "bridge_block_2");
-    	blockBridgeSlab3 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_3, 3), "bridge_block_3");
-    	blockBridgeSlab4 = ModUtils.registerBlockNoItem(new BridgeSlab(BridgeSlab.AABB_BLOCK_4, 4), "bridge_block_4");
-    	blockRopeLadder = ModUtils.registerBlockNoItem(new RopeLadder(), "rope_ladder");
-        GameRegistry.registerTileEntity(TileEntityRopeLadder.class, Constants.MOD_ID + ":rope_ladder_te");
-    }
+  public static final Block oak_bridge = null;
+  public static final Block birch_bridge = null;
+  public static final Block jungle_bridge = null;
+  public static final Block spruce_bridge = null;
+  public static final Block acacia_bridge = null;
+  public static final Block dark_oak_bridge = null;
 
-    public static void initItems() {
-        itemLadderBuilder = ModUtils.registerItem(new ItemLadderBuilder(), "ladder_builder");
-        itemBridgeHook = ModUtils.registerItem(new Item(), "bridge_builder_material.hook");
-        itemBarrel = ModUtils.registerItem(new Item(), "bridge_builder_material.barrel");
-        itemHandle = ModUtils.registerItem(new Item(), "bridge_builder_material.handle");
-        itemLadderHook = ModUtils.registerItem(new Item(), "ladder_hook");
-        itemBridgeBuilder = ModUtils.registerItem(new ItemBridgeBuilder(), "bridge_builder");
-        itemRope = ModUtils.registerItem(new Item(), "rope");
-    }
+  // Items
+  public static final Item bridge_builder = null,
+          ladder_builder = null;
+  public static final Item rope = null,
+          bridge_builder_hook = null,
+          bridge_builder_barrel = null,
+          bridge_builder_handle = null,
+          ladder_hook = null;
 
-    @SideOnly(Side.CLIENT)
-    public static void onClientPreInit()
-    {
-        ModUtils.registerItemInvModel(itemBridgeHook, 0, Constants.MOD_ID + ":bridge_builder_hook");
-        ModUtils.registerItemInvModel(itemBarrel, 0, Constants.MOD_ID + ":bridge_builder_barrel");
-        ModUtils.registerItemInvModel(itemHandle, 0, Constants.MOD_ID + ":bridge_builder_handle");
-        ModUtils.registerItemInvModel(itemBridgeBuilder);
-        ModUtils.registerItemInvModel(itemLadderBuilder);
-        ModUtils.registerItemInvModel(itemLadderHook);
-        ModUtils.registerItemInvModel(itemRope);
-    }
+  @SubscribeEvent
+  public static void initBlocks(final RegistryEvent.Register<Block> event) {
+    Block.Properties properties = Block.Properties.create(Material.WOOD);
+
+    ModUtils.register(new RopeBridgeBlock(properties), "oak_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(properties), "birch_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(properties), "jungle_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(properties), "spruce_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(properties), "acacia_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(properties), "dark_oak_bridge",event.getRegistry());
+
+    ModUtils.register(new RopeLadderBlock(properties), "oak_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(properties), "birch_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(properties), "jungle_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(properties), "spruce_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(properties), "acacia_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(properties), "dark_oak_rope_ladder",event.getRegistry());
+
+  }
+
+  @SubscribeEvent
+  public static void initItems(final RegistryEvent.Register<Item> event) {
+    Item.Properties properties = new Item.Properties().group(RopeBridge.RopeBridgeTab);
+    ModUtils.register(new ItemLadderBuilder(properties), "ladder_builder",event.getRegistry());
+    ModUtils.register(new Item(properties), "bridge_builder_hook",event.getRegistry());
+    ModUtils.register(new Item(properties), "bridge_builder_barrel",event.getRegistry());
+    ModUtils.register(new Item(properties), "bridge_builder_handle",event.getRegistry());
+    ModUtils.register(new Item(properties), "ladder_hook",event.getRegistry());
+    ModUtils.register(new ItemBridgeBuilder(properties), "bridge_builder",event.getRegistry());
+    ModUtils.register(new Item(properties), "rope",event.getRegistry());
+  }
 }
