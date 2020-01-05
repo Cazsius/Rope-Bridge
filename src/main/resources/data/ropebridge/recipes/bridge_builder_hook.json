@@ -1,15 +1,14 @@
 {
-  "type": "forge:ore_shaped",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "I  ",
     "III",
     "I  "
   ],
   "key": {
-    "I": { "item": "minecraft:iron_ingot" }
+    "I": { "tag": "forge:ingots/iron" }
   },
   "result": {
-    "item": "bridge_builder_material.hook",
-    "count": 1
+    "item": "ropebridge:bridge_builder_hook"
   }
 }

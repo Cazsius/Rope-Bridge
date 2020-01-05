@@ -8,6 +8,8 @@ import com.mrtrollnugnug.ropebridge.item.ItemLadderBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -46,22 +48,21 @@ public final class ContentHandler {
 
   @SubscribeEvent
   public static void initBlocks(final RegistryEvent.Register<Block> event) {
-    Block.Properties properties = Block.Properties.create(Material.WOOD);
+    Block.Properties bridge = Block.Properties.from(Blocks.OAK_PLANKS);
+    Block.Properties ladder = Block.Properties.from(Blocks.LADDER);
+    ModUtils.register(new RopeBridgeBlock(bridge), "oak_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(bridge), "birch_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(bridge), "jungle_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(bridge), "spruce_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(bridge), "acacia_bridge",event.getRegistry());
+    ModUtils.register(new RopeBridgeBlock(bridge), "dark_oak_bridge",event.getRegistry());
 
-    ModUtils.register(new RopeBridgeBlock(properties), "oak_bridge",event.getRegistry());
-    ModUtils.register(new RopeBridgeBlock(properties), "birch_bridge",event.getRegistry());
-    ModUtils.register(new RopeBridgeBlock(properties), "jungle_bridge",event.getRegistry());
-    ModUtils.register(new RopeBridgeBlock(properties), "spruce_bridge",event.getRegistry());
-    ModUtils.register(new RopeBridgeBlock(properties), "acacia_bridge",event.getRegistry());
-    ModUtils.register(new RopeBridgeBlock(properties), "dark_oak_bridge",event.getRegistry());
-
-    ModUtils.register(new RopeLadderBlock(properties), "oak_rope_ladder",event.getRegistry());
-    ModUtils.register(new RopeLadderBlock(properties), "birch_rope_ladder",event.getRegistry());
-    ModUtils.register(new RopeLadderBlock(properties), "jungle_rope_ladder",event.getRegistry());
-    ModUtils.register(new RopeLadderBlock(properties), "spruce_rope_ladder",event.getRegistry());
-    ModUtils.register(new RopeLadderBlock(properties), "acacia_rope_ladder",event.getRegistry());
-    ModUtils.register(new RopeLadderBlock(properties), "dark_oak_rope_ladder",event.getRegistry());
-
+    ModUtils.register(new RopeLadderBlock(ladder), "oak_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(ladder), "birch_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(ladder), "jungle_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(ladder), "spruce_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(ladder), "acacia_rope_ladder",event.getRegistry());
+    ModUtils.register(new RopeLadderBlock(ladder), "dark_oak_rope_ladder",event.getRegistry());
   }
 
   @SubscribeEvent

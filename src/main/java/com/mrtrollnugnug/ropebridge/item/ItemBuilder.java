@@ -1,6 +1,6 @@
 package com.mrtrollnugnug.ropebridge.item;
 
-import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
+import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,6 +34,6 @@ public abstract class ItemBuilder extends Item {
     }
 
     public static RayTraceResult trace(PlayerEntity player) {
-        return player.pick(ConfigurationHandler.getMaxBridgeDistance(), 1.0f,false);
+        return player.pick(ConfigHandler.getMaxBridgeDistance(), 1.0f,false);
     }
 }

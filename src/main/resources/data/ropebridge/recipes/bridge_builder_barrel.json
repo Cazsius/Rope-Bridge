@@ -6,11 +6,10 @@
     "III"
   ],
   "key": {
-    "I": { "item": "minecraft:iron_ingot" },
+    "I": { "tag": "forge:ingots/iron" },
   	"R": { "item": "ropebridge:rope" }
   },
   "result": {
-    "item": "ropebridge:bridge_builder_material.barrel",
-    "count": 1
+    "item": "ropebridge:bridge_builder_barrel"
   }
 }

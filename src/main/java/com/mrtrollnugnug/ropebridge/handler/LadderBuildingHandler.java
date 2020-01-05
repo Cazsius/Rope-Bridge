@@ -3,6 +3,7 @@ package com.mrtrollnugnug.ropebridge.handler;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mrtrollnugnug.ropebridge.block.RopeLadderBlock;
 import com.mrtrollnugnug.ropebridge.lib.BlockItemUseContextExt;
 import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
@@ -28,13 +29,12 @@ import net.minecraftforge.fml.server.ServerLifecycleHooks;
 public class LadderBuildingHandler {
 	public static void newLadder(BlockPos start, PlayerEntity player, World world, Direction hitSide,
 															 ItemStack builder) {
-		BlockState state1 = world.getBlockState(start.offset(hitSide));
 		if (!hitSide.getAxis().isHorizontal()) {
 			ModUtils.tellPlayer(player, Messages.BAD_SIDE,
 					hitSide == Direction.UP ? I18n.format(Messages.TOP) : I18n.format(Messages.BOTTOM));
 			return;
 		}
-		if (false) {
+		if (!RopeLadderBlock.canAttachTo(world,start.offset(hitSide.getOpposite()),hitSide)) {
 			ModUtils.tellPlayer(player, Messages.NOT_SOLID);
 			return;
 		}
@@ -53,9 +53,9 @@ public class LadderBuildingHandler {
 			return;
 		}
 
-		int woodNeeded = count * ConfigurationHandler.getWoodPerBlock();
-		int ropeNeeded = count * ConfigurationHandler.getRopePerBlock();
-		Block slabToUse = findPlankSlabs(player);
+		int woodNeeded = count * ConfigHandler.getWoodPerLadder();
+		int ropeNeeded = count * ConfigHandler.getRopePerLadder();
+		Block slabToUse = getSlabToUse(player);
 
 		if (!player.abilities.isCreativeMode) {
 			if (!hasMaterials(player, woodNeeded, ropeNeeded, slabToUse)) {
@@ -65,7 +65,7 @@ public class LadderBuildingHandler {
 		}
 
 		if (!player.abilities.isCreativeMode)
-			builder.damageItem(ConfigurationHandler.getLadderDamage(), player,playerEntity -> playerEntity.sendBreakAnimation(player.getActiveHand()));
+			builder.damageItem(ConfigHandler.getLadderDamage(), player, playerEntity -> playerEntity.sendBreakAnimation(player.getActiveHand()));
 
 		consume(player, woodNeeded, ropeNeeded, slabToUse);
 		build(world, start, count, hitSide, slabToUse);
@@ -74,7 +74,7 @@ public class LadderBuildingHandler {
 	public static boolean isReplaceable(World world, BlockPos pos, BlockState state){
 		BlockItemUseContext blockItemUseContext = new BlockItemUseContextExt(world,null, Hand.MAIN_HAND,ItemStack.EMPTY,
 						new BlockRayTraceResult(new Vec3d((double)pos.getX() + 0.5D + (double)Direction.DOWN.getXOffset() * 0.5D, (double)pos.getY() + 0.5D + (double)Direction.DOWN.getYOffset() * 0.5D, (double)pos.getZ() + 0.5D + (double)Direction.DOWN.getZOffset() * 0.5D), Direction.DOWN, pos, false));
-		return state.isReplaceable(blockItemUseContext);
+		return pos.getY()> 0 && state.isReplaceable(blockItemUseContext);
 	}
 
 	private static void build(World world, BlockPos start, int count, final Direction facing, final Block type) {
@@ -82,9 +82,10 @@ public class LadderBuildingHandler {
 	}
 
 	private static void build(final World world, final BlockPos start, final int count, final int iterations,
-                            final Direction facing, final Block slabToUsse) {
+                            final Direction facing, final Block slabToUse) {
 		ServerLifecycleHooks.getCurrentServer().execute(() -> {
-			BlockState state = slabToUsse.getDefaultState().with(LadderBlock.FACING, facing);
+
+			BlockState state = ModUtils.map.get(slabToUse).getRight().getDefaultState().with(LadderBlock.FACING, facing);
 			world.setBlockState(start.down(iterations), state);
 		});
 		if (iterations + 1 < count)
@@ -92,34 +93,30 @@ public class LadderBuildingHandler {
 
 				@Override
 				public void run() {
-					build(world, start, count, iterations + 1, facing, slabToUsse);
+					build(world, start, count, iterations + 1, facing, slabToUse);
 				}
 			}, 100);
 	}
 
 	private static void consume(PlayerEntity player, int woodNeeded, int ropeNeeded,
                               Block woodType) {
-		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
 		if (player.abilities.isCreativeMode || noCost)
 			return;
 		player.inventory.clearMatchingItems(stack -> stack.getItem() == ContentHandler.rope, ropeNeeded);
 		player.inventory.clearMatchingItems(stack -> stack.getItem() == woodType.asItem(), woodNeeded);
 	}
 
-	private static Block findPlankSlabs(PlayerEntity player) {
-		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+	private static Block getSlabToUse(PlayerEntity player) {
+		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
 		if (noCost || player.abilities.isCreativeMode)
 			return Blocks.OAK_SLAB;
-		for (ItemStack stack : player.inventory.mainInventory) {
-			if (stack.getItem().isIn(ItemTags.WOODEN_SLABS))
-				Block.getBlockFromItem(stack.getItem());
-		}
-		return null;
+		return player.inventory.mainInventory.stream().filter(stack -> stack.getItem().isIn(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.getBlockFromItem(stack.getItem())).orElse(null);
 	}
 
 	private static boolean hasMaterials(PlayerEntity player, int woodNeeded, int ropeNeeded,
                                       Block toFind) {
-		boolean noCost = ConfigurationHandler.getRopePerBlock() == 0 && ConfigurationHandler.getWoodPerBlock() == 0;
+		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
 		if (noCost || player.abilities.isCreativeMode)
 			return true;
 		for (ItemStack i : player.inventory.mainInventory) {
