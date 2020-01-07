@@ -4,6 +4,7 @@ import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
@@ -13,10 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RopeBridgeBlock extends Block {
 
@@ -61,10 +63,171 @@ public class RopeBridgeBlock extends Block {
   }
 
   @Override
+  public void onBlockHarvested(World world,final BlockPos pos, BlockState state, PlayerEntity player) {
+    super.onBlockHarvested(world, pos, state, player);
+    if (!world.isRemote) {
+      if (player.getHeldItemMainhand().getItem() == ContentHandler.bridge_builder && player.isCrouching()) {
+        boolean rotate = world.getBlockState(pos).get(RopeBridgeBlock.ROTATED);
+        if (rotate) {
+          breakNorth(pos,(ServerWorld) world);
+          breakSouth(pos,(ServerWorld)world);
+        } else {
+          breakEast(pos, (ServerWorld) world);
+          breakWest(pos,(ServerWorld)world);
+        }
+      }
+    }
+  }
+
+  public void breakSouth(BlockPos posToBreak,ServerWorld world){
+    BlockPos south = posToBreak.south();
+    BlockPos up = south.up();
+    BlockPos down = south.down();
+    BlockState stateDown = world.getBlockState(down);
+    BlockState stateUp = world.getBlockState(up);
+    BlockState state = world.getBlockState(south);
+    if (state.getBlock() == this) {
+      world.destroyBlock(south,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakSouth(south,world);
+        }
+      }, 100);
+    }
+    if (stateUp.getBlock() == this) {
+      world.destroyBlock(up,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakSouth(up,world);
+        }
+      }, 100);
+    }
+    if (stateDown.getBlock() == this) {
+      world.destroyBlock(down,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakSouth(down,world);
+        }
+      }, 100);
+    }
+  }
+
+  public void breakNorth(BlockPos posToBreak,ServerWorld world){
+    BlockPos north = posToBreak.north();
+    BlockPos up = north.up();
+    BlockPos down = north.down();
+    BlockState stateDown = world.getBlockState(down);
+    BlockState stateUp = world.getBlockState(up);
+    BlockState state = world.getBlockState(north);
+    if (state.getBlock() == this) {
+      world.destroyBlock(north,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakNorth(north,world);
+        }
+      }, 100);
+    }
+    if (stateUp.getBlock() == this) {
+      world.destroyBlock(up,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakNorth(up,world);
+        }
+      }, 100);
+    }
+    if (stateDown.getBlock() == this) {
+      world.destroyBlock(down,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakNorth(down,world);
+        }
+      }, 100);
+    }
+  }
+
+  public void breakEast(BlockPos posToBreak,ServerWorld world){
+    BlockPos east = posToBreak.east();
+    BlockPos up = east.up();
+    BlockPos down = east.down();
+    BlockState stateDown = world.getBlockState(down);
+    BlockState stateUp = world.getBlockState(up);
+    BlockState state = world.getBlockState(east);
+    if (state.getBlock() == this) {
+      world.destroyBlock(east,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakEast(east,world);
+        }
+      }, 100);
+    }
+    if (stateUp.getBlock() == this) {
+      world.destroyBlock(up,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakEast(up,world);
+        }
+      }, 100);
+    }
+    if (stateDown.getBlock() == this) {
+      world.destroyBlock(down,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakEast(down,world);
+        }
+      }, 100);
+    }
+  }
+
+  public void breakWest(BlockPos posToBreak,ServerWorld world){
+    BlockPos west = posToBreak.west();
+    BlockPos up = west.up();
+    BlockPos down = west.down();
+    BlockState stateDown = world.getBlockState(down);
+    BlockState stateUp = world.getBlockState(up);
+    BlockState state = world.getBlockState(west);
+    if (state.getBlock() == this) {
+      world.destroyBlock(west,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakWest(west,world);
+        }
+      }, 100);
+    }
+    if (stateUp.getBlock() == this) {
+      world.destroyBlock(up,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakWest(up,world);
+        }
+      }, 100);
+    }
+    if (stateDown.getBlock() == this) {
+      world.destroyBlock(down,true);
+      new Timer().schedule(new TimerTask() {
+        @Override
+        public void run() {
+          breakWest(down,world);
+        }
+      }, 100);
+    }
+  }
+
+  @Override
   public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
     List<ItemStack> drops = new ArrayList<>();
     drops.add(new ItemStack(ContentHandler.rope, ConfigHandler.getRopePerBridge()));
-    drops.add(new ItemStack(slab, ConfigHandler.getRopePerBridge()));
+    drops.add(new ItemStack(slab, ConfigHandler.getSlabsPerBridge()));
     return drops;
   }
 }

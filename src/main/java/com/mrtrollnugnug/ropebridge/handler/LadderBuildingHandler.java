@@ -108,10 +108,7 @@ public class LadderBuildingHandler {
 	}
 
 	private static Block getSlabToUse(PlayerEntity player) {
-		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
-		if (noCost || player.abilities.isCreativeMode)
-			return Blocks.OAK_SLAB;
-		return player.inventory.mainInventory.stream().filter(stack -> stack.getItem().isIn(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.getBlockFromItem(stack.getItem())).orElse(null);
+		return player.inventory.mainInventory.stream().filter(stack -> stack.getItem().isIn(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.getBlockFromItem(stack.getItem())).orElse(Blocks.OAK_SLAB);
 	}
 
 	private static boolean hasMaterials(PlayerEntity player, int woodNeeded, int ropeNeeded,

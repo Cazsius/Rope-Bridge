@@ -116,9 +116,10 @@ public class BridgeBuildingHandler {
         boolean noCost = ConfigHandler.getSlabsPerBridge() == 0 && ConfigHandler.getRopePerBridge() == 0;
         if (player.abilities.isCreativeMode || noCost)
             return true;
-        final int stringNeeded = 1 + dist / 2;
+        final int ropeNeeded = dist * ConfigHandler.getRopePerBridge();
+        final int slabsNeeded = dist * ConfigHandler.getSlabsPerBridge();
         int slabsHad = 0;
-        int stringHad = 0;
+        int ropeHad = 0;
 
         for (int i = 0; i < 36; i++) {
             final ItemStack stack = player.inventory.mainInventory.get(i);
@@ -127,16 +128,16 @@ public class BridgeBuildingHandler {
             }
             final Item item = stack.getItem();
             if (item == ContentHandler.rope) {
-                stringHad += stack.getCount();
+                ropeHad += stack.getCount();
             }
             if (item.isIn(ItemTags.WOODEN_SLABS)) {
                 slabsHad += stack.getCount();
             }
         }
-        if (slabsHad >= dist && stringHad >= stringNeeded) {
+        if (slabsHad >= slabsNeeded && ropeHad >= ropeNeeded) {
             return true;
         } else {
-            ModUtils.tellPlayer(player, Messages.UNDERFUNDED_BRIDGE, dist, stringNeeded);
+            ModUtils.tellPlayer(player, Messages.UNDERFUNDED_BRIDGE, dist, ropeNeeded);
             return false;
         }
     }
@@ -146,8 +147,8 @@ public class BridgeBuildingHandler {
         if (player.abilities.isCreativeMode || noCost) {
             return;
         }
-        int slabsNeeded = dist;
-        int stringNeeded = 1 + dist / 2;
+        int slabsNeeded = dist * ConfigHandler.getSlabsPerBridge();
+        int ropeNeeded = dist * ConfigHandler.getRopePerBridge();
         int i = 0;
 
         for (; i < 36; i++) {
@@ -157,13 +158,13 @@ public class BridgeBuildingHandler {
             }
             final Item item = stack.getItem();
             if (item == ContentHandler.rope) {
-                if (stack.getCount() > stringNeeded) {
-                	stack.shrink(stringNeeded);
-                    stringNeeded = 0;
+                if (stack.getCount() > ropeNeeded) {
+                	stack.shrink(ropeNeeded);
+                    ropeNeeded = 0;
                 }
             } else if (item.isIn(ItemTags.WOODEN_SLABS)) {
                 if (stack.getCount() > slabsNeeded) {
-                    stack.shrink(stringNeeded);
+                    stack.shrink(slabsNeeded);
                     slabsNeeded = 0;
                 }
             }

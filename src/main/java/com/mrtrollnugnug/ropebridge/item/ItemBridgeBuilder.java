@@ -96,7 +96,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
         final Block block = state.getBlock();
         if (!player.world.isRemote && player.isCrouching() && isBridgeBlock(player.world.getBlockState(pos).getBlock())) {
             ModUtils.tellPlayer(player, Messages.WARNING_BREAKING);
-            breakBridge(player, player.world, pos);
+            //breakBridge(player, player.world, pos);
         }
         return false;
     }
@@ -104,7 +104,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
             if (isBridgeBlock(state.getBlock())) {
-                return 0.3F;
+                return 1F;
             }
         return super.getDestroySpeed(stack, state);
     }
