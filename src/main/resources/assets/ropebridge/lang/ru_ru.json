@@ -1,0 +1,36 @@
+{
+  "item.ropebridge.bridge_builder": "Мостостроительное ружье",
+  "item.ropebridge.bridge_builder_hook": "Крюк мостостроительного ружья",
+  "item.ropebridge.bridge_builder_barrel": "Ружейный ствол",
+  "item.ropebridge.bridge_builder_handle": "Ружейный приклад",
+  "item.ropebridge.rope": "Веревка",
+  "item.ropebridge.ladder_hook": "Крюк лестничного ружья",
+  "item.ropebridge.ladder_builder": "Лестничное ружье",
+
+  "itemGroup.RopeBridgeTab": "Rope Bridge",
+
+  "block.ropebridge.bridge.block.1": "Часть моста 1",
+  "block.ropebridge.bridge.block.2": "Часть моста 2",
+  "block.ropebridge.bridge.block.3": "Часть моста 3",
+  "block.ropebridge.bridge.block.4": "Часть моста 4",
+
+  "block.ropebridge.rope.ladder": "Веревочная лестница",
+
+  "achievement.grapplingGun": "Мостостроительное ружье",
+  "achievement.grapplingGun.desc": "Скрафтить мостростроительное ружье из ствола, крюка и приклада",
+  "achievement.buildBridge": "Веревочный мост",
+  "achievement.buildBridge.desc": "Построить веревочный мост с помощью вашего нового мостостроительного ружья",
+
+  "chat.ropebridge.warning.breaking": "WARNING! Breaking whole bridge!",
+  "chat.ropebridge.info.notonground": "Вы должны стоять на чем-то, чтобы построить мост!",
+  "chat.ropebridge.info.notcardinal": "Извините, мост надо строить в основном направлении. Пожалуйста, попробуйте еще раз.",
+  "chat.ropebridge.info.greatslope": "Извините, но уклон слишком велик. Пожалуйста, попробуйте еще раз.",
+  "chat.ropebridge.info.obstruction": "Ой! Похоже, здесь что-то мешает.",
+  "_comment": "TODO Fix smoke! Look for the Smoke to see where that is and try again.",
+  "chat.ropebridge.info.underfunded_bridge": "Вам нужно как минимум %f плит и %f веревок для этого моста",
+  "chat.ropebridge.info.underfunded_ladder": "Вам нужно как минимум %f плит и %f веревок для этой лестницы",
+  "chat.ropebridge.info.bad_side": "Вы не можете построить лестницу с%fу блока. Попробуйте сбоку!",
+  "chat.ropebridge.info.not_solid": "Блок не сможет удержать лестницу с этой стороны!",
+  "chat.ropebridge.params.top": "верх",
+  "chat.ropebridge.params.bottom": "низ"
+}
