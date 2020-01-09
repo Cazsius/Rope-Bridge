@@ -1,0 +1,307 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "level": 0,
+        "rotated": false
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_0"
+      }
+    },
+    {
+      "when": {
+        "level": 1,
+        "rotated": false
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_1"
+      }
+    },
+    {
+      "when": {
+        "level": 2,
+        "rotated": false
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_2"
+      }
+    },
+    {
+      "when": {
+        "level": 3,
+        "rotated": false
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_3"
+      }
+    },
+    {
+      "when": {
+        "level": 0,
+        "rotated": true
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_0", "y": 90
+      }
+    },
+    {
+      "when": {
+        "level": 1,
+        "rotated": true
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_1", "y": 90
+      }
+    },
+    {
+      "when": {
+        "level": 2,
+        "rotated": true
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_2", "y": 90
+      }
+    },
+    {
+      "when": {
+        "level": 3,
+        "rotated": true
+      },
+      "apply": {
+        "model": "ropebridge:block/birch_bridge_block_3", "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 0,
+            "level": 1,
+            "rotated": true
+          },
+          {
+            "back": 1,
+            "level": 0,
+            "rotated": true
+          },
+          {
+            "back": 0,
+            "level": 2,
+            "rotated": true
+          },
+          {
+            "back": 2,
+            "level": 0,
+            "rotated": true
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_0_to_1","y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 1,
+            "level": 3,
+            "rotated": true
+          },
+          {
+            "back": 3,
+            "level": 1,
+            "rotated": true
+          },
+          {
+            "back": 1,
+            "level": 2,
+            "rotated": true
+          },
+          {
+            "back": 2,
+            "level": 1,
+            "rotated": true
+          },
+          {
+            "back": 0,
+            "level": 2,
+            "rotated": true
+          },
+          {
+            "back": 2,
+            "level": 0,
+            "rotated": true
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_1_to_2","y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 1,
+            "level": 3,
+            "rotated": true
+          },
+          {
+            "back": 3,
+            "level": 1,
+            "rotated": true
+          },
+          {
+            "back": 2,
+            "level": 3,
+            "rotated": true
+          },
+          {
+            "back": 3,
+            "level": 2,
+            "rotated": true
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_2_to_3","y": 90}
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 3,
+            "level": 0,
+            "rotated": true
+          },
+          {
+            "back": 0,
+            "level": 3,
+            "rotated": true
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_3_to_4","y": 90
+      }
+    },
+
+
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 0,
+            "level": 1,
+            "rotated": false
+          },
+          {
+            "back": 1,
+            "level": 0,
+            "rotated": false
+          },
+          {
+            "back": 0,
+            "level": 2,
+            "rotated": false
+          },
+          {
+            "back": 2,
+            "level": 0,
+            "rotated": false
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_0_to_1"}
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 1,
+            "level": 3,
+            "rotated": false
+          },
+          {
+            "back": 3,
+            "level": 1,
+            "rotated": false
+          },
+          {
+            "back": 1,
+            "level": 2,
+            "rotated": false
+          },
+          {
+            "back": 2,
+            "level": 1,
+            "rotated": false
+          },
+          {
+            "back": 0,
+            "level": 2,
+            "rotated": false
+          },
+          {
+            "back": 2,
+            "level": 0,
+            "rotated": false
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_1_to_2"}
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 1,
+            "level": 3,
+            "rotated": false
+          },
+          {
+            "back": 3,
+            "level": 1,
+            "rotated": false
+          },
+          {
+            "back": 2,
+            "level": 3,
+            "rotated": false
+          },
+          {
+            "back": 3,
+            "level": 2,
+            "rotated": false
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_2_to_3"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "back": 3,
+            "level": 0,
+            "rotated": false
+          },
+          {
+            "back": 0,
+            "level": 3,
+            "rotated": false
+          }
+        ]
+      },
+      "apply": {
+        "model": "ropebridge:block/bridge_attach_3_to_4"
+      }
+    }
+  ]
+}

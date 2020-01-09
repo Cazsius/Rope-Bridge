@@ -1,31 +1,21 @@
 package com.mrtrollnugnug.ropebridge.lib;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
+import com.mrtrollnugnug.ropebridge.block.RopeLadderBlock;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.item.Item;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.registries.GameData;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ModUtils {
-    /**
-     * A list of all items from RopeBridge.
-     */
-    protected static final List<Item> ITEMS = new ArrayList<>();
-
-    /**
-     * A list of all blocks from RopeBridge.
-     */
-    protected static final List<Block> BLOCKS = new ArrayList<>();
-
    
     /**
      * Sends a message to a command sender. Can be used for easier message
@@ -38,177 +28,45 @@ public final class ModUtils {
      *            The message to send. This can be a normal message, however
      *            translation keys are HIGHLY encouraged!
      */
-    public static void tellPlayer(ICommandSender sender, String message, Object... params) {
-        sender.sendMessage(new TextComponentTranslation(message, params));
+
+    public static final Map<Block, Pair<Block, Block>> map = new HashMap<>();
+
+    public static void tellPlayer(PlayerEntity sender, String message, Object... params) {
+        sender.sendMessage(new TranslationTextComponent(message, params));
     }
 
-    /**
-     * Provides the same functionality as older forge tile registration.
-     *
-     * @param block
-     *            The block to register.
-     * @param id
-     *            The ID to register the block with.
-    public static Block registerBlock(Block block, String id) {
-        block.setRegistryName(id);
-        block.setUnlocalizedName(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
-        block.setCreativeTab(ContentHandler.RopeBridgeTab);
-        GameData.register_impl(block);
-        System.out.println(block.getRegistryName());
-        GameRegistry.register(new ItemBlock(block), block.getRegistryName());
-        //TODO ^
-        BLOCKS.add(block);
-        return block;
-    }
-    */
-
-    public static Block registerBlockNoItem(Block block, String id) {
-        block.setRegistryName(id);
-        block.setTranslationKey(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
-        GameData.register_impl(block);
-        BLOCKS.add(block);
-        return block;
+    public static <T extends IForgeRegistryEntry<T>> void register(T obj, String name, IForgeRegistry<T> registry) {
+        register(obj, Constants.MOD_ID, name, registry);
     }
 
-    /**
-     * Provides the same functionality as older forge item registration.
-     *
-     * @param item
-     *            The item to register.
-     * @param id
-     *            The ID to register the item with.
-     */
-    public static Item registerItem(Item item, String id) {
-        if (item.getRegistryName() == null) {
-            item.setRegistryName(id);
-        }
-        item.setCreativeTab(ContentHandler.RopeBridgeTab);
-        item.setTranslationKey(Constants.MOD_ID + "." + id.toLowerCase().replace("_", "."));
-        GameData.register_impl(item);
-        ITEMS.add(item);
-        return item;
+    public static <T extends IForgeRegistryEntry<T>> void register(T obj, String modid, String name, IForgeRegistry<T> registry) {
+        register(obj,new ResourceLocation(modid, name),registry);
     }
 
-    /**
-     * Registers inventory models for a block that uses meta data.
-     *
-     * @param block
-     *            The block to register models for.
-     * @param variants
-     *            The names of the models to use in order of meta data.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, String[] variants) {
-        registerItemInvModel(Item.getItemFromBlock(block), variants);
+    public static <T extends IForgeRegistryEntry<T>> void register(T obj, ResourceLocation location, IForgeRegistry<T> registry) {
+        registry.register(obj.setRegistryName(location));
     }
 
-    /**
-     * Registers inventory models for a block that uses meta data.
-     *
-     * @param block
-     *            The block to register models for.
-     * @param prefix
-     *            A prefix for the model names.
-     * @param variants
-     *            The names of the models to use in order of meta data.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, String prefix, String[] variants) {
-        registerItemInvModel(Item.getItemFromBlock(block), prefix, variants);
-    }
+    public static void initMap(){
+        map.put(Blocks.OAK_SLAB, Pair.of(ContentHandler.oak_bridge,ContentHandler.oak_rope_ladder));
+        map.put(Blocks.BIRCH_SLAB, Pair.of(ContentHandler.birch_bridge,ContentHandler.birch_rope_ladder));
+        map.put(Blocks.JUNGLE_SLAB, Pair.of(ContentHandler.jungle_bridge,ContentHandler.jungle_rope_ladder));
+        map.put(Blocks.SPRUCE_SLAB, Pair.of(ContentHandler.spruce_bridge,ContentHandler.spruce_rope_ladder));
+        map.put(Blocks.ACACIA_SLAB, Pair.of(ContentHandler.acacia_bridge,ContentHandler.acacia_rope_ladder));
+        map.put(Blocks.DARK_OAK_SLAB, Pair.of(ContentHandler.dark_oak_bridge,ContentHandler.dark_oak_rope_ladder));
 
-    /**
-     * Registers inventory models for a block.
-     *
-     * @param block
-     *            The block to register models for.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block) {
-        registerItemInvModel(Item.getItemFromBlock(block), 0);
-    }
+        ((RopeLadderBlock)ContentHandler.oak_rope_ladder).setSlab(Blocks.OAK_SLAB);
+        ((RopeLadderBlock)ContentHandler.birch_rope_ladder).setSlab(Blocks.BIRCH_SLAB);
+        ((RopeLadderBlock)ContentHandler.jungle_rope_ladder).setSlab(Blocks.JUNGLE_SLAB);
+        ((RopeLadderBlock)ContentHandler.spruce_rope_ladder).setSlab(Blocks.SPRUCE_SLAB);
+        ((RopeLadderBlock)ContentHandler.acacia_rope_ladder).setSlab(Blocks.ACACIA_SLAB);
+        ((RopeLadderBlock)ContentHandler.dark_oak_rope_ladder).setSlab(Blocks.DARK_OAK_SLAB);
 
-    /**
-     * Registers inventory models for a block.
-     *
-     * @param block
-     *            The block to register models for.
-     * @param meta
-     *            The meta data to register the model for.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockInvModel(Block block, int meta) {
-        registerItemInvModel(Item.getItemFromBlock(block), meta);
-    }
-
-    /**
-     * Registers inventory models for an item.
-     *
-     * @param item
-     *            The item to register a model for.
-     * @param meta
-     *            The meta data to register the model for.
-     * @param model
-     *            The name of the model to register.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, int meta, String model) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(model, "inventory"));
-    }
-
-    /**
-     * Registers inventory models for an item that uses meta data.
-     *
-     * @param item
-     *            The item to register a model for.
-     * @param prefix
-     *            A prefix to use on the variant names.
-     * @param variants
-     *            The names of the models to use, in order of meta data.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, String prefix, String[] variants) {
-        for (int meta = 0; meta < variants.length; meta++) {
-            ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().getNamespace() + ":" + prefix + "_" + variants[meta], "inventory"));
-        }
-    }
-
-    /**
-     * Registers inventory models for an item that uses meta data.
-     *
-     * @param item
-     *            The item to register a model for.
-     * @param variants
-     *            The names of the models to use, in order of meta data.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, String[] variants) {
-        for (int meta = 0; meta < variants.length; meta++) {
-            ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().getNamespace() + ":" + variants[meta], "inventory"));
-        }
-    }
-
-    /**
-     * Registers inventory models for an item.
-     *
-     * @param item
-     *            The item to registers a model for.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
-    }
-
-    /**
-     * Registers inventory models for an item.
-     *
-     * @param item
-     *            The item to registers a model for.
-     * @param meta
-     *            The meta data to register the model for.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void registerItemInvModel(Item item, int meta) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
+        ((RopeBridgeBlock)ContentHandler.oak_bridge).setSlab(Blocks.OAK_SLAB);
+        ((RopeBridgeBlock)ContentHandler.birch_bridge).setSlab(Blocks.BIRCH_SLAB);
+        ((RopeBridgeBlock)ContentHandler.jungle_bridge).setSlab(Blocks.JUNGLE_SLAB);
+        ((RopeBridgeBlock)ContentHandler.spruce_bridge).setSlab(Blocks.SPRUCE_SLAB);
+        ((RopeBridgeBlock)ContentHandler.acacia_bridge).setSlab(Blocks.ACACIA_SLAB);
+        ((RopeBridgeBlock)ContentHandler.dark_oak_bridge).setSlab(Blocks.DARK_OAK_SLAB);
     }
 }
