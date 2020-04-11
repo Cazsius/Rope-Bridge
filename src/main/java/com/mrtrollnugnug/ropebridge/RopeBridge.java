@@ -1,7 +1,6 @@
 package com.mrtrollnugnug.ropebridge;
 
 import com.mrtrollnugnug.ropebridge.common.CommonProxy;
-import com.mrtrollnugnug.ropebridge.handler.ConfigurationHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 import com.mrtrollnugnug.ropebridge.network.LadderMessage;
@@ -28,7 +27,6 @@ public class RopeBridge {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent e) {
-        ConfigurationHandler.initConfig(e.getSuggestedConfigurationFile());
         proxy.preInit(e);
         snw = NetworkRegistry.INSTANCE.newSimpleChannel(Constants.MOD_ID);
         snw.registerMessage(BridgeMessage.BridgeMessageHandler.class, BridgeMessage.class, discriminator++, Side.SERVER);
