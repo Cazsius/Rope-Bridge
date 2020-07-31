@@ -13,6 +13,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
@@ -193,7 +194,7 @@ public class BridgeBuildingHandler {
     private static void spawnSmoke(World world, BlockPos pos, int times) {
 
         if (times > 0) {
-            world.addParticle(ParticleTypes.EXPLOSION,false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0.0D, 0.0D, 0.0D);
+            ((ServerWorld) world).spawnParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             final World finworld = world;
             final BlockPos finPos = pos;
             final int finTimes = times - 1;
