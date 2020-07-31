@@ -76,7 +76,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
         if (entityLiving instanceof PlayerEntity && world.isRemote) {
             final PlayerEntity player = (PlayerEntity) entityLiving;
             if (this.getUseDuration(stack) - timeLeft > 10) {
-                if (!player.onGround) {
+                if (!player.isOnGround()) {
                     ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 } else {
                     final RayTraceResult hit = trace(player);
