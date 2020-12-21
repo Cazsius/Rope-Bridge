@@ -194,6 +194,7 @@ public class BridgeBuildingHandler {
     private static void spawnSmoke(World world, BlockPos pos, int times) {
 
         if (times > 0) {
+          final World finworld = world;
             ((ServerWorld) world).spawnParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             final World finworld = world;
             final BlockPos finPos = pos;

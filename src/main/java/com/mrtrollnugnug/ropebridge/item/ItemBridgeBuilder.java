@@ -76,12 +76,12 @@ public class ItemBridgeBuilder extends ItemBuilder {
         if (entityLiving instanceof PlayerEntity && world.isRemote) {
             final PlayerEntity player = (PlayerEntity) entityLiving;
             if (this.getUseDuration(stack) - timeLeft > 10) {
-                if (!player.onGround) {
+                if (!player.isOnGround()) {
                     ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
                 } else {
                     final RayTraceResult hit = trace(player);
                     if (hit instanceof BlockRayTraceResult) {
-                        final BlockPos floored = new BlockPos(Math.floor(player.func_226277_ct_()), Math.floor(player.func_226278_cu_()) - 1, Math.floor(player.func_226281_cx_())).down();
+                        final BlockPos floored = new BlockPos(Math.floor(player.getPosX()), Math.floor(player.getPosY()) - 1, Math.floor(player.getPosZ())).down();
                         BlockPos target = ((BlockRayTraceResult) hit).getPos();
                         RopeBridge.getSnw().sendToServer(new BridgeMessage(floored, target));
                     }
