@@ -22,7 +22,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
@@ -73,7 +73,7 @@ public class LadderBuildingHandler {
 
 	public static boolean isReplaceable(World world, BlockPos pos, BlockState state){
 		BlockItemUseContext blockItemUseContext = new BlockItemUseContextExt(world,null, Hand.MAIN_HAND,ItemStack.EMPTY,
-						new BlockRayTraceResult(new Vec3d((double)pos.getX() + 0.5D + (double)Direction.DOWN.getXOffset() * 0.5D, (double)pos.getY() + 0.5D + (double)Direction.DOWN.getYOffset() * 0.5D, (double)pos.getZ() + 0.5D + (double)Direction.DOWN.getZOffset() * 0.5D), Direction.DOWN, pos, false));
+						new BlockRayTraceResult(new Vector3d((double)pos.getX() + 0.5D + (double)Direction.DOWN.getXOffset() * 0.5D, (double)pos.getY() + 0.5D + (double)Direction.DOWN.getYOffset() * 0.5D, (double)pos.getZ() + 0.5D + (double)Direction.DOWN.getZOffset() * 0.5D), Direction.DOWN, pos, false));
 		return pos.getY()> 0 && state.isReplaceable(blockItemUseContext);
 	}
 
@@ -103,8 +103,8 @@ public class LadderBuildingHandler {
 		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
 		if (player.abilities.isCreativeMode || noCost)
 			return;
-		player.inventory.clearMatchingItems(stack -> stack.getItem() == ContentHandler.rope, ropeNeeded);
-		player.inventory.clearMatchingItems(stack -> stack.getItem() == woodType.asItem(), woodNeeded);
+		player.inventory.func_234564_a_(stack -> stack.getItem() == ContentHandler.rope, ropeNeeded,player.container.func_234641_j_());
+		player.inventory.func_234564_a_(stack -> stack.getItem() == woodType.asItem(), woodNeeded,player.container.func_234641_j_());
 	}
 
 	private static Block getSlabToUse(PlayerEntity player) {

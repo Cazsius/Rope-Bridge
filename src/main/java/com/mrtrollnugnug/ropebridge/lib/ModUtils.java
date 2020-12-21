@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -32,7 +33,7 @@ public final class ModUtils {
     public static final Map<Block, Pair<Block, Block>> map = new HashMap<>();
 
     public static void tellPlayer(PlayerEntity sender, String message, Object... params) {
-        sender.sendMessage(new TranslationTextComponent(message, params));
+        sender.sendMessage(new TranslationTextComponent(message, params), Util.DUMMY_UUID);
     }
 
     public static <T extends IForgeRegistryEntry<T>> void register(T obj, String name, IForgeRegistry<T> registry) {
