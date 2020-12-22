@@ -27,27 +27,23 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 public class LadderBuildingHandler {
-	public static void newLadder(BlockPos start, PlayerEntity player, World world, Direction hitSide,
+	public static void newLadder(BlockPos selected, PlayerEntity player, World world, Direction hitSide,
 															 ItemStack builder) {
 		if (!hitSide.getAxis().isHorizontal()) {
 			ModUtils.tellPlayer(player, Messages.BAD_SIDE,
 					hitSide == Direction.UP ? I18n.format(Messages.TOP) : I18n.format(Messages.BOTTOM));
 			return;
 		}
-		if (!RopeLadderBlock.canAttachTo(world,start.offset(hitSide.getOpposite()),hitSide)) {
+
+		BlockState ladderState = ContentHandler.oak_rope_ladder.getDefaultState().with(LadderBlock.FACING,hitSide);
+
+		if (!ladderState.isValidPosition(world,selected)) {
 			ModUtils.tellPlayer(player, Messages.NOT_SOLID);
 			return;
 		}
 
-		int count = 0;
-		BlockPos lower = start;
-		BlockState state = world.getBlockState(lower);
+		int count = countBlocks(selected.offset(hitSide),world);
 
-		while (isReplaceable(world, lower,state)) {
-			count++;
-			lower = lower.down();
-			state = world.getBlockState(lower);
-		}
 		if (count <= 0) {
 			ModUtils.tellPlayer(player, Messages.OBSTRUCTED);
 			return;
@@ -68,7 +64,25 @@ public class LadderBuildingHandler {
 			builder.damageItem(ConfigHandler.getLadderDamage(), player, playerEntity -> playerEntity.sendBreakAnimation(player.getActiveHand()));
 
 		consume(player, woodNeeded, ropeNeeded, slabToUse);
-		build(world, start, count, hitSide, slabToUse);
+		build(world, selected.offset(hitSide), count, hitSide, slabToUse);
+	}
+
+
+	public static int countBlocks(BlockPos start, World world) {
+
+		BlockPos.Mutable mutable = new BlockPos.Mutable();
+
+		mutable.setPos(start);
+
+		int count = 0;
+		BlockState state = world.getBlockState(start);
+
+		while (isReplaceable(world, start,state)) {
+			count++;
+			start = start.down();
+			state = world.getBlockState(start);
+		}
+		return count;
 	}
 
 	public static boolean isReplaceable(World world, BlockPos pos, BlockState state){

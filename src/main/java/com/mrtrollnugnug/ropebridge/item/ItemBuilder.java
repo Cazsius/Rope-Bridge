@@ -26,14 +26,11 @@ public abstract class ItemBuilder extends Item {
     }
 
     @Override
-    public abstract void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft);
-
-    @Override
     public int getUseDuration(ItemStack stack) {
         return 72000;
     }
 
     public static RayTraceResult trace(PlayerEntity player) {
-        return player.pick(ConfigHandler.getMaxBridgeDistance(), 1.0f,false);
+        return player.pick(ConfigHandler.getMaxBridgeDistance(), 0,false);
     }
 }

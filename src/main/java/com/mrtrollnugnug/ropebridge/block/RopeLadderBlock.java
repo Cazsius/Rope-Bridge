@@ -7,9 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.LadderBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +25,6 @@ public class RopeLadderBlock extends LadderBlock {
 
     public void setSlab(Block slab){
         this.slab = slab;
-    }
-
-    public static boolean canAttachTo(IBlockReader world, BlockPos pos, Direction dir) {
-        BlockState blockstate = world.getBlockState(pos);
-        return !blockstate.canProvidePower() && blockstate.canConnectRedstone(world, pos, dir);
     }
 
     @Override

@@ -2,10 +2,9 @@ package com.mrtrollnugnug.ropebridge.item;
 
 import com.mrtrollnugnug.ropebridge.RopeBridge;
 import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
-import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -73,7 +71,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity && world.isRemote) {
+        if (entityLiving instanceof PlayerEntity && !world.isRemote) {
             final PlayerEntity player = (PlayerEntity) entityLiving;
             if (this.getUseDuration(stack) - timeLeft > 10) {
                 if (!player.isOnGround()) {
@@ -83,7 +81,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
                     if (hit instanceof BlockRayTraceResult) {
                         final BlockPos floored = new BlockPos(Math.floor(player.getPosX()), Math.floor(player.getPosY()) - 1, Math.floor(player.getPosZ())).down();
                         BlockPos target = ((BlockRayTraceResult) hit).getPos();
-                        RopeBridge.getSnw().sendToServer(new BridgeMessage(floored, target));
+                        BridgeBuildingHandler.newBridge(player, player.getHeldItemMainhand(), floored, target);
                     }
                 }
             }

@@ -4,8 +4,6 @@ import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-import com.mrtrollnugnug.ropebridge.network.BridgeMessage;
-import com.mrtrollnugnug.ropebridge.network.LadderMessage;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -25,9 +23,6 @@ public class RopeBridge {
       return new ItemStack(ContentHandler.bridge_builder);
     }
   };
-  private static SimpleChannel snw;
-
-  private int discriminator = 0;
 
   public RopeBridge() {
     ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.SERVER_SPEC);
@@ -35,13 +30,7 @@ public class RopeBridge {
   }
 
   private void preInit(FMLCommonSetupEvent e) {
-    snw = NetworkRegistry.newSimpleChannel(new ResourceLocation(Constants.MOD_ID,Constants.MOD_ID), () -> "1.0", s -> true, s -> true);
-    snw.registerMessage(discriminator++,BridgeMessage.class,BridgeMessage::encode, BridgeMessage::new,BridgeMessage::handle);
-    snw.registerMessage(discriminator++,LadderMessage.class, LadderMessage::encode, LadderMessage::new, LadderMessage::handle);
     ModUtils.initMap();
   }
 
-  public static SimpleChannel getSnw() {
-    return snw;
-  }
 }
