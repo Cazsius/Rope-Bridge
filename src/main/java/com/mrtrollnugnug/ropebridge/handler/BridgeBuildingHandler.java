@@ -229,8 +229,6 @@ public class BridgeBuildingHandler {
         }
     }
 
-    //todo, fix
-    @Nullable
     private static Block getSlabs(PlayerEntity player) {
         for (final ItemStack stack : player.inventory.mainInventory) {
             if (stack.isEmpty()) {
@@ -239,9 +237,7 @@ public class BridgeBuildingHandler {
             if (stack.getItem().isIn(ItemTags.WOODEN_SLABS))
                 return Block.getBlockFromItem(stack.getItem());
         }
-        if (player.abilities.isCreativeMode){
-            return Blocks.OAK_SLAB;
-        }
-        return null;
+        //todo: this is reachable when the player has 0 slabs, a fallback of oak is used in this case, maybe allow for different blocks?
+        return Blocks.OAK_SLAB;
     }
 }
