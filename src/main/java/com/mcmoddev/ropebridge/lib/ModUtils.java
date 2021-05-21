@@ -3,6 +3,7 @@ package com.mcmoddev.ropebridge.lib;
 import com.mcmoddev.ropebridge.block.RopeBridgeBlock;
 import com.mcmoddev.ropebridge.block.RopeLadderBlock;
 import com.mcmoddev.ropebridge.handler.ContentHandler;
+import com.mcmoddev.ropebridge.lib.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,12 +17,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class ModUtils {
+public class ModUtils {
+
+	public static final Map<Block, Pair<Block, Block>> map = new HashMap<>();
 
 	/**
 	 * Sends a message to a command sender. Can be used for easier message
 	 * sending.
-	 *
 	 * @param sender
 	 * The thing to send the message to. This should probably be a
 	 * player.
@@ -29,9 +31,6 @@ public final class ModUtils {
 	 * The message to send. This can be a normal message, however
 	 * translation keys are HIGHLY encouraged!
 	 */
-
-	public static final Map<Block, Pair<Block, Block>> map = new HashMap<>();
-
 	public static void tellPlayer(PlayerEntity sender, String message, Object... params) {
 		sender.sendMessage(new TranslationTextComponent(message, params), Util.DUMMY_UUID);
 	}
