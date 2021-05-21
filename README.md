@@ -1,6 +1,6 @@
-![Banner](rope_bridge_cover.png)
+![Banner](ropebridge.logo.png)
 
-#### The Rope-Bridge mod for Minecraft
+### The Rope-Bridge mod for Minecraft
 
 
 Jump to:
@@ -18,7 +18,6 @@ Features:
 -   Fully server-compatible
 -   Custom Acievements!
 - 	crafting recipe for string
--   Fancy models (coming to 1.7.10 soon)
 
 ---
 
@@ -84,9 +83,6 @@ Many thanks to Bushi_Seasons and FletcherGirl42 for all their help!
 - build from player
 - Model animation
 - Placable bridge walls
-- Auto-checker for updates
-- updated to 1.8.9
-- make use of cofig file
 ---
 
 # License

@@ -23,6 +23,7 @@ eclipse
 run
 classes
 *.hprof
+/logs/*
 
 /README.txt
 /forge-*-changelog.txt
