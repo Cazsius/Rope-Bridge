@@ -1,8 +1,7 @@
-![Banner](images/banner.png)
+![Banner](rope_bridge_cover.png)
 
-#### The Rope-Bridge mod for Minecraft 1.8.x
+#### The Rope-Bridge mod for Minecraft
 
-[DOWNLOAD v1.1](http://adf.ly/1RrNto)
 
 Jump to:
 

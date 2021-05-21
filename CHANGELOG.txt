@@ -1,0 +1,4 @@
+1.16.5-2.2.0:
+- Large refactor and code cleanup, updated build scripts and added an update checker.
+- Fixed rope bridges not taking items when you have >= the amount of materials needed.
+- Removed unused code for breaking the bridges as it was duplicated elsewhere.
