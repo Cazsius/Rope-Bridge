@@ -2,7 +2,6 @@ package com.mcmoddev.ropebridge.block;
 
 import com.mcmoddev.ropebridge.handler.ConfigHandler;
 import com.mcmoddev.ropebridge.handler.ContentHandler;
-import com.mcmoddev.ropebridge.lib.Constants;
 import com.mcmoddev.ropebridge.lib.Constants.Messages;
 import com.mcmoddev.ropebridge.lib.ModUtils;
 import net.minecraft.block.Block;
@@ -63,32 +62,30 @@ public class RopeBridgeBlock extends Block {
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		int level = state.get(PROPERTY_HEIGHT);
 		switch (level) {
-			case 0:
-			default:
-				return ZERO_AABB;
 			case 1:
 				return ONE_AABB;
 			case 2:
 				return TWO_AABB;
 			case 3:
 				return THREE_AABB;
+			case 0:
+			default:
+				return ZERO_AABB;
 		}
 	}
 
 	@Override
 	public void onBlockHarvested(World world, final BlockPos pos, BlockState state, PlayerEntity player) {
 		super.onBlockHarvested(world, pos, state, player);
-		if (!world.isRemote) {
-			if (player.getHeldItemMainhand().getItem() == ContentHandler.bridge_builder && player.isCrouching()) {
-				ModUtils.tellPlayer(player, Messages.WARNING_BREAKING);
-				boolean rotate = world.getBlockState(pos).get(RopeBridgeBlock.ROTATED);
-				if (rotate) {
-					breakNorth(pos, (ServerWorld) world);
-					breakSouth(pos, (ServerWorld) world);
-				} else {
-					breakEast(pos, (ServerWorld) world);
-					breakWest(pos, (ServerWorld) world);
-				}
+		if (!world.isRemote && player.getHeldItemMainhand().getItem() == ContentHandler.bridge_builder && player.isCrouching()) {
+			ModUtils.tellPlayer(player, Messages.WARNING_BREAKING);
+			boolean rotate = world.getBlockState(pos).get(RopeBridgeBlock.ROTATED);
+			if (rotate) {
+				breakNorth(pos, (ServerWorld) world);
+				breakSouth(pos, (ServerWorld) world);
+			} else {
+				breakEast(pos, (ServerWorld) world);
+				breakWest(pos, (ServerWorld) world);
 			}
 		}
 	}

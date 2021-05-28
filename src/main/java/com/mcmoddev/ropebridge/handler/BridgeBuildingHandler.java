@@ -21,7 +21,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class BridgeBuildingHandler {
-	private static String woodSlab = "tile.woodSlab";
+
+	private BridgeBuildingHandler() {
+	}
 
 	public static void newBridge(PlayerEntity player, ItemStack stack, BlockPos pos1, BlockPos pos2) {
 		final LinkedList<SlabPosHandler> bridge = new LinkedList<>();

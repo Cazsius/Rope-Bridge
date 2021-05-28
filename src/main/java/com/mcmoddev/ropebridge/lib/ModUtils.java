@@ -3,7 +3,6 @@ package com.mcmoddev.ropebridge.lib;
 import com.mcmoddev.ropebridge.block.RopeBridgeBlock;
 import com.mcmoddev.ropebridge.block.RopeLadderBlock;
 import com.mcmoddev.ropebridge.handler.ContentHandler;
-import com.mcmoddev.ropebridge.lib.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModUtils {
+
+	private ModUtils() {
+	}
 
 	public static final Map<Block, Pair<Block, Block>> map = new HashMap<>();
 
