@@ -1,3 +1,7 @@
+1.16.5-2.2.1:
+- Missing lang entries added.
+- Fixed Ladders not being climbable.
+
 1.16.5-2.2.0:
 - Large refactor and code cleanup, updated build scripts and added an update checker.
 - Fixed rope bridges not taking items when you have >= the amount of materials needed.

@@ -5,8 +5,11 @@ import com.mcmoddev.ropebridge.handler.ContentHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -26,6 +29,11 @@ public class RopeLadderBlock extends LadderBlock {
 
 	public void setSlab(Block slab) {
 		this.slab = slab;
+	}
+
+	@Override
+	public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
+		return true;
 	}
 
 	@Nonnull
