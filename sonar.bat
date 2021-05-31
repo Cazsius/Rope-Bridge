@@ -1,2 +1,0 @@
-call gradlew sonarqube
-pause
