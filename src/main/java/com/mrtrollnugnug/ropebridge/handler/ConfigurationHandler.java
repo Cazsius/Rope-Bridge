@@ -3,9 +3,13 @@ package com.mrtrollnugnug.ropebridge.handler;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public final class ConfigurationHandler {
     private static Configuration config = null;
+
+	public static File configDirectory;
+
     private static int maxBridgeDistance;
     private static int bridgeDroopFactor;
     private static float bridgeYOffset;
@@ -18,21 +22,13 @@ public final class ConfigurationHandler {
     private static int bridgeDamage;
     private static int ladderDamage;
 
-    /**
-     * Initializes the configuration file.
-     *
-     * @param file
-     *            The file to read/write config stuff to.
-     */
-    public static void initConfig(File file) {
-        setConfig(new Configuration(file));
-        syncConfig();
-    }
-
-    /**
-     * Syncs all configuration properties.
-     */
-    public static void syncConfig() {
+    public static void preInit(FMLPreInitializationEvent e) {
+		
+		configDirectory = e.getModConfigurationDirectory();
+		
+		config = new Configuration(e.getSuggestedConfigurationFile());
+        config.load();
+     
         setMaxBridgeDistance(getConfig().getInt("maxBridgeDistance", Configuration.CATEGORY_GENERAL, 400, 1, 1000, "Max length of bridges made be Grappling Gun."));
         setBridgeDroopFactor(getConfig().getInt("bridgeDroopFactor", Configuration.CATEGORY_GENERAL, 100, 0, 100, "Percent of slack the bridge will have, causing it to hang."));
         setBridgeYOffset(getConfig().getFloat("bridgeYOffset", Configuration.CATEGORY_GENERAL, -0.3F, -1.00F, 1.00F, "Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet."));
@@ -45,9 +41,7 @@ public final class ConfigurationHandler {
         setDamagePerLadder(getConfig().getInt("damageForLadder", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Ladder Gun is damaged after creating each ladder."));
         setDamagePerBridge(getConfig().getInt("damageForBridge", Configuration.CATEGORY_GENERAL, 1, 0, 64, "How much the Bridge Gun is damaged after creating each ladder."));
 
-        if (getConfig().hasChanged()) {
-            getConfig().save();
-        }
+        config.save();
     }
 
     public static Configuration getConfig() {
