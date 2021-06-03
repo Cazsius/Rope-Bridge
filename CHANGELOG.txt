@@ -1,0 +1,14 @@
+1.16.5-2.2.1:
+- Missing lang entries added.
+- Fixed Ladders not being climbable.
+
+1.16.5-2.2.0:
+- Large refactor and code cleanup, updated build scripts and added an update checker.
+- Fixed rope bridges not taking items when you have >= the amount of materials needed.
+- Removed unused code for breaking the bridges as it was duplicated elsewhere.
+
+1.12.2-2.2.1:
+- Fixed suffocation under bridges...
+- Fixed hardness when breaking the bridge.
+- Fixed config changes not being correctly applied.
+- Refactored the codebase and build systems.
