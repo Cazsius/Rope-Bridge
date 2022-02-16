@@ -1,9 +1,9 @@
-package com.mcmoddev.ropebridge.block;
+package com.mrtrollnugnug.ropebridge.block;
 
-import com.mcmoddev.ropebridge.handler.ConfigHandler;
-import com.mcmoddev.ropebridge.handler.ContentHandler;
-import com.mcmoddev.ropebridge.lib.Constants.Messages;
-import com.mcmoddev.ropebridge.lib.ModUtils;
+import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

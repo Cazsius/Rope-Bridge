@@ -1,8 +1,8 @@
-package com.mcmoddev.ropebridge.lib;
+package com.mrtrollnugnug.ropebridge.lib;
 
-import com.mcmoddev.ropebridge.block.RopeBridgeBlock;
-import com.mcmoddev.ropebridge.block.RopeLadderBlock;
-import com.mcmoddev.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
+import com.mrtrollnugnug.ropebridge.block.RopeLadderBlock;
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;

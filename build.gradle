@@ -379,10 +379,6 @@ repositories {
     jcenter()
     mavenCentral()
     removeIf { it instanceof MavenArtifactRepository && it.url.host == 'files.minecraftforge.net' }
-    maven {
-        name 'MMD'
-        url 'https://maven.mcmoddev.com/'
-    }
 }
 
 dependencies {
@@ -415,12 +411,12 @@ jar {
         mainAttributes(
                 'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}",
                 'Timestamp': System.currentTimeMillis(),
-                'Specification-Title': 'examplemod',
-                'Specification-Vendor': 'mcmoddev',
+                'Specification-Title': 'ropebridge',
+                'Specification-Vendor': 'cazsius',
                 'Specification-Version': '1',
                 'Implementation-Title': project.archivesBaseName,
                 'Implementation-Version': project.version,
-                'Implementation-Vendor' :'mcmoddev',
+                'Implementation-Vendor' :'cazsius',
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
                 'Built-On': "${project.forge_mc_version}-${project.forge_version}"
@@ -445,12 +441,12 @@ task apiJar(type: Jar) {
     mainAttributes(
       'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}:api",
       'Timestamp': System.currentTimeMillis(),
-      'Specification-Title': 'examplemod',
-      'Specification-Vendor': 'mcmoddev',
+      'Specification-Title': 'ropebridge',
+      'Specification-Vendor': 'cazsius',
       'Specification-Version': '1',
       'Implementation-Title': project.name + '-api',
       'Implementation-Version': project.version,
-      'Implementation-Vendor' :'mcmoddev',
+      'Implementation-Vendor' :'cazsius',
       'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
       'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
       'Built-On': "${project.forge_mc_version}-${project.forge_version}"
@@ -471,12 +467,12 @@ task deobfJar(type: Jar) {
         mainAttributes(
                 'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}:deobf",
                 'Timestamp': System.currentTimeMillis(),
-                'Specification-Title': 'examplemod',
-                'Specification-Vendor': 'mcmoddev',
+                'Specification-Title': 'ropebridge',
+                'Specification-Vendor': 'cazsius',
                 'Specification-Version': '1',
                 'Implementation-Title': project.name + '-deobf',
                 'Implementation-Version': project.version,
-                'Implementation-Vendor' :'mcmoddev',
+                'Implementation-Vendor' :'cazsius',
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
                 'Built-On': "${project.forge_mc_version}-${project.forge_version}"
@@ -502,12 +498,12 @@ task sourcesJar(type: Jar, dependsOn: classes) {
         mainAttributes(
                 'Maven-Artifact': "${project.group}:${project.archivesBaseName}:${project.version}:sources",
                 'Timestamp': System.currentTimeMillis(),
-                'Specification-Title': 'examplemod',
-                'Specification-Vendor': 'mcmoddev',
+                'Specification-Title': 'ropebridge',
+                'Specification-Vendor': 'cazsius',
                 'Specification-Version': '1',
                 'Implementation-Title': project.name + '-sources',
                 'Implementation-Version': project.version,
-                'Implementation-Vendor' :'mcmoddev',
+                'Implementation-Vendor' :'cazsius',
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
                 'Built-On': "${project.forge_mc_version}-${project.forge_version}"
@@ -715,14 +711,6 @@ publishing {
               issueManagement {
                 system = 'github'
                 url = 'https://github.com/Examples/Example.git/issues'
-              }
-              ciManagement {
-                system = 'jenkins'
-                url = 'https://ci.mcmoddev.com/'
-              }
-              organization {
-                name = 'Minecraft Mod Development'
-                url = 'https://mcmoddev.com/'
               }
             }
             */

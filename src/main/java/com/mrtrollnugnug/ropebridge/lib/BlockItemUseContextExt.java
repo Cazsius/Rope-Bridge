@@ -1,4 +1,4 @@
-package com.mcmoddev.ropebridge.lib;
+package com.mrtrollnugnug.ropebridge.lib;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;

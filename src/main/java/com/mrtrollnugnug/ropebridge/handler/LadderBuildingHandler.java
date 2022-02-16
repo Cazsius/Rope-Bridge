@@ -1,8 +1,8 @@
-package com.mcmoddev.ropebridge.handler;
+package com.mrtrollnugnug.ropebridge.handler;
 
-import com.mcmoddev.ropebridge.lib.BlockItemUseContextExt;
-import com.mcmoddev.ropebridge.lib.Constants.Messages;
-import com.mcmoddev.ropebridge.lib.ModUtils;
+import com.mrtrollnugnug.ropebridge.lib.BlockItemUseContextExt;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
+import com.mrtrollnugnug.ropebridge.lib.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -28,22 +28,22 @@ public class LadderBuildingHandler {
 	public static void newLadder(BlockPos selected, PlayerEntity player, World world, Direction hitSide,
 								 ItemStack builder) {
 		if (!hitSide.getAxis().isHorizontal()) {
-			ModUtils.tellPlayer(player, Messages.BAD_SIDE,
-				hitSide == Direction.UP ? I18n.format(Messages.TOP) : I18n.format(Messages.BOTTOM));
+			ModUtils.tellPlayer(player, Constants.Messages.BAD_SIDE,
+				hitSide == Direction.UP ? I18n.format(Constants.Messages.TOP) : I18n.format(Constants.Messages.BOTTOM));
 			return;
 		}
 
 		BlockState ladderState = ContentHandler.oak_rope_ladder.getDefaultState().with(LadderBlock.FACING, hitSide);
 
 		if (!ladderState.isValidPosition(world, selected)) {
-			ModUtils.tellPlayer(player, Messages.NOT_SOLID);
+			ModUtils.tellPlayer(player, Constants.Messages.NOT_SOLID);
 			return;
 		}
 
 		int count = countBlocks(selected.offset(hitSide), world);
 
 		if (count <= 0) {
-			ModUtils.tellPlayer(player, Messages.OBSTRUCTED);
+			ModUtils.tellPlayer(player, Constants.Messages.OBSTRUCTED);
 			return;
 		}
 
@@ -53,7 +53,7 @@ public class LadderBuildingHandler {
 
 		if (!player.abilities.isCreativeMode) {
 			if (!hasMaterials(player, woodNeeded, ropeNeeded, slabToUse)) {
-				ModUtils.tellPlayer(player, Messages.UNDERFUNDED_LADDER, woodNeeded, ropeNeeded);
+				ModUtils.tellPlayer(player, Constants.Messages.UNDERFUNDED_LADDER, woodNeeded, ropeNeeded);
 				return;
 			}
 		}

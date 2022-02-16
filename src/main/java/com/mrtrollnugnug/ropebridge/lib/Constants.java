@@ -1,4 +1,4 @@
-package com.mcmoddev.ropebridge.lib;
+package com.mrtrollnugnug.ropebridge.lib;
 
 public final class Constants {
 	public static final String MOD_ID = "ropebridge";

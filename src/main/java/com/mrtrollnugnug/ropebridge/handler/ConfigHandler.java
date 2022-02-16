@@ -1,4 +1,4 @@
-package com.mcmoddev.ropebridge.handler;
+package com.mrtrollnugnug.ropebridge.handler;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;

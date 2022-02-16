@@ -1,9 +1,9 @@
-package com.mcmoddev.ropebridge.item;
+package com.mrtrollnugnug.ropebridge.item;
 
-import com.mcmoddev.ropebridge.block.RopeBridgeBlock;
-import com.mcmoddev.ropebridge.handler.BridgeBuildingHandler;
-import com.mcmoddev.ropebridge.lib.Constants.Messages;
-import com.mcmoddev.ropebridge.lib.ModUtils;
+import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
+import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
+import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;

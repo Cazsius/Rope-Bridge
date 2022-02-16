@@ -1,6 +1,6 @@
-package com.mcmoddev.ropebridge.item;
+package com.mrtrollnugnug.ropebridge.item;
 
-import com.mcmoddev.ropebridge.handler.ConfigHandler;
+import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

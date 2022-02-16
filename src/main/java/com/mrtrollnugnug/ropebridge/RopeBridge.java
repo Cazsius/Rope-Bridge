@@ -1,9 +1,9 @@
-package com.mcmoddev.ropebridge;
+package com.mrtrollnugnug.ropebridge;
 
-import com.mcmoddev.ropebridge.handler.ConfigHandler;
-import com.mcmoddev.ropebridge.handler.ContentHandler;
-import com.mcmoddev.ropebridge.lib.Constants;
-import com.mcmoddev.ropebridge.lib.ModUtils;
+import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import com.mrtrollnugnug.ropebridge.lib.Constants;
+import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.ModLoadingContext;

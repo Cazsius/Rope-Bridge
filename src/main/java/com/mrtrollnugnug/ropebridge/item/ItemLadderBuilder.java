@@ -1,6 +1,6 @@
-package com.mcmoddev.ropebridge.item;
+package com.mrtrollnugnug.ropebridge.item;
 
-import com.mcmoddev.ropebridge.handler.LadderBuildingHandler;
+import com.mrtrollnugnug.ropebridge.handler.LadderBuildingHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
