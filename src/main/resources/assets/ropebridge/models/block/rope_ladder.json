@@ -1,7 +1,7 @@
 {
 "__comment": "Designed by Wire Segal with Cubik Studio - https://cubik.studio",
 "textures": {
-    "rope": "ropebridge:blocks/rope_ladder",
+    "rope": "ropebridge:block/rope_ladder",
     "particle": "#plank"
 },
 "elements": [ 

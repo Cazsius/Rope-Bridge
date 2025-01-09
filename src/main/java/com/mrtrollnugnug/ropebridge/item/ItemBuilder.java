@@ -1,13 +1,13 @@
 package com.mrtrollnugnug.ropebridge.item;
 
 import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 
 public abstract class ItemBuilder extends Item {
 
@@ -16,11 +16,11 @@ public abstract class ItemBuilder extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand hand) {
-		if (hand == Hand.MAIN_HAND) {
-			playerIn.setActiveHand(hand);
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		if (hand == InteractionHand.MAIN_HAND) {
+			player.startUsingItem(hand);
 		}
-		return super.onItemRightClick(worldIn, playerIn, hand);
+		return super.use(level, player, hand);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public abstract class ItemBuilder extends Item {
 		return 72000;
 	}
 
-	public static RayTraceResult trace(PlayerEntity player) {
+	public static HitResult trace(Player player) {
 		return player.pick(ConfigHandler.getMaxBridgeDistance(), 0, false);
 	}
 }

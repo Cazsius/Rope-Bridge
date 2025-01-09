@@ -1,14 +1,14 @@
 package com.mrtrollnugnug.ropebridge.item;
 
 import com.mrtrollnugnug.ropebridge.handler.LadderBuildingHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 public class ItemLadderBuilder extends ItemBuilder {
 
@@ -17,15 +17,14 @@ public class ItemLadderBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
-		if (entityLiving instanceof PlayerEntity && !world.isRemote) {
-			final PlayerEntity player = (PlayerEntity) entityLiving;
+	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
+		if (livingEntity instanceof Player player && !level.isClientSide) {
 			if (this.getUseDuration(stack) - timeLeft > 5) {
-				final RayTraceResult hit = trace(player);
-				if (hit instanceof BlockRayTraceResult) {
-					final BlockPos from = ((BlockRayTraceResult) hit).getPos();
-					Direction side = ((BlockRayTraceResult) hit).getFace();
-					LadderBuildingHandler.newLadder(from, player, player.getEntityWorld(), side, player.getHeldItemMainhand());
+				final HitResult hit = trace(player);
+				if (hit instanceof BlockHitResult blockHitResult) {
+					final BlockPos from = blockHitResult.getBlockPos();
+					Direction side = blockHitResult.getDirection();
+					LadderBuildingHandler.newLadder(from, player, player.getCommandSenderWorld(), side, player.getMainHandItem());
 				}
 			}
 		}

@@ -4,20 +4,18 @@ import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
 import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -28,30 +26,29 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-		super.onUsingTick(stack, player, count);
-		if (player.world.isRemote && player instanceof PlayerEntity) {
-			final PlayerEntity p = (PlayerEntity) player;
-			rotatePlayerTowards(p, getNearestYaw(p));
+	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+		super.onUseTick(level, livingEntity, stack, remainingUseDuration);
+		if (livingEntity.level().isClientSide && livingEntity instanceof Player player) {
+			rotatePlayerTowards(player, getNearestYaw(player));
 		}
 	}
 
-	private static void rotatePlayerTowards(PlayerEntity player, float target) {
-		float yaw = player.rotationYaw % 360;
+	private static void rotatePlayerTowards(Player player, float target) {
+		float yaw = player.getYRot() % 360;
 		if (yaw < 0) {
 			yaw += 360;
 		}
 		rotatePlayerTo(player, yaw + (target - yaw) / 4);
 	}
 
-	private static void rotatePlayerTo(PlayerEntity player, float yaw) {
-		final float original = player.rotationYaw;
-		player.rotationYaw = yaw;
-		player.prevRotationYaw += player.rotationYaw - original;
+	private static void rotatePlayerTo(Player player, float yaw) {
+		final float original = player.getYRot();
+		player.setYRot(yaw);
+		player.yRotO += player.getYRot() - original;
 	}
 
-	private static float getNearestYaw(PlayerEntity player) {
-		float yaw = player.rotationYaw % 360;
+	private static float getNearestYaw(Player player) {
+		float yaw = player.getYRot() % 360;
 		if (yaw < 0) {
 			yaw += 360;
 		}
@@ -70,18 +67,18 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
-		if (entityLiving instanceof PlayerEntity && !world.isRemote) {
-			final PlayerEntity player = (PlayerEntity) entityLiving;
-			if (this.getUseDuration(stack) - timeLeft > 10) {
-				if (!player.isOnGround()) {
+	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
+		if (livingEntity instanceof Player && !level.isClientSide) {
+			final Player player = (Player) livingEntity;
+			if (this.getUseDuration(stack) - timeCharged > 10) {
+				if (!player.onGround()) {
 					ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
 				} else {
-					final RayTraceResult hit = trace(player);
-					if (hit instanceof BlockRayTraceResult) {
-						final BlockPos floored = new BlockPos(Math.floor(player.getPosX()), Math.floor(player.getPosY()) - 1, Math.floor(player.getPosZ())).down();
-						BlockPos target = ((BlockRayTraceResult) hit).getPos();
-						BridgeBuildingHandler.newBridge(player, player.getHeldItemMainhand(), floored, target);
+					final HitResult hit = trace(player);
+					if (hit instanceof BlockHitResult blockHitResult) {
+						final BlockPos floored = BlockPos.containing(player.getX(), player.getY() - 1, player.getZ()).below();
+						BlockPos target = blockHitResult.getBlockPos();
+						BridgeBuildingHandler.newBridge(player, player.getMainHandItem(), floored, target);
 					}
 				}
 			}
@@ -89,7 +86,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
+	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {
 		return false;
 	}
 
@@ -102,10 +99,9 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new StringTextComponent("- Hold right-click to build"));
-		tooltip.add(new StringTextComponent("- Sneak to break whole bridge"));
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag) {
+		tooltip.add(Component.literal("- Hold right-click to build"));
+		tooltip.add(Component.literal("- Sneak to break whole bridge"));
 	}
 
 	private static boolean isBridgeBlock(Block block) {

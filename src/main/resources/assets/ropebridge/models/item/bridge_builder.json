@@ -1,11 +1,11 @@
 {
     "textures": {
-        "0": "ropebridge:items/mid",
-        "1": "ropebridge:items/dar",
-        "2": "ropebridge:items/lig",
-        "3": "ropebridge:items/tan",
-        "4": "ropebridge:items/darktan",
-        "5": "ropebridge:items/grap"
+        "0": "ropebridge:item/mid",
+        "1": "ropebridge:item/dar",
+        "2": "ropebridge:item/lig",
+        "3": "ropebridge:item/tan",
+        "4": "ropebridge:item/darktan",
+        "5": "ropebridge:item/grap"
     },
     "elements": [
         {

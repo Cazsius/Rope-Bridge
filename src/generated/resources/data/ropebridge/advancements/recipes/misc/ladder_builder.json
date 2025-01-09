@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bridge_builder_barrel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ropebridge:bridge_builder_barrel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_bridge_builder_handle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ropebridge:bridge_builder_handle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ladder_hook": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ropebridge:ladder_hook"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "ropebridge:ladder_builder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_ladder_hook",
+      "has_bridge_builder_barrel",
+      "has_bridge_builder_handle",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ropebridge:ladder_builder"
+    ]
+  },
+  "sends_telemetry_event": false
+}
