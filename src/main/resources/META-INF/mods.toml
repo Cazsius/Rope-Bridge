@@ -10,7 +10,7 @@ updateJSONURL = "https://raw.githubusercontent.com/Cazsius/Rope-Bridge/dev/updat
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/rope-bridge"
 logoFile = "ropebridge.logo.png"
 credits = "Originally created by czechmate777. Art from wiresgal and TrisAstral"
-authors = "MrTrollNugNug, Lewis_McReu, Darkhax, noobanidus, Jaredlll08, yrsegal, tfarcenim"
+authors = "MrTrollNugNug, Lewis_McReu, Darkhax, noobanidus, Jaredlll08, yrsegal, tfarcenim, Mrbysco"
 description = '''
 A mod that adds rope bridges to Minecraft. Craft the grappling gun and shoot it over a gap large or small to build a rope bridge across it.
 '''

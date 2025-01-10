@@ -63,6 +63,7 @@ public class LadderBuildingHandler {
 
 		consume(player, woodNeeded, ropeNeeded, slabToUse);
 		build(level, selected.relative(hitSide), count, hitSide, slabToUse);
+		ModUtils.unlockAdvancement(player, Constants.BUILD_LADDER_ADVANCEMENT);
 	}
 
 

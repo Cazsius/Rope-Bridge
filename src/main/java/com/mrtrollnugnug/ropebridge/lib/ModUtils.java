@@ -1,7 +1,12 @@
 package com.mrtrollnugnug.ropebridge.lib;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,17 +21,16 @@ public class ModUtils {
 	private ModUtils() {
 	}
 
-	public static final Map<Block, Pair<RegistryObject<Block>, RegistryObject<Block>>> map = new HashMap<>();
+	public static final Map<Block, Pair<RegistryObject<? extends Block>, RegistryObject<? extends Block>>> map = new HashMap<>();
 
 	/**
 	 * Sends a message to a command sender. Can be used for easier message
 	 * sending.
-	 * @param sender
-	 * The thing to send the message to. This should probably be a
-	 * player.
-	 * @param message
-	 * The message to send. This can be a normal message, however
-	 * translation keys are HIGHLY encouraged!
+	 *
+	 * @param sender  The thing to send the message to. This should probably be a
+	 *                player.
+	 * @param message The message to send. This can be a normal message, however
+	 *                translation keys are HIGHLY encouraged!
 	 */
 	public static void tellPlayer(Player sender, String message, Object... params) {
 		sender.sendSystemMessage(Component.translatable(message, params));
@@ -44,5 +48,22 @@ public class ModUtils {
 		map.put(Blocks.BAMBOO_SLAB, Pair.of(ContentHandler.bamboo_bridge, ContentHandler.bamboo_rope_ladder));
 		map.put(Blocks.CRIMSON_SLAB, Pair.of(ContentHandler.crimson_bridge, ContentHandler.crimson_rope_ladder));
 		map.put(Blocks.WARPED_SLAB, Pair.of(ContentHandler.warped_bridge, ContentHandler.warped_rope_ladder));
+	}
+
+	public static void unlockAdvancement(Player player, ResourceLocation advancementId) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			MinecraftServer server = serverPlayer.getServer();
+			if (server != null) {
+				Advancement advancementIn = server.getAdvancements().getAdvancement(advancementId);
+				if (advancementIn != null) {
+					AdvancementProgress advancementprogress = serverPlayer.getAdvancements().getOrStartProgress(advancementIn);
+					if (!advancementprogress.isDone()) {
+						for (String s : advancementprogress.getRemainingCriteria()) {
+							serverPlayer.getAdvancements().award(advancementIn, s);
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,0 +1,29 @@
+{
+  "parent": "ropebridge:main/craft_ladder_builder",
+  "criteria": {
+    "build_ladder": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.ropebridge.build_ladder.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ropebridge:oak_rope_ladder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.ropebridge.build_ladder.title"
+    }
+  },
+  "requirements": [
+    [
+      "build_ladder"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -2,10 +2,12 @@ package com.mrtrollnugnug.ropebridge.item;
 
 import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
 import com.mrtrollnugnug.ropebridge.handler.BridgeBuildingHandler;
+import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants.Messages;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -68,8 +70,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 
 	@Override
 	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
-		if (livingEntity instanceof Player && !level.isClientSide) {
-			final Player player = (Player) livingEntity;
+		if (livingEntity instanceof Player player && !level.isClientSide) {
 			if (this.getUseDuration(stack) - timeCharged > 10) {
 				if (!player.onGround()) {
 					ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
@@ -79,6 +80,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 						final BlockPos floored = BlockPos.containing(player.getX(), player.getY() - 1, player.getZ()).below();
 						BlockPos target = blockHitResult.getBlockPos();
 						BridgeBuildingHandler.newBridge(player, player.getMainHandItem(), floored, target);
+						level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), ContentHandler.swoosh.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
 					}
 				}
 			}

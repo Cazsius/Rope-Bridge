@@ -5,6 +5,9 @@ import net.minecraft.resources.ResourceLocation;
 public final class Constants {
 	public static final String MOD_ID = "ropebridge";
 
+	public static final ResourceLocation BUILD_BRIDGE_ADVANCEMENT = modLoc("main/build_bridge");
+	public static final ResourceLocation BUILD_LADDER_ADVANCEMENT = modLoc("main/build_ladder");
+
 	public static final class Messages {
 		public static final String WARNING_BREAKING = "chat.ropebridge.warning.breaking";
 		public static final String NOT_ON_GROUND = "chat.ropebridge.info.notonground";

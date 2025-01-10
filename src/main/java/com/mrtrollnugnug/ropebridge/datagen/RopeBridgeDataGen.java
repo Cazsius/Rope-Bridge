@@ -1,6 +1,10 @@
 package com.mrtrollnugnug.ropebridge.datagen;
 
 import com.mrtrollnugnug.ropebridge.datagen.client.ModBlockstateProvider;
+import com.mrtrollnugnug.ropebridge.datagen.client.ModItemModelProvider;
+import com.mrtrollnugnug.ropebridge.datagen.client.ModLanguageProvider;
+import com.mrtrollnugnug.ropebridge.datagen.client.ModSoundProvider;
+import com.mrtrollnugnug.ropebridge.datagen.server.ModAdvancementsProvider;
 import com.mrtrollnugnug.ropebridge.datagen.server.ModLootProvider;
 import com.mrtrollnugnug.ropebridge.datagen.server.ModRecipeProvider;
 import net.minecraft.core.HolderLookup.Provider;
@@ -25,12 +29,13 @@ public class RopeBridgeDataGen {
 		if (event.includeServer()) {
 			generator.addProvider(event.includeServer(), new ModLootProvider(packOutput));
 			generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
+			generator.addProvider(event.includeServer(), new ModAdvancementsProvider(packOutput, lookupProvider, helper));
 		}
 		if (event.includeClient()) {
-//			generator.addProvider(event.includeClient(), new ModLanguageProvider(packOutput));
-//			generator.addProvider(event.includeClient(), new ModSoundProvider(packOutput, helper));
+			generator.addProvider(event.includeClient(), new ModLanguageProvider(packOutput));
+			generator.addProvider(event.includeClient(), new ModSoundProvider(packOutput, helper));
 			generator.addProvider(event.includeClient(), new ModBlockstateProvider(packOutput, helper));
-//			generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, helper));
+			generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, helper));
 		}
 	}
 

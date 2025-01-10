@@ -1,0 +1,29 @@
+{
+  "parent": "ropebridge:main/craft_bridge_builder",
+  "criteria": {
+    "build_bridge": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.ropebridge.build_bridge.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ropebridge:oak_bridge"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.ropebridge.build_bridge.title"
+    }
+  },
+  "requirements": [
+    [
+      "build_bridge"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

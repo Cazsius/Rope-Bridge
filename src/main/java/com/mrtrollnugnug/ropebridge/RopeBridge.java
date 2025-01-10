@@ -23,6 +23,7 @@ public class RopeBridge {
 		ContentHandler.BLOCKS.register(eventBus);
 		ContentHandler.ITEMS.register(eventBus);
 		ContentHandler.CREATIVE_MODE_TABS.register(eventBus);
+		ContentHandler.SOUND_EVENTS.register(eventBus);
 	}
 
 	private void preInit(FMLCommonSetupEvent event) {

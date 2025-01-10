@@ -45,7 +45,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
 		makeRopeBridge(ContentHandler.warped_bridge, "warped_stem_top");
 	}
 
-	private void makeRopeBridge(RegistryObject<Block> registryObject, String logTexture) {
+	private void makeRopeBridge(RegistryObject<? extends Block> registryObject, String logTexture) {
 		String path = registryObject.getId().getPath();
 		MultiPartBlockStateBuilder builder = getMultipartBuilder(registryObject.get());
 
@@ -103,7 +103,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
 			.end();
 	}
 
-	private void makeRopeLadder(RegistryObject<Block> registryObject, String plankTexture) {
+	private void makeRopeLadder(RegistryObject<? extends Block> registryObject, String plankTexture) {
 		String path = registryObject.getId().getPath();
 		ModelFile model = models().getBuilder(path)
 			.parent(models().getExistingFile(modLoc("block/rope_ladder")))

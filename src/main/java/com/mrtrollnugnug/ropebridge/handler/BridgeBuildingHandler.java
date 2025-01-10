@@ -104,6 +104,7 @@ public class BridgeBuildingHandler {
 					playerEntity.broadcastBreakEvent(player.getUsedItemHand()));
 			}
 			buildBridge(player.level(), bridge, slab, 0, rotate);
+			ModUtils.unlockAdvancement(player, Constants.BUILD_BRIDGE_ADVANCEMENT);
 		} else {
 			ModUtils.tellPlayer(player, Constants.Messages.OBSTRUCTED);
 		}
@@ -190,7 +191,7 @@ public class BridgeBuildingHandler {
 	private static void spawnSmoke(Level level, BlockPos pos, int times) {
 
 		if (times > 0) {
-			((ServerLevel) level).sendParticles(ParticleTypes.EXPLOSION, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+			((ServerLevel) level).sendParticles(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			final Level finLevel = level;
 			final BlockPos finPos = pos;
 			final int finTimes = times - 1;

@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class RopeLadderBlock extends LadderBlock {
 
-	private Supplier<Block> slabSupplier;
+	private final Supplier<Block> slabSupplier;
 
 	public RopeLadderBlock(Properties properties, Supplier<Block> slabSupplier) {
 		super(properties);
