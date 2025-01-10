@@ -7,7 +7,7 @@
   "item.ropebridge.ladder_hook": "Крюк лестничного ружья",
   "item.ropebridge.ladder_builder": "Лестничное ружье",
 
-  "itemGroup.RopeBridgeTab": "Rope Bridge",
+  "itemGroup.ropebridge.tab": "Rope Bridge",
 
   "block.ropebridge.bridge.block.1": "Часть моста 1",
   "block.ropebridge.bridge.block.2": "Часть моста 2",

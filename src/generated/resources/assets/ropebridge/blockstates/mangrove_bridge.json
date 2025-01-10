@@ -1,0 +1,80 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_0"
+      },
+      "when": {
+        "level": "0",
+        "rotated": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_1"
+      },
+      "when": {
+        "level": "1",
+        "rotated": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_2"
+      },
+      "when": {
+        "level": "2",
+        "rotated": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_3"
+      },
+      "when": {
+        "level": "3",
+        "rotated": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_0",
+        "y": 90
+      },
+      "when": {
+        "level": "0",
+        "rotated": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_1",
+        "y": 90
+      },
+      "when": {
+        "level": "1",
+        "rotated": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_2",
+        "y": 90
+      },
+      "when": {
+        "level": "2",
+        "rotated": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ropebridge:block/mangrove_bridge_block_3",
+        "y": 90
+      },
+      "when": {
+        "level": "3",
+        "rotated": "true"
+      }
+    }
+  ]
+}

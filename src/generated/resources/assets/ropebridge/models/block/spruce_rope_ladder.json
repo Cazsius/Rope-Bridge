@@ -1,0 +1,6 @@
+{
+  "parent": "ropebridge:block/rope_ladder",
+  "textures": {
+    "plank": "minecraft:block/spruce_log_top"
+  }
+}

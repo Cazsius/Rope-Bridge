@@ -1,7 +1,7 @@
 {
     "parent":"item/generated",
     "textures": {
-    	"layer0":"ropebridge:items/hook"
+    	"layer0":"ropebridge:item/hook"
     },
     "display": {
         "thirdperson": {

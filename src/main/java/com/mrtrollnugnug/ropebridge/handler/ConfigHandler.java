@@ -29,7 +29,7 @@ public final class ConfigHandler {
 		builder.push("general");
 		maxBridgeDistance = builder.comment("Max length of bridges made be Grappling Gun.").defineInRange("maxBridgeDistance", 400, 1, 1000);
 		bridgeDroopFactor = builder.comment("Percent of slack the bridge will have, causing it to hang.").defineInRange("bridgeDroopFactor", 100, 0, 100);
-		bridgeYOffset = builder.comment("Generated bridges will be raised or lowered by this ammount in blocks.\nDefault is just below user's feet.").defineInRange("bridgeYOffset", -0.3, -1, 1);
+		bridgeYOffset = builder.comment("Generated bridges will be raised or lowered by this amount in blocks.\nDefault is just below user's feet.").defineInRange("bridgeYOffset", -0.3, -1, 1);
 		breakThroughBlocks = builder.comment("If enabled, all blocks that dare stand in a bridge's way will be broken.\nVery useful in creative mode.").define("breakThroughBlocks", false);
 		ignoreSlopeWarnings = builder.comment("Set true to ignore all slope warnings and allow building of very steep bridges.").define("ignoreSlopeWarnings", false);
 		slabsPerBridge = builder.comment("Slabs consumed for each bridge block built.").defineInRange("slabsPerBridge", 1, 0, 10);

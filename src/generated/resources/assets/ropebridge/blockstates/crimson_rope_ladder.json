@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "ropebridge:block/crimson_rope_ladder",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "ropebridge:block/crimson_rope_ladder",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "ropebridge:block/crimson_rope_ladder"
+    },
+    "facing=west": {
+      "model": "ropebridge:block/crimson_rope_ladder",
+      "y": 90
+    }
+  }
+}

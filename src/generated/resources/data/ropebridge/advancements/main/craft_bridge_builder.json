@@ -1,0 +1,38 @@
+{
+  "parent": "ropebridge:main/root",
+  "criteria": {
+    "craft_bridge_builder": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ropebridge:bridge_builder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.ropebridge.craft_bridge_builder.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "ropebridge:bridge_builder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.ropebridge.craft_bridge_builder.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_bridge_builder"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

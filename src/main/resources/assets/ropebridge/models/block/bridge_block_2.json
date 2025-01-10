@@ -1,6 +1,6 @@
 {
     "textures": {
-        "rope": "ropebridge:blocks/rope_ladder",
+        "rope": "ropebridge:block/rope_ladder",
         "particle": "#log"
     },
     "elements": [

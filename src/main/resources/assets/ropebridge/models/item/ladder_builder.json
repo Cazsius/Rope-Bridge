@@ -1,13 +1,13 @@
 {
 	"__comment": "Designed by Wire Segal with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"mid_gray": "ropebridge:items/mid",
-		"dark_gray": "ropebridge:items/dar",
-		"light_gray": "ropebridge:items/lig",
-		"tan": "ropebridge:items/tan",
-		"dark_tan": "ropebridge:items/darktan",
-		"grapple": "ropebridge:items/grap",
-		"rope": "ropebridge:blocks/rope_ladder"
+		"mid_gray": "ropebridge:item/mid",
+		"dark_gray": "ropebridge:item/dar",
+		"light_gray": "ropebridge:item/lig",
+		"tan": "ropebridge:item/tan",
+		"dark_tan": "ropebridge:item/darktan",
+		"grapple": "ropebridge:item/grap",
+		"rope": "ropebridge:block/rope_ladder"
 	},
 	"elements": [
 		{

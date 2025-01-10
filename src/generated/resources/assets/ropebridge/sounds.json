@@ -1,0 +1,14 @@
+{
+  "load": {
+    "sounds": [
+      "ropebridge:cock"
+    ],
+    "subtitle": "ropebridge.subtitle.load"
+  },
+  "swoosh": {
+    "sounds": [
+      "ropebridge:swoosh"
+    ],
+    "subtitle": "ropebridge.subtitle.swoosh"
+  }
+}
