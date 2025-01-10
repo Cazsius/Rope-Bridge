@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.lib;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class ModUtils {
 	private ModUtils() {
 	}
 
-	public static final Map<Block, Pair<RegistryObject<? extends Block>, RegistryObject<? extends Block>>> map = new HashMap<>();
+	public static final Map<Block, Pair<DeferredBlock<? extends Block>, DeferredBlock<? extends Block>>> map = new HashMap<>();
 
 	/**
 	 * Sends a message to a command sender. Can be used for easier message
@@ -54,12 +55,12 @@ public class ModUtils {
 		if (player instanceof ServerPlayer serverPlayer) {
 			MinecraftServer server = serverPlayer.getServer();
 			if (server != null) {
-				Advancement advancementIn = server.getAdvancements().getAdvancement(advancementId);
-				if (advancementIn != null) {
-					AdvancementProgress advancementprogress = serverPlayer.getAdvancements().getOrStartProgress(advancementIn);
+				AdvancementHolder advancementHolder = server.getAdvancements().get(advancementId);
+				if (advancementHolder != null) {
+					AdvancementProgress advancementprogress = serverPlayer.getAdvancements().getOrStartProgress(advancementHolder);
 					if (!advancementprogress.isDone()) {
 						for (String s : advancementprogress.getRemainingCriteria()) {
-							serverPlayer.getAdvancements().award(advancementIn, s);
+							serverPlayer.getAdvancements().award(advancementHolder, s);
 						}
 					}
 				}

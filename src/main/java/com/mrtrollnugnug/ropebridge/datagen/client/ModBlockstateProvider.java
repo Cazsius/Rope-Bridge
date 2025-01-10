@@ -7,11 +7,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 public class ModBlockstateProvider extends BlockStateProvider {
 	public ModBlockstateProvider(PackOutput packOutput, ExistingFileHelper helper) {
@@ -45,7 +45,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
 		makeRopeBridge(ContentHandler.warped_bridge, "warped_stem_top");
 	}
 
-	private void makeRopeBridge(RegistryObject<? extends Block> registryObject, String logTexture) {
+	private void makeRopeBridge(DeferredBlock<? extends Block> registryObject, String logTexture) {
 		String path = registryObject.getId().getPath();
 		MultiPartBlockStateBuilder builder = getMultipartBuilder(registryObject.get());
 
@@ -103,7 +103,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
 			.end();
 	}
 
-	private void makeRopeLadder(RegistryObject<? extends Block> registryObject, String plankTexture) {
+	private void makeRopeLadder(DeferredBlock<? extends Block> registryObject, String plankTexture) {
 		String path = registryObject.getId().getPath();
 		ModelFile model = models().getBuilder(path)
 			.parent(models().getExistingFile(modLoc("block/rope_ladder")))

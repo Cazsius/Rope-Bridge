@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	@Override
 	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
 		if (livingEntity instanceof Player player && !level.isClientSide) {
-			if (this.getUseDuration(stack) - timeCharged > 10) {
+			if (this.getUseDuration(stack, livingEntity) - timeCharged > 10) {
 				if (!player.onGround()) {
 					ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);
 				} else {
@@ -87,10 +86,9 @@ public class ItemBridgeBuilder extends ItemBuilder {
 		}
 	}
 
-	@Override
-	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {
-		return false;
-	}
+//	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {
+//		return false;
+//	}
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, BlockState state) {
@@ -101,7 +99,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag tooltipFlag) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
 		tooltip.add(Component.literal("- Hold right-click to build"));
 		tooltip.add(Component.literal("- Sneak to break whole bridge"));
 	}

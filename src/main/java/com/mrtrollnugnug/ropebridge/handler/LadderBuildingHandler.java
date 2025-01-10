@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.server.ServerLifecycleHooks;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -59,7 +59,7 @@ public class LadderBuildingHandler {
 		}
 
 		if (!player.getAbilities().instabuild)
-			builder.hurtAndBreak(ConfigHandler.getLadderDamage(), player, playerEntity -> playerEntity.broadcastBreakEvent(player.getUsedItemHand()));
+			builder.hurtAndBreak(ConfigHandler.getLadderDamage(), player, Player.getSlotForHand(player.getUsedItemHand()));
 
 		consume(player, woodNeeded, ropeNeeded, slabToUse);
 		build(level, selected.relative(hitSide), count, hitSide, slabToUse);

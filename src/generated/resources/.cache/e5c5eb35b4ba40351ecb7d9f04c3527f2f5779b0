@@ -1,6 +1,6 @@
-// 1.20.1	2025-01-10T19:49:03.9702146	Advancements
-41fda961deefc80eb1f030cbac83fd967b9eafa6 data/ropebridge/advancements/main/build_bridge.json
-1899badf6ea9b0ee9f3d202720c7706e85661590 data/ropebridge/advancements/main/build_ladder.json
-20db726fd97394b189390413c35efe0c33a0074a data/ropebridge/advancements/main/craft_bridge_builder.json
-cff9f50febbc475353b7f9ae2ef94baf3d5de416 data/ropebridge/advancements/main/craft_ladder_builder.json
-4c5baa7cd4e249f8da6f5d1f037cc8fc2c3915d6 data/ropebridge/advancements/main/root.json
+// 1.21.1	2025-01-10T22:13:05.1602795	Advancements
+a6212951f40988c571a494d1e86287e3ba62c756 data/ropebridge/advancement/main/build_bridge.json
+316d37799fd2751cd427e36b36fa898ffd69d594 data/ropebridge/advancement/main/build_ladder.json
+d23dea34aa3ae69a3fa9db303cea96208ac08889 data/ropebridge/advancement/main/craft_bridge_builder.json
+b83b675b869186e0b1b0d1667b121990fc4e5848 data/ropebridge/advancement/main/craft_ladder_builder.json
+9da1daf3af73b4ed64f600dc16c057a5f412a85c data/ropebridge/advancement/main/root.json

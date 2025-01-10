@@ -4,8 +4,8 @@ import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ModLanguageProvider extends LanguageProvider {
 
@@ -79,7 +79,7 @@ public class ModLanguageProvider extends LanguageProvider {
 	 * @param sound The sound event
 	 * @param text  The subtitle text
 	 */
-	public void addSubtitle(RegistryObject<SoundEvent> sound, String text) {
+	public void addSubtitle(DeferredHolder<SoundEvent, SoundEvent> sound, String text) {
 		this.addSubtitle(sound.get(), text);
 	}
 

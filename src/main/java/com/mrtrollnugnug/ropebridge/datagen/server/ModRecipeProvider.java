@@ -2,26 +2,27 @@ package com.mrtrollnugnug.ropebridge.datagen.server;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends RecipeProvider {
 
-	public ModRecipeProvider(PackOutput packOutput) {
-		super(packOutput);
+	public ModRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+		super(packOutput, lookupProvider);
 	}
 
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+	protected void buildRecipes(RecipeOutput output, Provider provider) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ContentHandler.bridge_builder.get())
 			.pattern("TBH")
 			.define('T', ContentHandler.bridge_builder_hook.get())
@@ -30,7 +31,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_hook", has(ContentHandler.bridge_builder_hook.get()))
 			.unlockedBy("has_barrel", has(ContentHandler.bridge_builder_barrel.get()))
 			.unlockedBy("has_handle", has(ContentHandler.bridge_builder_handle.get()))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_barrel.get())
 			.pattern("III")
@@ -40,7 +41,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.define('R', ContentHandler.rope.get())
 			.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
 			.unlockedBy("has_rope", has(ContentHandler.rope.get()))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_handle.get())
 			.pattern("I F")
@@ -56,7 +57,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_rope", has(ContentHandler.rope.get()))
 			.unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
 			.unlockedBy("has_planks", has(ItemTags.PLANKS))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_hook.get())
 			.pattern("I  ")
@@ -64,7 +65,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.pattern("I  ")
 			.define('I', Tags.Items.INGOTS_IRON)
 			.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.ladder_builder.get())
 			.pattern("TBH")
@@ -74,7 +75,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_ladder_hook", has(ContentHandler.ladder_hook.get()))
 			.unlockedBy("has_bridge_builder_barrel", has(ContentHandler.bridge_builder_barrel.get()))
 			.unlockedBy("has_bridge_builder_handle", has(ContentHandler.bridge_builder_handle.get()))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.ladder_hook.get())
 			.pattern("R  ")
@@ -84,7 +85,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.define('R', ContentHandler.rope.get())
 			.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
 			.unlockedBy("has_rope", has(ContentHandler.rope.get()))
-			.save(consumer);
+			.save(output);
 
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.rope.get(), 8)
 			.pattern("SV")
@@ -94,11 +95,11 @@ public class ModRecipeProvider extends RecipeProvider {
 			.define('V', Items.VINE)
 			.unlockedBy("has_string", has(Items.STRING))
 			.unlockedBy("has_vine", has(Items.VINE))
-			.save(consumer);
+			.save(output);
 
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 4)
 			.requires(Items.WHITE_WOOL)
 			.unlockedBy("has_white_wool", has(Items.WHITE_WOOL))
-			.save(consumer, Constants.modLoc("string"));
+			.save(output, Constants.modLoc("string"));
 	}
 }

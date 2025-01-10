@@ -1,31 +1,31 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public final class ConfigHandler {
-	private static ForgeConfigSpec.IntValue maxBridgeDistance;
-	private static ForgeConfigSpec.IntValue bridgeDroopFactor;
-	private static ForgeConfigSpec.DoubleValue bridgeYOffset;
-	private static ForgeConfigSpec.BooleanValue breakThroughBlocks;
-	private static ForgeConfigSpec.BooleanValue ignoreSlopeWarnings;
-	private static ForgeConfigSpec.IntValue slabsPerBridge;
-	private static ForgeConfigSpec.IntValue ropePerBridge;
-	private static ForgeConfigSpec.IntValue woodPerLadder;
-	private static ForgeConfigSpec.IntValue ropePerLadder;
-	private static ForgeConfigSpec.IntValue bridgeDamage;
-	private static ForgeConfigSpec.IntValue ladderDamage;
+	private static ModConfigSpec.IntValue maxBridgeDistance;
+	private static ModConfigSpec.IntValue bridgeDroopFactor;
+	private static ModConfigSpec.DoubleValue bridgeYOffset;
+	private static ModConfigSpec.BooleanValue breakThroughBlocks;
+	private static ModConfigSpec.BooleanValue ignoreSlopeWarnings;
+	private static ModConfigSpec.IntValue slabsPerBridge;
+	private static ModConfigSpec.IntValue ropePerBridge;
+	private static ModConfigSpec.IntValue woodPerLadder;
+	private static ModConfigSpec.IntValue ropePerLadder;
+	private static ModConfigSpec.IntValue bridgeDamage;
+	private static ModConfigSpec.IntValue ladderDamage;
 
 	public static final ConfigHandler SERVER;
-	public static final ForgeConfigSpec SERVER_SPEC;
+	public static final ModConfigSpec SERVER_SPEC;
 
 	static {
-		final Pair<ConfigHandler, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ConfigHandler::new);
+		final Pair<ConfigHandler, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(ConfigHandler::new);
 		SERVER_SPEC = specPair.getRight();
 		SERVER = specPair.getLeft();
 	}
 
-	public ConfigHandler(ForgeConfigSpec.Builder builder) {
+	public ConfigHandler(ModConfigSpec.Builder builder) {
 		builder.push("general");
 		maxBridgeDistance = builder.comment("Max length of bridges made be Grappling Gun.").defineInRange("maxBridgeDistance", 400, 1, 1000);
 		bridgeDroopFactor = builder.comment("Percent of slack the bridge will have, causing it to hang.").defineInRange("bridgeDroopFactor", 100, 0, 100);

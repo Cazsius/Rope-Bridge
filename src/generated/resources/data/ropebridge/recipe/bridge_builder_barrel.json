@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "item": "ropebridge:rope"
+    }
+  },
+  "pattern": [
+    "III",
+    "RRR",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ropebridge:bridge_builder_barrel"
+  }
+}

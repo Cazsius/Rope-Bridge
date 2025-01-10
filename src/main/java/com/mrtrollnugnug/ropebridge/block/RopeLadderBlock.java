@@ -37,7 +37,7 @@ public class RopeLadderBlock extends LadderBlock {
 	public List<ItemStack> getDrops(BlockState state, Builder builder) {
 		List<ItemStack> drops = new ArrayList<>();
 		drops.add(new ItemStack(ContentHandler.rope.get(), ConfigHandler.getRopePerLadder()));
-		drops.add(new ItemStack(slabSupplier.get(), ConfigHandler.getWoodPerLadder()));
+		drops.add(new ItemStack(getSlab(), ConfigHandler.getWoodPerLadder()));
 		return drops;
 	}
 }

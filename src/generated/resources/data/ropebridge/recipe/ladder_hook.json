@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "item": "ropebridge:rope"
+    }
+  },
+  "pattern": [
+    "R  ",
+    "III",
+    "I  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ropebridge:ladder_hook"
+  }
+}
