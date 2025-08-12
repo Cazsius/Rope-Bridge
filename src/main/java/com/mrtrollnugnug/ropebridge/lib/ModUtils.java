@@ -1,7 +1,6 @@
 package com.mrtrollnugnug.ropebridge.lib;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
@@ -34,7 +33,7 @@ public class ModUtils {
 	 *                translation keys are HIGHLY encouraged!
 	 */
 	public static void tellPlayer(Player sender, String message, Object... params) {
-		sender.sendSystemMessage(Component.translatable(message, params));
+		sender.displayClientMessage(Component.translatable(message, params), false);
 	}
 
 	public static void initMap() {

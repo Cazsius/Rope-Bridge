@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "ropebridge:bridge_builder_barrel"
-    },
-    "H": {
-      "item": "ropebridge:bridge_builder_handle"
-    },
-    "T": {
-      "item": "ropebridge:ladder_hook"
-    }
+    "B": "ropebridge:bridge_builder_barrel",
+    "H": "ropebridge:bridge_builder_handle",
+    "T": "ropebridge:ladder_hook"
   },
   "pattern": [
     "TBH"

@@ -68,7 +68,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
+	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
 		if (livingEntity instanceof Player player && !level.isClientSide) {
 			if (this.getUseDuration(stack, livingEntity) - timeCharged > 10) {
 				if (!player.onGround()) {
@@ -80,10 +80,12 @@ public class ItemBridgeBuilder extends ItemBuilder {
 						BlockPos target = blockHitResult.getBlockPos();
 						BridgeBuildingHandler.newBridge(player, player.getMainHandItem(), floored, target);
 						level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), ContentHandler.swoosh.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 //	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {

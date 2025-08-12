@@ -5,7 +5,8 @@
         "2": "ropebridge:item/lig",
         "3": "ropebridge:item/tan",
         "4": "ropebridge:item/darktan",
-        "5": "ropebridge:item/grap"
+        "5": "ropebridge:item/grap",
+        "particle": "#5"
     },
     "elements": [
         {

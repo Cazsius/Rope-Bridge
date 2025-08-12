@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "F": {
-      "item": "minecraft:flint_and_steel"
-    },
-    "G": {
-      "item": "minecraft:gunpowder"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "R": {
-      "item": "ropebridge:rope"
-    },
-    "W": {
-      "tag": "minecraft:planks"
-    }
+    "F": "minecraft:flint_and_steel",
+    "G": "minecraft:gunpowder",
+    "I": "#c:ingots/iron",
+    "R": "ropebridge:rope",
+    "W": "#minecraft:planks"
   },
   "pattern": [
     "I F",

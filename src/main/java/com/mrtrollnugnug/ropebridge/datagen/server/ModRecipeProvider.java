@@ -2,13 +2,12 @@ package com.mrtrollnugnug.ropebridge.datagen.server;
 
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
@@ -17,13 +16,13 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends RecipeProvider {
 
-	public ModRecipeProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
-		super(packOutput, lookupProvider);
+	public ModRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+		super(provider, recipeOutput);
 	}
 
 	@Override
-	protected void buildRecipes(RecipeOutput output, Provider provider) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ContentHandler.bridge_builder.get())
+	protected void buildRecipes() {
+		shaped(RecipeCategory.TOOLS, ContentHandler.bridge_builder.get())
 			.pattern("TBH")
 			.define('T', ContentHandler.bridge_builder_hook.get())
 			.define('B', ContentHandler.bridge_builder_barrel.get())
@@ -33,7 +32,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_handle", has(ContentHandler.bridge_builder_handle.get()))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_barrel.get())
+		shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_barrel.get())
 			.pattern("III")
 			.pattern("RRR")
 			.pattern("III")
@@ -43,7 +42,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_rope", has(ContentHandler.rope.get()))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_handle.get())
+		shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_handle.get())
 			.pattern("I F")
 			.pattern("RG ")
 			.pattern("IWW")
@@ -59,7 +58,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_planks", has(ItemTags.PLANKS))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_hook.get())
+		shaped(RecipeCategory.MISC, ContentHandler.bridge_builder_hook.get())
 			.pattern("I  ")
 			.pattern("III")
 			.pattern("I  ")
@@ -67,7 +66,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.ladder_builder.get())
+		shaped(RecipeCategory.MISC, ContentHandler.ladder_builder.get())
 			.pattern("TBH")
 			.define('T', ContentHandler.ladder_hook.get())
 			.define('B', ContentHandler.bridge_builder_barrel.get())
@@ -77,7 +76,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_bridge_builder_handle", has(ContentHandler.bridge_builder_handle.get()))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.ladder_hook.get())
+		shaped(RecipeCategory.MISC, ContentHandler.ladder_hook.get())
 			.pattern("R  ")
 			.pattern("III")
 			.pattern("I  ")
@@ -87,7 +86,7 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_rope", has(ContentHandler.rope.get()))
 			.save(output);
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ContentHandler.rope.get(), 8)
+		shaped(RecipeCategory.MISC, ContentHandler.rope.get(), 8)
 			.pattern("SV")
 			.pattern("VS")
 			.pattern("SV")
@@ -97,9 +96,25 @@ public class ModRecipeProvider extends RecipeProvider {
 			.unlockedBy("has_vine", has(Items.VINE))
 			.save(output);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.STRING, 4)
+		shapeless(RecipeCategory.MISC, Items.STRING, 4)
 			.requires(Items.WHITE_WOOL)
 			.unlockedBy("has_white_wool", has(Items.WHITE_WOOL))
-			.save(output, Constants.modLoc("string"));
+			.save(output, Constants.modLoc("string").toString());
+	}
+
+	public static class Runner extends RecipeProvider.Runner {
+		public Runner(PackOutput output, CompletableFuture<Provider> completableFuture) {
+			super(output, completableFuture);
+		}
+
+		@Override
+		protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+			return new ModRecipeProvider(provider, recipeOutput);
+		}
+
+		@Override
+		public String getName() {
+			return "Rope Bridge Recipes";
+		}
 	}
 }

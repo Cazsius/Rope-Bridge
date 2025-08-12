@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ropebridge:block/oak_rope_ladder"
+  }
+}

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "R": {
-      "item": "ropebridge:rope"
-    }
+    "I": "#c:ingots/iron",
+    "R": "ropebridge:rope"
   },
   "pattern": [
     "R  ",

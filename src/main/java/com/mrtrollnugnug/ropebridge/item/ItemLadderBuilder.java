@@ -17,7 +17,7 @@ public class ItemLadderBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int remainingUseDuration) {
+	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int remainingUseDuration) {
 		if (livingEntity instanceof Player player && !level.isClientSide) {
 			if (this.getUseDuration(stack, livingEntity) - remainingUseDuration > 5) {
 				final HitResult hit = trace(player);
@@ -25,8 +25,10 @@ public class ItemLadderBuilder extends ItemBuilder {
 					final BlockPos from = blockHitResult.getBlockPos();
 					Direction side = blockHitResult.getDirection();
 					LadderBuildingHandler.newLadder(from, player, player.getCommandSenderWorld(), side, player.getMainHandItem());
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 }

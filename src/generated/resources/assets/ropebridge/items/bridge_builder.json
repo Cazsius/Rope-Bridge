@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ropebridge:item/bridge_builder"
+  }
+}
