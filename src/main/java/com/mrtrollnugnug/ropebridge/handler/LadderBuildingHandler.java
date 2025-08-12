@@ -122,7 +122,7 @@ public class LadderBuildingHandler {
 	}
 
 	private static Block getSlabToUse(Player player) {
-		return player.getInventory().items.stream().filter(stack -> stack.is(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.byItem(stack.getItem())).orElse(Blocks.OAK_SLAB);
+		return player.getInventory().getNonEquipmentItems().stream().filter(stack -> stack.is(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.byItem(stack.getItem())).orElse(Blocks.OAK_SLAB);
 	}
 
 	private static boolean hasMaterials(Player player, int woodNeeded, int ropeNeeded,
@@ -130,7 +130,7 @@ public class LadderBuildingHandler {
 		boolean noCost = ConfigHandler.getRopePerLadder() == 0 && ConfigHandler.getWoodPerLadder() == 0;
 		if (noCost || player.getAbilities().instabuild)
 			return true;
-		for (ItemStack i : player.getInventory().items) {
+		for (ItemStack i : player.getInventory().getNonEquipmentItems()) {
 			if (i.isEmpty())
 				continue;
 			Item item = i.getItem();

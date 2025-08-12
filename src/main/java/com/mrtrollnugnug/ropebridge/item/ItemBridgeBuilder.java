@@ -12,13 +12,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class ItemBridgeBuilder extends ItemBuilder {
 
@@ -101,9 +102,9 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		tooltip.add(Component.literal("- Hold right-click to build"));
-		tooltip.add(Component.literal("- Sneak to break whole bridge"));
+	public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+		tooltipAdder.accept(Component.literal("- Hold right-click to build"));
+		tooltipAdder.accept(Component.literal("- Sneak to break whole bridge"));
 	}
 
 	private static boolean isBridgeBlock(Block block) {

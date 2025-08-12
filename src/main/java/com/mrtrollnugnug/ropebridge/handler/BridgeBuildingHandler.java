@@ -124,7 +124,7 @@ public class BridgeBuildingHandler {
 		int ropeHad = 0;
 
 		for (int i = 0; i < 36; i++) {
-			final ItemStack stack = player.getInventory().items.get(i);
+			final ItemStack stack = player.getInventory().getNonEquipmentItems().get(i);
 			if (stack.isEmpty()) {
 				continue;
 			}
@@ -153,7 +153,7 @@ public class BridgeBuildingHandler {
 		int i = 0;
 
 		for (; i < 36; i++) {
-			final ItemStack stack = player.getInventory().items.get(i);
+			final ItemStack stack = player.getInventory().getNonEquipmentItems().get(i);
 			if (stack.isEmpty()) {
 				continue;
 			}
@@ -226,7 +226,7 @@ public class BridgeBuildingHandler {
 	}
 
 	private static Block getSlabs(Player player) {
-		for (final ItemStack stack : player.getInventory().items) {
+		for (final ItemStack stack : player.getInventory().getNonEquipmentItems()) {
 			if (stack.isEmpty()) {
 				continue;
 			}

@@ -6,12 +6,8 @@ import com.mrtrollnugnug.ropebridge.lib.Constants;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.blockstates.Condition;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.client.data.models.blockstates.Variant;
-import net.minecraft.client.data.models.blockstates.VariantProperties;
-import net.minecraft.client.data.models.blockstates.VariantProperties.Rotation;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
@@ -91,45 +87,45 @@ public class ModModelProvider extends ModelProvider {
 		blockModels.blockStateOutput.accept(
 			MultiPartGenerator.multiPart(registryObject.get())
 				.with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 0)
 						.term(RopeBridgeBlock.ROTATED, false),
-					Variant.variant().with(VariantProperties.MODEL, model0)
+					BlockModelGenerators.plainVariant(model0)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 1)
 						.term(RopeBridgeBlock.ROTATED, false),
-					Variant.variant().with(VariantProperties.MODEL, model1)
+					BlockModelGenerators.plainVariant(model1)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 2)
 						.term(RopeBridgeBlock.ROTATED, false),
-					Variant.variant().with(VariantProperties.MODEL, model2)
+					BlockModelGenerators.plainVariant(model2)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 3)
 						.term(RopeBridgeBlock.ROTATED, false),
-					Variant.variant().with(VariantProperties.MODEL, model3)
+					BlockModelGenerators.plainVariant(model3)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 0)
 						.term(RopeBridgeBlock.ROTATED, true),
-					Variant.variant().with(VariantProperties.MODEL, model0).with(VariantProperties.Y_ROT, Rotation.R90)
+					BlockModelGenerators.plainVariant(model0).with(BlockModelGenerators.Y_ROT_90)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 1)
 						.term(RopeBridgeBlock.ROTATED, true),
-					Variant.variant().with(VariantProperties.MODEL, model1).with(VariantProperties.Y_ROT, Rotation.R90)
+					BlockModelGenerators.plainVariant(model1).with(BlockModelGenerators.Y_ROT_90)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 2)
 						.term(RopeBridgeBlock.ROTATED, true),
-					Variant.variant().with(VariantProperties.MODEL, model2).with(VariantProperties.Y_ROT, Rotation.R90)
+					BlockModelGenerators.plainVariant(model2).with(BlockModelGenerators.Y_ROT_90)
 				).with(
-					Condition.condition()
+					BlockModelGenerators.condition()
 						.term(RopeBridgeBlock.PROPERTY_HEIGHT, 3)
 						.term(RopeBridgeBlock.ROTATED, true),
-					Variant.variant().with(VariantProperties.MODEL, model3).with(VariantProperties.Y_ROT, Rotation.R90)
+					BlockModelGenerators.plainVariant(model3).with(BlockModelGenerators.Y_ROT_90)
 				)
 		);
 
@@ -146,9 +142,9 @@ public class ModModelProvider extends ModelProvider {
 
 		blockModels.blockStateOutput
 			.accept(
-				MultiVariantGenerator.multiVariant(registryObject.get(), Variant.variant().with(VariantProperties.MODEL, model)
+				MultiVariantGenerator.dispatch(registryObject.get(), BlockModelGenerators.plainVariant(model)
 
-				).with(BlockModelGenerators.createHorizontalFacingDispatchAlt())
+				).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING_ALT)
 			);
 		blockModels.registerSimpleItemModel(registryObject.asItem(), model);
 	}

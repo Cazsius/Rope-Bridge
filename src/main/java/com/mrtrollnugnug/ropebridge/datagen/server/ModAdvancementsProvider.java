@@ -10,6 +10,7 @@ import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.advancements.critereon.EnterBlockTrigger;
 import net.minecraft.advancements.critereon.ImpossibleTrigger;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.core.ClientAsset;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -85,7 +86,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 			return new DisplayInfo(new ItemStack(icon.asItem()),
 				Component.translatable(titleKey),
 				Component.translatable(descKey),
-				Optional.of(background), AdvancementType.TASK, true, true, false);
+				Optional.of(new ClientAsset(background)), AdvancementType.TASK, true, true, false);
 		}
 
 		/**
