@@ -24,7 +24,7 @@ public class ItemLadderBuilder extends ItemBuilder {
 				if (hit instanceof BlockHitResult blockHitResult) {
 					final BlockPos from = blockHitResult.getBlockPos();
 					Direction side = blockHitResult.getDirection();
-					LadderBuildingHandler.newLadder(from, player, player.getCommandSenderWorld(), side, player.getMainHandItem());
+					LadderBuildingHandler.newLadder(from, player, level, side, player.getMainHandItem());
 					return true;
 				}
 			}
