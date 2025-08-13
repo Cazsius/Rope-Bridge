@@ -1,4 +1,4 @@
-// 1.21.8	2025-08-12T22:21:59.2231642	Loot Tables
+// 1.21.8	2025-08-13T19:56:19.4732681	Loot Tables
 2e45bf5bfd29981a8d91cbd11daef744025dc105 data/ropebridge/loot_table/blocks/acacia_bridge.json
 a945ae6faf4578e92f26ec12c817a129543d0572 data/ropebridge/loot_table/blocks/acacia_rope_ladder.json
 316c72b4fdb41a44bc55499d335ef33f3b63021b data/ropebridge/loot_table/blocks/bamboo_bridge.json
@@ -17,6 +17,8 @@ c81b29dfe61ae86cf64b4f023657e809f589847f data/ropebridge/loot_table/blocks/mangr
 838d750a3f76c630f8b7b23632632c0945dedc76 data/ropebridge/loot_table/blocks/mangrove_rope_ladder.json
 5658b7b5a87775386afcbe1fd4298f10d7b5b127 data/ropebridge/loot_table/blocks/oak_bridge.json
 1aaf6460a15663739588ae2187f806e72df73e5d data/ropebridge/loot_table/blocks/oak_rope_ladder.json
+3a85cc9c254d7af1daded94436f4782da893b3e6 data/ropebridge/loot_table/blocks/pale_oak_bridge.json
+71bde834286ea066377fa4e612444d939c6fe0af data/ropebridge/loot_table/blocks/pale_oak_rope_ladder.json
 dd4cb3101c3211591a263b0218e39da2a416c57c data/ropebridge/loot_table/blocks/spruce_bridge.json
 d2b0e672e053aa5d4cea5fbfa4815ddae803a71e data/ropebridge/loot_table/blocks/spruce_rope_ladder.json
 f9ab7c7e5316b72ea2deb80f0e80edddd6281e02 data/ropebridge/loot_table/blocks/warped_bridge.json

@@ -36,6 +36,10 @@
       "bridge": "ropebridge:oak_bridge",
       "ladder": "ropebridge:oak_rope_ladder"
     },
+    "minecraft:pale_oak_slab": {
+      "bridge": "ropebridge:pale_oak_bridge",
+      "ladder": "ropebridge:pale_oak_rope_ladder"
+    },
     "minecraft:spruce_slab": {
       "bridge": "ropebridge:spruce_bridge",
       "ladder": "ropebridge:spruce_rope_ladder"

@@ -27,6 +27,7 @@ public class ModDataMapProvider extends DataMapProvider {
 		slabs.add(Blocks.CHERRY_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.cherry_bridge.get(), ContentHandler.cherry_rope_ladder.get()), false);
 		slabs.add(Blocks.DARK_OAK_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.dark_oak_bridge.get(), ContentHandler.dark_oak_rope_ladder.get()), false);
 		slabs.add(Blocks.MANGROVE_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.mangrove_bridge.get(), ContentHandler.mangrove_rope_ladder.get()), false);
+		slabs.add(Blocks.PALE_OAK_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.pale_oak_bridge.get(), ContentHandler.pale_oak_rope_ladder.get()), false);
 		slabs.add(Blocks.BAMBOO_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.bamboo_bridge.get(), ContentHandler.bamboo_rope_ladder.get()), false);
 		slabs.add(Blocks.CRIMSON_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.crimson_bridge.get(), ContentHandler.crimson_rope_ladder.get()), false);
 		slabs.add(Blocks.WARPED_SLAB.builtInRegistryHolder(), new SlabMap(ContentHandler.warped_bridge.get(), ContentHandler.warped_rope_ladder.get()), false);
