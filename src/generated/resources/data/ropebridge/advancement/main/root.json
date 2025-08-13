@@ -8,6 +8,7 @@
     }
   },
   "display": {
+    "announce_to_chat": false,
     "background": "minecraft:textures/block/oak_log_top.png",
     "description": {
       "translate": "advancement.ropebridge.root.desc"
