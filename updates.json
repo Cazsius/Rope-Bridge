@@ -1,7 +1,7 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/rope-bridge",
   "promos": {
-    "1.21.8-latest": "4.3.1",
+    "1.21.8-latest": "4.3.2",
     "1.21.5-latest": "4.2.1",
     "1.21.4-latest": "4.1.1",
     "1.21.1-latest": "4.0.1",
@@ -32,6 +32,7 @@
     "1.7.10-recommended": "v1.3"
   },
   "1.21.8": {
+    "4.3.2": "Add Pale Oak bridge / ladder variant",
     "4.3.1": "Change how rope ladders break, they now break if there's no wall supporting them or if there's no rope ladder attached above it. Make the root advancement not announce to chat",
     "4.3.0": "Initial port to 1.21.8"
   },
