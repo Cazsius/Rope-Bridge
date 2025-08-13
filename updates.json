@@ -3,7 +3,7 @@
   "promos": {
     "1.21.8-latest": "4.3.0",
     "1.21.5-latest": "4.2.0",
-    "1.21.4-latest": "4.1.0",
+    "1.21.4-latest": "4.1.1",
     "1.21.1-latest": "4.0.1",
     "1.20.1-latest": "3.0.1",
     "1.16.5-latest": "2.2.1",
@@ -38,6 +38,7 @@
     "4.2.0": "Initial port to 1.21.5"
   },
   "1.21.4": {
+    "4.1.1": "Change how rope ladders break, they now break if there's no wall supporting them or if there's no rope ladder attached above it. Fix Rope Ladder placement check. Make the root advancement not announce to chat",
     "4.1.0": "Initial port to 1.21.4"
   },
   "1.21.1": {
