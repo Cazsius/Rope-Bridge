@@ -82,7 +82,7 @@ public class ModAdvancementsProvider extends ForgeAdvancementProvider {
 			return new DisplayInfo(new ItemStack(icon.asItem()),
 				Component.translatable(titleKey),
 				Component.translatable(descKey),
-				background, FrameType.TASK, true, true, false);
+				background, FrameType.TASK, true, false, false);
 		}
 
 		/**
