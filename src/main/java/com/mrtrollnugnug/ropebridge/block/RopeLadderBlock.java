@@ -36,7 +36,7 @@ public class RopeLadderBlock extends LadderBlock {
 	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
 	                              BlockPos pCurrentPos, BlockPos pFacingPos) {
 		if (!canSurvive(pState, pLevel, pCurrentPos) && pLevel instanceof Level level && !pLevel.getBlockState(pCurrentPos.above()).is(this)) {
-			dropResources(pState, level, pCurrentPos, null, null, null, false);
+			dropResources(pState, level, pCurrentPos);
 			pLevel.setBlock(pCurrentPos, Blocks.AIR.defaultBlockState(), 3);
 		}
 		return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
