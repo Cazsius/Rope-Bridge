@@ -1,6 +1,7 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
+import com.mrtrollnugnug.ropebridge.datamap.SlabMap;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.LinkedList;
@@ -96,7 +96,7 @@ public class BridgeBuildingHandler {
 		}
 
 		if (allClear) {
-			final Block slab = getSlabs(player);
+			final Block slab = ModUtils.getSlabToUse(player);
 
 			if (slab != null && !player.getAbilities().instabuild) {
 				takeMaterials(player, distInt - 1);
@@ -209,7 +209,11 @@ public class BridgeBuildingHandler {
 		if (index < bridge.size()) {
 			slab = bridge.get(index);
 			int backLevel = index > 0 ? bridge.get(index - 1).getLevel() : 0;
-			BlockState state = ModUtils.map.get(slabBlock).getLeft().get().defaultBlockState()
+			SlabMap slabMap = slabBlock.builtInRegistryHolder().getData(ContentHandler.SLAB_MAP);
+			if (slabMap == null) {
+				return;
+			}
+			BlockState state = slabMap.bridge().defaultBlockState()
 				.setValue(RopeBridgeBlock.PROPERTY_HEIGHT, slab.getLevel())
 				.setValue(RopeBridgeBlock.PROPERTY_BACK, backLevel)
 				.setValue(RopeBridgeBlock.ROTATED, rotated);
@@ -223,17 +227,5 @@ public class BridgeBuildingHandler {
 				}
 			}, 100);
 		}
-	}
-
-	private static Block getSlabs(Player player) {
-		for (final ItemStack stack : player.getInventory().getNonEquipmentItems()) {
-			if (stack.isEmpty()) {
-				continue;
-			}
-			if (stack.is(ItemTags.WOODEN_SLABS))
-				return Block.byItem(stack.getItem());
-		}
-		//todo: this is reachable when the player has 0 slabs, a fallback of oak is used in this case, maybe allow for different blocks?
-		return Blocks.OAK_SLAB;
 	}
 }

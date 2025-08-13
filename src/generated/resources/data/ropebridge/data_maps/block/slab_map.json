@@ -1,0 +1,48 @@
+{
+  "values": {
+    "minecraft:acacia_slab": {
+      "bridge": "ropebridge:acacia_bridge",
+      "ladder": "ropebridge:acacia_rope_ladder"
+    },
+    "minecraft:bamboo_slab": {
+      "bridge": "ropebridge:bamboo_bridge",
+      "ladder": "ropebridge:bamboo_rope_ladder"
+    },
+    "minecraft:birch_slab": {
+      "bridge": "ropebridge:birch_bridge",
+      "ladder": "ropebridge:birch_rope_ladder"
+    },
+    "minecraft:cherry_slab": {
+      "bridge": "ropebridge:cherry_bridge",
+      "ladder": "ropebridge:cherry_rope_ladder"
+    },
+    "minecraft:crimson_slab": {
+      "bridge": "ropebridge:crimson_bridge",
+      "ladder": "ropebridge:crimson_rope_ladder"
+    },
+    "minecraft:dark_oak_slab": {
+      "bridge": "ropebridge:dark_oak_bridge",
+      "ladder": "ropebridge:dark_oak_rope_ladder"
+    },
+    "minecraft:jungle_slab": {
+      "bridge": "ropebridge:jungle_bridge",
+      "ladder": "ropebridge:jungle_rope_ladder"
+    },
+    "minecraft:mangrove_slab": {
+      "bridge": "ropebridge:mangrove_bridge",
+      "ladder": "ropebridge:mangrove_rope_ladder"
+    },
+    "minecraft:oak_slab": {
+      "bridge": "ropebridge:oak_bridge",
+      "ladder": "ropebridge:oak_rope_ladder"
+    },
+    "minecraft:spruce_slab": {
+      "bridge": "ropebridge:spruce_bridge",
+      "ladder": "ropebridge:spruce_rope_ladder"
+    },
+    "minecraft:warped_slab": {
+      "bridge": "ropebridge:warped_bridge",
+      "ladder": "ropebridge:warped_rope_ladder"
+    }
+  }
+}

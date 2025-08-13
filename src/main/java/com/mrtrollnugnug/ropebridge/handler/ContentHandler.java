@@ -2,6 +2,7 @@ package com.mrtrollnugnug.ropebridge.handler;
 
 import com.mrtrollnugnug.ropebridge.block.RopeBridgeBlock;
 import com.mrtrollnugnug.ropebridge.block.RopeLadderBlock;
+import com.mrtrollnugnug.ropebridge.datamap.SlabMap;
 import com.mrtrollnugnug.ropebridge.item.ItemBridgeBuilder;
 import com.mrtrollnugnug.ropebridge.item.ItemLadderBuilder;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
@@ -21,6 +22,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import java.util.List;
 import java.util.function.Function;
@@ -85,4 +88,13 @@ public final class ContentHandler {
 			List<ItemStack> stacks = ContentHandler.ITEMS.getEntries().stream().map(reg -> new ItemStack(reg.get())).toList();
 			output.acceptAll(stacks);
 		}).build());
+
+
+	public static final DataMapType<Block, SlabMap> SLAB_MAP = DataMapType.builder(
+		Constants.modLoc("slab_map"), Registries.BLOCK, SlabMap.CODEC)
+		.synced(SlabMap.CODEC, false).build();
+
+	public static void register(final RegisterDataMapTypesEvent event) {
+		event.register(SLAB_MAP);
+	}
 }
