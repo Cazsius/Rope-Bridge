@@ -1,5 +1,3 @@
-* Initial port to 1.20.1
-* Added new wood variants for the rope bridges and ladders
-* Added advancements based the old achievements
-* Integrated unused sounds with the Bridge Building Gun and Ladder Gun.
-* Added item variants of each Rope Bridge and Ladder block (Creative-only)
+* Change how rope ladders break, they now break if there's no wall supporting them or if there's no rope ladder attached above it
+* Fix Rope Ladder placement check
+* Make the root advancement not announce to chat
