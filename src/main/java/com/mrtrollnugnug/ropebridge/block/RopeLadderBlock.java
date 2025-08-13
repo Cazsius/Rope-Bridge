@@ -3,10 +3,14 @@ package com.mrtrollnugnug.ropebridge.block;
 import com.mrtrollnugnug.ropebridge.handler.ConfigHandler;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams.Builder;
@@ -26,6 +30,16 @@ public class RopeLadderBlock extends LadderBlock {
 
 	public Block getSlab() {
 		return slabSupplier.get();
+	}
+
+	@Override
+	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel,
+	                              BlockPos pCurrentPos, BlockPos pFacingPos) {
+		if (!canSurvive(pState, pLevel, pCurrentPos) && pLevel instanceof Level level && !pLevel.getBlockState(pCurrentPos.above()).is(this)) {
+			dropResources(pState, level, pCurrentPos, null, null, null, false);
+			pLevel.setBlock(pCurrentPos, Blocks.AIR.defaultBlockState(), 3);
+		}
+		return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
 	}
 
 	@Override
