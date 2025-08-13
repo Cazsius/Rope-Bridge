@@ -53,6 +53,7 @@ public class ModModelProvider extends ModelProvider {
 		makeRopeLadder(blockModels, ContentHandler.cherry_rope_ladder, "cherry_log_top");
 		makeRopeLadder(blockModels, ContentHandler.dark_oak_rope_ladder, "dark_oak_log_top");
 		makeRopeLadder(blockModels, ContentHandler.mangrove_rope_ladder, "mangrove_log_top");
+		makeRopeLadder(blockModels, ContentHandler.pale_oak_rope_ladder, "pale_oak_log_top");
 		makeRopeLadder(blockModels, ContentHandler.bamboo_rope_ladder, "bamboo_block_top");
 		makeRopeLadder(blockModels, ContentHandler.crimson_rope_ladder, "crimson_stem_top");
 		makeRopeLadder(blockModels, ContentHandler.warped_rope_ladder, "warped_stem_top");
@@ -65,6 +66,7 @@ public class ModModelProvider extends ModelProvider {
 		makeRopeBridge(blockModels, ContentHandler.cherry_bridge, "cherry_log_top");
 		makeRopeBridge(blockModels, ContentHandler.dark_oak_bridge, "dark_oak_log_top");
 		makeRopeBridge(blockModels, ContentHandler.mangrove_bridge, "mangrove_log_top");
+		makeRopeBridge(blockModels, ContentHandler.pale_oak_bridge, "pale_oak_log_top");
 		makeRopeBridge(blockModels, ContentHandler.bamboo_bridge, "bamboo_block_top");
 		makeRopeBridge(blockModels, ContentHandler.crimson_bridge, "crimson_stem_top");
 		makeRopeBridge(blockModels, ContentHandler.warped_bridge, "warped_stem_top");

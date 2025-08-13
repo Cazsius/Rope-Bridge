@@ -33,6 +33,7 @@ public class ModLanguageProvider extends LanguageProvider {
 		addBlock(ContentHandler.cherry_bridge, "Cherry Rope Bridge");
 		addBlock(ContentHandler.dark_oak_bridge, "Dark Oak Rope Bridge");
 		addBlock(ContentHandler.mangrove_bridge, "Mangrove Rope Bridge");
+		addBlock(ContentHandler.pale_oak_bridge, "Pale Oak Rope Bridge");
 		addBlock(ContentHandler.bamboo_bridge, "Bamboo Rope Bridge");
 		addBlock(ContentHandler.crimson_bridge, "Crimson Rope Bridge");
 		addBlock(ContentHandler.warped_bridge, "Warped Rope Bridge");
@@ -45,6 +46,7 @@ public class ModLanguageProvider extends LanguageProvider {
 		addBlock(ContentHandler.cherry_rope_ladder, "Cherry Rope Ladder");
 		addBlock(ContentHandler.dark_oak_rope_ladder, "Dark Oak Rope Ladder");
 		addBlock(ContentHandler.mangrove_rope_ladder, "Mangrove Rope Ladder");
+		addBlock(ContentHandler.pale_oak_rope_ladder, "Pale Oak Rope Ladder");
 		addBlock(ContentHandler.bamboo_rope_ladder, "Bamboo Rope Ladder");
 		addBlock(ContentHandler.crimson_rope_ladder, "Crimson Rope Ladder");
 		addBlock(ContentHandler.warped_rope_ladder, "Warped Rope Ladder");
