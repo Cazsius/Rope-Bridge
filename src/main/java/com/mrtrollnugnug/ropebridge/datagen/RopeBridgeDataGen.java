@@ -4,6 +4,7 @@ import com.mrtrollnugnug.ropebridge.datagen.client.ModLanguageProvider;
 import com.mrtrollnugnug.ropebridge.datagen.client.ModModelProvider;
 import com.mrtrollnugnug.ropebridge.datagen.client.ModSoundProvider;
 import com.mrtrollnugnug.ropebridge.datagen.server.ModAdvancementsProvider;
+import com.mrtrollnugnug.ropebridge.datagen.server.ModDataMapProvider;
 import com.mrtrollnugnug.ropebridge.datagen.server.ModLootProvider;
 import com.mrtrollnugnug.ropebridge.datagen.server.ModRecipeProvider;
 import net.minecraft.core.HolderLookup.Provider;
@@ -26,6 +27,7 @@ public class RopeBridgeDataGen {
 		generator.addProvider(true, new ModLootProvider(packOutput, lookupProvider));
 		generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
 		generator.addProvider(true, new ModAdvancementsProvider(packOutput, lookupProvider));
+		generator.addProvider(true, new ModDataMapProvider(packOutput, lookupProvider));
 
 		generator.addProvider(true, new ModLanguageProvider(packOutput));
 		generator.addProvider(true, new ModSoundProvider(packOutput));

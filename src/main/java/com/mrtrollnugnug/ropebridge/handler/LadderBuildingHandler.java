@@ -1,12 +1,12 @@
 package com.mrtrollnugnug.ropebridge.handler;
 
+import com.mrtrollnugnug.ropebridge.datamap.SlabMap;
 import com.mrtrollnugnug.ropebridge.lib.BlockItemUseContextExt;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import com.mrtrollnugnug.ropebridge.lib.ModUtils;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -49,7 +48,7 @@ public class LadderBuildingHandler {
 
 		int woodNeeded = count * ConfigHandler.getWoodPerLadder();
 		int ropeNeeded = count * ConfigHandler.getRopePerLadder();
-		Block slabToUse = getSlabToUse(player);
+		Block slabToUse = ModUtils.getSlabToUse(player);
 
 		if (!player.getAbilities().instabuild) {
 			if (!hasMaterials(player, woodNeeded, ropeNeeded, slabToUse)) {
@@ -98,7 +97,11 @@ public class LadderBuildingHandler {
 	                          final Direction facing, final Block slabToUse) {
 		ServerLifecycleHooks.getCurrentServer().execute(() -> {
 
-			BlockState state = ModUtils.map.get(slabToUse).getRight().get().defaultBlockState().setValue(LadderBlock.FACING, facing);
+			SlabMap slabMap = slabToUse.builtInRegistryHolder().getData(ContentHandler.SLAB_MAP);
+			if (slabMap == null) {
+				return;
+			}
+			BlockState state = slabMap.ladder().defaultBlockState().setValue(LadderBlock.FACING, facing);
 			level.setBlockAndUpdate(start.below(iterations), state);
 		});
 		if (iterations + 1 < count)
@@ -119,10 +122,6 @@ public class LadderBuildingHandler {
 		}
 		player.getInventory().clearOrCountMatchingItems(stack -> stack.is(ContentHandler.rope.get()), ropeNeeded, player.inventoryMenu.getCraftSlots());
 		player.getInventory().clearOrCountMatchingItems(stack -> stack.getItem() == woodType.asItem(), woodNeeded, player.inventoryMenu.getCraftSlots());
-	}
-
-	private static Block getSlabToUse(Player player) {
-		return player.getInventory().getNonEquipmentItems().stream().filter(stack -> stack.is(ItemTags.WOODEN_SLABS)).findFirst().map(stack -> Block.byItem(stack.getItem())).orElse(Blocks.OAK_SLAB);
 	}
 
 	private static boolean hasMaterials(Player player, int woodNeeded, int ropeNeeded,
