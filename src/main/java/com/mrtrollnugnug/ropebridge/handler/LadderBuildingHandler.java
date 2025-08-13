@@ -35,7 +35,7 @@ public class LadderBuildingHandler {
 
 		BlockState ladderState = ContentHandler.oak_rope_ladder.get().defaultBlockState().setValue(LadderBlock.FACING, hitSide);
 
-		if (!ladderState.canSurvive(level, selected)) {
+		if (!ladderState.canSurvive(level, selected.relative(hitSide))) {
 			ModUtils.tellPlayer(player, Constants.Messages.NOT_SOLID);
 			return;
 		}
