@@ -87,7 +87,7 @@ public class LadderBuildingHandler {
 	public static boolean isReplaceable(Level level, BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
 		BlockPlaceContext blockItemUseContext = new BlockItemUseContextExt(level, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
 			new BlockHitResult(new Vec3((double) pos.getX() + 0.5D + (double) Direction.DOWN.getStepX() * 0.5D, (double) pos.getY() + 0.5D + (double) Direction.DOWN.getStepY() * 0.5D, (double) pos.getZ() + 0.5D + (double) Direction.DOWN.getStepZ() * 0.5D), Direction.DOWN, pos, false));
-		return pos.getY() > level.getMinBuildHeight() && state.canBeReplaced(blockItemUseContext);
+		return pos.getY() > level.getMinY() && state.canBeReplaced(blockItemUseContext);
 	}
 
 	private static void build(Level level, BlockPos start, int count, final Direction facing, final Block type) {
