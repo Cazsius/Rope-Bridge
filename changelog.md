@@ -1,1 +1,1 @@
-* Add Pale Oak bridge / ladder variant
+* Fix Ladder Gun not working below Y level 0
