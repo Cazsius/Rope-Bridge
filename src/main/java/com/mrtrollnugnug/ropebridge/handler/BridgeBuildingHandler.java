@@ -24,29 +24,26 @@ public class BridgeBuildingHandler {
 	private BridgeBuildingHandler() {
 	}
 
-	public static void newBridge(Player player, ItemStack stack, BlockPos pos1, BlockPos pos2) {
+	public static void newBridge(Player player, ItemStack stack, BlockPos pos2) {
 		final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
+		final BlockPos pos1 = BlockPos.containing(player.getX(), player.getY(), player.getZ()).below();
 		boolean allClear = true;
 		int x1;
 		int x2;
-		int y1;
-		int y2;
+		int y1 = pos1.getY();
+		int y2 = pos2.getY();
 		int z1;
 		int z2;
 		boolean rotate = getRotate(pos1, pos2);
 		if (!rotate) {
 			x1 = pos1.getX();
-			y1 = pos1.getY();
 			z1 = pos1.getZ();
 			x2 = pos2.getX();
-			y2 = pos2.getY();
 			z2 = pos2.getZ();
 		} else {
 			x1 = pos1.getZ();
-			y1 = pos1.getY();
 			z1 = pos1.getX();
 			x2 = pos2.getZ();
-			y2 = pos2.getY();
 			z2 = pos2.getX();
 		}
 		if (Math.abs(z2 - z1) > 3) {
@@ -73,8 +70,8 @@ public class BridgeBuildingHandler {
 			return;
 		}
 		for (int x = Math.min(x1, x2) + 1; x <= Math.max(x1, x2) - 1; x++) {
+			final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigHandler.getBridgeDroopFactor() + ConfigHandler.getBridgeYOffset();
 			for (int y = Math.max(y1, y2); y >= Math.min(y1, y2) - distInt / 8 - 1; y--) {
-				final double funcVal = m * x + b - distance / 1000 * Math.sin((x - Math.min(x1, x2)) * (Math.PI / distance)) * ConfigHandler.getBridgeDroopFactor() + ConfigHandler.getBridgeYOffset();
 				if (y + 0.5 > funcVal && y - 0.5 <= funcVal) {
 					int level;
 					if (funcVal >= y) {

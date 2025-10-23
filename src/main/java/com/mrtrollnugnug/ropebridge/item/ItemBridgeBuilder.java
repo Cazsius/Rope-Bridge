@@ -76,9 +76,8 @@ public class ItemBridgeBuilder extends ItemBuilder {
 				} else {
 					final HitResult hit = trace(player);
 					if (hit instanceof BlockHitResult blockHitResult) {
-						final BlockPos floored = BlockPos.containing(player.getX(), player.getY() - 1, player.getZ()).below();
 						BlockPos target = blockHitResult.getBlockPos();
-						BridgeBuildingHandler.newBridge(player, player.getMainHandItem(), floored, target);
+						BridgeBuildingHandler.newBridge(player, player.getMainHandItem(), target);
 						level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), ContentHandler.swoosh.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
 					}
 				}
