@@ -1,1 +1,1 @@
-* Fix Ladder Gun not working below Y level 0
+* Fix starting block of short bridges (Thanks to TheAtomicOption)
