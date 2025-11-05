@@ -26,7 +26,7 @@ public class BridgeBuildingHandler {
 
 	public static void newBridge(Player player, ItemStack stack, BlockPos pos2) {
 		final LinkedList<SlabPosHandler> bridge = new LinkedList<>();
-		final BlockPos pos1 = BlockPos.containing(player.getX(), player.getY(), player.getZ()).below();
+		final BlockPos pos1 = player.blockPosition().below();
 		boolean allClear = true;
 		int x1;
 		int x2;
