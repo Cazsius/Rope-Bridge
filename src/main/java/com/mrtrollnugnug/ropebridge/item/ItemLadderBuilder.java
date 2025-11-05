@@ -18,7 +18,7 @@ public class ItemLadderBuilder extends ItemBuilder {
 
 	@Override
 	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int remainingUseDuration) {
-		if (livingEntity instanceof Player player && !level.isClientSide) {
+		if (livingEntity instanceof Player player && !level.isClientSide()) {
 			if (this.getUseDuration(stack, livingEntity) - remainingUseDuration > 5) {
 				final HitResult hit = trace(player);
 				if (hit instanceof BlockHitResult blockHitResult) {

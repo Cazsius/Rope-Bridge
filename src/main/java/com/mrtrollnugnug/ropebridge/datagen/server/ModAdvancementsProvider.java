@@ -86,7 +86,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 			return new DisplayInfo(new ItemStack(icon.asItem()),
 				Component.translatable(titleKey),
 				Component.translatable(descKey),
-				Optional.of(new ClientAsset(background)), AdvancementType.TASK, true, false, false);
+				Optional.of(new ClientAsset.ResourceTexture(background)), AdvancementType.TASK, true, false, false);
 		}
 
 		/**

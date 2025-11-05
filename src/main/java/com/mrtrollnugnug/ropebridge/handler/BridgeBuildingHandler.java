@@ -97,7 +97,7 @@ public class BridgeBuildingHandler {
 
 			if (slab != null && !player.getAbilities().instabuild) {
 				takeMaterials(player, distInt - 1);
-				stack.hurtAndBreak(ConfigHandler.getBridgeDamage(), player, Player.getSlotForHand(player.getUsedItemHand()));
+				stack.hurtAndBreak(ConfigHandler.getBridgeDamage(), player, player.getUsedItemHand().asEquipmentSlot());
 			}
 			buildBridge(player.level(), bridge, slab, 0, rotate);
 			ModUtils.unlockAdvancement(player, Constants.BUILD_BRIDGE_ADVANCEMENT);

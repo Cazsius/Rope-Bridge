@@ -30,7 +30,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 	@Override
 	public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
 		super.onUseTick(level, livingEntity, stack, remainingUseDuration);
-		if (livingEntity.level().isClientSide && livingEntity instanceof Player player) {
+		if (livingEntity.level().isClientSide() && livingEntity instanceof Player player) {
 			rotatePlayerTowards(player, getNearestYaw(player));
 		}
 	}
@@ -70,7 +70,7 @@ public class ItemBridgeBuilder extends ItemBuilder {
 
 	@Override
 	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
-		if (livingEntity instanceof Player player && !level.isClientSide) {
+		if (livingEntity instanceof Player player && !level.isClientSide()) {
 			if (this.getUseDuration(stack, livingEntity) - timeCharged > 10) {
 				if (!player.onGround()) {
 					ModUtils.tellPlayer(player, Messages.NOT_ON_GROUND);

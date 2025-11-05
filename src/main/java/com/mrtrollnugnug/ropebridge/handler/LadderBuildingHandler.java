@@ -58,7 +58,7 @@ public class LadderBuildingHandler {
 		}
 
 		if (!player.getAbilities().instabuild)
-			builder.hurtAndBreak(ConfigHandler.getLadderDamage(), player, Player.getSlotForHand(player.getUsedItemHand()));
+			builder.hurtAndBreak(ConfigHandler.getLadderDamage(), player, player.getUsedItemHand().asEquipmentSlot());
 
 		consume(player, woodNeeded, ropeNeeded, slabToUse);
 		build(level, selected.relative(hitSide), count, hitSide, slabToUse);

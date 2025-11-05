@@ -70,7 +70,7 @@ public class RopeBridgeBlock extends Block {
 	@Override
 	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
 		BlockState destroyState = super.playerWillDestroy(level, pos, state, player);
-		if (!level.isClientSide && player.getMainHandItem().is(ContentHandler.bridge_builder.get()) && player.isCrouching()) {
+		if (!level.isClientSide() && player.getMainHandItem().is(ContentHandler.bridge_builder.get()) && player.isCrouching()) {
 			ModUtils.tellPlayer(player, Messages.WARNING_BREAKING);
 			boolean rotate = level.getBlockState(pos).getValue(RopeBridgeBlock.ROTATED);
 			if (rotate) {

@@ -52,7 +52,7 @@ public class ModUtils {
 
 	public static void unlockAdvancement(Player player, ResourceLocation advancementId) {
 		if (player instanceof ServerPlayer serverPlayer) {
-			MinecraftServer server = serverPlayer.getServer();
+			MinecraftServer server = serverPlayer.level().getServer();
 			if (server != null) {
 				AdvancementHolder advancementHolder = server.getAdvancements().get(advancementId);
 				if (advancementHolder != null) {

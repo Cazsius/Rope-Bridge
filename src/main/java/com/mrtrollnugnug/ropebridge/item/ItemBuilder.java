@@ -22,7 +22,7 @@ public abstract class ItemBuilder extends Item {
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		if (hand == InteractionHand.MAIN_HAND) {
 			player.startUsingItem(hand);
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), ContentHandler.load.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
 			}
 		}
