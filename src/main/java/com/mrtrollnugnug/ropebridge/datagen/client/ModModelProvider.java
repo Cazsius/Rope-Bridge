@@ -13,6 +13,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -135,7 +136,7 @@ public class ModModelProvider extends ModelProvider {
 	}
 
 	private TextureMapping log(Identifier texture) {
-		return new TextureMapping().put(LOG, texture);
+		return new TextureMapping().put(LOG, new Material(texture));
 	}
 
 	private void makeRopeLadder(BlockModelGenerators blockModels, DeferredBlock<? extends Block> registryObject, String plankTexture) {
@@ -152,6 +153,6 @@ public class ModModelProvider extends ModelProvider {
 	}
 
 	private TextureMapping plank(Identifier texture) {
-		return new TextureMapping().put(PLANK, texture);
+		return new TextureMapping().put(PLANK, new Material(texture));
 	}
 }

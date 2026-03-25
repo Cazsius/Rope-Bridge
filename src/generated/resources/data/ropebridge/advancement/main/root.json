@@ -14,7 +14,6 @@
       "translate": "advancement.ropebridge.root.desc"
     },
     "icon": {
-      "count": 1,
       "id": "ropebridge:rope"
     },
     "title": {

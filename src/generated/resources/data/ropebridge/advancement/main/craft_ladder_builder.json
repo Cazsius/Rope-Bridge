@@ -18,7 +18,6 @@
       "translate": "advancement.ropebridge.craft_ladder_builder.desc"
     },
     "icon": {
-      "count": 1,
       "id": "ropebridge:ladder_builder"
     },
     "title": {

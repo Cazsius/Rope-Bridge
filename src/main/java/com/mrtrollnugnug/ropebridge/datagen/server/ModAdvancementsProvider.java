@@ -18,7 +18,7 @@ import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
@@ -83,7 +83,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 		 * @return The DisplayInfo object.
 		 */
 		protected static DisplayInfo rootDisplay(ItemLike icon, String titleKey, String descKey, Identifier background) {
-			return new DisplayInfo(new ItemStack(icon.asItem()),
+			return new DisplayInfo(new ItemStackTemplate(icon.asItem()),
 				Component.translatable(titleKey),
 				Component.translatable(descKey),
 				Optional.of(new ClientAsset.ResourceTexture(background)), AdvancementType.TASK, true, false, false);
@@ -97,7 +97,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 		 * @return The DisplayInfo object.
 		 */
 		protected static DisplayInfo simpleDisplay(ItemLike icon, String name) {
-			return new DisplayInfo(new ItemStack(icon.asItem()),
+			return new DisplayInfo(new ItemStackTemplate(icon.asItem()),
 				Component.translatable(advancementPrefix(name + ".title")),
 				Component.translatable(advancementPrefix(name + ".desc")),
 				Optional.empty(), AdvancementType.TASK, true, false, false);

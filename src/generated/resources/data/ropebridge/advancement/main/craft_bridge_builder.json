@@ -18,7 +18,6 @@
       "translate": "advancement.ropebridge.craft_bridge_builder.desc"
     },
     "icon": {
-      "count": 1,
       "id": "ropebridge:bridge_builder"
     },
     "title": {

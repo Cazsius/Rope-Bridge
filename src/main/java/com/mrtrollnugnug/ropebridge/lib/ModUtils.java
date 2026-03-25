@@ -28,7 +28,7 @@ public class ModUtils {
 	 *                translation keys are HIGHLY encouraged!
 	 */
 	public static void tellPlayer(Player sender, String message, Object... params) {
-		sender.displayClientMessage(Component.translatable(message, params), false);
+		sender.sendSystemMessage(Component.translatable(message, params));
 	}
 
 	public static Block getSlabToUse(Player player) {
