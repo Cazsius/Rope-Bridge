@@ -7,9 +7,9 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.advancements.critereon.EnterBlockTrigger;
-import net.minecraft.advancements.critereon.ImpossibleTrigger;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.EnterBlockTrigger;
+import net.minecraft.advancements.criterion.ImpossibleTrigger;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
@@ -17,7 +17,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -39,7 +39,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 			//Root advancement
 			AdvancementHolder root = Advancement.Builder.advancement()
 				.display(rootDisplay(ContentHandler.rope.get(), advancementPrefix("root.title"),
-					advancementPrefix("root.desc"), ResourceLocation.withDefaultNamespace("textures/block/oak_log_top.png")))
+					advancementPrefix("root.desc"), Identifier.withDefaultNamespace("textures/block/oak_log_top.png")))
 				.addCriterion("air", EnterBlockTrigger.TriggerInstance.entersBlock(Blocks.AIR))
 				.save(writer, rootID("root"));
 
@@ -82,7 +82,7 @@ public class ModAdvancementsProvider extends AdvancementProvider {
 		 * @param background The background texture.
 		 * @return The DisplayInfo object.
 		 */
-		protected static DisplayInfo rootDisplay(ItemLike icon, String titleKey, String descKey, ResourceLocation background) {
+		protected static DisplayInfo rootDisplay(ItemLike icon, String titleKey, String descKey, Identifier background) {
 			return new DisplayInfo(new ItemStack(icon.asItem()),
 				Component.translatable(titleKey),
 				Component.translatable(descKey),

@@ -14,7 +14,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -80,11 +80,11 @@ public class ModModelProvider extends ModelProvider {
 	}
 
 	private void makeRopeBridge(BlockModelGenerators blockModels, DeferredBlock<? extends Block> registryObject, String logTexture) {
-		ResourceLocation logTextureLocation = ResourceLocation.withDefaultNamespace("block/" + logTexture);
-		ResourceLocation model0 = BRIDGE_0.createWithSuffix(registryObject.get(), "_block_0", log(logTextureLocation), blockModels.modelOutput);
-		ResourceLocation model1 = BRIDGE_1.createWithSuffix(registryObject.get(), "_block_1", log(logTextureLocation), blockModels.modelOutput);
-		ResourceLocation model2 = BRIDGE_2.createWithSuffix(registryObject.get(), "_block_2", log(logTextureLocation), blockModels.modelOutput);
-		ResourceLocation model3 = BRIDGE_3.createWithSuffix(registryObject.get(), "_block_3", log(logTextureLocation), blockModels.modelOutput);
+		Identifier logTextureLocation = Identifier.withDefaultNamespace("block/" + logTexture);
+		Identifier model0 = BRIDGE_0.createWithSuffix(registryObject.get(), "_block_0", log(logTextureLocation), blockModels.modelOutput);
+		Identifier model1 = BRIDGE_1.createWithSuffix(registryObject.get(), "_block_1", log(logTextureLocation), blockModels.modelOutput);
+		Identifier model2 = BRIDGE_2.createWithSuffix(registryObject.get(), "_block_2", log(logTextureLocation), blockModels.modelOutput);
+		Identifier model3 = BRIDGE_3.createWithSuffix(registryObject.get(), "_block_3", log(logTextureLocation), blockModels.modelOutput);
 
 		blockModels.blockStateOutput.accept(
 			MultiPartGenerator.multiPart(registryObject.get())
@@ -134,13 +134,13 @@ public class ModModelProvider extends ModelProvider {
 		blockModels.registerSimpleItemModel(registryObject.asItem(), model0);
 	}
 
-	private TextureMapping log(ResourceLocation texture) {
+	private TextureMapping log(Identifier texture) {
 		return new TextureMapping().put(LOG, texture);
 	}
 
 	private void makeRopeLadder(BlockModelGenerators blockModels, DeferredBlock<? extends Block> registryObject, String plankTexture) {
-		ResourceLocation plankTextureLocation = ResourceLocation.withDefaultNamespace("block/" + plankTexture);
-		ResourceLocation model = ROPE_LADDER.create(registryObject.get(), plank(plankTextureLocation), blockModels.modelOutput);
+		Identifier plankTextureLocation = Identifier.withDefaultNamespace("block/" + plankTexture);
+		Identifier model = ROPE_LADDER.create(registryObject.get(), plank(plankTextureLocation), blockModels.modelOutput);
 
 		blockModels.blockStateOutput
 			.accept(
@@ -151,7 +151,7 @@ public class ModModelProvider extends ModelProvider {
 		blockModels.registerSimpleItemModel(registryObject.asItem(), model);
 	}
 
-	private TextureMapping plank(ResourceLocation texture) {
+	private TextureMapping plank(Identifier texture) {
 		return new TextureMapping().put(PLANK, texture);
 	}
 }

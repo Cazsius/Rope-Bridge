@@ -4,7 +4,7 @@ import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
@@ -50,7 +50,7 @@ public class ModUtils {
 		return block.builtInRegistryHolder().getData(ContentHandler.SLAB_MAP) != null;
 	}
 
-	public static void unlockAdvancement(Player player, ResourceLocation advancementId) {
+	public static void unlockAdvancement(Player player, Identifier advancementId) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			MinecraftServer server = serverPlayer.level().getServer();
 			if (server != null) {

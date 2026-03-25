@@ -1,12 +1,12 @@
 package com.mrtrollnugnug.ropebridge.lib;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public final class Constants {
 	public static final String MOD_ID = "ropebridge";
 
-	public static final ResourceLocation BUILD_BRIDGE_ADVANCEMENT = modLoc("main/build_bridge");
-	public static final ResourceLocation BUILD_LADDER_ADVANCEMENT = modLoc("main/build_ladder");
+	public static final Identifier BUILD_BRIDGE_ADVANCEMENT = modLoc("main/build_bridge");
+	public static final Identifier BUILD_LADDER_ADVANCEMENT = modLoc("main/build_ladder");
 
 	public static final class Messages {
 		public static final String WARNING_BREAKING = "chat.ropebridge.warning.breaking";
@@ -22,7 +22,7 @@ public final class Constants {
 		public static final String NOT_SOLID = "chat.ropebridge.info.not_solid";
 	}
 
-	public static ResourceLocation modLoc(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+	public static Identifier modLoc(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

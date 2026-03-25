@@ -3,7 +3,7 @@ package com.mrtrollnugnug.ropebridge.datagen.client;
 import com.mrtrollnugnug.ropebridge.handler.ContentHandler;
 import com.mrtrollnugnug.ropebridge.lib.Constants;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 public class ModSoundProvider extends SoundDefinitionsProvider {
@@ -23,7 +23,7 @@ public class ModSoundProvider extends SoundDefinitionsProvider {
 			.with(sound(Constants.modLoc("swoosh"))));
 	}
 
-	public String modSubtitle(ResourceLocation id) {
+	public String modSubtitle(Identifier id) {
 		return Constants.MOD_ID + ".subtitle." + id.getPath();
 	}
 }
