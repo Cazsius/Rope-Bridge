@@ -68,7 +68,7 @@ public final class ContentHandler {
 	public static final DeferredItem<Item> rope = ITEMS.registerSimpleItem("rope");
 	public static final DeferredItem<Item> bridge_builder_hook = ITEMS.registerSimpleItem("bridge_builder_hook");
 	public static final DeferredItem<Item> bridge_builder_barrel = ITEMS.registerSimpleItem("bridge_builder_barrel");
-	public static final DeferredItem<ItemBridgeBuilder> bridge_builder_handle = ITEMS.registerItem("bridge_builder_handle", ItemBridgeBuilder::new);
+	public static final DeferredItem<Item> bridge_builder_handle = ITEMS.registerSimpleItem("bridge_builder_handle");
 	public static final DeferredItem<Item> ladder_hook = ITEMS.registerSimpleItem("ladder_hook");
 
 	public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Function<Properties, ? extends T> func, Supplier<Properties> properties) {
