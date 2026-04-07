@@ -60,7 +60,7 @@ public final class ContentHandler {
 	public static final DeferredItem<Item> rope = ITEMS.registerSimpleItem("rope");
 	public static final DeferredItem<Item> bridge_builder_hook = ITEMS.registerSimpleItem("bridge_builder_hook");
 	public static final DeferredItem<Item> bridge_builder_barrel = ITEMS.registerSimpleItem("bridge_builder_barrel");
-	public static final DeferredItem<ItemBridgeBuilder> bridge_builder_handle = ITEMS.register("bridge_builder_handle", () -> new ItemBridgeBuilder(new Item.Properties()));
+	public static final DeferredItem<Item> bridge_builder_handle = ITEMS.registerSimpleItem("bridge_builder_handle");
 	public static final DeferredItem<Item> ladder_hook = ITEMS.registerSimpleItem("ladder_hook");
 
 	public static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Supplier<T> block) {
