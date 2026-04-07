@@ -1,1 +1,1 @@
-* Fix starting block of short bridges (Thanks to TheAtomicOption)
+* Fix Gun Stock acting like a Bridge Building Gun when right-clicked
