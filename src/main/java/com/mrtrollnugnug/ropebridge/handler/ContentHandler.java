@@ -59,7 +59,7 @@ public final class ContentHandler {
 	public static final RegistryObject<Item> rope = ITEMS.register("rope", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> bridge_builder_hook = ITEMS.register("bridge_builder_hook", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> bridge_builder_barrel = ITEMS.register("bridge_builder_barrel", () -> new Item(new Item.Properties()));
-	public static final RegistryObject<Item> bridge_builder_handle = ITEMS.register("bridge_builder_handle", () -> new ItemBridgeBuilder(new Item.Properties()));
+	public static final RegistryObject<Item> bridge_builder_handle = ITEMS.register("bridge_builder_handle", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> ladder_hook = ITEMS.register("ladder_hook", () -> new Item(new Item.Properties()));
 
 	public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> block) {
