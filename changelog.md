@@ -1,1 +1,1 @@
-* Update to 26.1
+* Fix Gun Stock acting like a Bridge Building Gun when right-clicked
