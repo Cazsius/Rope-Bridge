@@ -1,1 +1,1 @@
-* Update to 1.21.11
+* Fix Gun Stock acting like a Bridge Building Gun when right-clicked
